@@ -817,12 +817,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
         <div class="qf-field">
-          <label class="qf-label" for="f-date">Data presunta</label>
-          <input class="qf-input" id="f-date" name="data" type="text" placeholder="es. 21 giugno 2026" required />
+          <label class="qf-label" for="f-date">Data presunta <span class="opt">se la sai gi&agrave;</span></label>
+          <input class="qf-input" id="f-date" name="data" type="text" placeholder="es. 13 giugno 2027, o &laquo;ancora da decidere&raquo;" />
         </div>
         <div class="qf-field">
-          <label class="qf-label" for="f-location">Location</label>
-          <input class="qf-input" id="f-location" name="location" type="text" placeholder="Città / provincia" required />
+          <label class="qf-label" for="f-location">Location <span class="opt">anche solo la zona</span></label>
+          <input class="qf-input" id="f-location" name="location" type="text" placeholder="Città / provincia, o anche solo la zona" />
         </div>
 
         <div class="qf-field">
@@ -1034,7 +1034,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 (function(){
   var form=document.getElementById("quote-form");
   if(!form)return;
-  form.removeAttribute("novalidate"); // validazione HTML5 attiva (required su data, location, nome, email)
+  form.removeAttribute("novalidate"); // validazione HTML5 attiva (required su nome, email e privacy; data e luogo sono facoltativi dal 18/10/2026: erano required ma nascosti al passo 2, e il browser bloccava l'invio senza dire niente)
 
   // — chips a scelta singola —
   function chipGroup(id){
