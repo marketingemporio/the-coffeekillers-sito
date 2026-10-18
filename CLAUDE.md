@@ -471,7 +471,18 @@ Se la scelta di prima diventa illegale, si sposta da sola sulla piu' bassa ammes
   390/768/1024/1440 + misure: `scrollWidth`, testi <13px, immagini rotte, errori, peso; `VPS=m,t,l,d`),
   `contrasti.mjs` (contrasto sul fondo reale di ogni testo), `orfani.mjs` (classi nel markup senza
   regola), `scheletro.py` (IT ↔ EN), `link.py` (link e risorse locali), `form-test.mjs` (il modulo
-  con data e luogo vuoti deve passare), `ottimizza-immagini.py` (copie web, miniature, sfocature).
+  con data e luogo vuoti deve passare; `BASE=https://thecoffeekillers.com` lo prova in produzione senza
+  inviare), `ottimizza-immagini.py` (copie web, miniature, sfocature), **`visibili.mjs`** (cosa resta
+  invisibile a chi guarda davvero: `node _strumenti/visibili.mjs <base> pagina.html …`, `VP=1440` per il
+  desktop; deve dare 0 — vedi il punto qui sotto).
+- 🐞 **Le schermate mentono sulle cose a comparsa.** `shots.mjs` emula «movimento ridotto» per fotografare
+  pagine intere, e quella regola del foglio forza a opacità 1 tutto ciò che è `.rise/.rv/.fade-in/.stagger`.
+  Il 18/10 sera il sito è andato online con **la hero del country, il testo della hero in home e le 33 foto
+  della gallery invisibili** per un'ora, con tutte le schermate «perfette»: le classi erano nascoste dal
+  foglio e gli script di quelle pagine non le osservavano. Regola: **ogni classe che il foglio nasconde deve
+  o comparire da sola (`.rise`, animazione a tempo) o essere osservata dallo script di QUELLA pagina**
+  (`.fade-in, .rv, .stagger`, soglia bassa se il contenitore è alto); e prima di pubblicare si lancia
+  `visibili.mjs`, oppure `MOTION=1 shots.mjs`.
 - **Playwright non è installato**: si usa **Chrome headless + CDP**, a **1440×900** e **390×844**.
 - 🚨 **Sulle cose visive si crede allo screenshot, non al DOM.** Tutti i difetti veri di
   queste pagine sono usciti guardando le schermate (sette in una sola sessione), nessuno dal

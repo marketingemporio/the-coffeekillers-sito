@@ -105,7 +105,26 @@ luogo vuoti), poi sul ramo B (`01d60ba`, fast-forward, online in 30 s). Controll
 foglio, font, le 6 miniature delle card e `live-basso-senza-numeri` a 200, `stile-hjck.css` 404, home 390 px =
 8.470 px / 2,3 MB, 0 testi <13 px, 0 immagini rotte, 0 errori in console (anche su FAQ). Per tornare indietro:
 su Netlify «Deploys → il deploy precedente → Publish deploy», oppure `git revert` dei commit (mai reset su main).
-I tre rami restano su GitHub finché Michele non decide di cancellarli. **Trappola:** `_strumenti/corpi/` non è in git e **non segue
+I tre rami restano su GitHub finché Michele non decide di cancellarli.
+
+🐞 **Il bug trovato da Michele un'ora dopo la pubblicazione («la pagina sul country non ha un titolo sulla
+hero»).** Vero, e non solo lì: fra le ~20:52 e le ~21:30 a chi guardava il sito mancavano **il titolo, la riga e
+l'indice della hero del country**, **il blocco di testo della hero in home** (IT e EN) e **tutte le 33 foto della
+gallery** (IT e EN). Causa: le classi a comparsa. Il foglio nasconde `.rise`, `.rv`, `.fade-in` e i figli di
+`.stagger` finché lo script della pagina non aggiunge `in`; gli script del country e della home osservavano solo
+`.fade-in/.rv/.stagger` (non `.rise`, che prima del restyling era un'animazione a tempo dentro il CSS di ogni
+pagina), e quello della gallery non osservava `.stagger`. **Fix (`75cb6f7`)**: `.rise` ora compare da sola
+(animazione a tempo nel foglio, nessuno script) e la gallery osserva anche `.stagger`. Secondo fix (`6297a7e`):
+nella gallery la soglia dell'osservatore scende da 0,12 a 0,01, perché le griglie sono alte migliaia di px e da
+computer il 12% non entrava mai nella prima schermata: la prima fila restava vuota finché non si scorreva.
+**Perché non l'avevo visto:** `shots.mjs` emula «movimento ridotto» per fotografare pagine intere, e quella
+regola forza a opacità 1 tutto ciò che è a comparsa: **le schermate mentivano proprio su questo**. Da stasera
+c'è `_strumenti/visibili.mjs` (Chrome vero, niente emulazione: carica, aspetta 1,8 s, controlla sopra la piega,
+scorre tutta la pagina e ricontrolla; stampa ogni elemento con opacità < 0,9) e fa parte dei controlli prima di
+pubblicare (conta «sopra la piega» solo ciò che entra di almeno 120 px nella prima schermata: quello che spunta
+dal bordo compare al primo scorrimento, ed è giusto così). Verificato in produzione dopo i due fix: 16 pagine,
+**0 elementi invisibili a 390 e a 1440**.
+**Trappola:** `_strumenti/corpi/` non è in git e **non segue
 il ramo**: ci sono `_strumenti/corpi-panna/` (= A) e `_strumenti/corpi-arancio/` (= B); `corpi/` è il set
 attivo (stasera = arancio). Copiare il set giusto in `corpi/` prima di rigenerare una pagina. `migra.py` ora si
 può rilanciare anche su una pagina già migrata (niente link doppi; regge le FAQ senza `<style>` e i due
