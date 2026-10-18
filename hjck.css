@@ -74,6 +74,11 @@
 /* i toni: si mettono sulla sezione, non sulla pagina. Senza classe = scura. */
 .t-panna{ --pg-bg:var(--carta); --pg-fg:#2B1405; --pg-mut:#6B4426; --pg-fil:#D3BC98 }
 .t-tan  { --pg-bg:#C39A6A;      --pg-fg:#2B1405; --pg-mut:#3D1C05; --pg-fil:#96683F }
+/* il tono ARANCIO (variante del 18/10 sera — Michele: «mi manca un po' di quell'arancio scuro»): fogli pieni
+   d'arancio per il blocco del video e per l'invito finale. La regola dell'arancio non cade: sopra ci stanno
+   solo titoli grandi, pastiglie scure e pannelli di carta; un testo corrente nudo sull'arancio farebbe 3,84:1.
+   Per questo .v-lead qui diventa 19px/700 (testo grande per norma) e il timbro .acc si fa scuro. */
+.t-arancio{ --pg-bg:var(--arancio); --pg-fg:var(--panna); --pg-mut:#F3E5D0; --pg-fil:rgba(243,229,208,.45) }
 
 /* ---------- 3 · LA BASE ----------------------------------------------------- */
 *{margin:0;padding:0;box-sizing:border-box}
@@ -253,6 +258,31 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:400;font-synthesis:none;
 .v-wa:hover{opacity:1;border-color:var(--pg-fg)}
 .v-wa svg{width:17px;height:17px;flex:none;opacity:.75}
 .t-panna .v-wa,.t-tan .v-wa,.chiaro .v-wa{color:var(--espresso);border-color:rgba(43,20,5,.45);opacity:1}
+
+/* ---------- 7b · SULL'ARANCIO e IL PANNELLO DI CARTA ------------------------- */
+.t-arancio .acc{background:var(--scuro2);text-shadow:none}
+.t-arancio .v-lead{font-weight:700;font-size:clamp(19px,2vw,21px)}
+.t-arancio .v-pill{background:var(--scuro2);color:var(--panna);border-color:var(--scuro2)}
+.t-arancio .v-pill:hover{background:var(--espresso);border-color:var(--espresso);color:var(--panna)}
+.t-arancio .v-pill--contorno{background:transparent;color:var(--panna);border-color:rgba(243,229,208,.6)}
+.t-arancio .v-pill--contorno:hover{border-color:var(--panna)}
+.t-arancio .v-wa{color:var(--panna);border-color:rgba(243,229,208,.6);opacity:1}
+.t-arancio + .t-arancio{padding-top:0}
+.t-arancio + .fascia.f-arancio > .strappo-su{display:none}
+/* il pannello: la scheda di carta appoggiata sul foglio arancio, per l'invito finale di ogni pagina */
+.v-pannello{
+  background:var(--carta);color:var(--espresso);border-radius:18px;max-width:760px;margin:0 auto;text-align:center;
+  padding:clamp(26px,4vw,44px) clamp(22px,4vw,44px);box-shadow:0 26px 60px -26px rgba(0,0,0,.6),0 0 0 1px rgba(43,20,5,.1);
+}
+.v-pannello .v-h{color:var(--espresso);margin-inline:auto}
+.v-pannello .v-lead{color:#4A2A12;margin-inline:auto;font-weight:400;font-size:clamp(17px,1.9vw,19px)}
+.v-pannello .acc{background:var(--arancio);color:var(--panna);text-shadow:1px 1px 0 rgba(0,0,0,.3)}
+.v-pannello .v-cta-fila{justify-content:center}
+.v-pannello .v-pill{background:var(--scuro2);color:var(--panna);border-color:var(--scuro2)}
+.v-pannello .v-pill:hover{background:var(--espresso);border-color:var(--espresso);color:var(--panna)}
+.v-pannello .v-pill--contorno{background:transparent;color:var(--espresso);border-color:rgba(43,20,5,.45)}
+.v-pannello .v-pill--contorno:hover{background:transparent;border-color:var(--espresso);color:var(--espresso)}
+.v-pannello .v-wa{color:var(--espresso);border-color:rgba(43,20,5,.45);opacity:1}
 
 /* ---------- 8 · LE FOTOGRAFIE: si incorniciano, non si tingono -------------- */
 .cornice img,.v-volto img,.v-figura img,.v-gall img{filter:saturate(1.05) contrast(1.03)}
