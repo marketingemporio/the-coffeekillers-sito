@@ -20,552 +20,30 @@
 <meta property="og:image" content="https://thecoffeekillers.com/images/og-image.jpg" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="icon" type="image/svg+xml" href="../images/logo/favicon.svg" />
+<link rel="preload" href="../fonts/bonzana.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="../fonts/Manrope-Variable.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="../hjck.css" />
 <style>
 /* ============================================================================
-   MANROPE, OSPITATO QUI E NON PRESO DA GOOGLE
-   ----------------------------------------------------------------------------
-   Prima arrivava da fonts.googleapis.com: ogni visita mandava l'indirizzo IP
-   del visitatore ai server di Google, senza che nessuno l'avesse chiesto — e
-   in Europa e' proprio il punto su cui i garanti hanno gia' dato torto a dei
-   siti. Ospitandolo qui il problema sparisce del tutto: nessun terzo viene
-   contattato per mostrare una pagina, e l'informativa privacy ha una voce in
-   meno da dichiarare. In piu' si risparmiano due connessioni esterne.
-   E' il file VARIABILE: un file solo copre tutti i pesi da 400 a 800.
-   ⚠️ Rye e' uscito: era solo il fallback dopo Bonzana e veniva anch'esso da
-      Google. Al suo posto il serif di sistema, che non chiama nessuno.
+   PRIVACY — solo l'impaginazione dei blocchi suoi: la testa e le dieci card su carta.
    ============================================================================ */
-@font-face{
-  font-family:"Manrope";
-  src:url("../fonts/Manrope-Variable.ttf") format("truetype-variations");
-  font-weight:200 800; font-style:normal; font-display:swap;
-}
-</style>
-<style>
-/* ============ FONT ============ */
-/* Valley = taglio pulito senza trattini (demo personal-use, come Bronco);
-   LT Cushion = sottotitoli e contenuti di supporto (LyonsType).
-   File in _font-prova/ (gitignorata): prima di pubblicare, comprare Bronco Valley
-   (include entrambi i tagli con gli accenti) e verificare la licenza di LT Cushion. */
-@font-face{font-family:"LT Cushion";src:url("../fonts/LTCushion-Light.ttf");font-weight:300;font-display:swap}
-@font-face{font-family:"LT Cushion";src:url("../fonts/LTCushion-Medium.ttf");font-weight:500;font-display:swap}
-@font-face{font-family:"LT Cushion";src:url("../fonts/LTCushion-Bold.ttf");font-weight:700;font-display:swap}
-@font-face{font-family:"LT Cushion";src:url("../fonts/LTCushion-Black.ttf");font-weight:900;font-display:swap}
-
-/* ============ TOKENS ============ */
-:root{
-  --espresso:#241005;      /* fondo notte */
-  --espresso-2:#2E1509;    /* base tartan / variazione */
-  --nero:#180A02;          /* footer quasi nero */
-  --caffe:#49240A;
-  --panna:#FBF5EA;
-  --beige:#EDDABD;
-  --tan:#BD8B65;
-  --arancio:#FA8600;
-  --ruggine:#CD5812;
-  --azz:#8BAEA4;           /* azzurro vintage: etichette su scuro */
-  --azz-scuro:#5F837A;     /* azzurro leggibile su chiaro */
-  --azz-testo:#3F5C55;    /* azzurro leggibile per i TESTI su fondo chiaro */
-  --azz-wash:#D8E5E0;
-  --bronco:"Bronco Valley",serif;
-  --serif:"LT Cushion",serif;
-  --sans:"Manrope",sans-serif;
-  --valley:"Valley",serif;
-  --cushion:"LT Cushion",serif;
-  --wrap:1180px;
-  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>");
-}
-
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:130px}
-body{
-  font-family:var(--sans);
-  background:var(--espresso);
-  color:var(--panna);
-  font-size:16px;
-  line-height:1.6;
-  overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;
-}
-img{max-width:100%;display:block}
-a{color:inherit}
-
-/* il velluto: grana su tutta la pagina */
-body::after{
-  content:"";position:fixed;inset:0;z-index:80;pointer-events:none;
-  background:var(--grain);opacity:.07;
-}
-
-h1,h2,h3{
-  font-family:var(--bronco);
-  font-weight:400;
-  font-synthesis:none;
-  letter-spacing:.03em;
-  line-height:1.04;
-  text-transform:uppercase;
-}
-.wrap{max-width:var(--wrap);margin:0 auto;padding:0 clamp(20px,4vw,48px)}
-
-/* ============ ICONE (mask) ============ */
-.ico{
-  display:inline-block;background:currentColor;flex:none;
-  -webkit-mask:no-repeat center/contain;mask:no-repeat center/contain;
-}
-.i-teschio  {-webkit-mask-image:url("../images/icone/teschio-longhorn.svg");mask-image:url("../images/icone/teschio-longhorn.svg");aspect-ratio:373.99/176.81}
-.i-cactus   {-webkit-mask-image:url("../images/icone/cactus.svg");mask-image:url("../images/icone/cactus.svg");aspect-ratio:140.28/229.85}
-.i-cappello {-webkit-mask-image:url("../images/icone/cappello-cowboy.svg");mask-image:url("../images/icone/cappello-cowboy.svg");aspect-ratio:266.88/132.43}
-.i-ferri    {-webkit-mask-image:url("../images/icone/ferri-di-cavallo.svg");mask-image:url("../images/icone/ferri-di-cavallo.svg");aspect-ratio:267.1/184.4}
-.i-stivale  {-webkit-mask-image:url("../images/icone/stivale.svg");mask-image:url("../images/icone/stivale.svg");aspect-ratio:169.63/240.37}
-.i-camaleonte{-webkit-mask-image:url("../images/icone/camaleonte.svg");mask-image:url("../images/icone/camaleonte.svg");aspect-ratio:272.48/160.07}
-.i-stella   {-webkit-mask-image:url("../images/icone/stella-sceriffo.svg");mask-image:url("../images/icone/stella-sceriffo.svg");aspect-ratio:187.62/203.89}
-.i-chitarra {-webkit-mask-image:url("../images/icone/chitarra.svg");mask-image:url("../images/icone/chitarra.svg");aspect-ratio:128.45/317.28}
-
-/* ============ TARTAN ============ */
-.tartan{
-  background-color:var(--espresso-2);
-  background-image:
-    repeating-linear-gradient(90deg,
-      transparent 0 16px, rgba(205,88,18,.5) 16px 23px,
-      transparent 23px 40px, rgba(251,245,234,.22) 40px 41.5px,
-      transparent 41.5px 56px),
-    repeating-linear-gradient(0deg,
-      transparent 0 16px, rgba(205,88,18,.5) 16px 23px,
-      transparent 23px 40px, rgba(251,245,234,.22) 40px 41.5px,
-      transparent 41.5px 56px);
-}
-.payoff-edge{height:12px}
-
-/* ============ NAV ============ */
-/* ============ NAV stile sito Kruse Brothers, replica fedele:
-   striscia annuncio in cima, menu maiuscoletto a sinistra, logo grande
-   centrale, icone social a destra; nav trasparente con gradiente sull'hero,
-   scendendo si stacca e diventa barra fissa scura (JS in fondo) ============ */
-.annuncio{
-  background:var(--caffe);color:var(--panna);text-align:center;
-  font-size:11.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
-  padding:9px 16px;position:relative;z-index:61;
-}
-.annuncio a{color:inherit;text-decoration:none}
-.annuncio a:hover{color:var(--arancio)}
-.nav{
-  position:absolute;top:36px;left:0;right:0;z-index:60;
-  background:linear-gradient(180deg,rgba(8,4,1,.94) 0%,rgba(8,4,1,.72) 46%,rgba(8,4,1,.28) 80%,transparent 100%);
-  padding-bottom:26px;
-  transition:background .3s,box-shadow .3s;
-}
-.nav.solid{
-  position:fixed;top:0;
-  background:var(--caffe);            /* stesso marrone della striscia annuncio, come nel riferimento */
-  padding-bottom:0;
-  border-bottom:1px solid rgba(237,218,189,.14);
-  box-shadow:0 10px 30px rgba(0,0,0,.35);
-}
-.nav-in{
-  max-width:1320px;margin:0 auto;padding:10px clamp(20px,4vw,48px) 14px;
-  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px;
-}
-.nav-logo{justify-self:center}
-.nav-logo img{
-  height:118px;width:auto;transition:height .3s;
-}
-.nav.solid .nav-logo img{height:74px}
-.nav-side{display:flex;align-items:center;gap:clamp(12px,1.8vw,26px);list-style:none;margin:0;padding:0}
-.nav-side.dx{justify-content:flex-end}
-.nav-side a{
-  color:#fff;text-decoration:none;font-weight:700;font-size:12.5px;
-  letter-spacing:.16em;text-transform:uppercase;
-}
-.nav-side a:hover{color:var(--arancio)}
-.nav-side a{white-space:nowrap}
-.nav-soc{display:flex;align-items:center;gap:14px}
-.nav-soc a{display:flex}
-.nav-soc svg{width:18px;height:18px;fill:#fff;transition:fill .2s}
-.nav-soc a:hover svg{fill:var(--arancio)}
-
-/* ---- Menu mobile (sotto i 720px): panetto a tendina con tutte le voci ---- */
-.nav-burger{
-  display:none;background:none;border:0;cursor:pointer;padding:8px 6px;
-  flex-direction:column;gap:5px;width:38px;
-}
-.nav-burger span{display:block;height:2px;width:26px;background:var(--beige);transition:transform .25s,opacity .2s}
-.nav-burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-.nav-burger[aria-expanded="true"] span:nth-child(2){opacity:0}
-.nav-burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-.nav-drawer{
-  display:none;background:var(--caffe);border-top:1px solid rgba(237,218,189,.16);
-  padding:10px clamp(20px,5vw,32px) 22px;
-}
-.nav-drawer.open{display:block}
-.nav-drawer ul{list-style:none;margin:0;padding:0}
-.nav-drawer a{
-  display:block;padding:14px 2px;color:var(--beige);text-decoration:none;
-  font-weight:700;font-size:15px;letter-spacing:.16em;text-transform:uppercase;
-  border-bottom:1px solid rgba(237,218,189,.12);
-}
-.nav-drawer a[aria-current="page"]{color:var(--arancio)}
-.nav-drawer .dr-soc{display:flex;gap:20px;padding-top:18px}
-.nav-drawer .dr-soc a{border-bottom:0;padding:0}
-.nav-drawer .dr-soc svg{width:20px;height:20px;fill:var(--beige)}
-
-
-/* Pagine interne: niente foto a tutta pagina dietro la nav → barra marrone
-   piena fin da subito, come la pagina MERCH del riferimento. */
-.nav{
-  position:sticky;top:0;
-  background:var(--caffe);
-  padding-bottom:0;
-  border-bottom:1px solid rgba(237,218,189,.14);
-}
-.nav .nav-logo img{height:74px}
-.nav-cta{
-  font-family:var(--valley)!important;font-size:17px!important;font-weight:400!important;
-  color:var(--azz)!important;border:1.5px solid var(--azz);border-radius:8px;
-  padding:6px 16px;letter-spacing:.05em!important;
-}
-.nav-cta:hover{color:var(--espresso)!important;background:var(--azz)}
-.nav-side a[aria-current="page"]{color:var(--arancio)}
-.nav-burger{display:none}
-
-/* ============ SEZIONI COMUNI ============ */
-.section{position:relative;padding:clamp(72px,9vw,120px) 0}
-.sec-head{
-  display:flex;justify-content:space-between;align-items:baseline;
-  gap:12px;flex-wrap:wrap;margin-bottom:clamp(28px,4vw,44px);
-}
-.eyebrow{
-  display:flex;align-items:center;gap:12px;
-  font-size:13.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--azz);
-}
-.eyebrow .ico{color:var(--azz)}
-.eyebrow-r{font-size:12.5px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--tan)}
-.sec-title{
-  font-size:clamp(34px,4.6vw,60px);
-  color:var(--panna);
-  margin-bottom:18px;
-}
-.lead-p{font-size:clamp(16px,1.9vw,19px);color:var(--beige)}
-@media (min-width:900px){
-  .eyebrow .ico{transform:scale(1.35);margin:0 3px}
-}
-
-/* ============ BOTTONI (veste poster da A2) ============ */
-.btn-poster,.cta-btn{
-  display:inline-block;font-family:var(--valley);letter-spacing:.04em;
-  text-decoration:none;transition:background .2s,color .2s;
-  background:var(--beige);color:var(--caffe);
-  border:2px solid var(--beige);border-radius:6px;
-  box-shadow:inset 0 0 0 2px var(--beige),inset 0 0 0 3px rgba(73,36,10,.55);
-}
-.btn-poster{font-size:clamp(19px,2.2vw,23px);padding:10px 30px 12px}
-.cta-btn{font-size:clamp(21px,2.6vw,26px);padding:14px 40px 16px}
-.btn-poster::before,.cta-btn::before{content:"★ ";color:var(--ruggine);font-size:.75em}
-.btn-poster::after,.cta-btn::after{content:" ★";color:var(--ruggine);font-size:.75em}
-.btn-poster:hover,.cta-btn:hover{
-  background:var(--arancio);border-color:var(--arancio);color:var(--espresso);
-  box-shadow:inset 0 0 0 2px var(--arancio),inset 0 0 0 3px rgba(24,10,2,.55);
-}
-
-/* ============ SEZIONE FAQ (scura: intro + accordion) ============ */
-.faq-sec{background:var(--espresso)}
-.faq-grid{
-  display:grid;grid-template-columns:1fr 1.25fr;
-  gap:clamp(32px,4vw,56px);align-items:start;
-}
-.faq-intro{position:sticky;top:110px}
-.faq-intro .sec-title{font-size:clamp(34px,4vw,52px)}
-.faq-intro .lead-p{max-width:44ch}
-.faq-intro .lead-p a{color:var(--azz)}
-.faq-cta{margin-top:30px}
-.faq-contacts{
-  margin-top:34px;padding-top:24px;
-  border-top:1px solid rgba(139,174,164,.28);
-  display:grid;gap:16px;font-size:14.5px;font-weight:700;
-}
-.faq-contacts a{color:var(--beige);text-decoration:none}
-.faq-contacts a:hover{color:var(--azz)}
-.faq-contacts .k{
-  display:block;font-size:11px;font-weight:800;letter-spacing:.22em;
-  text-transform:uppercase;color:var(--azz);margin-bottom:2px;
-}
-.faq-cam{width:84px;color:var(--azz);opacity:.85;margin-top:34px;transform:scaleX(-1)}
-
-/* Accordion: <details>/<summary> nativi, biglietti beige come i ticket di A2 */
-.qa-list{display:grid;gap:14px}
-.qa{
-  background:var(--beige);color:var(--espresso);border-radius:12px;
-  box-shadow:0 26px 50px -16px rgba(0,0,0,.45);
-  overflow:hidden;
-}
-.qa summary{
-  display:flex;align-items:baseline;gap:16px;
-  padding:18px 22px;cursor:pointer;list-style:none;
-  transition:background .2s;
-}
-.qa summary::-webkit-details-marker{display:none}
-.qa summary::marker{content:""}
-.qa summary:hover{background:rgba(73,36,10,.07)}
-.qa summary:focus-visible{outline:2px solid var(--azz-scuro);outline-offset:-2px}
-.qa-num{
-  font-family:var(--valley);font-size:21px;line-height:1.2;
-  color:var(--caffe);letter-spacing:.04em;flex:none;min-width:34px;
-}
-.qa-q{
-  flex:1;font-family:var(--cushion);font-weight:700;
-  font-size:clamp(17px,2vw,20px);line-height:1.35;letter-spacing:.02em;
-  color:var(--espresso);
-}
-/* Indicatore apri/chiudi: chevron che punta in giu' da chiuso e in su' da
-   aperto (la stella ruotata di 180° era indistinguibile nei due stati). */
-.qa-ind{
-  flex:none;align-self:center;width:12px;height:12px;
-  border-right:2.5px solid var(--ruggine);border-bottom:2.5px solid var(--ruggine);
-  border-radius:0 0 2px 0;
-  transform:translateY(-3px) rotate(45deg);
-  transition:transform .35s cubic-bezier(.22,.61,.36,1);
-}
-.qa[open] .qa-ind{transform:translateY(3px) rotate(-135deg)}
-.qa[open] summary{background:rgba(73,36,10,.07)}
-.qa-a{
-  margin:0 22px;padding:14px 0 18px;
-  border-top:2px dashed rgba(73,36,10,.35);
-  font-size:15.5px;line-height:1.6;color:var(--caffe);
-}
-/* icone western in linea nelle risposte (al posto delle emoji di sistema) */
-.qa-ico{color:var(--ruggine);width:auto;vertical-align:-.16em;margin-left:.15em}
-.qa[open] .qa-a{animation:qa-in .4s ease both}
-@keyframes qa-in{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
-
-/* Da tablet in giu' l'elenco domande sale subito sotto l'introduzione:
-   .faq-intro diventa "trasparente" (display:contents) cosi' i suoi pezzi
-   entrano nella griglia e si possono riordinare; contatti e camaleonte
-   scendono sotto le domande. */
-@media (max-width:960px){
-  .faq-grid{grid-template-columns:1fr;gap:0}
-  .faq-intro{display:contents}
-  .faq-intro .sec-title{order:1}
-  .faq-intro .lead-p{order:2}
-  .faq-cta{order:3}
-  .qa-list{order:4;margin-top:36px}
-  .faq-contacts{order:5;margin-top:40px}
-  .faq-cam{order:6;margin-top:28px}
-}
-@media (max-width:520px){
-  .qa summary{padding:16px 18px;gap:12px}
-  .qa-a{margin:0 18px}
-  .qa-num{min-width:28px;font-size:19px}
-}
-
-/* ============ CTA INSEGNA (condivisa, da A2) ============ */
-.cta{background:var(--arancio);color:var(--espresso);position:relative}
-.cta-panel{
-  max-width:900px;margin:0 auto;text-align:center;
-  border:3px solid var(--espresso);outline:3px solid var(--espresso);outline-offset:7px;
-  padding:clamp(44px,6vw,76px) clamp(22px,5vw,64px);
-  position:relative;
-}
-.cta-corner{position:absolute;width:26px;height:28px;color:var(--espresso)}
-.cta-corner.tl{top:14px;left:14px}
-.cta-corner.tr{top:14px;right:14px}
-.cta-corner.bl{bottom:14px;left:14px}
-.cta-corner.br{bottom:14px;right:14px}
-.cta-eyebrow{
-  font-family:var(--serif);font-style:italic;font-size:clamp(17px,2.2vw,22px);
-  margin-bottom:8px;
-}
-.cta .sec-title{color:var(--espresso);font-size:clamp(40px,6vw,76px);margin-bottom:16px}
-.cta-lead{max-width:46ch;margin:0 auto 30px;font-weight:500;font-size:clamp(16px,1.9vw,18.5px)}
-.cta-meta{
-  display:flex;justify-content:center;gap:clamp(18px,4vw,48px);flex-wrap:wrap;
-  margin-top:34px;font-size:14.5px;font-weight:700;
-}
-.cta-meta a{color:inherit}
-.cta-meta .k{display:block;font-size:11px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;opacity:.7;margin-bottom:2px}
-
-/* ============ FOOTER (variante ridotta, da A2) ============ */
-.footer{background:var(--nero);position:relative;padding:0 0 40px}
-.footer-cam{
-  display:flex;flex-direction:column;align-items:center;
-  padding:clamp(64px,9vw,110px) 20px 0;text-align:center;
-}
-.footer-cam .ico{
-  width:min(400px,72vw);height:auto;aspect-ratio:272.48/160.07;
-  color:var(--azz);
-}
-.footer-payoff{
-  font-family:var(--bronco);font-weight:400;font-synthesis:none;text-transform:uppercase;
-  color:var(--panna);font-size:clamp(30px,5.4vw,64px);letter-spacing:.06em;
-  margin-top:26px;line-height:1.08;
-}
-.footer-sub{
-  font-family:var(--serif);font-style:italic;color:var(--azz);
-  font-size:clamp(16px,2vw,20px);margin-top:10px;
-}
-.footer-rule{
-  display:flex;align-items:center;gap:18px;
-  max-width:var(--wrap);margin:clamp(44px,6vw,64px) auto 0;padding:0 clamp(20px,4vw,48px);
-  color:var(--azz);
-}
-.footer-rule .line{flex:1;height:1px;background:rgba(139,174,164,.35)}
-.footer-rule .ico{width:20px;height:22px}
-.footer-grid{
-  max-width:var(--wrap);margin:40px auto 0;padding:0 clamp(20px,4vw,48px);
-  display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:clamp(28px,4vw,56px);
-}
-/* ⚠️ min-width:0 sulle colonne. Senza, un elemento di griglia non scende mai
-   sotto la larghezza del suo contenuto (min-width:auto e' il valore di
-   partenza): da telefono la colonna restava a 403px dentro un footer di 390 e
-   TUTTA la pagina scorreva di lato di 33px. Difetto vecchio, trovato il 10/09
-   misurando lo scrollWidth. */
-.footer-grid > *{min-width:0}
-.footer-grid, .footer-grid *{overflow-wrap:anywhere}
-.footer h5{
-  font-family:var(--sans);font-size:12px;font-weight:800;letter-spacing:.24em;
-  text-transform:uppercase;color:var(--azz);margin-bottom:16px;
-}
-.footer-big{font-family:var(--bronco);font-size:clamp(24px,3vw,32px);color:var(--beige);line-height:1.15;letter-spacing:.04em}
-.footer ul{list-style:none}
-.footer ul li{margin-bottom:9px;font-size:14.5px;color:var(--beige)}
-.footer ul a{color:var(--beige);text-decoration:none}
-.footer ul a:hover{color:var(--azz)}
-.footer-social{display:flex;gap:14px;margin-top:18px}
-.footer-social a{
-  font-size:13px;font-weight:700;letter-spacing:.08em;color:var(--azz);
-  text-decoration:none;border:1px solid rgba(139,174,164,.4);border-radius:99px;
-  padding:7px 16px;
-}
-.footer-social a:hover{background:var(--azz);color:var(--nero)}
-.footer-copy{
-  max-width:var(--wrap);margin:44px auto 0;padding:20px clamp(20px,4vw,48px) 0;
-  border-top:1px solid rgba(139,174,164,.18);
-  font-size:12.5px;color:var(--tan);text-align:center;
-}
-.footer-copy a{color:var(--azz);text-decoration:none}
-/* variante ridotta (-1/3 sulle spaziature verticali) */
-.footer--ridotta{padding:0 0 26px}
-.footer--ridotta .footer-cam{padding:clamp(42px,6vw,72px) 20px 0}
-.footer--ridotta .footer-payoff{margin-top:17px}
-.footer--ridotta .footer-sub{margin-top:7px}
-.footer--ridotta .footer-rule{margin:clamp(29px,4vw,42px) auto 0}
-.footer--ridotta .footer-grid{margin:26px auto 0}
-.footer--ridotta h5{margin-bottom:11px}
-.footer--ridotta ul li{margin-bottom:6px}
-.footer--ridotta .footer-social{margin-top:12px}
-.footer--ridotta .footer-copy{margin:29px auto 0;padding-top:13px}
-@media (max-width:720px){
-  .footer--ridotta .footer-grid{gap:22px}
-}
-
-/* ============ RESPONSIVE ============ */
-@media (max-width:960px){
-  .footer-grid{grid-template-columns:1fr 1fr}
-}
-@media (max-width:1000px){
-  .nav-side.sx{display:none}
-  .nav-soc{display:none}
-  .nav-in{grid-template-columns:auto 1fr auto;gap:10px}
-  .nav-logo{grid-column:2}
-  .nav .nav-logo img{height:52px}
-  .nav-burger{display:flex;grid-column:1;justify-self:start}
-  .footer-grid{grid-template-columns:1fr;gap:32px}
-}
-
-/* ---- REVEAL allo scroll (da A2) --------------------------
-   Gating con html.js: senza JavaScript la classe .js non c'è e tutto
-   resta visibile (fallback obbligatorio). */
-html.js .rv{
-  opacity:0;transform:translateY(26px);
-  transition:opacity .85s cubic-bezier(.22,.61,.36,1),transform .85s cubic-bezier(.22,.61,.36,1);
-  will-change:opacity,transform;
-}
-html.js .rv--left{transform:translateX(-30px)}
-html.js .rv--right{transform:translateX(30px)}
-html.js .rv.in{opacity:1;transform:none}
-@media (max-width:700px){html.js .rv--left,html.js .rv--right{transform:translateY(26px)}}
-html.js .fade-in{opacity:0;transform:translateY(18px);transition:opacity .9s ease,transform .9s ease}
-html.js .fade-in.in{opacity:1;transform:none}
-html.js .stagger>*{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
-html.js .stagger.in>*{opacity:1;transform:none}
-html.js .stagger.in>*:nth-child(1){transition-delay:.04s}
-html.js .stagger.in>*:nth-child(2){transition-delay:.12s}
-html.js .stagger.in>*:nth-child(3){transition-delay:.2s}
-html.js .stagger.in>*:nth-child(4){transition-delay:.28s}
-html.js .stagger.in>*:nth-child(5){transition-delay:.36s}
-html.js .stagger.in>*:nth-child(6){transition-delay:.44s}
-html.js .stagger.in>*:nth-child(7){transition-delay:.52s}
-html.js .stagger.in>*:nth-child(8){transition-delay:.6s}
-/* accessibilità: chi chiede meno animazioni vede tutto subito, fermo */
-@media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  html.js .rv,html.js .fade-in,html.js .stagger>*{
-    opacity:1!important;transform:none!important;transition:none!important;animation:none!important;
-  }
-  .qa-ind{transition:none!important}
-  .qa[open] .qa-a{animation:none!important}
-}
-/* ============ INFORMATIVA PRIVACY ============ */
-.pv-sec{background:var(--espresso);padding:clamp(48px,6vw,84px) 0 clamp(56px,7vw,96px)}
-.pv-sec h1{color:var(--panna);font-size:clamp(34px,5vw,64px);margin:12px 0 18px}
-.pv-it{color:var(--arancio)}
-.pv-lead{font-family:var(--sans);color:var(--beige);font-size:clamp(16px,2vw,19px);max-width:60ch;line-height:1.6}
-.pv-avviso{
-  margin:28px 0 40px;max-width:70ch;
-  background:rgba(250,134,0,.12);border-left:3px solid var(--arancio);
-  border-radius:0 10px 10px 0;padding:16px 20px;
-  font-family:var(--sans);font-size:15px;line-height:1.6;color:var(--beige);
-}
-.pv-avviso strong{color:var(--panna)}
-.pv-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(20px,3vw,32px)}
+.pv-sec{padding-top:clamp(40px,6vw,80px)}
+.pv-lead{font-size:clamp(17px,1.9vw,19px);line-height:1.62;max-width:60ch;margin-top:18px}
+.pv-sec > .v-in > .pv-nota{max-width:60ch;margin-top:12px;color:var(--pg-mut)}
+.pv-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(16px,2.6vw,28px);margin-top:clamp(28px,4vw,44px)}
 @media (max-width:820px){.pv-grid{grid-template-columns:1fr}}
-.pv-blocco{
-  background:var(--panna);color:var(--espresso);border-radius:14px;
-  padding:clamp(22px,3vw,30px);box-shadow:0 20px 44px -22px rgba(0,0,0,.5);
-}
-.pv-blocco h2{font-family:var(--bronco);font-weight:400;font-synthesis:none;text-transform:uppercase;
-  font-size:clamp(21px,2.4vw,27px);letter-spacing:.02em;margin-bottom:12px;color:var(--espresso)}
-.pv-blocco p{font-family:var(--sans);font-size:15.5px;line-height:1.62;color:var(--caffe);margin-bottom:12px}
+/* una card chiara su fondo scuro ridichiara i colori del testo */
+.pv-blocco{--pg-fg:#2B1405;--pg-mut:#6B4426;background:var(--carta);color:#2B1405;border:1px solid #DFCDAE;border-radius:16px;padding:clamp(20px,2.8vw,30px);box-shadow:0 10px 26px -14px rgba(0,0,0,.55)}
+.pv-blocco h2{font-size:clamp(18px,1.8vw,22px);letter-spacing:.03em;margin-bottom:12px}
+.pv-blocco p{font-size:16px;line-height:1.62;color:#3E2410;margin-bottom:12px}
 .pv-blocco p:last-child{margin-bottom:0}
-.pv-blocco b{color:var(--espresso)}
-.pv-blocco a{color:var(--azz-testo);text-decoration:underline;text-underline-offset:3px}
+.pv-blocco b{color:#2B1405}
+.pv-blocco a{color:#2B1405;text-decoration:underline;text-decoration-color:var(--arancio);text-decoration-thickness:2px;text-underline-offset:3px}
 .pv-lista{list-style:none;margin:0 0 12px;display:grid;gap:8px}
-.pv-lista li{
-  font-family:var(--sans);font-size:15px;line-height:1.5;color:var(--caffe);
-  padding-left:20px;position:relative;
-}
-.pv-lista li::before{content:"★";position:absolute;left:0;top:0;color:var(--ruggine);font-size:11px;line-height:1.9}
-.pv-nota{font-family:var(--cushion);font-weight:500;font-style:italic;font-size:14.5px;color:var(--azz-testo)}
-.pv-fondo{margin-top:clamp(32px,4vw,48px);text-align:center}
-
+.pv-lista li{position:relative;padding-left:20px;font-size:16px;line-height:1.6;color:#3E2410}
+.pv-lista li::before{content:"";position:absolute;left:2px;top:.62em;width:8px;height:8px;border-radius:50%;background:var(--arancio)}
+.pv-nota{font-family:"LT Cushion",Georgia,serif;font-style:italic;font-weight:500;font-size:15px;line-height:1.55;color:#6B4426}
 </style>
-<link rel="stylesheet" href="../stile-hjck.css" />
-<style>
-/* ===== SELETTORE DI LINGUA (aggiunto con la versione inglese) =====
-   Il bottone IT/EN vive nella lista di destra della testata: su mobile quella
-   lista mostra solo l'ultimo elemento (il bottone "preventivo"), quindi la
-   voce della lingua sparisce da sola e resta quella nel menu a tendina. */
-.nav-lang{
-  border:1px solid rgba(237,218,189,.55);border-radius:6px;
-  padding:5px 9px 4px;font-size:11.5px!important;letter-spacing:.16em;
-}
-.nav-lang:hover{background:rgba(237,218,189,.14)}
-/* strisciolina in basso: appare solo a chi ha il browser nell'altra lingua */
-.lang-bar{
-  position:fixed;left:0;right:0;bottom:0;z-index:95;display:none;
-  background:var(--caffe,#49240A);color:var(--panna,#EDDABD);
-  border-top:1px solid rgba(237,218,189,.22);
-  box-shadow:0 -8px 24px rgba(73,36,10,.4);
-  font-family:var(--sans,system-ui,sans-serif);font-size:13.5px;line-height:1.4;
-  padding:11px clamp(14px,4vw,28px);
-}
-.lang-bar.on{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
-.lang-bar a{color:var(--arancio,#CD5812);font-weight:800;text-decoration:underline}
-.lang-bar b{color:var(--panna,#EDDABD)}
-.lang-bar button{
-  background:none;border:1px solid rgba(237,218,189,.45);border-radius:6px;
-  color:inherit;font:inherit;line-height:1;padding:6px 9px;cursor:pointer;
-}
-.lang-bar button:hover{background:rgba(237,218,189,.14)}
-</style>
-
 <!-- ⚠️ L'ORDINE CONTA: consenso.js PRIMA di Tag Manager, e senza defer. Imposta il
      consent mode a NEGATO come stato di partenza, cosi' i tag dentro GTM non scrivono
      niente finche' qualcuno non accetta. Se girasse dopo, il banner sarebbe finto. -->
@@ -586,7 +64,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <script>document.documentElement.classList.add("js");</script>
 
-<!-- ==================== NAV (stile home confermato il 01/09) ==================== -->
 <header class="nav">
   <div class="nav-in">
     <button class="nav-burger" type="button" aria-expanded="false" aria-controls="nav-drawer" aria-label="Open the menu"><span></span><span></span><span></span></button>
@@ -617,31 +94,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </ul>
   </nav>
 </header>
-<!-- ==================== 1. INFORMATIVA ==================== -->
-<!-- ============================================================================
-     ⚠️ CHI E' IL TITOLARE DEL TRATTAMENTO
-     ----------------------------------------------------------------------------
-     Il GDPR NON richiede una forma giuridica: l'art. 4.7 dice "la persona fisica
-     o giuridica" che decide finalita' e mezzi. Una band di amici puo' quindi
-     essere in regola indicando una PERSONA.
-     Qui e' indicato Michele Frosio come referente del gruppo. Le alternative,
-     se un giorno cambia l'assetto:
-       · CONTITOLARITA' (art. 26) — tutti i membri titolari insieme, con un
-         accordo interno che dica chi fa cosa. Piu' corretto se le decisioni
-         sono davvero collegiali, ma piu' pesante da gestire.
-       · ASSOCIAZIONE CULTURALE / APS — se nascera'. Un'associazione, anche non
-         riconosciuta, e' gia' un soggetto valido come titolare: subentra lei.
-     In pratica: il titolare naturale e' chi emette le ricevute per i cachet.
-     Se non e' Michele, si cambia il nome nel blocco "Chi tratta i tuoi dati"
-     qui sotto — e' l'unico punto da toccare.
-     ============================================================================ -->
-<section class="section pv-sec" id="top">
-  <div class="wrap">
 
-    <h1 class="rv">Privacy <span class="pv-it">policy.</span></h1>
+<section class="v-sez pv-sec" id="top">
+  <div class="v-in">
+
+    <h1 class="v-h v-h--hero rv">Privacy <span class="acc">policy.</span></h1>
     <p class="pv-lead rv">When you write to us for a quote, or subscribe to hear about our dates, you
        leave us some personal data. This page says what we do with it, in plain words.
-       Last updated: <b>15 September 2026</b>.</p>
+       Last updated: <b>18 October 2026</b>.</p>
     <p class="pv-nota rv">This is an English translation of our Italian privacy policy, provided
        for your convenience. The <a href="../privacy.html" hreflang="it" lang="it">Italian
        version</a> is the legally binding one: if the two ever differ, the Italian text prevails.</p>
@@ -702,14 +162,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
            running. Each of them processes the data on our behalf, under a contract that requires
            them to:</p>
         <ul class="pv-lista">
-          <li><b>Netlify</b> (Netlify Inc., United States) &mdash; hosts the site and <b>receives the quote forms</b>. <b>Formspree</b> (Formspree Inc., United States) &mdash; receives what you write in
-              the forms and delivers it to us.</li>
-          <li><b>Netlify</b> (Netlify Inc., United States) &mdash; hosts the site; its servers log
-              accesses, as any web server does.</li>
+          <li><b>Netlify</b> (Netlify Inc., United States) &mdash; hosts the site and <b>receives the quote forms</b>; its servers log accesses, as any web server does.</li>
+          <li><b>Formspree</b> (Formspree Inc., United States) &mdash; receives <b>only the subscriptions to our date updates</b>.</li>
           <li><b>Cloudflare</b> (Cloudflare Inc., United States) &mdash; provides the anonymous
               visit statistics, with no cookies and without recognising individual visitors.</li>
           <li><b>Google</b> (Google Ireland Ltd.) &mdash; Google Analytics and Google Tag Manager,
-              <b>only if you accepted</b>. It receives your IP address and the statistics cookies.
+              <b>only if you accepted</b>. It receives your IP address and the statistics and advertising cookies.
               Without your consent it is not contacted to collect data about you.</li>
         </ul>
         <p><b>Transfers outside the European Union.</b> These suppliers are based in the United
@@ -724,7 +182,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <article class="pv-blocco rv" id="cookie">
         <h2>Cookies and choices</h2>
-        <p>On your first visit we ask whether we may use statistics cookies. Until you answer, and
+        <p>On your first visit we ask whether we may use statistics and advertising cookies. Until you answer, and
            if you answer no, <b>no cookie is written on your device</b> and Google receives nothing:
            the starting state is &laquo;denied&raquo;, and our tools stay put until you change it.</p>
         <ul class="pv-lista">
@@ -732,6 +190,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               storage, otherwise we would have to ask you again on every page.</li>
           <li><b>Statistics</b> (Google Analytics) &mdash; only with your consent. They tell us which
               pages get read and which ad brought the people who write to us.</li>
+          <li><b>Advertising</b> (Google Ads, through Tag Manager) &mdash; only with your consent. It measures whether the people who arrive from one of our ads actually write to us.</li>
         </ul>
         <p><b>Changing your mind:</b> if you accepted and no longer want to, or refused and want to
            reconsider, <a href="#" onclick="if(window.ckConsenso){window.ckConsenso.riapri();}return false;">reopen
@@ -798,8 +257,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<footer class="footer footer--ridotta">
-  <div class="payoff-edge tartan"></div>
+<footer class="footer">
+  <div class="filetto"></div>
 
   <!-- la newsletter e' la prima riga del footer, non una fascia sospesa sopra -->
   <div class="foot-nl" id="newsletter">
