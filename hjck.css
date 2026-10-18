@@ -231,8 +231,8 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:400;font-synthesis:none;
 .t-panna .v-pill--contorno,.t-tan .v-pill--contorno{border-color:rgba(43,20,5,.45)}
 /* ⚠️ un contenitore chiaro dentro una sezione scura (card Instagram, scheda della data, popup)
    deve ridichiarare i colori del testo: senza, il contorno e' panna su carta, cioe' invisibile */
-.chiaro .v-pill--contorno{color:var(--espresso);border-color:rgba(43,20,5,.45)}
-.chiaro .v-pill--contorno:hover{color:var(--espresso);border-color:var(--espresso)}
+.chiaro .v-pill--contorno{background:transparent;color:var(--espresso);border-color:rgba(43,20,5,.45)}
+.chiaro .v-pill--contorno:hover{background:transparent;color:var(--espresso);border-color:var(--espresso)}
 /* il piccolo: testata e newsletter */
 .v-pill--mini{font-size:13.5px;letter-spacing:.06em;padding:10px 16px 11px;border-radius:12px}
 .v-cta-fila{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:clamp(28px,3.6vw,40px)}
