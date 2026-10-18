@@ -1,0 +1,662 @@
+/* ============================================================================
+   HJCK.CSS — IL FOGLIO DI LINGUAGGIO DEL SITO (dal 18/10/2026)
+   ----------------------------------------------------------------------------
+   Un foglio solo per tutte le pagine del sito, tranne la landing delle
+   inserzioni (`musica-country-dal-vivo.html`), che resta com'e' e da cui questo
+   foglio e' stato RICAVATO: token, tipografia, bottoni, card, strappi, line-up,
+   loghi, video e FAQ sono i suoi, con gli stessi nomi. Decisione di Michele del
+   18/10/2026: «standard di riferimento = la landing», palette compresa.
+
+   Come si usa in una pagina:
+     <link rel="stylesheet" href="hjck.css">   (da en/: ../hjck.css)
+     <style> ...solo regole DI PAGINA (prefissi .ph- .hero6 .cal- .gal- ...)... </style>
+   Il link va PRIMA dello <style> di pagina, cosi' la pagina vince a parita' di
+   specificita'. Niente token, niente classi v-, niente classi della testata o del piede negli style di pagina.
+
+   Regole di casa che questo foglio incorpora (CLAUDE.md del sito):
+     - corpo minimo 13px, e 13 e' il minimo, non la misura giusta;
+     - niente occhielli-intestazione, niente micro-scritte nude sul colore;
+     - bottoni LT Cushion 900, raggio 12-14, senza ombra e senza stelline;
+     - un solo bottone pieno per schermata, e porta al preventivo; WhatsApp a contorno;
+     - niente card storte, niente grana ne' sporcature: tinte piatte e strappi;
+     - il colore NON cambia scorrendo: il tono lo da' la classe sulla sezione;
+     - l'arancio non e' mai testo piccolo: pastiglia scura, timbro .acc o >=19px/700;
+     - le icone sono le 8 del brand (maschere), mai emoji al loro posto;
+     - i font sono auto-ospitati: Google Fonts e' vietato.
+
+   PALETTE VECCHIA (brand book, usata fino al 18/10 su index) — per tornare
+   indietro basta rimettere questi valori in :root, nient'altro:
+     --espresso:#49240A; --panna:#EDDABD; --carta:#EDDABD; --scuro2:#49240A;
+     --arancio:#CD5812; --tan:#BD8B65;
+     .t-panna{--pg-bg:#EDDABD;--pg-fg:#49240A;--pg-mut:#6B4426;--pg-fil:#C9B08B}
+   ============================================================================ */
+
+/* ---------- 1 · I CARATTERI, tutti ospitati qui ----------------------------
+   woff2 prima: in ttf i quattro file pesavano 333 KB, in woff2 120. */
+@font-face{
+  font-family:"Bonzana";
+  src:url("fonts/bonzana.woff2") format("woff2"),
+      url("fonts/bonzana.woff")  format("woff");
+  font-weight:400;font-display:swap;
+}
+@font-face{
+  font-family:"Manrope";
+  src:url("fonts/Manrope-Variable.woff2") format("woff2-variations"),
+      url("fonts/Manrope-Variable.ttf")   format("truetype-variations");
+  font-weight:200 800;font-style:normal;font-display:swap;
+}
+@font-face{font-family:"LT Cushion";src:url("fonts/LTCushion-Medium.woff2") format("woff2"),url("fonts/LTCushion-Medium.ttf") format("truetype");font-weight:500;font-display:swap}
+@font-face{font-family:"LT Cushion";src:url("fonts/LTCushion-Bold.woff2")   format("woff2"),url("fonts/LTCushion-Bold.ttf")   format("truetype");font-weight:700;font-display:swap}
+@font-face{font-family:"LT Cushion";src:url("fonts/LTCushion-Black.woff2")  format("woff2"),url("fonts/LTCushion-Black.ttf")  format("truetype");font-weight:900;font-display:swap}
+
+/* ---------- 2 · I TOKEN (quelli della landing, stessi nomi) ---------------- */
+:root{
+  --arancio:#C74A07;      /* solo come PIENO: fasce, timbri, bordi. Mai testo piccolo. */
+  --carta:#EFE2CE;        /* l'avorio delle SUPERFICI: card, bottoni pieni, sezioni chiare */
+  --scuro2:#381A08;       /* il marrone dei pieni APPOGGIATI sul chiaro (chip, pastiglie, bottoni) */
+  --espresso:#2B1405;     /* il fondo scuro di pagina */
+  --panna:#F3E5D0;        /* il TESTO sul fondo scuro (non e' un fondo) */
+  --tan:#C39A6A;          /* il terzo foglio: fondo pieno, non accento */
+  --azz:#8BAEA4;          /* il turchese: solo accento sui fondi scuri (link, camaleonte) */
+  --pg-bg:#2B1405; --pg-fg:#F3E5D0; --pg-mut:#DCC4A4; --pg-fil:#7A5130;
+
+  --display:"Bonzana",Georgia,serif;
+  --testo:"Manrope",system-ui,sans-serif;
+  --btn:"LT Cushion","Manrope",system-ui,sans-serif;
+  --wrap:1180px;
+  --wrap-largo:1320px;
+  --lato:clamp(20px,5vw,46px);
+  --nav-h:96px;
+
+  /* il bordo strappato, disegnato dal browser (una riga dritta non e' carta) */
+  --bordo-strappato:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1400' height='40' preserveAspectRatio='none'><filter id='s' x='-6%25' y='-30%25' width='112%25' height='190%25'><feTurbulence type='fractalNoise' baseFrequency='0.011 0.42' numOctaves='4' seed='9' result='n'/><feDisplacementMap in='SourceGraphic' in2='n' scale='30' xChannelSelector='R' yChannelSelector='G'/></filter><rect x='-30' y='-30' width='1460' height='52' fill='black' filter='url(%23s)'/></svg>");
+}
+/* i toni: si mettono sulla sezione, non sulla pagina. Senza classe = scura. */
+.t-panna{ --pg-bg:var(--carta); --pg-fg:#2B1405; --pg-mut:#6B4426; --pg-fil:#D3BC98 }
+.t-tan  { --pg-bg:#C39A6A;      --pg-fg:#2B1405; --pg-mut:#3D1C05; --pg-fil:#96683F }
+
+/* ---------- 3 · LA BASE ----------------------------------------------------- */
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--nav-h) + 12px)}
+body{
+  font-family:var(--testo);background:var(--pg-bg);color:var(--pg-fg);
+  line-height:1.6;overflow-x:hidden;
+}
+/* ⚠️ height:auto: senza, gli attributi width/height battono aspect-ratio e le foto si stirano */
+img,video{max-width:100%;height:auto;display:block}
+a{color:inherit}
+button{font:inherit;color:inherit}
+::selection{background:var(--arancio);color:var(--panna)}
+:focus-visible{outline:3px solid var(--azz);outline-offset:3px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* l'attributo hidden perde contro qualunque display dichiarato (.ticket{display:grid}): cosi' no */
+[hidden]{display:none !important}
+/* la trappola anti-spam di Netlify Forms: esiste nel markup, non si vede mai */
+.qf-esca{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+/* ---------- 4 · LE SEZIONI -------------------------------------------------- */
+.v-sez{position:relative;overflow-x:clip;background:var(--pg-bg);color:var(--pg-fg);padding:clamp(46px,7vw,96px) 0}
+.v-sez--alta{padding:clamp(58px,10vw,132px) 0}
+.v-sez--bassa{padding:clamp(34px,5vw,64px) 0}
+/* due sezioni dello stesso tono di fila: lo stacco lo fa un margine solo */
+.t-panna + .t-panna,.t-tan + .t-tan{padding-top:0}
+.v-in{max-width:var(--wrap);margin:0 auto;padding:0 var(--lato)}
+.v-in--largo{max-width:var(--wrap-largo)}
+.v-in--stretto{max-width:880px}
+
+/* le fasce piene: fogli di carta incollati, col bordo mangiato sopra e sotto */
+.fascia{position:relative;overflow-x:clip;isolation:isolate;z-index:3}
+.f-arancio{background-color:var(--arancio);color:var(--panna)}
+.f-tan    {background-color:var(--tan);    color:var(--espresso)}
+.fascia > .strappo-su,
+.fascia::after{
+  content:"";position:absolute;left:0;right:0;height:34px;z-index:4;
+  background-color:inherit;pointer-events:none;
+  -webkit-mask:var(--bordo-strappato) no-repeat center/100% 100%;
+          mask:var(--bordo-strappato) no-repeat center/100% 100%;
+}
+.fascia::after{bottom:-31px}
+.fascia > .strappo-su{top:-31px;transform:scaleY(-1)}
+/* una sezione normale puo' avere lo strappo in cima (per staccarsi dalla precedente) */
+.v-sez > .strappo-su{
+  content:"";position:absolute;left:0;right:0;top:-31px;height:34px;z-index:4;
+  background-color:var(--pg-bg);pointer-events:none;transform:scaleY(-1);
+  -webkit-mask:var(--bordo-strappato) no-repeat center/100% 100%;
+          mask:var(--bordo-strappato) no-repeat center/100% 100%;
+}
+.v-sez:has(> .strappo-su){z-index:2}
+
+/* il tartan: il filetto del brand, senza una parola sopra (sostituisce .payoff-edge.tartan) */
+.filetto,.payoff-edge.tartan{
+  position:relative;z-index:3;height:14px;background-color:var(--arancio);
+  background-image:
+    repeating-linear-gradient(90deg,transparent 0 16px,rgba(199,74,7,.55) 16px 23px,transparent 23px 40px,rgba(243,229,208,.24) 40px 41.5px,transparent 41.5px 56px),
+    repeating-linear-gradient(0deg, transparent 0 16px,rgba(199,74,7,.55) 16px 23px,transparent 23px 40px,rgba(243,229,208,.24) 40px 41.5px,transparent 41.5px 56px);
+}
+
+/* ---------- 5 · LE ICONE DEL BRAND: maschere, il colore lo decide il CSS ---- */
+.ico{display:inline-block;background:currentColor;flex:none;
+  -webkit-mask:no-repeat center/contain;mask:no-repeat center/contain}
+.i-teschio   {-webkit-mask-image:url("images/icone/teschio-longhorn.svg");mask-image:url("images/icone/teschio-longhorn.svg");aspect-ratio:373.99/176.81}
+.i-cactus    {-webkit-mask-image:url("images/icone/cactus.svg");mask-image:url("images/icone/cactus.svg");aspect-ratio:140.28/229.85}
+.i-cappello  {-webkit-mask-image:url("images/icone/cappello-cowboy.svg");mask-image:url("images/icone/cappello-cowboy.svg");aspect-ratio:266.88/132.43}
+.i-ferri     {-webkit-mask-image:url("images/icone/ferri-di-cavallo.svg");mask-image:url("images/icone/ferri-di-cavallo.svg");aspect-ratio:267.1/184.4}
+.i-stivale   {-webkit-mask-image:url("images/icone/stivale.svg");mask-image:url("images/icone/stivale.svg");aspect-ratio:169.63/240.37}
+.i-camaleonte{-webkit-mask-image:url("images/icone/camaleonte.svg");mask-image:url("images/icone/camaleonte.svg");aspect-ratio:272.48/160.07}
+.i-stella    {-webkit-mask-image:url("images/icone/stella-sceriffo.svg");mask-image:url("images/icone/stella-sceriffo.svg");aspect-ratio:187.62/203.89}
+.i-chitarra  {-webkit-mask-image:url("images/icone/chitarra.svg");mask-image:url("images/icone/chitarra.svg");aspect-ratio:128.45/317.28}
+/* l'icona gigante in filigrana dietro un titolo: tono su tono, si intuisce */
+.marchio{position:absolute;pointer-events:none;z-index:0;opacity:.085;color:var(--pg-fg)}
+@media (max-width:760px){.marchio{opacity:.06}}
+
+/* ---------- 6 · TIPOGRAFIA -------------------------------------------------- */
+h1,h2,h3,h4{font-family:var(--display);font-weight:400;font-synthesis:none;
+  text-transform:uppercase;letter-spacing:.02em;line-height:1.1;text-wrap:balance}
+.v-h{font-size:clamp(26px,3.4vw,40px);letter-spacing:.005em;max-width:24ch;color:var(--pg-fg)}
+.v-h--hero{font-size:clamp(31px,4.4vw,52px);max-width:30ch}
+.v-h--centro{margin-inline:auto;text-align:center}
+.f-tan .v-h,.f-arancio .v-h{color:inherit}
+.v-lead{font-size:clamp(17px,1.9vw,19px);line-height:1.62;color:var(--pg-fg);max-width:54ch;margin-top:20px}
+.v-lead--centro{margin-inline:auto;text-align:center}
+.v-lead b{font-weight:800}
+.f-tan .v-lead,.f-tan .v-lead b{color:var(--espresso)}
+/* il blocco di testa di una sezione centrato (titolo + riga) */
+.v-testa{text-align:center}
+.v-testa .v-h,.v-testa .v-lead{margin-inline:auto}
+
+/* LA PAROLA TIMBRATA: arancio dietro la parola, non come colore del testo */
+.acc{
+  background:var(--arancio);color:var(--panna);
+  padding:.02em .18em .08em;box-decoration-break:clone;-webkit-box-decoration-break:clone;
+  text-shadow:1px 1px 0 rgba(0,0,0,.3);
+}
+/* la tesi di chiusura di un blocco */
+.v-tesi{
+  font-family:var(--display);font-weight:400;font-synthesis:none;text-transform:uppercase;
+  font-size:clamp(24px,3vw,34px);line-height:1.12;letter-spacing:.02em;
+  max-width:40ch;margin-top:clamp(44px,6vw,76px);
+}
+/* LA PASTIGLIA: l'unica scritta piccola ammessa, e solo appoggiata su una foto */
+.pastiglia{
+  display:inline-flex;align-items:center;gap:9px;
+  background:var(--scuro2);color:var(--panna);
+  font-family:var(--btn);font-size:13px;font-weight:900;letter-spacing:.14em;
+  text-transform:uppercase;line-height:1;
+  padding:9px 16px 10px;border-radius:999px;
+  box-shadow:0 6px 18px rgba(12,5,1,.45);
+}
+/* la fila di stelle: separatore da manifesto */
+.stelle{display:flex;align-items:center;gap:10px;color:var(--arancio)}
+.stelle .ico{width:15px;height:16px}
+.stelle::before,.stelle::after{content:"";flex:1;height:2px;
+  background:repeating-linear-gradient(90deg,currentColor 0 7px,transparent 7px 13px);opacity:.5}
+
+/* LA PROSA: la colonna di testo delle pagine lunghe. A sinistra, stretta,
+   paragrafi corti. E' qui che si decide se una pagina e' un muro o si legge. */
+.v-prosa{max-width:62ch}
+.v-prosa p,.v-prosa li{font-size:clamp(16px,1.7vw,17.5px);line-height:1.65;color:var(--pg-fg)}
+.v-prosa p + p,.v-prosa ul + p,.v-prosa p + ul{margin-top:1em}
+.v-prosa h3{font-size:clamp(20px,2.2vw,26px);letter-spacing:.01em;margin:1.7em 0 .5em}
+.v-prosa h3:first-child{margin-top:0}
+.v-prosa ul{padding-left:1.15em}
+.v-prosa li + li{margin-top:.4em}
+.v-prosa b,.v-prosa strong{font-weight:800}
+.v-prosa a{color:var(--azz);text-decoration:underline;text-underline-offset:3px}
+.t-panna .v-prosa a,.t-tan .v-prosa a{color:#6B4426;text-decoration-color:var(--arancio)}
+.v-prosa--centro{margin-inline:auto}
+/* la frase guida: la prima riga del capitolo, in evidenza */
+.v-guida{font-size:clamp(18px,2vw,21px);line-height:1.5;font-weight:700;color:var(--pg-fg);max-width:48ch}
+/* una nota piccola, ma non micro */
+.v-nota{font-size:14px;line-height:1.5;color:var(--pg-mut)}
+
+/* ---------- 7 · I BOTTONI --------------------------------------------------- */
+.v-pill{
+  display:inline-block;font-family:var(--btn);font-weight:900;
+  font-size:clamp(15px,1.45vw,16.5px);
+  letter-spacing:.07em;text-transform:uppercase;text-decoration:none;text-align:center;
+  background:var(--carta);color:var(--espresso);
+  border:2px solid var(--carta);border-radius:14px;
+  padding:15px 26px 16px;cursor:pointer;line-height:1.2;
+  transition:background .18s,color .18s,border-color .18s;
+}
+/* ⚠️ l'hover NON e' arancio: panna su arancio a 16px fa 3,84:1 */
+.v-pill:hover{background:var(--panna);border-color:var(--panna);color:var(--espresso)}
+.v-pill:active{transform:translateY(1px)}
+/* sul chiaro la pill si inverte, se no sparisce */
+.t-panna .v-pill,.t-tan .v-pill,.chiaro .v-pill{background:var(--scuro2);color:var(--panna);border-color:var(--scuro2)}
+.t-panna .v-pill:hover,.t-tan .v-pill:hover,.chiaro .v-pill:hover{background:var(--espresso);border-color:var(--espresso);color:var(--panna)}
+/* il secondario: solo contorno, stesso corpo */
+.v-pill--contorno,.t-panna .v-pill--contorno,.t-tan .v-pill--contorno{background:transparent;color:var(--pg-fg);border-color:var(--pg-fil)}
+.v-pill--contorno:hover,.t-panna .v-pill--contorno:hover,.t-tan .v-pill--contorno:hover{background:transparent;border-color:var(--pg-fg);color:var(--pg-fg)}
+.t-panna .v-pill--contorno,.t-tan .v-pill--contorno{border-color:rgba(43,20,5,.45)}
+/* il piccolo: testata e newsletter */
+.v-pill--mini{font-size:13.5px;letter-spacing:.06em;padding:10px 16px 11px;border-radius:12px}
+.v-cta-fila{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:clamp(28px,3.6vw,40px)}
+.v-cta-fila--centro{justify-content:center}
+@media (max-width:560px){
+  .v-cta-fila{display:grid;grid-template-columns:1fr;gap:12px}
+  .v-cta-fila .v-pill,.v-cta-fila .v-wa{width:100%;text-align:center;justify-content:center}
+}
+/* WhatsApp: resta, ma a contorno. Un solo bottone pieno per schermata. */
+.v-wa{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:var(--btn);font-weight:700;font-size:14.5px;letter-spacing:.05em;
+  text-transform:uppercase;text-decoration:none;
+  background:transparent;color:var(--pg-fg);opacity:.82;
+  border:2px solid var(--pg-fil);border-radius:10px;padding:12px 17px 13px;
+  transition:opacity .16s,border-color .16s;
+}
+.v-wa:hover{opacity:1;border-color:var(--pg-fg)}
+.v-wa svg{width:17px;height:17px;flex:none;opacity:.75}
+.t-panna .v-wa,.t-tan .v-wa,.chiaro .v-wa{color:var(--espresso);border-color:rgba(43,20,5,.45);opacity:1}
+
+/* ---------- 8 · LE FOTOGRAFIE: si incorniciano, non si tingono -------------- */
+.cornice img,.v-volto img,.v-figura img,.v-gall img{filter:saturate(1.05) contrast(1.03)}
+/* la cornice: una stampa appoggiata, col cartoncino crema */
+.cornice{
+  background:var(--carta);padding:11px 11px 13px;border-radius:12px;
+  box-shadow:0 26px 46px -18px rgba(12,5,1,.6),0 0 0 1px rgba(43,20,5,.18);
+}
+.cornice img{width:100%;height:auto;object-fit:cover;display:block;border-radius:5px}
+.cornice figcaption,.cornice .dida{
+  font-family:var(--btn);font-style:italic;font-weight:500;font-size:14.5px;line-height:1.4;
+  color:#5C3315;text-align:center;padding:11px 6px 0;
+}
+/* la figura semplice: foto con angoli tondi e didascalia sotto */
+.v-figura{margin:0}
+.v-figura img{width:100%;height:auto;border-radius:16px;box-shadow:0 20px 40px -20px rgba(12,5,1,.55)}
+.v-figura figcaption{
+  font-family:var(--btn);font-style:italic;font-weight:500;font-size:14.5px;line-height:1.45;
+  color:var(--pg-mut);margin-top:11px;
+}
+/* foto e testo affiancati: due colonne da 860px in su, impilati sotto */
+.v-due{display:grid;grid-template-columns:1fr 1fr;gap:clamp(26px,4vw,56px);align-items:center}
+.v-due--testo-largo{grid-template-columns:3fr 2fr}
+.v-due--foto-larga{grid-template-columns:2fr 3fr}
+.v-due--foto-sx > .cornice,.v-due--foto-sx > .v-figura,.v-due--foto-sx > .v-video{order:-1}
+@media (max-width:860px){
+  .v-due,.v-due--testo-largo,.v-due--foto-larga{grid-template-columns:1fr;gap:clamp(22px,5vw,34px)}
+  .v-due--foto-sx > *{order:0}
+  .v-due--foto-prima > .cornice,.v-due--foto-prima > .v-figura{order:-1}
+}
+.v-due .v-h{margin-top:0}
+
+/* ---------- 9 · IL VIDEO: una stampa incorniciata, l'iframe nasce al clic ----- */
+.v-video{margin-top:clamp(30px,4vw,48px)}
+.v-video-cornice{position:relative;overflow:hidden;border-radius:16px;background:var(--espresso);box-shadow:0 26px 50px -18px rgba(12,5,1,.62)}
+.v-video-cornice video{width:100%;aspect-ratio:16/9;object-fit:cover;background:var(--espresso);display:block}
+.v-video-cornice .inner{position:relative;line-height:0}
+.v-video-cornice .inner > img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.vb-play{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:92px;height:92px;border-radius:50%;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--carta);color:var(--scuro2);border:3px solid var(--scuro2);
+  transition:transform .18s;
+}
+.vb-play:hover{transform:translate(-50%,-50%) scale(1.06)}
+.vb-play svg{margin-left:5px}
+@media (max-width:600px){
+  .vb-play{width:66px;height:66px;border-width:2px}
+  .vb-play svg{width:26px;height:26px;margin-left:4px}
+  .vcap{bottom:12px;font-size:13px;padding:8px 13px 9px}
+}
+/* la didascalia del video: occhiello DI COMPOSIZIONE, in pastiglia sulla foto */
+.vcap{
+  position:absolute;left:50%;transform:translateX(-50%);bottom:16px;
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;white-space:nowrap;
+  font-family:var(--btn);font-weight:900;font-size:13px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--panna);line-height:1;
+  background:var(--scuro2);border-radius:999px;padding:9px 15px 10px;
+}
+.vcap .ico{width:12px;height:13px;color:var(--arancio)}
+.v-video-cornice .inner.vb-on img,
+.v-video-cornice .inner.vb-on .vb-play,
+.v-video-cornice .inner.vb-on .vcap{display:none}
+.v-video-cornice .inner iframe{width:100%;aspect-ratio:16/9;border:0;display:block}
+/* il clip verticale (9/16): sta in una colonna sua, mai a tutta altezza da computer */
+.v-clip{border-radius:24px;overflow:hidden;box-shadow:0 28px 54px -20px rgba(0,0,0,.72)}
+.v-clip .inner > img,.v-clip .inner iframe{aspect-ratio:9/16}
+.v-clip .vb-play{width:74px;height:74px}
+.v-clip .vb-play svg{width:29px;height:29px;margin-left:4px}
+
+/* ---------- 10 · LO SCORRIMENTO ORIZZONTALE (nativo, niente JavaScript) ----- */
+.v-scorri{
+  display:flex;gap:clamp(14px,2.2vw,26px);
+  overflow-x:auto;overscroll-behavior-x:contain;
+  scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;
+  justify-content:safe center;
+  padding:6px var(--lato) 20px;
+  margin-inline:calc(var(--lato) * -1);
+  scrollbar-width:none;
+}
+.v-scorri::-webkit-scrollbar{display:none}
+.v-scorri > *{scroll-snap-align:center;flex:0 0 auto}
+/* i loghi dei clienti: a colori, su chiaro, pareggiati sulle ALTEZZE */
+.v-loghi{
+  align-items:center;margin-top:clamp(30px,4vw,48px);
+  --sf:clamp(18px,4vw,42px);
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 var(--sf),#000 calc(100% - var(--sf)),transparent 100%);
+          mask-image:linear-gradient(90deg,transparent 0,#000 var(--sf),#000 calc(100% - var(--sf)),transparent 100%);
+}
+.v-loghi img{display:block;width:auto;filter:saturate(1.02)}
+.v-loghi img[src$="coca-cola.svg"]              {height:35px}
+.v-loghi img[src$="ca-del-bosco.svg"]           {height:50px}
+.v-loghi img[src$="conti-thun.webp"]            {height:58px}
+.v-loghi img[src$="centro-porsche-brescia.webp"]{height:62px}
+.v-loghi img[src$="lombarda-ceramiche.webp"]    {height:34px}
+.v-loghi img[src$="pietra-cavalla.webp"]        {height:50px}
+.v-loghi img[src$="il-cascinetto.webp"]         {height:52px}
+.v-altri{
+  font-family:var(--btn);font-weight:700;font-size:15px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--pg-mut);white-space:nowrap;padding-left:6px;
+}
+
+/* ---------- 11 · LA FASCIA DEI NUMERI (arancio, etichette in pastiglia) ----- */
+.v-fatti{padding:clamp(38px,5vw,64px) 0}
+.v-fatti-griglia{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:18px clamp(14px,2.4vw,30px);
+  max-width:var(--wrap);margin:0 auto;padding:0 var(--lato);text-align:center;
+}
+.v-fatti-griglia.v-fatti--tre{grid-template-columns:repeat(3,1fr)}
+.v-fatti b{
+  display:block;font-family:var(--display);font-weight:400;font-synthesis:none;
+  font-variant-numeric:tabular-nums;
+  font-size:clamp(34px,4.8vw,52px);line-height:.96;color:var(--panna);
+  text-shadow:2px 2px 0 var(--espresso);
+}
+/* l'etichetta sta in pastiglia scura a ogni larghezza: il marrone nudo sull'arancio fa 3,25:1 */
+.v-fatti span{
+  display:inline-block;margin-top:10px;
+  font-family:var(--btn);font-weight:700;font-size:15px;
+  letter-spacing:.06em;text-transform:uppercase;line-height:1.2;
+  color:var(--panna);background:var(--scuro2);
+  border-radius:999px;padding:7px 14px 8px;
+}
+@media (max-width:700px){
+  .v-fatti-griglia{grid-template-columns:1fr 1fr;gap:24px 14px}
+  .v-fatti-griglia.v-fatti--tre{grid-template-columns:repeat(3,1fr);gap:0 8px}
+  .v-fatti span{padding:7px 12px 8px;font-size:13.5px;letter-spacing:.03em}
+}
+
+/* ---------- 12 · LE CARD INFORMAZIONI: carta, icona in riga col titolo ------ */
+.v-info{display:grid;gap:clamp(12px,1.8vw,18px);max-width:860px;margin:clamp(34px,4.4vw,52px) auto 0}
+.v-info-card{
+  --pg-fg:#2B1405; --pg-mut:#6B4426; --pg-fil:#D3BC98;
+  display:grid;grid-template-columns:36px 1fr;column-gap:clamp(12px,1.6vw,16px);
+  align-items:center;align-content:start;
+  background:var(--carta);color:var(--pg-fg);border:1px solid #DFCDAE;border-radius:16px;
+  box-shadow:0 10px 26px -14px rgba(0,0,0,.55);
+  padding:clamp(21px,2.6vw,27px) clamp(21px,2.8vw,29px) clamp(23px,2.8vw,29px);
+}
+.v-info-card > div{display:contents}
+.v-info-card .ico{grid-column:1;grid-row:1;width:36px;height:30px;aspect-ratio:auto;justify-self:center;color:var(--arancio)}
+.v-info-card h3{grid-column:2;grid-row:1;font-size:clamp(17px,1.5vw,19px);letter-spacing:.045em;line-height:1.15;color:var(--pg-fg)}
+.v-info-card p{grid-column:1/-1;grid-row:2;margin-top:11px;font-family:var(--testo);font-size:16.5px;line-height:1.68;color:#5A3A1C}
+.v-info-card p b{color:var(--pg-fg);font-weight:700}
+.v-info-card .emo{font-size:1em;line-height:1;vertical-align:-.05em}
+@media (min-width:900px){
+  .v-info{grid-template-columns:1fr 1fr;max-width:none;gap:clamp(14px,1.6vw,18px)}
+  /* con un numero dispari la prima card (il testo piu' lungo) prende tutta la riga */
+  .v-info--dispari .v-info-card:first-child{grid-column:1/-1}
+  .v-info--dispari .v-info-card:first-child p{max-width:75ch}
+}
+@media (min-width:1000px){.v-info--tre{grid-template-columns:repeat(3,1fr)}}
+
+/* ---------- 13 · LA LINE-UP: ritratti in cornice, 3:4 ---------------------- */
+.v-lineup{align-items:flex-start;margin-top:clamp(30px,4vw,48px)}
+.v-lineup .v-volto{width:min(70vw,272px)}
+.v-lineup--bio .v-volto{width:min(82vw,330px)}
+@media (min-width:900px){
+  .v-lineup{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(16px,1.8vw,26px);overflow:visible;margin-inline:0;padding:0}
+  .v-lineup .v-volto{width:auto}
+  /* con le bio dentro, tre per riga (3 + 2 centrati): cinque colonne sarebbero troppo strette per leggere */
+  .v-lineup--bio{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(22px,2.6vw,36px) clamp(20px,2.4vw,32px)}
+  .v-lineup--bio .v-volto{width:calc((100% - 2 * clamp(20px,2.4vw,32px)) / 3)}
+}
+.v-volto{position:relative}
+.v-volto .cornice{padding:9px 9px 11px}
+.v-volto img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;display:block}
+.v-volto h3,.v-volto h4{font-size:clamp(19px,2vw,24px);color:var(--pg-fg);margin-top:16px;line-height:1.05}
+.v-volto .ruolo{
+  font-family:var(--btn);font-weight:700;font-size:14.5px;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--pg-mut);margin-top:5px;
+}
+.v-volto .bio{margin-top:12px;text-align:left}
+.v-volto .bio p{font-size:15.5px;line-height:1.58;color:var(--pg-fg)}
+.v-volto .bio p + p{margin-top:.6em}
+.v-volto .battuta{
+  font-family:"LT Cushion",Georgia,serif;font-style:italic;font-weight:500;
+  font-size:15.5px;line-height:1.45;color:var(--pg-fg);margin-top:10px;
+}
+.v-volto .battuta::before{content:"\201C"}
+.v-volto .battuta::after{content:"\201D"}
+
+/* ---------- 14 · LA GALLERY PICCOLA (sei foto): scorre da telefono, griglia da 900 */
+.v-gall img{height:min(46vw,300px);width:auto;border-radius:16px;display:block;box-shadow:0 16px 30px -16px rgba(12,5,1,.5)}
+@media (min-width:900px){
+  .v-gall{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,1.8vw,22px);overflow:visible;margin-inline:0;padding:0}
+  .v-gall img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover}
+}
+
+/* ---------- 15 · LE FAQ: grandi, col «+» in cerchio arancio ------------------ */
+.v-faq{max-width:880px;margin:clamp(36px,4.6vw,54px) auto 0;display:grid;gap:14px}
+.v-q{
+  --q-bg:#381A08; --q-fg:var(--panna); --q-p:#E4CDA9;
+  border:1.5px solid var(--pg-fil);border-radius:14px;overflow:hidden;
+  background:var(--q-bg);transition:border-color .2s;
+}
+.t-panna .v-q{--q-bg:#FAF3E7;--q-fg:#2B1405;--q-p:#4A2A12;border-color:#DFCDAE}
+.v-q:hover,.v-q[open]{border-color:var(--arancio)}
+.v-q summary{
+  cursor:pointer;list-style:none;padding:22px 74px 22px 26px;position:relative;
+  font-family:var(--btn);font-weight:700;font-size:clamp(19px,2vw,21px);line-height:1.3;
+  color:var(--q-fg);letter-spacing:.01em;
+}
+.v-q summary::-webkit-details-marker{display:none}
+.v-q summary::after{
+  content:"+";position:absolute;right:20px;top:50%;transform:translateY(-50%);
+  width:38px;height:38px;border-radius:50%;
+  background:var(--arancio);color:var(--panna);
+  font-family:var(--btn);font-weight:900;font-size:25px;line-height:38px;text-align:center;
+}
+.v-q[open] summary::after{content:"\2013"}
+.v-q[open] summary{padding-bottom:10px}
+.v-q p{font-size:17px;line-height:1.66;color:var(--q-p);padding:0 26px 24px}
+.v-q p + p{padding-top:0;margin-top:-10px}
+.v-q p b{color:var(--q-fg);font-weight:700}
+@media (max-width:560px){
+  .v-q summary{padding:19px 62px 19px 19px}
+  .v-q summary::after{width:32px;height:32px;font-size:21px;line-height:32px;right:15px}
+  .v-q p{padding:0 19px 21px}
+}
+
+/* ---------- 16 · LA LIGHTBOX (dialog nativo) -------------------------------- */
+.v-luce{border:0;padding:0;background:transparent;max-width:96vw;max-height:96vh;margin:auto}
+.v-luce::backdrop{background:rgba(12,5,1,.92)}
+.v-luce figure{margin:0}
+.v-luce img{max-width:96vw;max-height:86vh;width:auto;height:auto;border-radius:12px;display:block;margin:0 auto}
+.v-luce figcaption{color:var(--panna);text-align:center;font-size:15px;line-height:1.45;margin-top:12px;padding:0 10px}
+.v-luce .v-luce-x{
+  position:fixed;top:14px;right:14px;width:46px;height:46px;border-radius:50%;cursor:pointer;
+  border:2px solid var(--panna);background:var(--scuro2);color:var(--panna);
+  font-family:var(--btn);font-weight:900;font-size:26px;line-height:1;
+}
+body:has(dialog.v-luce[open]){overflow:hidden}
+
+/* ---------- 17 · COMPARSA ALLO SCORRIMENTO (solo con JS attivo) -------------- */
+.js .rv,.js .fade-in,.js .rise{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.js .rv.in,.js .fade-in.in,.js .rise.in{opacity:1;transform:none}
+.js .stagger > *{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.js .stagger.in > *{opacity:1;transform:none}
+.js .stagger.in > *:nth-child(2){transition-delay:.08s}
+.js .stagger.in > *:nth-child(3){transition-delay:.16s}
+.js .stagger.in > *:nth-child(4){transition-delay:.24s}
+.js .stagger.in > *:nth-child(5){transition-delay:.32s}
+.js .stagger.in > *:nth-child(6){transition-delay:.4s}
+.js .stagger.in > *:nth-child(n+7){transition-delay:.46s}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .js .rv,.js .fade-in,.js .rise,.js .stagger > *{opacity:1!important;transform:none!important;transition:none!important;animation:none!important}
+}
+
+/* ---------- 18 · LA TESTATA (nuova: la landing non ce l'ha) ------------------
+   Barra piena, sticky, uguale su tutte le pagine, home compresa: tinte piatte,
+   niente velo sfumato sopra la foto. I nomi sono quelli che il JS usa gia'
+   (.nav-burger, #nav-drawer, .open, aria-expanded; .solid resta inerte). */
+.nav{
+  position:sticky;top:0;z-index:60;
+  background:var(--espresso);color:var(--panna);
+  border-bottom:1px solid rgba(243,229,208,.14);
+}
+.nav.solid{position:sticky}
+.nav-in{
+  max-width:var(--wrap-largo);margin:0 auto;padding:10px var(--lato) 12px;
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:clamp(18px,2.4vw,36px);
+}
+.nav-logo{justify-self:center;display:block}
+.nav-logo img{height:72px;width:auto;display:block}
+.nav-side{display:flex;align-items:center;gap:clamp(14px,1.6vw,24px);list-style:none;margin:0;padding:0}
+.nav-side.sx{justify-content:flex-end}
+.nav-side.dx{justify-content:flex-start}
+.nav-side a{
+  display:inline-block;color:var(--panna);text-decoration:none;white-space:nowrap;
+  font-family:var(--btn);font-weight:700;font-size:13.5px;letter-spacing:.1em;text-transform:uppercase;
+  padding:6px 0;border-bottom:2px solid transparent;transition:border-color .18s;
+}
+.nav-side a:hover{border-bottom-color:rgba(243,229,208,.55)}
+.nav-side a[aria-current="page"]{border-bottom-color:var(--arancio)}
+/* il bottone: una pill piccola, carta su espresso, senza ombra */
+.nav-side a.nav-cta,.nav-cta{
+  font-family:var(--btn);font-weight:900;font-size:13.5px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--espresso);background:var(--carta);border:2px solid var(--carta);border-radius:12px;
+  padding:9px 16px 10px;line-height:1.2;transition:background .18s,color .18s;
+}
+.nav-side a.nav-cta:hover,.nav-cta:hover{background:transparent;color:var(--panna);border-bottom-color:var(--carta)}
+.nav-side a.nav-cta[aria-current="page"]{border-color:var(--carta)}
+/* EN / IT: contornato, leggibile (13,5px, non piu' 11,5) */
+.nav-side a.nav-lang,.nav-lang{
+  font-family:var(--btn);font-weight:700;font-size:13.5px;letter-spacing:.12em;
+  border:1.5px solid rgba(243,229,208,.45);border-radius:7px;padding:5px 9px 6px;line-height:1.1;
+}
+.nav-side a.nav-lang:hover{background:rgba(243,229,208,.12);border-bottom-color:rgba(243,229,208,.45)}
+/* il menu da telefono */
+.nav-burger{
+  display:none;background:none;border:0;cursor:pointer;padding:8px 6px;
+  flex-direction:column;gap:5px;width:38px;
+}
+.nav-burger span{display:block;height:2px;width:26px;background:var(--panna);transition:transform .25s,opacity .2s}
+.nav-burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.nav-burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.nav-drawer{display:none;background:var(--scuro2);border-top:1px solid rgba(243,229,208,.14);padding:8px var(--lato) 20px}
+.nav-drawer.open{display:block}
+.nav-drawer ul{list-style:none;margin:0;padding:0}
+.nav-drawer a{
+  display:block;padding:14px 2px;color:var(--panna);text-decoration:none;
+  font-family:var(--btn);font-weight:700;font-size:16px;letter-spacing:.1em;text-transform:uppercase;
+  border-bottom:1px solid rgba(243,229,208,.12);
+}
+.nav-drawer a[aria-current="page"]{box-shadow:inset 0 -2px 0 var(--arancio);border-bottom-color:transparent}
+@media (max-width:1000px){
+  :root{--nav-h:72px}
+  .nav-in{grid-template-columns:auto 1fr auto;gap:10px;padding-top:8px;padding-bottom:8px}
+  .nav-logo{grid-column:2}
+  .nav-logo img{height:52px}
+  .nav-burger{display:flex;grid-column:1;justify-self:start}
+  .nav-side.sx{display:none}
+  .nav-side.dx{justify-content:flex-end;grid-column:3}
+  .nav-side.dx li:not(:last-child){display:none}
+}
+
+/* ---------- 19 · IL PIEDE: newsletter, camaleonte, tre colonne -------------- */
+.footer{position:relative;overflow-x:clip;background:var(--espresso);color:var(--panna);padding:0 0 26px}
+.foot-nl{
+  max-width:var(--wrap);margin:0 auto;
+  padding:clamp(26px,3.4vw,40px) var(--lato) clamp(24px,3vw,34px);
+  border-bottom:1px solid rgba(139,174,164,.22);
+}
+.foot-nl-in{display:grid;grid-template-columns:1fr min(460px,44%);gap:clamp(18px,3vw,44px);align-items:center;min-width:0}
+.foot-nl-in > *{min-width:0}
+.foot-nl-tit{font-family:var(--display);font-weight:400;font-synthesis:none;text-transform:uppercase;
+  font-size:clamp(24px,2.8vw,32px);line-height:1.08;letter-spacing:.01em;color:var(--panna);margin:0}
+/* la parola in evidenza e' timbrata, non arancio nudo */
+.nl-accent{background:var(--arancio);color:var(--panna);padding:.02em .16em .08em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.newsletter{
+  display:flex;align-items:center;gap:10px;width:100%;
+  border:1.5px solid rgba(243,229,208,.32);border-radius:999px;
+  padding:6px 6px 6px 20px;background:var(--scuro2);
+}
+.newsletter input{flex:1;min-width:0;background:transparent;border:0;outline:0;
+  font-family:var(--testo);font-size:15px;color:var(--panna);padding:11px 0}
+.newsletter input::placeholder{color:rgba(243,229,208,.62)}
+.newsletter button{
+  flex:none;font-family:var(--btn);font-weight:900;font-size:13.5px;letter-spacing:.06em;text-transform:uppercase;
+  cursor:pointer;background:var(--carta);color:var(--espresso);border:2px solid var(--carta);border-radius:999px;
+  padding:10px 18px 11px;line-height:1.2;transition:background .18s,color .18s;
+}
+.newsletter button:hover{background:var(--panna);border-color:var(--panna)}
+.newsletter button:disabled{opacity:.6;cursor:wait}
+.nl-done{font-family:"LT Cushion",Georgia,serif;font-style:italic;font-weight:500;font-size:16px;padding:12px 0;color:var(--panna)}
+.nl-consenso{font-family:var(--testo);font-size:13.5px;line-height:1.5;color:var(--pg-mut);margin:10px 0 0;max-width:48ch}
+.nl-consenso a{color:var(--azz)}
+@media (max-width:800px){
+  .foot-nl-in{grid-template-columns:1fr}
+  .newsletter{padding-left:16px}
+}
+.footer-cam{display:flex;flex-direction:column;align-items:center;padding:clamp(26px,3.4vw,40px) 20px 0;text-align:center}
+.footer-cam .ico{width:min(230px,44vw);height:auto;aspect-ratio:272.48/160.07;color:var(--azz)}
+.footer-payoff{font-family:var(--display);font-weight:400;font-synthesis:none;text-transform:uppercase;
+  color:var(--panna);font-size:clamp(24px,3.4vw,40px);letter-spacing:.05em;margin-top:12px;line-height:1.08}
+.footer-rule{display:flex;align-items:center;gap:18px;max-width:var(--wrap);margin:clamp(20px,2.6vw,30px) auto 0;padding:0 var(--lato);color:var(--azz)}
+.footer-rule .line{flex:1;height:1px;background:rgba(139,174,164,.35)}
+.footer-rule .ico{width:20px;height:22px}
+.footer-grid{
+  max-width:var(--wrap);margin:22px auto 0;padding:0 var(--lato);
+  display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:clamp(24px,4vw,56px);
+}
+/* ⚠️ min-width:0: senza, una colonna restava a 403px in un footer di 390 e tutta la pagina scorreva di lato */
+.footer-grid > *{min-width:0}
+.footer-grid,.footer-grid *{overflow-wrap:anywhere}
+.footer h5{font-family:var(--btn);font-size:13.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--azz);margin-bottom:12px;text-wrap:initial}
+.footer-big{font-family:var(--display);font-weight:400;font-synthesis:none;text-transform:uppercase;
+  font-size:clamp(22px,2.6vw,30px);color:var(--panna);line-height:1.12;letter-spacing:.02em}
+.footer ul{list-style:none}
+.footer ul li{margin-bottom:7px;font-size:15px;color:var(--panna)}
+.footer ul a{color:var(--panna);text-decoration:none}
+.footer ul a:hover{color:var(--azz)}
+.footer-social{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.footer-social a{
+  display:inline-flex;align-items:center;gap:8px;white-space:nowrap;
+  font-family:var(--btn);font-size:13.5px;font-weight:700;letter-spacing:.05em;color:var(--azz);
+  text-decoration:none;border:1.5px solid rgba(139,174,164,.45);border-radius:99px;padding:8px 15px 9px;
+}
+.footer-social a:hover{background:var(--azz);color:var(--espresso)}
+.footer-social svg{width:15px;height:15px;fill:currentColor;flex:none}
+.footer-copy{
+  max-width:var(--wrap);margin:24px auto 0;padding:14px var(--lato) 0;
+  border-top:1px solid rgba(139,174,164,.18);
+  font-size:13.5px;line-height:1.6;color:var(--pg-mut);text-align:center;
+}
+.footer-copy a{color:var(--azz);text-decoration:none}
+.footer-copy a:hover{text-decoration:underline}
+@media (max-width:960px){.footer-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.footer-grid{grid-template-columns:1fr;gap:26px}}
+
+/* ---------- 20 · LA STRISCIA DELLA LINGUA ----------------------------------- */
+.lang-bar{
+  position:fixed;left:0;right:0;bottom:0;z-index:95;display:none;
+  background:var(--scuro2);color:var(--panna);
+  border-top:1px solid rgba(243,229,208,.22);box-shadow:0 -8px 24px rgba(12,5,1,.45);
+  font-family:var(--testo);font-size:14px;line-height:1.4;
+  padding:11px clamp(14px,4vw,28px);
+}
+.lang-bar.on{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
+/* il link e' panna sottolineato di arancio: l'arancio come testo a 14px non regge */
+.lang-bar a{color:var(--panna);font-weight:800;text-decoration:underline;text-decoration-color:var(--arancio);text-decoration-thickness:2px;text-underline-offset:3px}
+.lang-bar b{color:var(--panna)}
+.lang-bar button{
+  background:none;border:1px solid rgba(243,229,208,.45);border-radius:6px;
+  color:inherit;font:inherit;line-height:1;padding:6px 9px;cursor:pointer;
+}
+.lang-bar button:hover{background:rgba(243,229,208,.14)}
