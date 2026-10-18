@@ -20,1963 +20,104 @@
 <meta property="og:image" content="https://thecoffeekillers.com/images/og-image.jpg" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="icon" type="image/svg+xml" href="images/logo/favicon.svg" />
+<link rel="preload" href="fonts/bonzana.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="fonts/Manrope-Variable.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="hjck.css" />
 <style>
 /* ============================================================================
-   MANROPE, OSPITATO QUI E NON PRESO DA GOOGLE
-   ----------------------------------------------------------------------------
-   Prima arrivava da fonts.googleapis.com: ogni visita mandava l'indirizzo IP
-   del visitatore ai server di Google, senza che nessuno l'avesse chiesto — e
-   in Europa e' proprio il punto su cui i garanti hanno gia' dato torto a dei
-   siti. Ospitandolo qui il problema sparisce del tutto: nessun terzo viene
-   contattato per mostrare una pagina, e l'informativa privacy ha una voce in
-   meno da dichiarare. In piu' si risparmiano due connessioni esterne.
-   E' il file VARIABILE: un file solo copre tutti i pesi da 400 a 800.
-   ⚠️ Rye e' uscito: era solo il fallback dopo Bonzana e veniva anch'esso da
-      Google. Al suo posto il serif di sistema, che non chiama nessuno.
+   HOME — solo l'impaginazione dei blocchi suoi: hero, video affiancato,
+   calendario sulla foto del palco, card Instagram, popup della data.
+   Tutto il resto (testata, tipografia, card, loghi, line-up, piede) e' in hjck.css.
    ============================================================================ */
-@font-face{
-  font-family:"Manrope";
-  src:url("fonts/Manrope-Variable.ttf") format("truetype-variations");
-  font-weight:200 800; font-style:normal; font-display:swap;
-}
-.nl-consenso{
-  font-family:var(--sans);font-size:12px;line-height:1.45;
-  color:var(--tan);margin:10px 0 0;max-width:46ch;
-}
-.nl-consenso a{color:var(--azz)}
 
-</style>
-<style>
-/* ============ FONT ============ */
-@font-face{
-  font-family:"Bonzana";
-  /* woff2 prima: 25 KB contro i 136 dell'otf, cioe' un quinto del peso.
-     Il woff resta per i browser vecchi; l'otf non serve piu' online. */
-  src:url("fonts/bonzana.woff2") format("woff2"),
-      url("fonts/bonzana.woff")  format("woff");
-  font-weight:400; font-display:swap;
+/* ---- l'hero: la fotografia comanda, il velo scende dove appoggia il testo ---- */
+.hero6{position:relative;min-height:88svh;display:flex;align-items:flex-end;padding:0 0 clamp(44px,6.5vw,80px);overflow:hidden;background:var(--espresso)}
+@media (min-width:1000px){.hero6{min-height:min(760px,86svh)}}
+.hero6-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 42%;filter:saturate(1.06) contrast(1.04)}
+/* il primo stop e' il colore di pagina PIENO: la foto si dissolve nella sezione dopo, niente riga netta */
+.hero6-velo{position:absolute;inset:0;z-index:1;background:
+  linear-gradient(to top,var(--espresso) 0%,rgba(43,20,5,.93) 13%,rgba(43,20,5,.74) 30%,rgba(43,20,5,.33) 52%,rgba(43,20,5,.05) 76%,rgba(43,20,5,0) 90%),
+  linear-gradient(to right,rgba(28,12,3,.5) 0%,rgba(28,12,3,.17) 42%,rgba(28,12,3,0) 68%)}
+.hero6-in{position:relative;z-index:2;width:100%;max-width:var(--wrap);margin:0 auto;padding:0 var(--lato)}
+.hero6 .v-h{text-shadow:0 3px 26px rgba(12,5,1,.5)}
+.hero6 .v-lead{max-width:46ch;text-shadow:0 1px 3px rgba(12,5,1,.92),0 2px 14px rgba(12,5,1,.7)}
+
+/* ---- il video: da 960px titolo e video affiancati, nient'altro nel blocco ---- */
+@media (min-width:960px){
+  .v-ascolta .v-in{display:grid;grid-template-columns:minmax(0,auto) minmax(0,760px);justify-content:center;gap:clamp(40px,5vw,80px);align-items:center}
+  .v-ascolta .v-h{max-width:9ch;font-size:clamp(38px,4.4vw,58px)}
+  .v-ascolta .v-video{margin:0;width:100%}
 }
 
-/* I tre font del brand, tutti ospitati in fonts/ e nessuno preso da terzi:
-   BONZANA per i titoli, LT CUSHION per bottoni e testi di supporto,
-   MANROPE per i testi (dichiarato nel blocco qui sopra).
-   ⚠️ Bronco Valley e' fuori: non si usa piu'. Anche il taglio "Valley"
-      (ValleyPersonalUse) e' stato tolto — era Personal Use, su un sito
-      non si puo' usare, e comunque non lo richiamava nessuna regola.
-   ⚠️ Resta da confermare la licenza commerciale di BONZANA. */
-@font-face{font-family:"LT Cushion";src:url("fonts/LTCushion-Light.ttf");font-weight:300;font-display:swap}
-@font-face{font-family:"LT Cushion";src:url("fonts/LTCushion-Medium.ttf");font-weight:500;font-display:swap}
-@font-face{font-family:"LT Cushion";src:url("fonts/LTCushion-Bold.ttf");font-weight:700;font-display:swap}
-@font-face{font-family:"LT Cushion";src:url("fonts/LTCushion-Black.ttf");font-weight:900;font-display:swap}
-
-/* ============ TOKENS ============ */
-:root{
-  /* ---- SOLO i colori del brand. Il giallo #FA8600 e' escluso per scelta,
-         e l'unico marrone ammesso e' #49240A: niente testa di moro. ---- */
-  --arancio:#CD5812;       /* IL colore di questa pagina: fasce, titoli, cornici, bottoni */
-  --ruggine:#CD5812;       /* stesso arancio: gli accenti non sfumano piu' in un secondo tono */
-  --espresso:#49240A;      /* marrone: fondo delle sezioni scure e testo su fondo chiaro */
-  --espresso-2:#CD5812;    /* la trama del tartan, in arancio */
-  --nero:#49240A;          /* footer: stesso marrone, non esiste un tono piu' scuro nel brand */
-  --caffe:#49240A;         /* striscia annuncio e testata piena */
-  --panna:#EDDABD;         /* la superficie di lettura */
-  --beige:#EDDABD;
-  --tan:#BD8B65;           /* marrone chiaro: testi secondari SUL SCURO (4.6:1) e dettagli */
-  --azz:#8BAEA4;           /* turchese: accento, solo sul marrone (5.6:1) */
-  --azz-scuro:#CD5812;     /* sul chiaro il turchese sparisce (1.8:1): al suo posto l'arancio */
-  --azz-testo:#49240A;     /* testo piccolo su fondo chiaro: solo marrone regge (10:1) */
-  --azz-wash:#BD8B65;
-  --bronco:"Bonzana",serif;
-  --serif:"LT Cushion",serif;
-  --sans:"Manrope",sans-serif;
-  --valley:"Bonzana",serif;
-  --cushion:"LT Cushion",serif;
-  --wrap:1180px;
-  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>");
-}
-
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:130px}
-body{
-  font-family:var(--sans);
-  background:var(--espresso);
-  color:var(--panna);
-  font-size:16px;
-  line-height:1.6;
-  overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;
-}
-img{max-width:100%;display:block}
-a{color:inherit}
-
-/* il velluto: grana su tutta la pagina */
-body::after{
-  content:"";position:fixed;inset:0;z-index:80;pointer-events:none;
-  background:var(--grain);opacity:.07;
-}
-
-h1,h2,h3{
-  font-family:var(--bronco);
-  font-weight:400;
-  font-synthesis:none;
-  letter-spacing:.03em;
-  line-height:1.04;
-  text-transform:uppercase;
-}
-.wrap{max-width:var(--wrap);margin:0 auto;padding:0 clamp(20px,4vw,48px)}
-
-/* ============ ICONE (mask) ============ */
-.ico{
-  display:inline-block;background:currentColor;flex:none;
-  -webkit-mask:no-repeat center/contain;mask:no-repeat center/contain;
-}
-.i-teschio  {-webkit-mask-image:url("images/icone/teschio-longhorn.svg");mask-image:url("images/icone/teschio-longhorn.svg");aspect-ratio:373.99/176.81}
-.i-cactus   {-webkit-mask-image:url("images/icone/cactus.svg");mask-image:url("images/icone/cactus.svg");aspect-ratio:140.28/229.85}
-.i-cappello {-webkit-mask-image:url("images/icone/cappello-cowboy.svg");mask-image:url("images/icone/cappello-cowboy.svg");aspect-ratio:266.88/132.43}
-.i-ferri    {-webkit-mask-image:url("images/icone/ferri-di-cavallo.svg");mask-image:url("images/icone/ferri-di-cavallo.svg");aspect-ratio:267.1/184.4}
-.i-stivale  {-webkit-mask-image:url("images/icone/stivale.svg");mask-image:url("images/icone/stivale.svg");aspect-ratio:169.63/240.37}
-.i-camaleonte{-webkit-mask-image:url("images/icone/camaleonte.svg");mask-image:url("images/icone/camaleonte.svg");aspect-ratio:272.48/160.07}
-.i-stella   {-webkit-mask-image:url("images/icone/stella-sceriffo.svg");mask-image:url("images/icone/stella-sceriffo.svg");aspect-ratio:187.62/203.89}
-.i-chitarra {-webkit-mask-image:url("images/icone/chitarra.svg");mask-image:url("images/icone/chitarra.svg");aspect-ratio:128.45/317.28}
-
-/* ============ TARTAN ============ */
-.tartan{
-  background-color:var(--espresso-2);
-  background-image:
-    repeating-linear-gradient(90deg,
-      transparent 0 16px, rgba(205,88,18,.5) 16px 23px,
-      transparent 23px 40px, rgba(237,218,189,.22) 40px 41.5px,
-      transparent 41.5px 56px),
-    repeating-linear-gradient(0deg,
-      transparent 0 16px, rgba(205,88,18,.5) 16px 23px,
-      transparent 23px 40px, rgba(237,218,189,.22) 40px 41.5px,
-      transparent 41.5px 56px);
-}
-
-/* ============ NAV stile sito Kruse Brothers, replica fedele:
-   striscia annuncio in cima, menu maiuscoletto a sinistra, logo grande
-   centrale, icone social a destra; nav trasparente con gradiente sull'hero,
-   scendendo si stacca e diventa barra fissa scura (JS in fondo) ============ */
-/* (la striscia annuncio in cima e' stata tolta il 01/09: la nav parte da 0) */
-.nav{
-  position:absolute;top:0;left:0;right:0;z-index:60;
-  /* velo piu' fitto e piu' lungo: prima le voci del menu cadevano nella
-     zona a .72/.28 e sopra un cielo chiaro non si leggevano */
-  background:linear-gradient(180deg,rgba(73,36,10,.96) 0%,rgba(73,36,10,.92) 38%,rgba(73,36,10,.74) 62%,rgba(73,36,10,.34) 84%,transparent 100%);
-  padding-bottom:30px;
-  transition:background .3s,box-shadow .3s;
-}
-.nav.solid{
-  position:fixed;top:0;
-  background:var(--caffe);            /* stesso marrone della striscia annuncio, come nel riferimento */
-  padding-bottom:0;
-  border-bottom:1px solid rgba(237,218,189,.14);
-  box-shadow:0 10px 30px rgba(73,36,10,.35);
-}
-.nav-in{
-  max-width:1320px;margin:0 auto;padding:10px clamp(20px,4vw,48px) 14px;
-  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px;
-}
-.nav-logo{justify-self:center}
-.nav-logo img{
-  height:118px;width:auto;transition:height .3s;
-}
-.nav.solid .nav-logo img{height:74px}
-.nav-side{display:flex;align-items:center;gap:clamp(12px,1.8vw,26px);list-style:none;margin:0;padding:0}
-.nav-side.dx{justify-content:flex-end}
-.nav-side a{
-  color:var(--panna);text-decoration:none;font-weight:800;font-size:13px;
-  letter-spacing:.14em;text-transform:uppercase;
-  /* sulla parte trasparente il beige finisce sopra la fotografia: l'alone
-     scuro lo stacca dal cielo chiaro senza appesantire la barra piena */
-  text-shadow:0 1px 2px rgba(73,36,10,.95), 0 0 14px rgba(73,36,10,.85);
-}
-.nav.solid .nav-side a{text-shadow:none}
-.nav-side a:hover{color:var(--arancio)}
-.nav-side a{white-space:nowrap}
-/* (le icone social sono uscite dalla testata il 01/09: stanno solo nel footer) */
-
-/* ---- Menu mobile (sotto i 720px): panetto a tendina con tutte le voci ---- */
-.nav-burger{
-  display:none;background:none;border:0;cursor:pointer;padding:8px 6px;
-  flex-direction:column;gap:5px;width:38px;
-}
-.nav-burger span{display:block;height:2px;width:26px;background:var(--beige);transition:transform .25s,opacity .2s}
-.nav-burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-.nav-burger[aria-expanded="true"] span:nth-child(2){opacity:0}
-.nav-burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-.nav-drawer{
-  display:none;background:var(--caffe);border-top:1px solid rgba(237,218,189,.16);
-  padding:10px clamp(20px,5vw,32px) 22px;
-}
-.nav-drawer.open{display:block}
-.nav-drawer ul{list-style:none;margin:0;padding:0}
-.nav-drawer a{
-  display:block;padding:14px 2px;color:var(--beige);text-decoration:none;
-  font-weight:700;font-size:15px;letter-spacing:.16em;text-transform:uppercase;
-  border-bottom:1px solid rgba(237,218,189,.12);
-}
-.nav-drawer a[aria-current="page"]{color:var(--arancio)}
-
-/* Il bottone "Preventivo" era turchese contornato: sul velo della testata
-   trasparente non si leggeva. Ora e' pieno di beige con la scritta marrone
-   (10:1 sempre, sia sul trasparente sia sulla barra piena) e ha la stessa
-   ombra piena arancio del bottone dell'hero, cosi' parla la stessa lingua. */
-.nav-cta{
-  font-family:var(--valley)!important;font-size:13px!important;font-weight:900!important;
-  color:var(--espresso)!important;background:var(--panna);
-  border:2px solid var(--espresso);border-radius:8px;
-  padding:8px 18px 9px;letter-spacing:.12em!important;text-transform:uppercase;
-  box-shadow:3px 3px 0 var(--arancio);
-  transition:transform .16s,box-shadow .16s,background .2s,color .2s;
-}
-.nav-cta:hover{
-  color:var(--panna)!important;background:var(--espresso);
-  transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--arancio);
-}
-.nav-side a[aria-current="page"]{color:var(--arancio)}
-.nav-burger{display:none}
-
-/* ============ HERO ============ */
-.hero{
-  position:relative;
-  min-height:min(94vh,980px);
-  display:flex;flex-direction:column;justify-content:center;
-  text-align:center;
-  padding:clamp(70px,9vh,120px) 0 clamp(56px,7vh,96px);
-  overflow:hidden;
-}
-.hero-bg{position:absolute;inset:0;z-index:0}
-.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:saturate(.9)}
-.hero-bg::after{
-  content:"";position:absolute;inset:0;
-  background:
-    radial-gradient(ellipse 90% 70% at 50% 38%, rgba(73,36,10,.55) 0%, rgba(73,36,10,.86) 62%, var(--espresso) 100%),
-    linear-gradient(180deg, rgba(73,36,10,.72) 0%, rgba(73,36,10,.55) 40%, var(--espresso) 96%);
-}
-.hero-in{position:relative;z-index:1;max-width:1020px;margin:0 auto;padding:0 20px}
-.orna{
-  display:flex;align-items:center;justify-content:center;gap:14px;
-  color:var(--azz);font-size:12.5px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;
-}
-.orna .ico{width:17px;height:18px}
-.orna-line{width:clamp(28px,6vw,84px);height:1px;background:var(--azz);opacity:.55}
-.hero-eyebrow{
-  font-family:var(--serif);font-style:italic;color:var(--arancio);
-  font-size:clamp(18px,2.4vw,25px);margin:26px 0 10px;letter-spacing:.01em;
-  text-shadow:0 1px 8px rgba(73,36,10,.75);
-}
-.hero h1{
-  color:var(--panna);
-  font-size:clamp(46px,8.4vw,112px);
-  margin:6px 0 22px;
-}
-.hero-lead{
-  color:var(--beige);max-width:56ch;margin:0 auto 30px;
-  font-size:clamp(16px,1.9vw,19px);
-}
-.hero-lead b{color:var(--panna)}
-.hero-actions{
-  display:flex;align-items:center;justify-content:center;gap:clamp(16px,3vw,34px);
-  flex-wrap:wrap;margin-bottom:14px;
-}
-.hero-date{
-  font-family:var(--cushion);font-weight:500;color:var(--arancio);
-  font-size:clamp(21px,2.6vw,28px);letter-spacing:.04em;
-  text-decoration:none;
-}
-.hero-date small{display:block;font-family:var(--sans);font-weight:700;font-size:12px;letter-spacing:.22em;color:var(--azz);text-transform:uppercase;margin-bottom:2px}
-.btn-poster{
-  display:inline-block;font-family:var(--valley);font-size:clamp(19px,2.2vw,24px);
-  color:var(--azz);border:2px solid var(--azz);border-radius:10px;
-  padding:10px 30px 12px;text-decoration:none;letter-spacing:.06em;
-  background:rgba(73,36,10,.35);
-  transition:background .2s,color .2s;
-}
-.btn-poster:hover{background:var(--azz);color:var(--espresso)}
-.hero-tags{
-  display:flex;justify-content:center;flex-wrap:wrap;gap:8px 0;
-  color:var(--tan);font-size:13.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
-  margin-top:26px;
-}
-.hero-tags span{display:flex;align-items:center}
-.hero-tags .ico{width:11px;height:12px;color:var(--azz);margin:0 14px;opacity:.85}
-.hero-stats{
-  position:relative;z-index:1;
-  display:flex;justify-content:center;gap:clamp(24px,5vw,72px);flex-wrap:wrap;
-  margin-top:clamp(38px,6vh,64px);padding-top:26px;
-  border-top:1px solid rgba(139,174,164,.28);
-  max-width:860px;margin-left:auto;margin-right:auto;
-}
-.stat{text-align:center}
-.stat .num{font-family:var(--valley);font-size:clamp(30px,3.6vw,42px);color:var(--beige);line-height:1}
-.stat .lbl{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--azz);margin-top:6px}
-
-/* ============ FILETTO TARTAN ============
-   La striscia scorrevole "Long Live Country Music" e' stata tolta il 01/09.
-   Restano .payoff-edge e .tartan: li usa ancora il filetto del footer. */
-.payoff-edge{height:12px}
-@media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-}
-
-/* ============ SEZIONI COMUNI ============ */
-.section{position:relative;padding:clamp(72px,9vw,120px) 0}
-.sec-head{
-  display:flex;justify-content:space-between;align-items:baseline;
-  gap:12px;flex-wrap:wrap;margin-bottom:clamp(28px,4vw,44px);
-}
-.eyebrow{
-  display:flex;align-items:center;gap:12px;
-  font-size:13.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--azz);
-}
-.eyebrow .ico{color:var(--azz)}
-.eyebrow-r{font-size:12.5px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--tan)}
-.on-light .eyebrow{color:var(--azz-testo)}          /* testo: tono leggibile */
-.on-light .eyebrow .ico{color:var(--azz-scuro)}      /* icona: tono originale */
-.on-light .eyebrow-r{color:var(--caffe);opacity:.75}
-.sec-title{
-  font-size:clamp(34px,4.6vw,60px);
-  color:var(--panna);
-  margin-bottom:18px;
-}
-.on-light .sec-title{color:var(--espresso)}
-.lead-p{font-size:clamp(16px,1.9vw,19px);color:var(--beige)}
-.on-light .lead-p{color:var(--caffe)}
-
-/* ============ VIDEO GUITAR ============ */
-.video-sec{background:var(--espresso)}
-.video-grid{display:grid;grid-template-columns:1fr 1.35fr;gap:clamp(28px,4vw,64px);align-items:center}
-.video-copy p{margin-top:14px}
-.video-copy .lead-p b{color:var(--panna)}
-.video-copy p a{color:var(--azz)}
-.fv-frame{
-  position:relative;display:block;text-decoration:none;
-  background:var(--beige);padding:12px 12px 0;
-  box-shadow:0 30px 60px -18px rgba(73,36,10,.65);
-  transform:rotate(.6deg);
-}
-.fv-frame img{width:100%;aspect-ratio:16/9;object-fit:cover}
-.fv-play{
-  position:absolute;top:calc(50% - 26px);left:50%;transform:translate(-50%,-50%);
-  width:86px;height:86px;border-radius:50%;
-  background:var(--arancio);color:var(--espresso);
-  display:flex;align-items:center;justify-content:center;
-  border:3px solid var(--espresso);
-  box-shadow:0 0 0 6px rgba(205,88,18,.28), 0 12px 30px rgba(73,36,10,.5);
-  transition:transform .2s;
-}
-.fv-frame:hover .fv-play{transform:translate(-50%,-50%) scale(1.07)}
-.fv-caption{
-  display:flex;align-items:center;justify-content:space-between;gap:10px;
-  padding:12px 6px 14px;color:var(--espresso);
-}
-.fv-caption .song{font-family:var(--cushion);font-weight:500;font-size:clamp(19px,2vw,24px);letter-spacing:.04em}
-.fv-caption .yt{font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--ruggine)}
-.video-actions{display:flex;gap:16px;flex-wrap:wrap;margin-top:26px}
-.btn-ghost-az{
-  display:inline-block;font-family:var(--valley);font-size:19px;
-  color:var(--beige);border:2px solid rgba(237,218,189,.4);border-radius:10px;
-  padding:8px 22px 10px;text-decoration:none;letter-spacing:.06em;
-  transition:border-color .2s,color .2s;
-}
-.btn-ghost-az:hover{border-color:var(--beige)}
-
-/* ============ BIRRA (pausa di carta) ============ */
-.birra{background:var(--panna);color:var(--espresso)}
-.birra-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(30px,5vw,72px);align-items:center}
-.birra .sec-title{max-width:14ch}
-.birra-list{list-style:none;margin-top:28px;display:grid;gap:14px}
-.birra-list li{
-  display:flex;align-items:center;gap:16px;
-  font-weight:700;font-size:15.5px;letter-spacing:.02em;color:var(--caffe);
-}
-.birra-list .ico{color:var(--azz-scuro)}
-.bl-cappello{width:34px;height:17px}
-.bl-stivale{width:20px;height:28px}
-.bl-ferri{width:30px;height:21px}
-.bl-cactus{width:17px;height:28px}
-.bl-teschio{width:38px;height:18px}
-.birra-cta{display:flex;gap:16px;flex-wrap:wrap;margin-top:32px}
-.btn-dark{
-  display:inline-block;font-family:var(--valley);font-size:20px;
-  background:var(--espresso);color:var(--panna);border-radius:10px;
-  padding:10px 26px 12px;text-decoration:none;letter-spacing:.06em;
-  border:2px solid var(--espresso);transition:background .2s,color .2s;
-}
-.btn-dark:hover{background:transparent;color:var(--espresso)}
-.polaroid{
-  background:var(--beige);padding:14px 14px 18px;
-  box-shadow:0 26px 50px -16px rgba(73,36,10,.38);
-  transform:rotate(-1.4deg);
-  position:relative;
-}
-.polaroid img{width:100%;aspect-ratio:4/3;object-fit:cover}
-.polaroid figcaption{
-  font-family:var(--cushion);font-weight:500;color:var(--caffe);text-align:center;
-  font-size:17px;margin-top:12px;letter-spacing:.05em;
-}
-.stamp{
-  position:absolute;top:-20px;right:-14px;
-  font-family:var(--cushion);font-weight:700;font-size:15px;color:var(--azz-testo);
-  border:2px solid var(--azz-scuro);border-radius:8px;padding:5px 12px;
-  transform:rotate(6deg);letter-spacing:.08em;background:var(--panna);
-}
-
-/* ============ PALCO ============ */
-.palco{background:var(--espresso);padding-bottom:0}
-.palco-head{max-width:820px}
-.palco-video{
-  position:relative;margin-top:clamp(34px,5vw,56px);
-  height:clamp(380px,68vh,720px);
-}
-.palco-video video{width:100%;height:100%;object-fit:cover;display:block}
-.palco-video::after{
-  content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(180deg,var(--espresso) 0%,transparent 18%,transparent 72%,var(--espresso) 100%);
-}
-.palco-place{
-  position:absolute;right:clamp(16px,4vw,44px);bottom:22px;z-index:2;
-  display:flex;align-items:center;gap:10px;
-  font-family:var(--cushion);font-weight:500;font-size:17px;color:var(--beige);letter-spacing:.05em;
-  background:rgba(73,36,10,.72);padding:8px 16px;border-radius:8px;
-  border:1px solid rgba(139,174,164,.35);
-}
-.palco-place .ico{width:17px;height:18px;color:var(--azz)}
-.palco-tags{
-  display:flex;justify-content:center;gap:clamp(14px,3vw,20px);flex-wrap:wrap;
-  padding:clamp(26px,4vw,40px) clamp(20px,4vw,48px) clamp(60px,8vw,96px);
-}
-.palco-tags span{
-  display:flex;align-items:center;gap:10px;
-  font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--beige);border:1px solid rgba(139,174,164,.4);border-radius:99px;
-  padding:9px 18px;
-}
-.palco-tags .ico{width:13px;height:14px;color:var(--azz)}
-
-/* ============ DATE ============ */
-.date-sec{background:var(--espresso)}
-.tickets{display:grid;gap:16px;margin-top:8px}
-.ticket{
-  position:relative;display:grid;grid-template-columns:132px 1fr auto;align-items:center;
-  background:var(--beige);color:var(--espresso);border-radius:12px;
-  text-decoration:none;overflow:hidden;
-  transition:transform .18s, box-shadow .18s;
-}
-.ticket:hover{transform:translateY(-3px);box-shadow:0 18px 36px -14px rgba(73,36,10,.55)}
-.tk-date{
-  text-align:center;padding:20px 10px;
-  border-right:2px dashed rgba(73,36,10,.35);
-  position:relative;
-}
-.tk-date::before,.tk-date::after{
-  content:"";position:absolute;right:-9px;width:16px;height:16px;border-radius:50%;
-  background:var(--espresso);z-index:1;
-}
-.tk-date::before{top:-9px}
-.tk-date::after{bottom:-9px}
-.tk-day{font-family:var(--valley);font-size:40px;line-height:1;color:var(--ruggine)}
-.tk-mon{font-size:12px;font-weight:800;letter-spacing:.26em;text-transform:uppercase;color:var(--caffe);margin-top:4px}
-.tk-info{padding:16px 22px}
-.tk-name{font-weight:800;font-size:17px;letter-spacing:.01em}
-.tk-prov{font-size:13.5px;font-weight:700;color:var(--azz-testo);letter-spacing:.06em;text-transform:uppercase;margin-top:3px}
-.tk-side{
-  padding:0 24px;display:flex;align-items:center;gap:10px;
-  font-family:var(--valley);font-size:16px;color:var(--caffe);letter-spacing:.08em;
-}
-.tk-side .ico{width:18px;height:20px;color:var(--azz-scuro)}
-.ticket-next{
-  grid-template-columns:170px 1fr auto;
-  box-shadow:0 22px 48px -16px rgba(73,36,10,.6), 0 0 0 3px var(--arancio);
-}
-.ticket-next .tk-day{font-size:58px;color:var(--ruggine)}
-.ticket-next .tk-info{padding:26px 24px}
-.ticket-next .tk-name{font-size:clamp(18px,2.4vw,24px)}
-.next-badge{
-  position:absolute;top:14px;right:-34px;transform:rotate(38deg);
-  background:var(--arancio);color:var(--espresso);
-  font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;
-  padding:5px 40px;
-}
-.date-more{margin-top:30px;display:flex;justify-content:center}
-
-/* ============ LINEUP ============ */
-.lineup{background:var(--panna);color:var(--espresso)}
-.lineup-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,72px);align-items:center}
-.lineup-photos{position:relative;padding-bottom:56px}
-.lp-a{
-  width:78%;background:var(--beige);padding:12px 12px 16px;
-  transform:rotate(-2deg);
-  box-shadow:0 24px 44px -16px rgba(73,36,10,.4);
-}
-.lp-a img{aspect-ratio:4/3;object-fit:cover;width:100%}
-.lp-b{
-  position:absolute;right:0;bottom:0;width:48%;
-  background:var(--panna);padding:10px 10px 14px;
-  transform:rotate(2.4deg);
-  box-shadow:0 22px 40px -14px rgba(73,36,10,.42);
-  border:1px solid rgba(73,36,10,.12);
-}
-.lp-b img{aspect-ratio:3/4;object-fit:cover;width:100%}
-.members{list-style:none;margin-top:26px}
-.members li{
-  display:flex;align-items:center;gap:18px;
-  padding:13px 0;border-bottom:1px solid rgba(139,174,164,.3);
-}
-.members li:last-child{border-bottom:none}
-.members .ico{color:var(--azz-scuro)}
-.m-chitarra{width:15px;height:34px}
-.m-ferri{width:28px;height:20px}
-.m-stella{width:22px;height:24px}
-.m-cappello{width:32px;height:16px}
-.m-stivale{width:19px;height:26px}
-.m-name{font-weight:800;font-size:16.5px;flex:1}
-.m-role{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--azz-testo);text-align:right}
-
-/* ============ CTA INSEGNA ============ */
-.cta{background:var(--arancio);color:var(--espresso);position:relative}
-.cta-panel{
-  max-width:900px;margin:0 auto;text-align:center;
-  border:3px solid var(--espresso);outline:3px solid var(--espresso);outline-offset:7px;
-  padding:clamp(44px,6vw,76px) clamp(22px,5vw,64px);
-  position:relative;
-}
-.cta-corner{position:absolute;width:26px;height:28px;color:var(--espresso)}
-.cta-corner.tl{top:14px;left:14px}
-.cta-corner.tr{top:14px;right:14px}
-.cta-corner.bl{bottom:14px;left:14px}
-.cta-corner.br{bottom:14px;right:14px}
-.cta-eyebrow{
-  font-family:var(--serif);font-style:italic;font-size:clamp(17px,2.2vw,22px);
-  margin-bottom:8px;
-}
-.cta .sec-title{color:var(--espresso);font-size:clamp(40px,6vw,76px);margin-bottom:16px}
-.cta-lead{max-width:46ch;margin:0 auto 30px;font-weight:500;font-size:clamp(16px,1.9vw,18.5px)}
-.cta-btn{
-  display:inline-block;font-family:var(--valley);font-size:clamp(21px,2.6vw,27px);
-  background:var(--espresso);color:var(--panna);border-radius:12px;
-  padding:14px 40px 16px;text-decoration:none;letter-spacing:.06em;
-  border:2px solid var(--espresso);
-  transition:background .2s,color .2s;
-}
-.cta-btn:hover{background:transparent;color:var(--espresso)}
-.cta-meta{
-  display:flex;justify-content:center;gap:clamp(18px,4vw,48px);flex-wrap:wrap;
-  margin-top:34px;font-size:14.5px;font-weight:700;
-}
-.cta-meta a{color:inherit}
-.cta-meta .k{display:block;font-size:11px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;opacity:.7;margin-bottom:2px}
-
-/* ============ FOOTER ============ */
-.footer{background:var(--nero);position:relative;padding:0 0 40px}
-.footer-cam{
-  display:flex;flex-direction:column;align-items:center;
-  padding:clamp(64px,9vw,110px) 20px 0;text-align:center;
-}
-.footer-cam .ico{
-  width:min(400px,72vw);height:auto;aspect-ratio:272.48/160.07;
-  color:var(--azz);
-}
-.footer-payoff{
-  font-family:var(--bronco);font-weight:400;font-synthesis:none;text-transform:uppercase;
-  color:var(--panna);font-size:clamp(30px,5.4vw,64px);letter-spacing:.06em;
-  margin-top:26px;line-height:1.08;
-}
-.footer-sub{
-  font-family:var(--serif);font-style:italic;color:var(--azz);
-  font-size:clamp(16px,2vw,20px);margin-top:10px;
-}
-.footer-rule{
-  display:flex;align-items:center;gap:18px;
-  max-width:var(--wrap);margin:clamp(44px,6vw,64px) auto 0;padding:0 clamp(20px,4vw,48px);
-  color:var(--azz);
-}
-.footer-rule .line{flex:1;height:1px;background:rgba(139,174,164,.35)}
-.footer-rule .ico{width:20px;height:22px}
-.footer-grid{
-  max-width:var(--wrap);margin:40px auto 0;padding:0 clamp(20px,4vw,48px);
-  display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:clamp(28px,4vw,56px);
-}
-/* ⚠️ min-width:0 sulle colonne. Senza, un elemento di griglia non scende mai
-   sotto la larghezza del suo contenuto (min-width:auto e' il valore di
-   partenza): da telefono la colonna restava a 403px dentro un footer di 390 e
-   TUTTA la pagina scorreva di lato di 33px. Difetto vecchio, trovato il 10/09
-   misurando lo scrollWidth. */
-.footer-grid > *{min-width:0}
-.footer-grid, .footer-grid *{overflow-wrap:anywhere}
-.footer h5{
-  font-family:var(--sans);font-size:12px;font-weight:800;letter-spacing:.24em;
-  text-transform:uppercase;color:var(--azz);margin-bottom:16px;
-}
-.footer-big{font-family:var(--bronco);font-size:clamp(24px,3vw,32px);color:var(--beige);line-height:1.15;letter-spacing:.04em}
-.footer ul{list-style:none}
-.footer ul li{margin-bottom:9px;font-size:14.5px;color:var(--beige)}
-.footer ul a{color:var(--beige);text-decoration:none}
-.footer ul a:hover{color:var(--azz)}
-.footer-social{display:flex;gap:14px;margin-top:18px}
-.footer-social a{
-  font-size:13px;font-weight:700;letter-spacing:.08em;color:var(--azz);
-  text-decoration:none;border:1px solid rgba(139,174,164,.4);border-radius:99px;
-  padding:7px 16px;
-}
-.footer-social a:hover{background:var(--azz);color:var(--nero)}
-.footer-copy{
-  max-width:var(--wrap);margin:44px auto 0;padding:20px clamp(20px,4vw,48px) 0;
-  border-top:1px solid rgba(139,174,164,.18);
-  font-size:12.5px;color:var(--tan);text-align:center;
-}
-.footer-copy a{color:var(--azz);text-decoration:none}
-
-/* ============ PILL PROPOSTE ============ */
-
-/* ============ RESPONSIVE ============ */
-@media (max-width:960px){
-  .video-grid,.birra-grid,.lineup-grid{grid-template-columns:1fr}
-  .lineup-photos{max-width:520px;margin:0 auto}
-  .footer-grid{grid-template-columns:1fr 1fr}
-}
-@media (max-width:1000px){
-  .nav-side.sx{display:none}
-  /* a destra resta il solo bottone Preventivo: le voci passano nel panetto */
-  .nav-side.dx li:not(:last-child){display:none}
-  .nav-in{grid-template-columns:auto 1fr auto;gap:10px}
-  .nav-logo{grid-column:2}
-  .nav .nav-logo img{height:52px}
-  .nav-burger{display:flex;grid-column:1;justify-self:start}
-  .ticket{grid-template-columns:104px 1fr}
-  .ticket-next{grid-template-columns:120px 1fr}
-  .tk-side{display:none}
-  .tk-day{font-size:34px}
-  .ticket-next .tk-day{font-size:44px}
-  .footer-grid{grid-template-columns:1fr;gap:32px}
-  .hero-stats{gap:22px 30px}
-}
-
-/* ============ PROVA A2: BOTTONI IN VALLEY + GRAFICA DA POSTER ============
-   Stile dal poster "Kruse Brothers": bottoni principali = barra crema con
-   testo scuro, filetto interno e stelle; secondari = cornice sottile spaziata.
-   Font bottoni: LT Cushion 900 (vedi il blocco in fondo). */
-.btn-poster,.btn-ghost-az,.btn-dark,.cta-btn,.nav-burger{
-  font-family:var(--valley);
-  letter-spacing:.04em;
-}
-/* principali: barra crema con filetto interno e stelle, come "AUGUST 15" */
-.btn-poster,.cta-btn{
-  background:var(--beige);color:var(--caffe);
-  border:2px solid var(--beige);border-radius:6px;
-  box-shadow:inset 0 0 0 2px var(--beige),inset 0 0 0 3px rgba(73,36,10,.55);
-}
-.btn-poster::before,.cta-btn::before{content:"★ ";color:var(--ruggine);font-size:.75em}
-.btn-poster::after,.cta-btn::after{content:" ★";color:var(--ruggine);font-size:.75em}
-.btn-poster:hover,.cta-btn:hover{
-  background:var(--arancio);border-color:var(--arancio);color:var(--espresso);
-  box-shadow:inset 0 0 0 2px var(--arancio),inset 0 0 0 3px rgba(73,36,10,.55);
-}
-.btn-poster{font-size:clamp(19px,2.2vw,23px)}
-.cta-btn{font-size:clamp(21px,2.6vw,26px)}
-
-/* ============ ICONE PIÙ GRANDI DA DESKTOP (16/08) ============
-   Da desktop le icone western a misura originale fanno "effetto macchia".
-   Qui le ingrandiamo ~35% sopra i 900px. Gli eyebrow hanno le misure
-   inline nell'HTML: lì si scala con transform senza toccare il layout.
-   Per tornare com'era: cancella questo blocco. */
-@media (min-width:900px){
-  .eyebrow .ico{transform:scale(1.35);margin:0 3px}
-  .orna .ico{width:24px;height:25px}
-  .hero-tags .ico{width:16px;height:17px}
-  .bl-cappello{width:46px;height:23px}
-  .bl-stivale{width:27px;height:37px}
-  .bl-ferri{width:40px;height:28px}
-  .bl-cactus{width:23px;height:38px}
-  .bl-teschio{width:51px;height:24px}
-  .palco-place .ico{width:23px;height:24px}
-  .palco-tags .ico{width:17px;height:18px}
-  .tk-side .ico{width:24px;height:27px}
-}
-/* secondari: cornice sottile e testo spaziato, come "LIVE AT" sul poster */
-.btn-ghost-az{
-  font-weight:300;font-size:19px;letter-spacing:.1em;
-  color:var(--beige);border-color:rgba(237,218,189,.7);border-radius:6px;
-}
-.btn-dark{font-weight:300;font-size:20px;letter-spacing:.08em;border-radius:6px}
-
-/* ================================================================
-   ============ MERGE 16/08 — SEZIONI IMPORTATE (live + B) ========
-   Schema font vincolante: titoli = --bronco · bottoni = --valley
-   (veste poster) · sottotitoli/supporto = --cushion · testi = --sans.
-   Colori: solo le vars della palette A qui sopra.
-   ================================================================ */
-
-/* ---- Color helper (per le icone delle card, da B) ---- */
-.c-rug{color:var(--ruggine)}
-.c-azs{color:var(--azz-testo)}
-.c-tan{color:var(--tan)}
-.c-caf{color:var(--caffe)}
-
-/* ---- 1. HERO CINEMATICO (dal sito live, senza logo grande) ---- */
-.hero-cine{position:relative;padding:0}
-.hero-cine-box{position:relative;min-height:min(820px,92vh);overflow:hidden;background:var(--nero)}
-.hero-cine-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 45%;filter:contrast(1.04) saturate(1.05)}
-.hero-cine-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(73,36,10,.5) 0%,rgba(73,36,10,.26) 34%,var(--espresso) 100%)}
-.hero-cine-content{
-  position:relative;z-index:1;min-height:min(820px,92vh);
-  display:flex;flex-direction:column;justify-content:flex-end;
-  max-width:var(--wrap);margin:0 auto;
-  padding:clamp(180px,28vw,260px) clamp(20px,4vw,48px) clamp(48px,7vw,90px);
-  color:var(--panna);text-shadow:0 2px 10px rgba(73,36,10,.45);
-}
-.hero-cine-eyebrow{
-  font-family:var(--cushion);font-weight:500;font-style:italic;
-  color:var(--arancio);font-size:clamp(17px,2.2vw,24px);letter-spacing:.02em;
-}
-.hero-cine h1{
-  color:var(--panna);margin:14px 0 0;
-  font-size:clamp(38px,6vw,84px);
-  max-width:14ch;line-height:1;
-}
-.hero-cine-gold{color:var(--arancio)}
-.hero-cine-sub{
-  font-family:var(--sans);color:var(--beige);
-  max-width:50ch;margin:22px 0 0;font-size:clamp(16px,2vw,19px);
-}
-.hero-cine-cta{display:flex;gap:16px;margin-top:30px;flex-wrap:wrap}
-/* Ken Burns sulla foto + entrata "rise" al load (non serve observer) */
-.kb .hero-cine-photo{animation:ck-kb 14s ease-out forwards}
-@keyframes ck-kb{from{transform:scale(1.09)}to{transform:none}}
-.rise{animation:ck-rise .9s cubic-bezier(.22,.61,.36,1) both}
-@keyframes ck-rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
-/* freccetta "scrolla" in basso */
-.scroll-cue{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);width:26px;height:42px;border:1.5px solid rgba(237,218,189,.5);border-radius:999px;z-index:5}
-.scroll-cue::after{content:"";position:absolute;top:8px;left:50%;margin-left:-2px;width:4px;height:8px;border-radius:999px;background:rgba(237,218,189,.8);animation:cue-drop 1.9s ease-in-out infinite}
-@keyframes cue-drop{0%{opacity:0;transform:translateY(0)}30%{opacity:1}100%{opacity:0;transform:translateY(14px)}}
-@media (max-width:900px){
-  .scroll-cue{display:none}
-  .hero-cine-content{padding:clamp(150px,26vw,240px) clamp(20px,5vw,40px) clamp(40px,6vw,64px)}
-  .hero-cine h1{font-size:clamp(30px,8vw,52px)}
-}
-
-/* ---- 3. VIDEO nel layout B, rivestito con lo stile A (scuro espresso) ---- */
-.video-b{background:var(--espresso);color:var(--panna)}
-.video-b .eyebrow,.video-b .eyebrow .ico{color:var(--azz)}
-.video-b .eyebrow-r{color:var(--tan)}
-.video-b .sec-title{color:var(--panna)}
-.video-b .lead-p{color:var(--panna);max-width:62ch}
-.vb-halftone{display:none}  /* puntini pop del layout B: fuori palette A */
-.vframe{position:relative;margin-top:38px}
-.vframe .inner{border-radius:16px;overflow:hidden;border:3px solid var(--beige);box-shadow:0 26px 50px -16px rgba(73,36,10,.5);position:relative}
-.vframe .inner img{width:100%;aspect-ratio:16/9;object-fit:cover}
-.vb-play{
-  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  width:96px;height:96px;border-radius:50%;background:var(--arancio);color:var(--espresso);
-  border:3px solid var(--espresso);box-shadow:0 0 0 6px rgba(205,88,18,.28),0 12px 30px rgba(73,36,10,.5);
-  display:grid;place-items:center;text-decoration:none;transition:transform .15s;
-}
-.vb-play:hover{transform:translate(-50%,-50%) scale(1.06)}
-.vb-play svg{margin-left:6px}
-.vcap{
-  position:absolute;left:22px;bottom:18px;background:var(--beige);color:var(--caffe);
-  font-family:var(--cushion);font-weight:500;font-size:16px;letter-spacing:.05em;
-  padding:8px 18px;border-radius:999px;
-}
-.video-cam{position:absolute;top:-46px;right:56px;width:104px;color:var(--azz);opacity:.85;z-index:2;transform:scaleX(-1)}
-.v-actions{display:flex;gap:16px;flex-wrap:wrap;margin-top:34px}
-@media (max-width:640px){.video-cam{right:18px;width:84px;top:-38px}}
-
-/* ---- 4. BIRRA nel layout B (panna, foto bordata, 5 card) ---- */
-.birra2{background:var(--panna);color:var(--espresso)}
-.birra2-grid{
-  display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,4vw,56px);
-  align-items:center;margin-bottom:clamp(36px,5vw,56px);
-}
-.photo-r{border-radius:16px;overflow:hidden;border:3px solid var(--beige);box-shadow:0 26px 50px -16px rgba(73,36,10,.38)}
-.photo-r img{width:100%;aspect-ratio:4/3;object-fit:cover}
-.ctx-cards{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
-.ctx-card{
-  background:var(--beige);border:none;border-radius:12px;
-  padding:22px 18px 20px;text-align:center;position:relative;
-}
-.ctx-card .ico{height:44px;width:auto;max-width:80px;margin:0 auto 12px;display:block}
-.ctx-card h3{font-size:19px;letter-spacing:.05em;color:var(--espresso)}
-.ctx-card p{font-family:var(--sans);font-size:13px;line-height:1.45;color:var(--caffe);margin-top:6px}
-.birra2-cam{width:88px;color:var(--tan);margin-top:18px}
-@media (max-width:960px){
-  .birra2-grid{grid-template-columns:1fr}
-  .ctx-cards{grid-template-columns:repeat(2,1fr)}
-  .ctx-card:last-child{grid-column:1/-1}
-}
-
-/* ---- 6. CALENDARIO nel layout B, rivestito con lo stile A (scuro, ticket beige) ---- */
-.cal-sec{background:var(--espresso);color:var(--panna)}
-.cal-cam{width:86px;color:var(--azz);opacity:.85;transform:scaleX(-1)}
+/* ---- il calendario: la foto del palco fa da fondo, il velo la tiene sotto ---- */
+.cal-sec{position:relative;overflow:hidden;isolation:isolate}
+.cal-bg{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover;object-position:center 40%}
+.cal-velo{position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(43,20,5,.97) 0%,rgba(43,20,5,.88) 40%,rgba(43,20,5,.66) 100%)}
+.cal-sec .v-in{position:relative;z-index:2}
 .next-card{
-  background:var(--beige);border:none;border-radius:12px;
-  box-shadow:0 18px 40px -18px rgba(73,36,10,.55);color:var(--espresso);
-  padding:clamp(22px,3vw,34px);display:grid;grid-template-columns:auto 1fr auto;
-  gap:clamp(18px,3vw,36px);align-items:center;margin:20px 0 0;
+  display:grid;grid-template-columns:auto 1fr;gap:clamp(16px,2.6vw,28px);align-items:center;
+  background:var(--carta);color:var(--espresso);border-radius:16px;
+  padding:clamp(18px,2.6vw,26px) clamp(18px,2.8vw,30px);margin-top:clamp(26px,3.6vw,40px);
+  box-shadow:0 24px 50px -22px rgba(12,5,1,.7);
 }
-.next-card .when{text-align:center;border-right:2px solid var(--espresso);padding-right:clamp(18px,3vw,36px)}
-.next-card .when .d{font-family:var(--valley);font-size:clamp(52px,6vw,76px);line-height:.9;color:var(--ruggine)}
-.next-card .when .m{font-family:var(--valley);font-size:24px;color:var(--espresso)}
-.cal-badge{
-  display:inline-block;background:var(--espresso);color:var(--panna);
-  font-family:var(--valley);font-size:15px;letter-spacing:.09em;
-  padding:6px 16px 7px;border-radius:999px;margin-bottom:10px;
-}
-.next-card h3{font-size:clamp(24px,3vw,38px);color:var(--espresso)}
-.next-card .where{font-weight:700;color:var(--caffe);margin-top:6px}
-.cal-rows{margin-top:14px;color:var(--panna)}
+.next-card .when{text-align:center;font-family:var(--display);line-height:1;min-width:64px}
+.next-card .when .d{font-size:clamp(38px,4.4vw,52px)}
+.next-card .when .m{font-size:16px;letter-spacing:.08em;text-transform:uppercase;margin-top:4px}
+.next-card h3{font-size:clamp(20px,2.2vw,26px);letter-spacing:.01em;color:var(--espresso)}
+.next-card .where{font-size:15.5px;color:#5C3315;margin-top:4px}
+.next-card .dt-open{grid-column:1/-1;justify-self:start}
+@media (min-width:700px){.next-card{grid-template-columns:auto 1fr auto}.next-card .dt-open{grid-column:auto}}
+.cal-rows{margin-top:14px;display:grid;gap:10px}
 .cal-row{
-  display:grid;grid-template-columns:110px 1fr auto;gap:18px;align-items:baseline;
-  padding:20px 6px;border-top:1px solid rgba(237,218,189,.22);
+  display:grid;grid-template-columns:auto 1fr auto;gap:4px 16px;align-items:center;
+  background:rgba(56,26,8,.78);border:1px solid var(--pg-fil);border-radius:14px;padding:14px 18px;
 }
-.cal-row:first-child{border-top:none}
-.cal-row .dd{font-family:var(--valley);font-size:24px;white-space:nowrap;color:var(--beige)}
-.cal-row .nm{font-weight:800;font-size:17px}
-.cal-row .pv{font-weight:500;color:var(--tan);font-size:15px}
-.cal-foot{margin-top:30px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
-.cal-foot .eyebrow-r{letter-spacing:.12em}
-/* .btn-dark sulle sezioni scure diventa ghost beige (stile A) */
-.cal-sec .btn-dark,.video-b .btn-dark{
-  background:transparent;color:var(--beige);border-color:rgba(237,218,189,.7);
+.cal-row .dd{font-family:var(--display);font-size:20px;letter-spacing:.02em;min-width:72px;grid-row:1/3}
+.cal-row .nm{font-weight:700;font-size:16.5px}
+.cal-row .pv{font-size:14.5px;color:var(--pg-mut);grid-column:2}
+.cal-row .dt-open{grid-column:3;grid-row:1/3}
+@media (max-width:560px){
+  .cal-row{grid-template-columns:auto 1fr}
+  .cal-row .dt-open{grid-column:1/-1;grid-row:auto;justify-self:start;margin-top:8px}
 }
-.cal-sec .btn-dark:hover,.video-b .btn-dark:hover{border-color:var(--beige);background:transparent;color:var(--beige)}
-.socials-sec .btn-dark:hover{color:var(--espresso)}
-@media (max-width:640px){
-  .next-card{grid-template-columns:1fr}
-  .next-card .when{border-right:none;border-bottom:2px solid var(--espresso);padding:0 0 14px;display:flex;align-items:baseline;gap:12px;text-align:left}
-  .cal-row{grid-template-columns:96px 1fr;row-gap:2px}
-  .cal-row .pv{grid-column:2}
-}
+/* il JavaScript, quando non ci sono date, inietta un paragrafo con questa classe */
+.cal-sec .lead-p{font-size:clamp(17px,1.9vw,19px);line-height:1.62;max-width:54ch;margin-top:20px}
+.cal-sec .lead-p a{color:var(--panna);text-decoration:underline;text-decoration-color:var(--arancio);text-decoration-thickness:2px;text-underline-offset:3px}
 
-/* ---- 7. LINEUP (dal sito live: griglia 3+2 di ritratti tondi) ---- */
-.lu-sec{background:var(--panna);color:var(--espresso)}
-.lu-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:40px;flex-wrap:wrap}
-.lu-head .sec-title{margin-bottom:0}
-.lu-it{color:var(--ruggine)}
-.lu-intro{font-family:var(--sans);max-width:36ch;margin:0;color:var(--caffe)}
-@media (max-width:600px){.lu-head{flex-direction:column;align-items:flex-start;gap:16px}.lu-intro{max-width:100%}}
-/* griglia 3+2 centrata: 6 colonne, ogni membro ne occupa 2; il 4° e 5° slittano */
-.lu-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:48px 32px;min-width:0}
-.lu-grid .member{grid-column:span 2}
-.lu-grid .member:nth-child(4){grid-column:2 / span 2}
-.lu-grid .member:nth-child(5){grid-column:4 / span 2}
-@media (max-width:900px){
-  .lu-grid{grid-template-columns:repeat(2,1fr)}
-  .lu-grid .member,.lu-grid .member:nth-child(4),.lu-grid .member:nth-child(5){grid-column:auto}
-}
-@media (max-width:560px){.lu-grid{grid-template-columns:1fr}}
-.member{position:relative;text-align:center}
-.member .photo{
-  position:relative;width:230px;height:230px;max-width:100%;border-radius:50%;
-  overflow:hidden;background:var(--beige);margin:0 auto 22px;
-}
-.member .photo img{width:100%;height:100%;object-fit:cover;transition:transform 1s ease;filter:contrast(1.04)}
-.member:hover .photo img{transform:scale(1.06)}
-.member h4{
-  font-family:var(--bronco);font-weight:400;font-synthesis:none;
-  text-transform:uppercase;letter-spacing:.03em;line-height:1.1;
-  font-size:23px;margin:6px 0 4px;color:var(--espresso);
-}
-.member .role{font-family:var(--sans);font-size:12.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ruggine)}
-.member .bio{font-family:var(--sans);margin:14px auto 0;font-size:15.5px;line-height:1.55;color:var(--caffe);max-width:32ch}
-.member .quote{font-family:var(--cushion);font-weight:500;font-style:italic;font-size:16px;margin:10px auto 0;color:var(--azz-testo);max-width:28ch}
-@media (max-width:560px){.member .photo{width:200px;height:200px}}
-
-/* ---- 8. BRANDS "Abbiamo fatto ballare" (dal sito live, fondo caffe) ---- */
-.brands-sec{
-  background:var(--espresso);
-  border-top:1px solid rgba(237,218,189,.12);border-bottom:1px solid rgba(237,218,189,.12);
-}
-.brands-sec .sec-title{color:var(--beige);margin-bottom:36px}
-.brands-accent{color:var(--arancio)}
-.brand-grid{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid rgba(237,218,189,.12);min-width:0}
-.brand-cell{
-  aspect-ratio:5/3;display:grid;place-items:center;
-  border-bottom:1px solid rgba(237,218,189,.12);
-  border-right:1px solid rgba(237,218,189,.12);
-  padding:24px;transition:background .3s;
-}
-.brand-cell:nth-child(5n){border-right:0}
-.brand-cell:hover{background:rgba(237,218,189,.06)}
-/* loghi in monocromo crema, come nel live */
-.brand-logo{max-width:80%;max-height:80px;width:auto;height:auto;object-fit:contain;filter:brightness(0) invert(1);opacity:.82}
-@media (max-width:800px){
-  .brand-grid{grid-template-columns:repeat(2,1fr)}
-  .brand-cell{aspect-ratio:3/2}
-  .brand-cell:nth-child(5n){border-right:1px solid rgba(237,218,189,.12)}
-  .brand-cell:nth-child(2n){border-right:0}
-}
-@media (max-width:400px){
-  .brand-grid{grid-template-columns:1fr}
-  .brand-cell:nth-child(2n){border-right:1px solid rgba(237,218,189,.12)}
-  .brand-cell:nth-child(1n){border-right:0}
-}
-
-/* ---- 9. SOCIALS "Un assaggio del nostro live" (dal sito live) ---- */
-.socials-sec{background:var(--panna);color:var(--espresso)}
-.socials-accent{color:var(--ruggine)}
-.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,80px);align-items:start;min-width:0}
-.split>*{min-width:0}
-@media (max-width:900px){.split{grid-template-columns:1fr}}
-.socials-body{font-family:var(--sans);font-size:clamp(16px,2vw,19px);line-height:1.6;max-width:52ch;color:var(--caffe);margin:0 0 32px}
-.ig-card{padding:clamp(20px,3vw,32px);background:var(--beige);border-radius:12px;border:none}
-.ig-card-head{display:flex;align-items:center;gap:12px;margin-bottom:14px;color:var(--ruggine)}
-.ig-handle{font-family:var(--sans);font-weight:800;font-size:21px;color:var(--espresso)}
-.ig-card-sub{font-family:var(--sans);font-size:15px;margin:0 0 20px;color:var(--caffe)}
-.ig-strip{display:flex;gap:12px;overflow-x:auto;padding-bottom:16px;margin-bottom:16px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
-.ig-strip a{flex:0 0 140px;height:140px;scroll-snap-align:start;border-radius:8px;overflow:hidden;display:block;position:relative}
+/* ---- i social: la card di Instagram (il video di YouTube usa .v-video-cornice) ---- */
+.ig-card{background:var(--carta);color:var(--espresso);border-radius:16px;padding:clamp(18px,2.4vw,26px);box-shadow:0 20px 44px -20px rgba(12,5,1,.6)}
+.ig-card-head{display:flex;align-items:center;gap:10px}
+.ig-card-head svg{width:18px;height:18px;color:var(--arancio);flex:none}
+.ig-handle{font-family:var(--btn);font-weight:900;font-size:17px;letter-spacing:.02em}
+.ig-card-sub{font-size:15.5px;color:#5C3315;margin-top:6px}
+.ig-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0 18px}
+.ig-strip a{display:block;border-radius:8px;overflow:hidden;aspect-ratio:1}
 .ig-strip img{width:100%;height:100%;object-fit:cover}
-/* colonna YouTube (formato Shorts 9:16) */
-.socials-right{display:flex;justify-content:center}
-.yt-wrapper{
-  position:relative;width:100%;max-width:315px;aspect-ratio:9/16;border-radius:24px;
-  overflow:hidden;background:var(--nero);box-shadow:0 25px 50px -12px rgba(73,36,10,.35);
-}
-.yt-wrapper iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:2}
-.yt-fallback{
-  position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;
-  justify-content:center;gap:14px;background:linear-gradient(135deg,var(--caffe) 0%,var(--espresso) 100%);
-  color:var(--panna);text-align:center;padding:24px;text-decoration:none;
-}
-.yt-play{width:64px;height:64px;border-radius:50%;background:var(--ruggine);color:var(--panna);display:grid;place-items:center;font-size:22px;padding-left:4px}
-.yt-label{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--beige)}
-@media (max-width:900px){.yt-wrapper{max-width:100%}}
-
-/* ---- 10. NEWSLETTER "Ti aggiorniamo sulle date" (dal sito live, su espresso) ---- */
-.nl-sec{background:var(--espresso)}
-.nl-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:center;min-width:0}
-.nl-grid>*{min-width:0}
-@media (max-width:800px){.nl-grid{grid-template-columns:1fr}}
-.nl-title{margin:14px 0 8px;letter-spacing:.02em}
-.nl-accent{color:var(--arancio)}
-.nl-sub{font-family:var(--sans);margin:0;color:var(--beige);max-width:42ch}
-.newsletter{
-  display:flex;align-items:center;gap:16px;
-  border:1px solid rgba(139,174,164,.45);border-radius:999px;
-  padding:8px 8px 8px 22px;background:rgba(73,36,10,.35);max-width:540px;
-}
-.newsletter input{
-  flex:1;min-width:0;background:transparent;border:0;outline:0;
-  font-family:var(--sans);font-size:14px;letter-spacing:.02em;color:var(--panna);padding:12px 0;
-}
-.newsletter input::placeholder{color:var(--tan)}
-.newsletter button{
-  font-family:var(--valley);font-size:18px;letter-spacing:.04em;cursor:pointer;
-  background:var(--beige);color:var(--caffe);
-  border:2px solid var(--beige);border-radius:6px;padding:8px 20px 10px;
-  box-shadow:inset 0 0 0 2px var(--beige),inset 0 0 0 3px rgba(73,36,10,.55);
-  transition:background .2s,border-color .2s,color .2s;
-}
-.newsletter button:hover{
-  background:var(--arancio);border-color:var(--arancio);color:var(--espresso);
-  box-shadow:inset 0 0 0 2px var(--arancio),inset 0 0 0 3px rgba(73,36,10,.55);
-}
-.nl-done{font-family:var(--cushion);font-weight:500;font-size:15px;letter-spacing:.06em;padding:12px 0;color:var(--panna)}
-@media (max-width:600px){
-  .newsletter{flex-direction:column;border-radius:16px;padding:16px;gap:12px;align-items:stretch;max-width:100%}
-  .newsletter input{padding:8px 0}
-  .newsletter button{padding:12px;text-align:center}
-}
-
-/* ---- 12. FOOTER — variante ridotta (-1/3 sulle spaziature verticali) ---- */
-.footer--ridotta{padding:0 0 26px}                                   /* era 40px */
-.footer--ridotta .footer-cam{padding:clamp(42px,6vw,72px) 20px 0}    /* era clamp(64px,9vw,110px) */
-.footer--ridotta .footer-payoff{margin-top:17px}                     /* era 26px */
-.footer--ridotta .footer-sub{margin-top:7px}                         /* era 10px */
-.footer--ridotta .footer-rule{margin:clamp(29px,4vw,42px) auto 0}    /* era clamp(44px,6vw,64px) */
-.footer--ridotta .footer-grid{margin:26px auto 0}                    /* era 40px */
-.footer--ridotta h5{margin-bottom:11px}                              /* era 16px */
-.footer--ridotta ul li{margin-bottom:6px}                            /* era 9px */
-.footer--ridotta .footer-social{margin-top:12px}                     /* era 18px */
-.footer--ridotta .footer-copy{margin:29px auto 0;padding-top:13px}   /* era 44px / 20px */
-@media (max-width:720px){
-  .footer--ridotta .footer-grid{gap:22px}                            /* era 32px */
-}
-
-/* ---- REVEAL allo scroll (dal sito live) --------------------------
-   Gating con html.js: senza JavaScript la classe .js non c'è e tutto
-   resta visibile (fallback obbligatorio). */
-html.js .rv{
-  opacity:0;transform:translateY(26px);
-  transition:opacity .85s cubic-bezier(.22,.61,.36,1),transform .85s cubic-bezier(.22,.61,.36,1);
-  will-change:opacity,transform;
-}
-html.js .rv--left{transform:translateX(-30px)}
-html.js .rv--right{transform:translateX(30px)}
-html.js .rv.in{opacity:1;transform:none}
-@media (max-width:700px){html.js .rv--left,html.js .rv--right{transform:translateY(26px)}}
-html.js .fade-in{opacity:0;transform:translateY(18px);transition:opacity .9s ease,transform .9s ease}
-html.js .fade-in.in{opacity:1;transform:none}
-html.js .stagger>*{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
-html.js .stagger.in>*{opacity:1;transform:none}
-html.js .stagger.in>*:nth-child(1){transition-delay:.04s}
-html.js .stagger.in>*:nth-child(2){transition-delay:.12s}
-html.js .stagger.in>*:nth-child(3){transition-delay:.2s}
-html.js .stagger.in>*:nth-child(4){transition-delay:.28s}
-html.js .stagger.in>*:nth-child(5){transition-delay:.36s}
-html.js .stagger.in>*:nth-child(6){transition-delay:.44s}
-html.js .stagger.in>*:nth-child(7){transition-delay:.52s}
-html.js .stagger.in>*:nth-child(8){transition-delay:.6s}
-/* accessibilità: chi chiede meno animazioni vede tutto subito, fermo */
-@media (prefers-reduced-motion:reduce){
-  html.js .rv,html.js .fade-in,html.js .stagger>*,.rise{
-    opacity:1!important;transform:none!important;transition:none!important;animation:none!important;
-  }
-  .kb .hero-cine-photo{animation:none!important}
-  .scroll-cue::after{animation:none!important}
-  .member .photo img{transition:none!important}
-}
-/* ==================================================================
-   A6 · LA STESSA VESTE DELLA A5, CON BONZANA
-   Ispirata al branding del font: fondo terracotta, inchiostro sabbia,
-   zigzag negli angoli, disegni a linea, foto sbiadite come stampe
-   vecchie, grana di carta e pelle. La palette e' gia' rimappata sopra
-   sugli stessi token, qui si aggiunge lo strato grafico.
-   ================================================================== */
-
-/* --- grana di carta/pelle, piu' presente della A4 --- */
-:root{
-  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/></svg>");
-  /* macchie larghe da pelle invecchiata */
-  --macchie:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='700' height='700'><filter id='m'><feTurbulence type='fractalNoise' baseFrequency='0.006' numOctaves='4' stitchTiles='stitch' seed='7'/><feColorMatrix type='saturate' values='0'/><feComponentTransfer><feFuncA type='table' tableValues='0 0.5'/></feComponentTransfer></filter><rect width='100%25' height='100%25' filter='url(%23m)'/></svg>");
-  /* --- la sporcatura, in tre strati, tutta disegnata dal browser ---
-     GRANA: puntini fittissimi, il "rumore" della carta.
-     FIBRA: una trama media, che rompe la regolarita' della grana.
-     NUVOLE: aloni larghi e morbidi, la disomogeneita' del foglio.
-     Tutte e tre con stitchTiles: i bordi del tassello combaciano. */
-  --sporco-grana:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='190' height='190'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='3' stitchTiles='stitch' seed='5'/><feColorMatrix type='saturate' values='0'/><feComponentTransfer><feFuncA type='table' tableValues='0 0.85'/></feComponentTransfer></filter><rect width='100%25' height='100%25' filter='url(%23g)'/></svg>");
-  --sporco-fibra:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='340' height='340'><filter id='f'><feTurbulence type='fractalNoise' baseFrequency='0.14' numOctaves='4' stitchTiles='stitch' seed='23'/><feColorMatrix type='saturate' values='0'/><feComponentTransfer><feFuncA type='table' tableValues='0 0.18'/></feComponentTransfer></filter><rect width='100%25' height='100%25' filter='url(%23f)'/></svg>");
-  --sporco-nuvole:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='620' height='620'><filter id='n2'><feTurbulence type='fractalNoise' baseFrequency='0.013' numOctaves='4' stitchTiles='stitch' seed='41'/><feColorMatrix type='saturate' values='0'/><feComponentTransfer><feFuncA type='table' tableValues='0 0.22'/></feComponentTransfer></filter><rect width='100%25' height='100%25' filter='url(%23n2)'/></svg>");
-  /* zigzag da bordo tessuto/navajo */
-  --zigzag:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='26' viewBox='0 0 120 26'><polyline points='2,20 12,6 22,20 32,6 42,20 52,6 62,20 72,6 82,20 92,6 102,20 112,6 118,13' fill='none' stroke='%23A44521' stroke-width='2.4' stroke-linejoin='round' stroke-linecap='round'/></svg>");
-}
-body{background:var(--espresso)}
-/* la grana copre tutta la pagina, come su un foglio stampato */
-body::after{
-  content:"";position:fixed;inset:0;z-index:5;pointer-events:none;
-  background:var(--grain);opacity:.16;mix-blend-mode:multiply;
-}
-/* alone di sole sbiadito negli angoli */
-body::before{
-  content:"";position:fixed;inset:0;z-index:4;pointer-events:none;
-  background:radial-gradient(120% 90% at 50% 0%,rgba(237,218,189,.10) 0%,transparent 55%),
-             radial-gradient(120% 100% at 50% 100%,rgba(73,36,10,.20) 0%,transparent 60%);
-}
-/* macchie di pelle sulle sezioni scure e su quelle di carta */
-.section,.hero-cine-box,.footer{position:relative}
-.section::before{
-  content:"";position:absolute;inset:0;pointer-events:none;
-  background:var(--macchie);background-size:700px 700px;
-  opacity:.05;mix-blend-mode:multiply;
-}
-
-/* --- zigzag negli angoli delle sezioni (firma del branding) --- */
-.section > .wrap{position:relative}
-.section{padding-top:calc(clamp(56px,7vw,96px) + 14px)}
-.zz{position:absolute;width:120px;height:26px;background:var(--zigzag);background-size:contain;
-    background-repeat:no-repeat;opacity:.6;pointer-events:none}
-.zz-tl{top:-30px;left:-14px}
-.zz-tr{top:-30px;right:-14px;transform:scaleX(-1)}
-.zz-bl{bottom:-30px;left:-14px;transform:scaleY(-1)}
-.zz-br{bottom:-30px;right:-14px;transform:scale(-1,-1)}
-@media (max-width:720px){.zz{width:84px;height:18px}}
-
-/* --- foto: stampe vecchie sbiadite, dentro la palette --- */
-.hero-cine-photo,.polaroid img,.photo-r img,.vframe img,.member .photo img,
-.live-strip img,.gal-item img,.ig-strip img{
-  filter:sepia(.52) saturate(.58) contrast(.93) brightness(1.06);
-}
-/* velo terracotta sopra le foto grandi: le lega al fondo */
-.hero-cine-box::after,.vframe .inner::after,.live-strip::after{
-  content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(180deg,rgba(73,36,10,.28),rgba(73,36,10,.42));
-  mix-blend-mode:multiply;
-}
-.vframe .inner,.live-strip{position:relative}
-.hero-cine-scrim{
-  background:linear-gradient(180deg,rgba(73,36,10,.42) 0%,rgba(73,36,10,.30) 34%,var(--espresso) 100%);
-}
-
-
-/* velo caldo sulle foto delle sezioni di carta: sembrano stampe incollate */
-.polaroid,.photo-r,.member .photo,.gal-item{position:relative}
-.polaroid::after,.photo-r::after,.member .photo::after,.gal-item::after{
-  content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;
-  background:linear-gradient(165deg,rgba(205,88,18,.16),rgba(205,88,18,.20));
-  mix-blend-mode:multiply;
-}
-.polaroid figcaption::after,.polaroid figcaption::before{content:none}
-
-/* --- bordi e cornici: filetto doppio da etichetta stampata --- */
-.polaroid,.ctx-card,.next-card,.ticket,.ig-card,.pv-blocco{
-  box-shadow:0 0 0 1px rgba(73,36,10,.28), 0 18px 34px -20px rgba(73,36,10,.55) !important;
-}
-.vframe .inner{border-color:var(--beige)}
-
-/* --- testo ad arco sopra l'hero (come "TERMIUS CAFE") --- */
-.arco{display:block;margin:0 auto 6px;max-width:520px;overflow:visible}
-.arco text{
-  font-family:var(--valley);fill:var(--beige);paint-order:stroke;stroke:rgba(73,36,10,.5);stroke-width:3px;
-  font-size:23px;letter-spacing:5.5px;text-transform:uppercase;
-}
-@media (max-width:720px){.arco{max-width:330px}.arco text{font-size:26px;letter-spacing:3px}}
-
-/* --- etichette verticali ai lati (come "TRD" / "MRK") --- */
-.lato{
-  position:absolute;top:50%;transform:translateY(-50%);z-index:3;
-  writing-mode:vertical-rl;text-orientation:mixed;
-  font-family:var(--valley);font-size:15px;letter-spacing:.42em;
-  color:var(--beige);opacity:.72;text-transform:uppercase;
-}
-.lato-sx{left:22px;transform:translateY(-50%) rotate(180deg)}
-.lato-dx{right:22px}
-@media (max-width:900px){.lato{display:none}}
-
-/* --- disegni a linea grandi, come il cactus del riferimento --- */
-.deco{position:absolute;color:var(--beige);opacity:.13;pointer-events:none;z-index:1}
-.deco-cactus-sx{left:2.5%;bottom:6%;width:96px}
-.deco-cactus-dx{right:2.5%;bottom:6%;width:96px;transform:scaleX(-1)}
-.deco-teschio{left:50%;transform:translateX(-50%);top:26px;width:190px}
-@media (max-width:1100px){.deco-cactus-sx,.deco-cactus-dx{display:none}}
-
-/* --- titoli: un filo di respiro in piu', da stampa a caldo --- */
-.hero-cine h1,.sec-title{letter-spacing:.012em}
-.hero-cine-eyebrow{color:var(--tan)}
-
-/* --- nav: mattone profondo --- */
-.nav.solid{background:var(--caffe)}
-
-
-
-/* ---- adattamenti di corpo, ereditati dalla A5 (carattere largo) ---- */
-.hero-cine h1{font-size:clamp(30px,5.4vw,64px)}
-.sec-title{font-size:clamp(30px,4.4vw,54px)}
-.btn-poster,.btn-dark,.cta-btn,.nav-cta{letter-spacing:.01em}
-.btn-poster{font-size:clamp(16px,1.8vw,19px)}
-.cta-btn{font-size:clamp(17px,2vw,21px)}
-.btn-dark{font-size:17px}
-
-/* =====================================================================
-   A6 — LE FASCE ARANCIO  (#CD5812 e' il colore che comanda la pagina)
-   ---------------------------------------------------------------------
-   Il marrone #49240A resta per il testo sul chiaro, la testata, la
-   newsletter e il footer: sono le zone con scritte piccole, e su
-   #CD5812 il testo piccolo non si legge abbastanza (rapporto 3.07:1
-   col beige, serve 4.5:1). Le fasce arancio ospitano quindi solo
-   titoli grandi, foto e bottoni; le etichettine stanno dentro una
-   pastiglia marrone, dove tornano a leggersi bene (10:1).
-   ===================================================================== */
-
-.video-sec, .video-b, .palco, .date-sec, .brands-sec{ background:var(--arancio) }
-.brands-sec{
-  border-top:1px solid rgba(73,36,10,.35);
-  border-bottom:1px solid rgba(73,36,10,.35);
-}
-.brand-grid{border-top-color:rgba(73,36,10,.35)}
-.brands-accent{color:var(--espresso)}
-
-/* i titoloni sulle fasce: beige, e sono abbastanza grandi da reggere */
-.video-b .sec-title, .palco .sec-title, .date-sec .sec-title,
-.brands-sec .sec-title{ color:var(--panna) }
-
-/* il paragrafo d'apertura: sull'arancio ci va in grande e in neretto,
-   altrimenti non arriva alla soglia di leggibilita' */
-.video-b .lead-p, .palco .lead-p, .date-sec .lead-p{
-  color:var(--panna);font-weight:700;font-size:clamp(19px,2.1vw,22px);
-}
-
-/* le etichettine (occhielli) dentro una pastiglia marrone */
-.video-b .eyebrow, .palco .eyebrow, .date-sec .eyebrow,
-.brands-sec .eyebrow, .video-b .eyebrow-r, .palco .eyebrow-r{
-  display:inline-flex;align-items:center;gap:8px;
-  background:var(--espresso);color:var(--panna);
-  padding:6px 14px;border-radius:999px;
-}
-.video-b .eyebrow .ico, .palco .eyebrow .ico, .date-sec .eyebrow .ico,
-.brands-sec .eyebrow .ico{ color:var(--azz) }
-
-/* la riga d'invito sotto il titolo grande della CTA */
-.cta-lead{ font-weight:700;font-size:clamp(19px,2.2vw,22px) }
-
-/* le foto: il velo che le lega al fondo diventa arancio, non piu' marrone */
-.hero-cine-box::after, .vframe .inner::after, .live-strip::after{
-  background:linear-gradient(180deg,rgba(205,88,18,.30),rgba(205,88,18,.46));
-}
-.hero-cine-scrim{
-  background:linear-gradient(180deg,rgba(73,36,10,.38) 0%,rgba(205,88,18,.34) 40%,var(--arancio) 100%);
-}
-.palco-video::after{ background:linear-gradient(180deg,transparent,rgba(205,88,18,.35)) }
-
-/* --- hero: adesso il fondo e' arancio, quindi la parola in evidenza
-       non puo' essere arancio anche lei. Va in marrone, e stacca. --- */
-.hero-cine .hero-cine-gold{ color:var(--espresso) }
-.hero-cine-eyebrow{ color:var(--panna) }
-
-/* etichette verticali ai lati della foto: stesso motivo */
-.lato{ color:var(--panna);opacity:.85 }
-
-/* --- correzioni di leggibilita', misurate a schermo sulla pagina --- */
-
-/* .cal-sec porta la classe "on-light" ma il fondo e' scuro: senza questo
-   blocco titolo e occhiello restano marroni su marrone, cioe' invisibili.
-   (Prima non si notava solo perche' i due marroni erano diversi.) */
-.cal-sec .sec-title, .cal-sec .lead-p, .cal-sec h3{ color:var(--panna) }
-.cal-sec .eyebrow, .cal-sec .eyebrow .ico{ color:var(--azz) }
-.cal-sec .eyebrow-r{ color:var(--tan) }
-/* ...tranne dentro la scheda "La prossima", che invece e' beige */
-.next-card h3, .next-card .where{ color:var(--espresso) }
-
-/* bottone "Dettagli": sta dentro una scheda beige, ma era trasparente
-   con il testo beige — spariva. Ora e' pieno. */
-.next-card .btn-dark{
-  background:var(--espresso);color:var(--panna);border-color:var(--espresso);
-}
-/* bottone fantasma sulla fascia arancio: il beige su arancio non basta (3.07) */
-.video-b .btn-dark, .palco .btn-dark{
-  background:var(--espresso);color:var(--panna);border-color:var(--espresso);
-}
-
-/* ruoli dei musicisti: 13px in arancio sul beige stanno a 3.07, servono 4.5 */
-.member .role, .m-role{ color:var(--espresso) }
-
-/* occhiello "Selected clients" sulla fascia arancio */
-.brands-sec .eyebrow-r{
-  display:inline-block;background:var(--espresso);color:var(--panna);
-  padding:6px 14px;border-radius:999px;
-}
-
-/* il tondo del play era arancio su fascia arancio */
-.yt-play{ background:var(--espresso);color:var(--panna) }
-
-/* il riquadro della CTA prende fondo beige: dentro ci sono l'email, il
-   telefono e il cachet, tutte scritte piccole che sull'arancio non
-   reggerebbero. Attorno la fascia resta arancio. */
-.cta-panel{ background:var(--panna) }
-.cta .sec-title, .cta-eyebrow, .cta-lead, .cta-meta{ color:var(--espresso) }
-.cta-meta .k{ opacity:1;color:var(--espresso) }   /* 11px: in arancio sul beige starebbe a 3.07 */
-
-/* =====================================================================
-   A6 — RILAVORAZIONE DEL 29/08
-   Tre interventi: l'hero rifatto da capo, le fotografie liberate dal
-   viraggio seppia, e due blocchi ridisegnati (calendario e formazione).
-   ===================================================================== */
-
-
-
-/* ============================================================
-   1 · HERO — FOTO A TUTTO CAMPO, CONTENUTO ORGANIZZATO
-   ------------------------------------------------------------
-   La fotografia torna a fare da sfondo, ma senza il viraggio
-   seppia che spegneva tutto. Il trucco e' che il velo scuro
-   non e' steso sull'intera immagine: scende **da sinistra e
-   dal basso**, cioe' solo dove appoggia il testo, e lascia
-   libero l'angolo in alto a destra. Cosi' la foto resta viva
-   dove si guarda e diventa fondo dove si legge.
-   Le misure non sono a occhio: col marrone all'80% il beige
-   sopra sta a 5.4:1 anche se sotto c'e' cielo bianco, che e'
-   il punto peggiore della fotografia. Nella zona del testo il
-   velo arriva al 93%.
-   Il contenuto e' su due piani: il blocco di testo in alto a
-   sinistra, e una fascia marrone piena in fondo che tiene i
-   dati e la prossima data.
-   ============================================================ */
-
-.hero6{
-  position:relative;overflow:hidden;background:var(--espresso);
-  min-height:min(880px,94vh);
-  display:flex;flex-direction:column;justify-content:flex-end;
-}
-.hero6-bg{
-  position:absolute;inset:0;z-index:0;
-  width:100%;height:100%;object-fit:cover;object-position:center 38%;
-  filter:saturate(1.06) contrast(1.04);
-}
-.kb .hero6-bg{animation:ck-kb 16s ease-out forwards}
-.hero6-velo{
-  position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:
-    linear-gradient(to top,
-      rgba(73,36,10,.95) 0%, rgba(73,36,10,.88) 24%,
-      rgba(73,36,10,.58) 44%, rgba(73,36,10,.16) 66%, rgba(73,36,10,0) 82%),
-    linear-gradient(to right,
-      rgba(73,36,10,.62) 0%, rgba(73,36,10,.30) 38%, rgba(73,36,10,0) 62%);
-}
-
-.hero6-in{
-  position:relative;z-index:2;width:100%;
-  max-width:var(--wrap);margin:0 auto;
-  padding:clamp(150px,17vw,210px) clamp(20px,4vw,48px) clamp(30px,3.4vw,44px);
-}
-.hero6-testo{max-width:min(680px,60%)}
-
-.hero6-eyebrow{
-  display:inline-block;margin:0;
-  font-family:var(--sans);font-size:11.5px;font-weight:800;
-  letter-spacing:.22em;text-transform:uppercase;
-  color:var(--panna);background:rgba(73,36,10,.85);
-  border:1.5px solid var(--arancio);border-radius:999px;padding:7px 15px;
-}
-.hero6 h1{
-  font-family:var(--bronco);font-weight:400;font-synthesis:none;
-  color:var(--panna);text-transform:uppercase;
-  font-size:clamp(36px,5.4vw,78px);line-height:.98;letter-spacing:.012em;
-  margin:18px 0 0;max-width:none;text-shadow:0 2px 18px rgba(73,36,10,.5);
-}
-/* la parola in evidenza: in arancio sul velo scuro starebbe a 2.5:1, troppo
-   poco anche per un titolone. Diventa un blocco arancio con la scritta beige,
-   come una timbratura: cosi' e' 3.07:1, sopra la soglia dei corpi grandi. */
-.hero6-acc{
-  background:var(--arancio);color:var(--panna);
-  padding:0 .14em .04em;box-decoration-break:clone;-webkit-box-decoration-break:clone;
-  text-shadow:none;
-}
-.hero6-sub{
-  font-family:var(--sans);font-size:clamp(16px,1.4vw,18.5px);line-height:1.55;
-  color:var(--panna);max-width:44ch;margin:20px 0 0;
-}
-.hero6-cta{display:flex;align-items:center;gap:clamp(16px,2.2vw,28px);flex-wrap:wrap;margin-top:30px}
-.hero6-btn{
-  font-family:var(--valley);font-size:clamp(18px,1.9vw,23px);letter-spacing:.05em;
-  background:var(--panna);color:var(--espresso);text-decoration:none;
-  padding:13px 32px 15px;border-radius:10px;
-  box-shadow:5px 5px 0 var(--arancio);
-  transition:transform .16s,box-shadow .16s;
-}
-.hero6-btn:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--arancio);color:var(--espresso)}
-.hero6-link{
-  font-family:var(--sans);font-size:13.5px;font-weight:800;letter-spacing:.12em;
-  text-transform:uppercase;color:var(--panna);text-decoration:none;
-  border-bottom:2px solid var(--arancio);padding-bottom:3px;
-}
-.hero6-link:hover{color:var(--arancio)}
-
-/* --- la fascia in fondo --- */
-.hero6-barra{
-  position:relative;z-index:3;
-  background:var(--espresso);border-top:3px solid var(--arancio);
-}
-.hero6-barra-in{
-  max-width:var(--wrap);margin:0 auto;
-  padding:16px clamp(20px,4vw,48px);
-  display:flex;align-items:center;justify-content:space-between;
-  gap:clamp(18px,3vw,40px);flex-wrap:wrap;
-}
-.hero6-fatti{display:flex;gap:clamp(20px,3vw,44px);list-style:none;margin:0;padding:0}
-.hero6-fatti li{display:flex;flex-direction:column-reverse;gap:1px}
-.hero6-fatti b{
-  font-family:var(--bronco);font-weight:400;font-synthesis:none;
-  font-size:clamp(19px,1.9vw,24px);line-height:1;color:var(--panna);
-}
-/* etichette in marrone chiaro: sul marrone fanno 4.6:1, l'arancio no */
-.hero6-fatti span{
-  font-family:var(--sans);font-size:10px;font-weight:800;
-  letter-spacing:.2em;text-transform:uppercase;color:var(--tan);
-}
-.hero6-prossima{
-  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
-  text-decoration:none;color:var(--panna);
-  border:2px solid rgba(237,218,189,.28);border-radius:999px;
-  padding:9px 20px 9px 16px;transition:border-color .2s,background .2s;
-}
-.hero6-prossima:hover{border-color:var(--arancio);background:rgba(205,88,18,.16);color:var(--panna)}
-.hero6-prossima .k{
-  font-family:var(--sans);font-size:10px;font-weight:800;
-  letter-spacing:.2em;text-transform:uppercase;color:var(--tan);
-}
-.hero6-prossima b{
-  font-family:var(--bronco);font-weight:400;font-synthesis:none;
-  font-size:19px;line-height:1;color:var(--panna);
-}
-.hero6-prossima .ev{font-family:var(--sans);font-size:13.5px;font-weight:600;color:var(--panna)}
-.hero6-prossima .fr{color:var(--arancio);font-size:17px;line-height:1}
-
-@media (max-width:1000px){
-  .hero6-testo{max-width:100%}
-  /* senza colonna a destra il velo laterale non serve piu': resta solo
-     quello verticale, ma piu' alto, perche' il testo occupa tutta la larghezza */
-  .hero6-velo{
-    background:linear-gradient(to top,
-      rgba(73,36,10,.95) 0%, rgba(73,36,10,.9) 34%,
-      rgba(73,36,10,.62) 56%, rgba(73,36,10,.22) 76%, rgba(73,36,10,0) 92%);
-  }
-}
-@media (max-width:700px){
-  .hero6{min-height:auto}
-  .hero6-in{padding-top:clamp(130px,34vw,180px)}
-  .hero6-barra-in{flex-direction:column;align-items:flex-start;gap:14px}
-  .hero6-prossima{width:100%}
-  .hero6-prossima .ev{flex-basis:100%;font-size:13px}
-}
-
-/* ============================================================
-   2 · LE FOTOGRAFIE TORNANO A COLORI
-   ------------------------------------------------------------
-   C'era un viraggio seppia forte su tutte le immagini
-   (sepia .52 + saturazione abbassata a .58) piu' due veli
-   arancio in "multiply". Insieme spegnevano le foto e
-   appiattivano la pagina su un unico tono.
-   Adesso resta solo un ritocco leggero, e il velo scuro
-   sopravvive unicamente dove serve davvero: sotto le
-   didascalie appoggiate all'immagine.
-   ============================================================ */
-
-.hero-cine-photo,.polaroid img,.photo-r img,.vframe img,.member .photo img,
-.live-strip img,.gal-item img{
-  filter:saturate(1.05) contrast(1.03);
-}
-/* niente piu' velo colorato sopra le stampe */
-.polaroid::after,.photo-r::after,.member .photo::after,.gal-item::after{
-  background:none;
-}
-/* sulle immagini grandi resta una sfumatura in basso, ma solo li':
-   serve alle scritte appoggiate sopra, non a "colorare" la foto */
-.vframe .inner::after,.live-strip::after{
-  background:linear-gradient(180deg,transparent 52%,rgba(73,36,10,.62) 100%);
-  mix-blend-mode:normal;
-}
-
-
-/* ============================================================
-   3 · IL CALENDARIO
-   ------------------------------------------------------------
-   Il 01/09 i "biglietti staccabili" della A6 sono stati tolti:
-   qui torna l'impianto della A7 — scheda beige per la prossima
-   data ed elenco di righe sotto — che e' quello scelto da
-   Michele. Le regole base stanno piu' in alto (blocco "6.
-   CALENDARIO nel layout B"), qui restano solo le aggiunte.
-   ============================================================ */
-
-/* ============================================================
-   4 · LA FORMAZIONE — SENZA CARD
-   ------------------------------------------------------------
-   Il 01/09 le schede "manifesto" (foglio beige, doppio filetto,
-   foto ad arco, ombra arancio) sono state tolte: non piacevano.
-   Restano i ritratti TONDI su fondo pulito, come nella regola
-   base piu' in alto. Qui sotto solo i ritocchi di tono.
-   ============================================================ */
-
-.member .role{
-  display:block;width:fit-content;margin:8px auto 0;
-  font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--espresso);opacity:.75;
-}
-.member .quote{
-  margin:14px auto 0;padding-top:12px;max-width:28ch;
-  border-top:2px dashed rgba(73,36,10,.28);
-}
-
-/* --- ultimi contrasti, chiusi dopo la misura a schermo ---------------
-   Sono tutti lo stesso caso: arancio e beige, uno sull'altro, fanno
-   3.07:1 — abbastanza per un titolo grande, non per una scritta
-   piccola. Dove il testo e' piccolo si scende al marrone, o gli si
-   mette sotto una pastiglia marrone. */
-
-
-/* le pastiglie del palco: erano beige contornate, sull'arancio;
-   ora sono piene di marrone e si leggono a 10:1 */
-.palco-tags span{
-  background:var(--espresso);border-color:var(--espresso);color:var(--panna);
-}
-.palco-tags span .ico{color:var(--azz)}
-.palco-place{background:var(--espresso);border-color:var(--espresso);color:var(--panna)}
-
-
-
-/* --- dopo la prima prova a schermo ---------------------------------
-   Il titolo, a corpo pieno, arrivava all'altezza delle facce e ne
-   copriva due. Rimpicciolito e portato in basso: la meta' alta della
-   fotografia resta libera, che e' poi il motivo per cui una foto si
-   mette li'. */
-.hero6 h1{font-size:clamp(32px,4.2vw,60px);max-width:17ch;margin-top:16px}
-/* il blocco sta gia' in fondo (justify-content:flex-end): il padding in
-   alto serve solo a scavalcare la testata, non a spingerlo giu'.
-   Spingendolo si allungava l'hero e la fascia finiva sotto lo schermo. */
-.hero6-in{padding-top:clamp(140px,16vw,200px);padding-bottom:clamp(24px,2.6vw,34px)}
-.hero6-sub{margin-top:16px;max-width:42ch}
-.hero6-cta{margin-top:24px}
-.hero6-bg{object-position:center 42%}
-@media (max-width:700px){ .hero6-in{padding-top:clamp(130px,34vw,200px)} }
-
-
-/* il titolo su quattro righe arrivava ancora a sfiorare due facce: allargando
-   la misura scende a tre, e il blocco — che sta agganciato in basso — si
-   abbassa da solo. Anche l'hero si accorcia un po', cosi' la fascia in fondo
-   entra nello schermo senza dover scorrere. */
-.hero6{min-height:min(820px,90vh)}
-.hero6 h1{max-width:21ch;font-size:clamp(32px,4vw,57px)}
-
-
-/* la freccina era arancio su marrone (3.25): a corpo maggiore e in neretto
-   rientra fra i "testi grandi", per cui la soglia e' 3.0 */
-.hero6-prossima .fr{font-size:19px;font-weight:700}
-
-
-/* ============================================================
-   5 · GLI SFONDI "ROVINATI" DEL BRAND
-   ------------------------------------------------------------
-   Stessa idea della A7 — la sporcatura della pagina SFONDI del
-   brand book, stesa sopra il colore ufficiale invece che dentro
-   un'immagine a colori — ma con la texture divisa in DUE strati,
-   per un motivo preciso.
-   Un file solo, allargato a coprire una sezione alta, veniva
-   ingrandito piu' di due volte: e una sporcatura fatta di
-   puntini fitti, se la ingrandisci, si vede tutta a quadretti.
-   Sull'arancio, che qui e' il colore principale, saltava agli
-   occhi.
-   Quindi:
-   · GRANA (512px, si ripete a misura naturale) — i puntini
-     fitti. Non viene MAI ingrandita, percio' non sgrana.
-     Il quadrato e' specchiato sui due assi: le giunzioni non
-     si vedono.
-   · MACCHIE (480px, sfocate, allargate a coprire) — gli aloni
-     larghi. Essendo sfocate, ingrandirle non si nota.
-   ============================================================ */
-
-/* ⚠️ 01/09 — RIFATTA DA ZERO, E NON E' PIU' UN'IMMAGINE.
-   Prima erano due file ritagliati dal brand book: `grana.webp` (512px) e
-   soprattutto `macchie.webp` (760px) allargato a `cover` su fasce larghe
-   1440px e piu'. Ingrandito due-tre volte si vedeva tutto: i puntini a
-   quadretti e — peggio — dentro le "macchie" si leggevano le LETTERE
-   sfocate della pagina del PDF da cui erano state ritagliate.
-   Un'immagine, per quanto grande, prima o poi la ingrandisci.
-   Adesso la sporcatura e' DISEGNATA DAL BROWSER (feTurbulence dentro un
-   SVG): e' un tassello che si ripete a misura fissa e non viene mai
-   scalato, quindi non puo' sgranare a nessuna larghezza di schermo.
-   `stitchTiles='stitch'` fa combaciare i bordi: le giunzioni non si vedono.
-   Pesa zero byte di rete e serve tutti i colori.
-   I tre .webp in images/sfondi/ non li usa piu' nessuno tranne
-   `bordo-strappato.webp`, che e' una maschera di forma, non una texture. */
-.sporco{position:relative;isolation:isolate}
-.sporco > *{position:relative;z-index:1}
-.sporco::before{
-  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
-  background:
-    var(--sporco-grana)  repeat 0 0 / 190px 190px,
-    var(--sporco-fibra)  repeat 0 0 / 340px 340px,
-    var(--sporco-nuvole) repeat 0 0 / 620px 620px;
-  /* le dosi stanno dentro i tasselli (feFuncA), non qui: cosi' i tre
-     strati si possono bilanciare uno per uno. Provate a schermo fianco a
-     fianco su arancio, marrone e beige in _diag-grana.html. */
-  opacity:1;mix-blend-mode:multiply;
-}
-.sporco.poco::before{opacity:.4}       /* sul beige basta un'ombra di grana */
-/* lo specchio non serve piu': il disegno non ha piu' una macchia fissa
-   che cadeva sempre dallo stesso lato. Sfalsa i tasselli, cosi' due
-   sezioni vicine non hanno la stessa identica sporcatura. */
-.sporco.specchio::before{background-position:95px 60px, 170px 130px, 310px 240px}
-
-/* il bordo mangiato: il colore della sezione sborda su quella dopo.
-   Serve lo z-index, altrimenti la sezione seguente ci passa sopra. */
-.strappo{z-index:3}
-.strappo::after{
-  content:"";position:absolute;left:0;right:0;bottom:-26px;height:28px;z-index:2;
-  background-color:inherit;pointer-events:none;
-  -webkit-mask:url("images/sfondi/bordo-strappato.webp") no-repeat center/100% 100%;
-  mask:url("images/sfondi/bordo-strappato.webp") no-repeat center/100% 100%;
-}
-/* le sezioni prendono il colore anche sul contenitore, se no lo strappo
-   non sa di che colore sbordare */
-.video-b.strappo,.palco.strappo{background-color:var(--arancio)}
-.cal-sec.strappo{background-color:var(--espresso)}
-
-
-/* ============================================================
-   6 · IL FONT DEI BOTTONI
-   ------------------------------------------------------------
-   Bonzana e' un carattere da manifesto: sui titoli grandi
-   funziona, ma su un'etichetta di quindici o venti pixel le
-   grazie squadrate si chiudono e la parola non si legge piu'.
-   Al suo posto va LT CUSHION, che e' uno dei quattro font del
-   brand, nel taglio piu' pesante e con le lettere staccate.
-   I numeroni delle date restano in Bonzana: li' il corpo e'
-   grande e il carattere fa il suo mestiere.
-   ============================================================ */
-
-:root{ --btn:"LT Cushion","Manrope",system-ui,sans-serif }
-
-.btn-poster,.btn-dark,.cta-btn,.nav-cta,.hero6-btn,.cal-badge,
-.hero6-prossima b,.tk-m{
-  font-family:var(--btn) !important;
-  font-weight:900;
-  letter-spacing:.09em;
-  text-transform:uppercase;
-}
-/* LT Cushion ha un occhio piu' piccolo di Bonzana: a parita' di corpo
-   sembra piu' minuto, quindi si sale di un paio di punti */
-.hero6-btn{font-size:clamp(16px,1.5vw,19px);padding:14px 32px}
-.btn-poster{font-size:clamp(15px,1.5vw,18px)}
-.cta-btn{font-size:clamp(16px,1.7vw,20px)}
-.btn-dark{font-size:15.5px}
-.nav-cta{font-size:12.5px !important;letter-spacing:.14em}
-.cal-badge{font-size:11px;letter-spacing:.16em}
-
-
-/* =====================================================================
-   A6 — RILAVORAZIONE DEL 01/09/2026
-   Testata senza striscia annuncio e senza social, hero alleggerito,
-   sezioni riordinate, calendario con popup dei dettagli.
-   ===================================================================== */
-
-/* --- HERO: tolta la fascia in fondo, il testo si prende quello spazio --- */
-.hero6-in{padding-bottom:clamp(54px,6.5vw,84px)}
-
-/* --- VIDEO "ASCOLTACI DAL VIVO": la copertina lascia il posto all'iframe,
-       dentro la pagina. Il bottone play e' un <button>, non un link. --- */
-.vb-play{
-  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:3;
-  width:86px;height:86px;border-radius:50%;border:3px solid var(--beige);
-  background:var(--espresso);color:var(--panna);cursor:pointer;
-  display:grid;place-items:center;padding:0;
-  transition:transform .18s,background .2s;
-}
-.vb-play:hover{transform:translate(-50%,-50%) scale(1.06);background:var(--arancio)}
-.vb-play svg{margin-left:6px}
-.vframe .inner.vb-on{background:#000}
-.vframe .inner.vb-on img,
-.vframe .inner.vb-on .vb-play,
-.vframe .inner.vb-on .vcap{display:none}
-.vframe .inner.vb-on::after{display:none}     /* via il velo: sopra un video da' fastidio */
-.vframe .inner.vb-on iframe{
-  position:absolute;inset:0;width:100%;height:100%;border:0;z-index:3;
-}
-.vframe .inner{aspect-ratio:16/9}
-
-/* --- "COSA FACCIAMO?": la foto e' la protagonista, prende piu' spazio --- */
-#cosa-facciamo .birra2-grid{grid-template-columns:1fr 1.2fr;align-items:center}
-#cosa-facciamo .lead-p{font-size:clamp(15.5px,1.6vw,17.5px);line-height:1.62}
-/* la foto della terrazza e' 3:2, non 4:3: col ritaglio vecchio perdeva
-   il cielo e la collina, che sono meta' della fotografia */
-#cosa-facciamo .photo-r img{aspect-ratio:3/2}
-@media (max-width:960px){ #cosa-facciamo .birra2-grid{grid-template-columns:1fr} }
-
-/* --- "DOVE DIAMO IL MEGLIO?": sezione sua, fascia arancio, sei card --- */
-.dove-sec{background:var(--arancio);color:var(--panna)}
-.dove-sec.strappo{background-color:var(--arancio)}
-.dove-sec .sec-title{
-  color:var(--panna);text-align:center;
-  margin:0 auto clamp(30px,4vw,46px);max-width:26ch;
-}
-.video-cam{top:-28px;right:40px;width:88px}
-@media (max-width:640px){.video-cam{top:-22px;right:14px;width:66px}}
-
-.dove-sec .ctx-cards{grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.8vw,20px)}
-.dove-sec .ctx-card{
-  text-align:left;padding:clamp(22px,2.4vw,28px) clamp(20px,2.2vw,26px);
-  display:flex;flex-direction:column;
-}
-.dove-sec .ctx-card .ico{margin:0 0 14px;height:40px}
-.dove-sec .ctx-card h3{font-size:clamp(19px,1.9vw,23px);line-height:1.06}
-.dove-sec .ctx-card p{font-size:14px;line-height:1.5;margin-top:9px}
-@media (max-width:900px){ .dove-sec .ctx-cards{grid-template-columns:repeat(2,1fr)} }
-@media (max-width:560px){ .dove-sec .ctx-cards{grid-template-columns:1fr} }
-/* la regola vecchia della sezione birra faceva sfondare l'ultima card */
-.dove-sec .ctx-card:last-child{grid-column:auto}
-
-/* --- IL PALCO: solo il video, senza testi e senza fascia arancio --- */
-.palco-solo{position:relative;padding:0;background:var(--espresso);line-height:0}
-.palco-solo .palco-video{margin-top:0;height:clamp(300px,62vh,660px)}
-.palco-solo .palco-video::after{display:none}   /* niente velo: il video sta da solo */
-
-/* --- CALENDARIO: il bottone "Dettagli" anche sulle righe --- */
-.cal-row{grid-template-columns:110px 1fr auto auto}
-.cal-dett{
-  font-family:var(--btn);font-weight:900;font-size:11.5px;letter-spacing:.14em;
-  text-transform:uppercase;cursor:pointer;
-  background:transparent;color:var(--beige);
-  border:1.5px solid rgba(237,218,189,.55);border-radius:999px;
-  padding:7px 15px;transition:background .2s,color .2s,border-color .2s;
-}
-.cal-dett:hover{background:var(--beige);color:var(--espresso);border-color:var(--beige)}
-@media (max-width:640px){
-  /* minmax(0,1fr): senza il min a zero il nome lungo ("Inaugurazione Beach
-     Fly") allargava la riga di 11px oltre lo schermo */
-  .cal-row{grid-template-columns:88px minmax(0,1fr) auto}
-  .cal-row .nm{overflow-wrap:anywhere}
-  .cal-row .pv{grid-column:2}
-  .cal-dett{grid-row:1/3;grid-column:3;align-self:center}
-}
-
-/* --- POPUP DEI DETTAGLI DATA --- */
+@media (max-width:420px){.ig-strip{grid-template-columns:repeat(2,1fr)}}
+.social-due{align-items:stretch}
+.social-due > *{min-width:0}
+
+/* ---- il popup dei dettagli della data (il markup sta dopo il piede, il JS lo riempie) ---- */
 .dt-modal{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:20px}
-.dt-modal[hidden]{display:none}
-.dt-velo{position:absolute;inset:0;background:rgba(73,36,10,.86)}
+.dt-velo{position:absolute;inset:0;background:rgba(12,5,1,.82)}
 .dt-panel{
-  position:relative;z-index:1;width:min(560px,100%);max-height:88vh;overflow-y:auto;
-  background:var(--panna);color:var(--espresso);
-  border:3px solid var(--espresso);border-radius:14px;
-  box-shadow:10px 10px 0 rgba(205,88,18,.55);
-  padding:clamp(26px,4vw,38px);
+  position:relative;width:min(560px,100%);max-height:92vh;overflow:auto;
+  background:var(--carta);color:var(--espresso);border-radius:18px;
+  padding:clamp(22px,3.4vw,34px);box-shadow:0 34px 80px -30px rgba(0,0,0,.8);
 }
-.dt-x{
-  position:absolute;top:10px;right:12px;width:36px;height:36px;
-  background:none;border:0;cursor:pointer;
-  font-size:30px;line-height:1;color:var(--espresso);
-}
-.dt-x:hover{color:var(--arancio)}
-.dt-kicker{
-  display:inline-block;background:var(--espresso);color:var(--panna);
-  font-family:var(--btn);font-weight:900;font-size:10.5px;letter-spacing:.2em;
-  text-transform:uppercase;padding:5px 13px;border-radius:999px;
-}
-.dt-panel h3{
-  font-family:var(--bronco);font-weight:400;font-synthesis:none;text-transform:uppercase;
-  font-size:clamp(24px,3vw,32px);line-height:1.05;color:var(--espresso);margin:14px 0 18px;
-}
-.dt-meta{list-style:none;display:grid;gap:12px;margin:0 0 18px;padding:0;
-  border-top:2px dashed rgba(73,36,10,.3);border-bottom:2px dashed rgba(73,36,10,.3);padding:16px 0}
-.dt-meta li{display:grid;grid-template-columns:88px 1fr;gap:12px;align-items:baseline}
-.dt-meta .k{
-  font-family:var(--sans);font-size:10.5px;font-weight:800;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--espresso);opacity:.72;
-}
-.dt-meta b{font-family:var(--sans);font-size:15.5px;font-weight:700;color:var(--espresso)}
-.dt-note{font-family:var(--sans);font-size:14.5px;line-height:1.55;color:var(--caffe);margin:0 0 22px}
-.dt-azioni{display:flex;gap:12px;flex-wrap:wrap}
-.dt-azioni .btn-poster,.dt-azioni .btn-dark{font-size:13px;padding:10px 20px 11px;cursor:pointer}
-/* il .btn-poster e' beige su un pannello beige: qui gli serve il fondo scuro */
-.dt-panel .btn-poster{
-  background:var(--espresso);color:var(--panna);border-color:var(--espresso);
-  box-shadow:inset 0 0 0 2px var(--espresso),inset 0 0 0 3px rgba(237,218,189,.45);
-}
-.dt-panel .btn-poster:hover{
-  background:var(--arancio);border-color:var(--arancio);color:var(--panna);
-  box-shadow:inset 0 0 0 2px var(--arancio),inset 0 0 0 3px rgba(237,218,189,.45);
-}
-.dt-panel .btn-poster::before,.dt-panel .btn-poster::after{content:none}
-.dt-ricorda-box{
-  margin-top:20px;padding:18px 18px 20px;border-radius:10px;
-  background:rgba(205,88,18,.12);border:2px dashed rgba(73,36,10,.35);
-}
-.dt-ricorda-box[hidden]{display:none}
-.dt-ricorda-tit{
-  font-family:var(--btn);font-weight:900;font-size:13px;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--espresso);margin:0 0 8px;
-}
-.dt-ricorda-p{font-family:var(--sans);font-size:14px;line-height:1.5;color:var(--caffe);margin:0 0 16px}
-.dt-ricorda-nota{font-family:var(--sans);font-size:12.5px;line-height:1.45;color:var(--caffe);opacity:.85;margin:14px 0 0}
-
-/* --- RIMANDO AL PREVENTIVO, subito sotto le date --- */
-.pv-rimando{background:var(--arancio)}
-.pv-rimando.strappo{background-color:var(--arancio)}
-.pvr-box{
-  background:var(--espresso);color:var(--panna);
-  border:3px solid var(--espresso);outline:2px solid var(--espresso);outline-offset:6px;
-  border-radius:14px;padding:clamp(28px,4vw,44px) clamp(24px,4vw,48px);
-  display:flex;align-items:center;justify-content:space-between;
-  gap:clamp(20px,3vw,44px);flex-wrap:wrap;
-}
-.pvr-box > div{flex:1 1 340px;min-width:0}
-.pvr-box > .cta-btn{flex:0 0 auto}
-.pv-rimando .sec-title{color:var(--panna);margin:0;font-size:clamp(26px,3.2vw,40px)}
-.pvr-p{font-family:var(--sans);font-size:clamp(15px,1.7vw,17px);color:var(--beige);margin:10px 0 0;max-width:44ch}
-@media (max-width:700px){ .pvr-box{flex-direction:column;align-items:flex-start} }
-
-/* --- FOOTER: le icone social, arrivate dalla testata --- */
-.footer-social a{display:inline-flex;align-items:center;gap:8px}
-.footer-social svg{width:15px;height:15px;fill:currentColor;flex:none}
-
-/* --- NEWSLETTER: resta il solo titolo, la colonna si stringe --- */
-.nl-grid{grid-template-columns:1fr auto;align-items:center}
-.nl-title{margin:0}
-@media (max-width:800px){ .nl-grid{grid-template-columns:1fr} }
-
-/* --- pulizia: pezzi rimasti senza padrone dopo il riordino --- */
-.cal-foot,.cal-badge,.palco-tags,.palco-place,.palco-head,.socials-body{display:none}
-
-
-/* =====================================================================
-   A6 — SECONDO GIRO DEL 01/09/2026
-   Sfondi rifatti (vedi il blocco .sporco), menu riordinato, hero piu'
-   arioso, niente camaleonti sparsi / occhielli / zigzag, formazione
-   senza card, newsletter dentro il footer.
-   ===================================================================== */
-
-/* --- MENU: le voci stanno addosso al logo, non ai bordi dello schermo --- */
-.nav-side{gap:clamp(14px,1.4vw,22px)}
-.nav-side.sx{justify-content:flex-end}
-.nav-side.dx{justify-content:flex-start}
-.nav-in{gap:clamp(20px,2.6vw,38px)}
-@media (max-width:1000px){ .nav-side.dx{justify-content:flex-end} }
-
-/* --- HERO: il titolo era troppo schiacciato fra una riga e l'altra --- */
-.hero6 h1{line-height:1.16;margin-top:0}
-.hero6-sub{margin-top:22px}
-
-/* --- SEZIONI: tolti gli occhielli, il titolo non deve restare appeso --- */
-.section > .wrap > .sec-title:first-child{margin-top:0}
-
-/* --- FORMAZIONE: senza card la griglia puo' respirare di piu' --- */
-.lu-head{margin-bottom:clamp(34px,4.5vw,52px)}
-.lu-grid{gap:clamp(40px,4.5vw,56px) clamp(24px,3vw,36px)}
-
-/* --- NEWSLETTER DENTRO IL FOOTER --- */
-.foot-nl{
-  max-width:var(--wrap);margin:0 auto;
-  padding:clamp(34px,4.5vw,52px) clamp(20px,4vw,48px) clamp(30px,4vw,44px);
-  border-bottom:1px solid rgba(139,174,164,.22);
-}
-.foot-nl-in{
-  display:grid;grid-template-columns:1fr min(460px,44%);gap:clamp(20px,3vw,44px);
-  align-items:center;min-width:0;
-}
-.foot-nl-in > *{min-width:0}
-.foot-nl-tit{
-  font-family:var(--bronco);font-weight:400;font-synthesis:none;text-transform:uppercase;
-  font-size:clamp(24px,3.2vw,40px);line-height:1.06;letter-spacing:.02em;
-  color:var(--panna);margin:0;
-}
-/* dentro il footer il form era una colonna "auto" e si stringeva
-   attorno al bottone: il campo diventava un francobollo */
-.foot-nl .newsletter{width:100%;max-width:none}
-@media (max-width:800px){ .foot-nl-in{grid-template-columns:1fr} .foot-nl .newsletter{width:100%} }
-/* il camaleonte grande arriva subito dopo: gli serve un po' meno spinta */
-.footer--ridotta .footer-cam{padding-top:clamp(34px,4.5vw,56px)}
-
-
-/* --- I LOGHI DEI CLIENTI, RIMESSI IN SCALA (01/09) ---------------------
-   Erano tutti a `max-width:80%; max-height:80px`, e con quella regola
-   sola venivano fuori di sette misure diverse: Lombarda Ceramica era un
-   francobollo, Porsche quasi.
-   Il motivo e' che dentro il file il disegno NON riempie il riquadro, e
-   ognuno lo riempie in modo diverso. Misurato col getBBox del browser,
-   con la regola vecchia il disegno vero risultava alto:
-     Ca' del Bosco 80px · Coca-Cola 56 · Thun 50 · Porsche 28 · Lombarda 25.
-   Peggio: `Porsche.svg` e `Lombarda-Ceramiche.svg` non sono i loghi
-   veri, sono segnaposto scritti a mano — Lombarda ha il testo a
-   font-size 13 dentro un riquadro alto 80, cioe' occupa un quinto
-   dell'altezza. (Da sostituire coi file veri quando arrivano.)
-   Qui la misura e' data marchio per marchio, calibrata sulla LARGHEZZA
-   del disegno vero — che in una fila di marchi a scritta e' quello che
-   si percepisce — e agganciata al nome del file, non alla posizione,
-   cosi' non si rompe se l'ordine cambia. */
-/* il padding della cella era 24px per lato: su una colonna larga 236px
-   restavano 188px, e i due marchi larghi (Porsche, Lombarda) sbattevano
-   contro il `max-width` prima di arrivare alla loro altezza. Con 14px di
-   padding lo spazio utile sale a ~200px e le misure qui sotto reggono.
-   ⚠️ I due segnaposto restano da sostituire coi loghi veri dei clienti. */
-.brand-cell{padding:14px}
-.brand-logo{max-width:96%;max-height:none;height:auto;width:auto;opacity:.9}
-.brand-logo[src$="Coca-Cola.svg"]{height:47px}          /* disegno ~150 x 47 */
-.brand-logo[src$="Ca-del-Bosco.svg"]{height:55px}       /* disegno ~120 x 55 */
-.brand-logo[src$="Porsche.svg"]{height:50px}            /* disegno ~165 x 29 */
-.brand-logo[src$="Logo-Thun.svg"]{height:36px}          /* disegno ~130 x 36 */
-.brand-logo[src$="Lombarda-Ceramica-v2.svg"]{height:44px}  /* disegno ~150 x 44 */
-@media (max-width:800px){
-  /* in due colonne c'e' piu' spazio in larghezza: si puo' crescere */
-  .brand-cell{padding:18px}
-  .brand-logo[src$="Coca-Cola.svg"]{height:56px}
-  .brand-logo[src$="Ca-del-Bosco.svg"]{height:66px}
-  .brand-logo[src$="Porsche.svg"]{height:60px}
-  .brand-logo[src$="Logo-Thun.svg"]{height:43px}
-  .brand-logo[src$="Lombarda-Ceramica-v2.svg"]{height:52px}
-}
-
-
-
-/* ============================================================================
-   IL MURO DEI MARCHI, RIFATTO IL 10/09
-   ----------------------------------------------------------------------------
-   ⚠️ I loghi veri sono arrivati da Michele il 10/09 e NON possono stare in
-   monocromia crema come prima: l'oro del Conti Thun, il girasole del
-   Cascinetto e lo stemma Porsche in silhouette diventano macchie. Quindi la
-   fascia passa sul CHIARO e i marchi tengono i loro colori.
-   🚫 Fuori i due segnaposto scritti a mano (Porsche.svg era la parola
-   "PORSCHE" in Arial dentro 238 byte) e dentro i due nuovi: Pietracavalla e
-   Il Cascinetto. Nomi corretti da lui: "Conti Thun", "Centro Porsche Brescia".
-   ⚠️ A scorrimento e non in griglia: sono sette, e da telefono una griglia li
-   schiaccia.
-   ============================================================================ */
-.brands-sec{background:var(--panna) !important;overflow-x:clip}
-/* ⚠️ overflow-x:clip sulla sezione: il carosello sfonda i margini di proposito
-   (margin-inline:-4vw) per farsi scorrere da bordo a bordo, ma senza il clip
-   quello sfondamento diventa scorrimento orizzontale di TUTTA la pagina. */
-.brands-sec .sec-title{color:var(--espresso) !important}
-.brand-scorri{
-  display:flex;align-items:center;gap:clamp(22px,3.4vw,46px);
-  overflow-x:auto;overscroll-behavior-x:contain;
-  scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;
-  padding:14px 4vw 24px;margin-inline:-4vw;scrollbar-width:none;
-}
-.brand-scorri::-webkit-scrollbar{display:none}
-.brand-scorri > *{flex:0 0 auto;scroll-snap-align:center}
-.brand-scorri img{display:block;width:auto;filter:none;opacity:1;max-width:none;max-height:none}
-.brand-scorri img[src$="coca-cola.svg"]              {height:42px}
-.brand-scorri img[src$="ca-del-bosco.svg"]           {height:56px}
-.brand-scorri img[src$="conti-thun.webp"]            {height:60px}
-.brand-scorri img[src$="centro-porsche-brescia.webp"]{height:66px}
-.brand-scorri img[src$="lombarda-ceramiche.webp"]    {height:42px}
-.brand-scorri img[src$="pietra-cavalla.webp"]        {height:54px}
-.brand-scorri img[src$="il-cascinetto.webp"]         {height:58px}
-.brand-altri{
-  font-family:var(--btn);font-weight:900;font-size:15px;letter-spacing:.1em;
-  text-transform:uppercase;color:#6B4426;white-space:nowrap;
-}
-@media (max-width:700px){
-  .brand-scorri img{height:44px !important}
-  .brand-scorri img[src$="centro-porsche-brescia.webp"]{height:52px !important}
-  .brand-scorri img[src$="conti-thun.webp"]{height:48px !important}
-}
-
-/* ---------- I BOTTONI, RIVISTI IL 10/09 -----------------------------------
-   ⚠️ Michele: "non mi piace come i tasti, anche quelli del sito. Senza ombra
-   dietro, senza stelle, e un po' piu' tondi."
-   Prima: raggio 6px, doppio filetto inset, una stellina prima e una dopo, e
-   sulla .nav-cta un'ombra piena arancio spostata di 3px. */
-.btn-poster::before,.cta-btn::before,
-.btn-poster::after, .cta-btn::after{content:none !important}
-.btn-poster,.cta-btn,.btn-dark,.btn-ghost-az,.nav-cta{
-  border-radius:12px !important;
-  box-shadow:none !important;
-}
-.nav-cta:hover{transform:none !important;box-shadow:none !important}
-
-/* --- FOOTER PIU' BASSO (01/09) -----------------------------------------
-   Misurato: 932px su una finestra da 900, cioe' piu' di uno schermo pieno.
-   Il grosso lo faceva il camaleonte (235px da solo) piu' il payoff a corpo
-   64 e le spaziature ereditate. Qui si stringe tutto in proporzione, senza
-   togliere niente: il camaleonte grande resta, solo piu' piccolo. */
-.footer-cam .ico{width:min(230px,44vw)}
-.footer-payoff{font-size:clamp(26px,3.8vw,46px)}
-.footer--ridotta{padding-bottom:20px}
-.footer--ridotta .footer-cam{padding:clamp(22px,3vw,36px) 20px 0}
-.footer--ridotta .footer-payoff{margin-top:10px}
-.footer--ridotta .footer-rule{margin:clamp(20px,2.6vw,28px) auto 0}
-.footer--ridotta .footer-grid{margin:20px auto 0}
-.footer--ridotta .footer-copy{margin:20px auto 0;padding-top:12px}
-.foot-nl{padding:clamp(24px,3vw,36px) clamp(20px,4vw,48px) clamp(22px,2.8vw,32px)}
-/* su telefono il titolo scendeva a 22px: sotto i 24px la parola in arancio
-   ("date.") non e' piu' un "testo grande" e a 3.25:1 non basta piu'.
-   25px la riporta sopra la soglia senza allargare il footer. */
-.foot-nl-tit{font-size:clamp(25px,2.8vw,34px)}
-
-
-/* --- I RITRATTI NUOVI DELLA FORMAZIONE (01/09) --------------------------
-   Cinque scatti verticali 3:4 sullo stesso muro arancio. Dentro un cerchio
-   `object-fit:cover` ritaglia un quadrato, e con l'impostazione di serie
-   (centro) le teste finivano tagliate o sperdute: in una foto 3:4 il
-   quadrato centrale parte al 12,5% dell'altezza, ma i volti stanno fra il
-   26% e il 40% — e non nello stesso punto in tutte e cinque.
-   Le percentuali qui sotto sono calcolate una per una perche' il viso cada
-   sempre a circa un terzo dall'alto del cerchio: e' l'inquadratura da
-   ritratto, e i cinque si allineano fra loro. */
-.member .photo img{object-position:center 22%}
-.member .photo img[src$="mike-ritratto-muro.webp"]{object-position:center 25%}
-.member .photo img[src$="miglio-ritratto-muro.webp"]{object-position:center 21%}
-/* Larry e Richi erano lontani nella foto: le loro sorgenti sono state
-   ritagliate piu' strette, quindi qui la finestra parte in alto */
-.member .photo img[src$="larry-ritratto-muro.webp"]{object-position:center 4%}
-.member .photo img[src$="ste-ritratto-muro.webp"]{object-position:center 6%}
-.member .photo img[src$="richi-ritratto-muro.webp"]{object-position:center 2%}
-
-/* ⚠️ L'attributo `hidden` da solo non basta: il browser gli da' `display:none`
-   con la specificita' piu' bassa, e qualunque regola che imposti un display
-   (`.ticket{display:grid}`, `.cal-row{display:grid}`, `.tickets{display:grid}`)
-   lo sovrascrive. Le date passate restavano a schermo pur avendo l'attributo.
-   Con `!important` il nascondi vale davvero. */
-[hidden]{display:none !important}
-
+.dt-x{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;border:1.5px solid rgba(43,20,5,.3);background:transparent;color:var(--espresso);font-size:24px;line-height:1;cursor:pointer}
+.dt-kicker{display:inline-block;font-family:var(--btn);font-weight:700;font-size:13.5px;letter-spacing:.1em;text-transform:uppercase;color:#6B4426}
+.dt-panel h3{font-size:clamp(22px,2.6vw,30px);letter-spacing:.01em;margin-top:8px;padding-right:44px}
+.dt-meta{list-style:none;margin-top:16px;display:grid;gap:8px}
+.dt-meta .k{display:block;font-family:var(--btn);font-weight:700;font-size:13.5px;letter-spacing:.08em;text-transform:uppercase;color:#6B4426}
+.dt-meta b{font-size:16.5px}
+.dt-note{margin-top:14px;font-size:16px;line-height:1.55;color:#4A2A12}
+.dt-note:empty{display:none}
+.dt-azioni{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.dt-ricorda-box{margin-top:18px;padding-top:16px;border-top:1px solid rgba(43,20,5,.18)}
+.dt-ricorda-tit{font-family:var(--btn);font-weight:900;font-size:16px}
+.dt-ricorda-p,.dt-ricorda-nota{font-size:15px;line-height:1.55;color:#4A2A12;margin-top:6px}
+.dt-ricorda-nota{font-size:14px;color:#6B4426}
 </style>
 <!-- Dati strutturati: recuperati dal sito precedente, il logo aggiornato
      a quello definitivo. Servono a Google per capire chi siamo. -->
@@ -2043,35 +184,6 @@ body::before{
     }
   }
 </script>
-<style>
-/* ===== SELETTORE DI LINGUA (aggiunto con la versione inglese) =====
-   Il bottone IT/EN vive nella lista di destra della testata: su mobile quella
-   lista mostra solo l'ultimo elemento (il bottone "preventivo"), quindi la
-   voce della lingua sparisce da sola e resta quella nel menu a tendina. */
-.nav-lang{
-  border:1px solid rgba(237,218,189,.55);border-radius:6px;
-  padding:5px 9px 4px;font-size:11.5px!important;letter-spacing:.16em;
-}
-.nav-lang:hover{background:rgba(237,218,189,.14)}
-/* strisciolina in basso: appare solo a chi ha il browser nell'altra lingua */
-.lang-bar{
-  position:fixed;left:0;right:0;bottom:0;z-index:95;display:none;
-  background:var(--caffe,#49240A);color:var(--panna,#EDDABD);
-  border-top:1px solid rgba(237,218,189,.22);
-  box-shadow:0 -8px 24px rgba(73,36,10,.4);
-  font-family:var(--sans,system-ui,sans-serif);font-size:13.5px;line-height:1.4;
-  padding:11px clamp(14px,4vw,28px);
-}
-.lang-bar.on{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
-.lang-bar a{color:var(--arancio,#CD5812);font-weight:800;text-decoration:underline}
-.lang-bar b{color:var(--panna,#EDDABD)}
-.lang-bar button{
-  background:none;border:1px solid rgba(237,218,189,.45);border-radius:6px;
-  color:inherit;font:inherit;line-height:1;padding:6px 9px;cursor:pointer;
-}
-.lang-bar button:hover{background:rgba(237,218,189,.14)}
-</style>
-
 <!-- ⚠️ L'ORDINE CONTA: consenso.js PRIMA di Tag Manager, e senza defer. Imposta il
      consent mode a NEGATO come stato di partenza, cosi' i tag dentro GTM non scrivono
      niente finche' qualcuno non accetta. Se girasse dopo, il banner sarebbe finto. -->
@@ -2092,7 +204,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <script>document.documentElement.classList.add("js");</script>
 
-<!-- ==================== NAV (replica testata Kruse Brothers, senza striscia annuncio) ==================== -->
 <header class="nav">
   <div class="nav-in">
     <button class="nav-burger" type="button" aria-expanded="false" aria-controls="nav-drawer" aria-label="Apri il menu"><span></span><span></span><span></span></button>
@@ -2124,148 +235,198 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </nav>
 </header>
 
-<!-- ==================== 1. HERO (stile sito live, senza logo grande) ==================== -->
-<section class="hero-cine" id="top">
-  <div class="hero6 kb">
-
-    <!-- la fotografia sta sotto, a tutto campo e a colori veri -->
-    <img class="hero6-bg" src="images/band-giardino-hero.webp"
-         alt="Hot Joe &amp; The Coffeekillers, i cinque musicisti della band country di Brescia abbracciati in giardino, tra cappelli da cowboy, camicie a quadri e salopette"
-         fetchpriority="high" decoding="async">
-    <!-- il velo non copre tutto: scende da sinistra e dal basso, dove sta il
-         testo, e lascia libero l'angolo in alto a destra della foto -->
-    <span class="hero6-velo" aria-hidden="true"></span>
-
-    <div class="hero6-in">
-      <div class="hero6-testo rise">
-        <h1>Vivi l&rsquo;energia <span class="hero6-acc">travolgente</span> del country live.</h1>
-        <p class="hero6-sub">Una band bresciana dall&rsquo;anima internazionale, pronta a regalarti
-          eventi country indimenticabili.</p>
-      </div>
+<!-- ==================== 1. HERO: la fotografia comanda, un solo invito ==================== -->
+<section class="hero6" id="top">
+  <img class="hero6-bg" src="images/band-giardino-hero.webp" width="1536" height="1100"
+       alt="Hot Joe &amp; The Coffeekillers, i cinque musicisti della band country di Brescia abbracciati in giardino, tra cappelli da cowboy, camicie a quadri e salopette"
+       fetchpriority="high" decoding="async" />
+  <span class="hero6-velo" aria-hidden="true"></span>
+  <div class="hero6-in rise">
+    <h1 class="v-h v-h--hero">Vivi l&rsquo;energia <span class="acc">travolgente</span> del country live.</h1>
+    <p class="v-lead">Una band bresciana dall&rsquo;anima internazionale, pronta a regalarti eventi country indimenticabili.</p>
+    <div class="v-cta-fila">
+      <a class="v-pill" href="preventivo.html">Chiedi il preventivo</a>
     </div>
-
   </div>
 </section>
 
-<!-- ==================== 2. ASCOLTACI DAL VIVO (video incorporato) ==================== -->
-<section class="section video-b sporco strappo" id="video">
-  <div class="wrap rv">
-    <h2 class="sec-title">Ascoltaci dal vivo!</h2>
-    <p class="lead-p">Questo &egrave; ci&ograve; che ti aspetta al tuo prossimo evento: chitarre, armonie vocali,
-      solide basi ritmiche e quella sensazione di un viaggio negli U.S.A. che solo il country sa dare.</p>
-    <div class="vframe">
-      <!-- Facciata: si vede la copertina locale e l'iframe di YouTube nasce
-           SOLO al primo clic, dentro la pagina (non si va piu' su YouTube).
-           Un embed a freddo pesa quasi 1 MB di script di terze parti: cosi'
-           lo paga solo chi il video lo guarda davvero. -->
-      <div class="inner" id="vb-inner" data-yt="mwindsVYrmo">
-        <img src="images/video-guitar-cover.webp" alt="Hot Joe &amp; The CoffeeKillers dal vivo al tramonto in riva al fiume: Mike canta con la chitarra acustica, la band suona alle sue spalle" loading="lazy" />
-        <button class="vb-play" type="button" aria-label="Riproduci il video: Guitar (Zach Top) &mdash; Hot Joe &amp; The CoffeeKillers">
-          <svg viewBox="0 0 24 24" width="38" height="38" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
-        </button>
-        <span class="vcap">Guitar &middot; Zach Top</span>
+<!-- ==================== 2. ASCOLTACI LIVE: titolo e video, nient'altro ====================
+     La copertina e' locale e l'iframe di YouTube nasce SOLO al clic (vedi lo script in fondo). -->
+<section class="v-sez v-ascolta" id="video">
+  <div class="v-in">
+    <h2 class="v-h v-h--centro rv">Ascoltaci <span class="acc">live.</span></h2>
+    <div class="v-video rv">
+      <div class="v-video-cornice">
+        <div class="inner" id="vb-inner" data-yt="mwindsVYrmo" data-titolo="Guitar (Zach Top) — Hot Joe &amp; The CoffeeKillers, dal vivo">
+          <img src="images/video-guitar-cover.webp" width="1280" height="720" alt="Hot Joe &amp; The CoffeeKillers dal vivo al tramonto in riva al fiume: Mike canta con la chitarra acustica, la band suona alle sue spalle" loading="lazy" />
+          <button class="vb-play" type="button" aria-label="Riproduci il video: Guitar (Zach Top) &mdash; Hot Joe &amp; The CoffeeKillers">
+            <svg viewBox="0 0 24 24" width="38" height="38" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
+          </button>
+          <span class="vcap"><span class="ico i-stella" aria-hidden="true"></span>Guitar &middot; Zach Top</span>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ==================== 3. COSA FACCIAMO ==================== -->
-<section class="section birra2 on-light sporco poco" id="cosa-facciamo">
-  <div class="wrap rv">
-    <div class="birra2-grid">
-      <div>
-        <h2 class="sec-title">Cosa facciamo?</h2>
-        <p class="lead-p">Che tu voglia ascoltare un buon concerto, rilassarti con ballads romantiche davanti
-          a un cocktail o scatenarti sui tavoli con le party songs pi&ugrave; ritmate, creiamo la colonna sonora
-          ideale per il tuo evento. Nelle cover dei giganti di Nashville &mdash; come <b>Zach Top</b>,
-          <b>Chris Stapleton</b>, <b>Brad Paisley</b>, <b>The Zac Brown Band</b>, <b>The Kruse Brothers</b>,
-          <b>Blake Shelton</b> &mdash; portiamo in scena l&rsquo;autentico spirito americano. Il nostro sound
-          unisce sonorit&agrave; rustiche, solide basi ritmiche, intrecci di strumenti a corda e ricche armonie
-          vocali, il tutto condito dall&rsquo;inconfondibile carattere coffee-killer. Ogni performance diventa
-          cos&igrave; un viaggio travolgente nel cuore del neo-traditional country.</p>
+<!-- ==================== 3. COSA FACCIAMO: i due paragrafi approvati della landing, con la foto accanto ==================== -->
+<section class="v-sez t-tan" id="cosa-facciamo">
+  <span class="strappo-su" aria-hidden="true"></span>
+  <div class="v-in">
+    <div class="v-due v-due--testo-largo v-due--foto-prima">
+      <div class="rv">
+        <h2 class="v-h">Cosa <span class="acc">facciamo?</span></h2>
+        <div class="v-prosa" style="margin-top:18px">
+          <p>Che tu voglia ascoltare un buon concerto, rilassarti con ballad romantiche davanti a un cocktail o scatenarti sui tavoli con le party song pi&ugrave; ritmate, la nostra scaletta ti porta dove vuoi andare.</p>
+          <p>Nelle cover dei giganti di Nashville &mdash; <b>Zach Top</b>, <b>Chris Stapleton</b>, <b>Brad Paisley</b>, <b>The Zac Brown Band</b>, <b>The Kruse Brothers</b>, <b>Blake Shelton</b> &mdash; portiamo in scena l&rsquo;autentico spirito americano: sonorit&agrave; rustiche, solide basi ritmiche, intrecci di strumenti a corda e ricche armonie vocali.</p>
+          <p>Country americano neotradizionale e contemporaneo, <b>dagli anni Novanta in poi</b>, con qualche eccezione pi&ugrave; vecchia &mdash; <i>Country Roads</i> di John Denver e <i>Jolene</i> di Dolly Parton.</p>
+        </div>
       </div>
-      <div class="photo-r">
-        <img src="images/terrazza-live.webp" alt="Hot Joe &amp; The CoffeeKillers dal vivo sulla terrazza al tramonto: chitarre, batteria e tastiere sul palco, con la collina e i cipressi sullo sfondo" loading="lazy" />
-      </div>
+      <figure class="v-figura rv">
+        <img src="images/terrazza-live.webp" width="1600" height="1067" alt="Hot Joe &amp; The CoffeeKillers dal vivo sulla terrazza al tramonto: chitarre, batteria e tastiere sul palco, con la collina e i cipressi sullo sfondo" loading="lazy" />
+        <figcaption>Dal vivo sulla terrazza, al tramonto.</figcaption>
+      </figure>
     </div>
   </div>
 </section>
 
-<!-- ==================== 4. DOVE DIAMO IL MEGLIO (sezione sua, sei card) ==================== -->
-<section class="section dove-sec sporco specchio strappo" id="dove">
-  <div class="wrap rv">
-    <h2 class="sec-title">Dove diamo il meglio?</h2>
-    <div class="ctx-cards stagger">
-      <div class="ctx-card">
-        <span class="ico i-chitarra c-rug" aria-hidden="true"></span>
+<!-- ==================== 4. DOVE DIAMO IL MEGLIO: sei card con l'icona in riga col titolo ==================== -->
+<section class="v-sez t-panna" id="dove">
+  <span class="strappo-su" aria-hidden="true"></span>
+  <div class="v-in">
+    <div class="v-testa rv">
+      <h2 class="v-h">Dove diamo il <span class="acc">meglio?</span></h2>
+    </div>
+    <div class="v-info v-info--tre stagger">
+      <article class="v-info-card"><span class="ico i-chitarra" aria-hidden="true"></span><div>
         <h3>Locali &amp; Pub</h3>
-        <p>Due set dentro spazi anche piccoli: ci bastano 4 &times; 3 m e una presa di corrente.
-          Volume calibrato sul locale, cos&igrave; al bancone si continua a ordinare e a parlare.</p>
-      </div>
-      <div class="ctx-card">
-        <span class="ico i-ferri c-azs" aria-hidden="true"></span>
+        <p>Due set dentro spazi anche piccoli: ci bastano <b>4 &times; 3 m</b> e una presa di corrente. Volume calibrato sul locale: si ascolta, si canta e si continua a chiacchierare.</p></div></article>
+      <article class="v-info-card"><span class="ico i-ferri" aria-hidden="true"></span><div>
         <h3>Ranch &amp; Maneggi</h3>
-        <!-- ⚠️ era: "Scaletta pensata per chi balla, con i tempi giusti per le
-             coreografie country". Fuori il 07/09: nel brain il ballabile puro
-             e' scritto in tre punti come NON la direzione della band, e non
-             c'e' nessuna nota che documenti una line dance a una loro serata.
-             Prometteva una cosa che poi la sera non arriva. -->
-        <p>Il nostro habitat naturale: balle di fieno, stivali e chitarre. Il country americano
-          di oggi, con i brani su cui la gente si alza da sola.</p>
-      </div>
-      <div class="ctx-card">
-        <span class="ico i-stella c-rug" aria-hidden="true"></span>
+        <p>Il nostro habitat naturale: balle di fieno, stivali e chitarre. Il country americano di oggi, con i brani su cui la gente si alza da sola.</p></div></article>
+      <article class="v-info-card"><span class="ico i-stella" aria-hidden="true"></span><div>
         <h3>Feste &amp; Sagre</h3>
-        <p>Piazze, oratori e feste di paese, dal pomeriggio a notte. Audio e luci sono nostri:
-          montiamo, suoniamo e smontiamo senza far pensare a niente il comitato.</p>
-      </div>
-      <div class="ctx-card">
-        <span class="ico i-teschio c-azs" aria-hidden="true"></span>
+        <p>Piazze, oratori e feste di paese, dal pomeriggio a notte. Audio e luci sono nostri: montiamo, suoniamo e smontiamo senza far pensare a niente il comitato.</p></div></article>
+      <article class="v-info-card"><span class="ico i-teschio" aria-hidden="true"></span><div>
         <h3>Festival &amp; Rassegne</h3>
-        <p>Palchi grandi e cambi rapidi: stage plan e input list arrivano al service in anticipo,
-          cos&igrave; il soundcheck non mangia la serata.</p>
-      </div>
-      <div class="ctx-card">
-        <span class="ico i-cappello c-rug" aria-hidden="true"></span>
+        <p>Palchi grandi e cambi rapidi: arriviamo con tutto pronto, cos&igrave; il soundcheck non mangia la serata.</p></div></article>
+      <article class="v-info-card"><span class="ico i-cappello" aria-hidden="true"></span><div>
         <h3>Aziende &amp; Privati</h3>
-        <p>Inaugurazioni, cene e feste in villa. Set acustico e leggero durante l&rsquo;aperitivo,
-          band al completo dopo cena: il volume segue il momento.</p>
-      </div>
-      <div class="ctx-card">
-        <span class="ico i-stivale c-azs" aria-hidden="true"></span>
+        <p>Inaugurazioni, cene e feste in villa. Set acustico e leggero durante l&rsquo;aperitivo, band al completo dopo cena: il volume segue il momento.</p></div></article>
+      <article class="v-info-card"><span class="ico i-stivale" aria-hidden="true"></span><div>
         <h3>Matrimoni</h3>
-        <p>Cerimonia, aperitivo e festa: dalle ballads sotto il pergolato alle party song sui tavoli.
-          Il brano del vostro ingresso lo prepariamo su richiesta.</p>
-      </div>
+        <p>Cerimonia, aperitivo e festa: dalle ballad sotto il pergolato alle party song sui tavoli. Il brano del vostro ingresso lo prepariamo su richiesta.</p></div></article>
     </div>
   </div>
 </section>
 
-<!-- ==================== 5. IL PALCO — solo il video, niente altro ==================== -->
-<section class="palco-solo" id="palco" aria-label="Il palco allestito: ripresa dall'alto">
-  <div class="palco-video rv">
-    <video src="images/palco-villa-gussago.mp4" poster="images/palco-villa-gussago.webp"
-      autoplay muted loop playsinline preload="none" width="1280" height="720"
-      aria-label="Ripresa dall'alto del palco allestito dei Coffeekillers nel giardino di una villa a Gussago: batteria, tastiere, chitarre, casse e luci, con le file di sedie del pubblico e i vigneti sullo sfondo"></video>
+<!-- ==================== 5. I NUMERI: aprono il blocco delle prove ==================== -->
+<div class="fascia f-arancio v-fatti" aria-label="I numeri della band">
+  <span class="strappo-su" aria-hidden="true"></span>
+  <div class="v-fatti-griglia v-fatti--tre">
+    <div><b>2018</b><span>Country dal</span></div>
+    <div><b>+200</b><span>Serate all&rsquo;attivo</span></div>
+    <div><b>7</b><span>Regioni nel 2026</span></div>
+  </div>
+</div>
+
+<!-- ==================== 6. ABBIAMO SUONATO PER: i loghi, a colori, su chiaro ==================== -->
+<section class="v-sez t-panna" id="brands">
+  <div class="v-in">
+    <div class="v-testa rv">
+      <h2 class="v-h">Abbiamo suonato <span class="acc">per.</span></h2>
+    </div>
+    <div class="v-scorri v-loghi rv">
+      <img src="images/loghi/coca-cola.svg" alt="Coca-Cola" loading="lazy" width="615" height="193" />
+      <img src="images/loghi/ca-del-bosco.svg" alt="Ca&rsquo; del Bosco" loading="lazy" width="116" height="53" />
+      <img src="images/loghi/conti-thun.webp" alt="Conti Thun" loading="lazy" width="228" height="132" />
+      <img src="images/loghi/centro-porsche-brescia.webp" alt="Centro Porsche Brescia" loading="lazy" width="183" height="132" />
+      <img src="images/loghi/lombarda-ceramiche.webp" alt="Lombarda Ceramiche" loading="lazy" width="448" height="132" />
+      <img src="images/loghi/pietra-cavalla.webp" alt="Pietracavalla" loading="lazy" width="287" height="132" />
+      <img src="images/loghi/il-cascinetto.webp" alt="Il Cascinetto" loading="lazy" width="245" height="132" />
+      <span class="v-altri">e tanti altri</span>
+    </div>
   </div>
 </section>
 
-<!-- ==================== 6. CALENDARIO (impianto della A7: scheda + elenco) ====================
-     Ogni data porta con se' i suoi dati negli attributi data-*: sono quelli
-     che il popup legge. Per aggiungere o cambiare una data si tocca SOLO
-     l'HTML qui sotto, il JavaScript non va aperto.
+<!-- ==================== 7. LA LINE-UP: ritratti in cornice, con la bio dentro la scheda ====================
+     Da telefono scorre di lato (una schermata invece di cinque), da 900px e' 3 + 2. -->
+<section class="v-sez v-sez--alta t-tan" id="lineup">
+  <span class="strappo-su" aria-hidden="true"></span>
+  <div class="v-in">
+    <div class="v-testa rv">
+      <h2 class="v-h">La nostra <span class="acc">line-up.</span></h2>
+    </div>
+    <div class="v-scorri v-lineup v-lineup--bio rv">
+      <article class="v-volto">
+        <figure class="cornice"><img src="images/land/mike-ritratto-muro.webp" width="520" height="693" alt="Michele &ldquo;Mike&rdquo; Frosio con cappello da cowboy e chitarra acustica, davanti a un muro arancio" loading="lazy" /></figure>
+        <h3>Michele &ldquo;Mike&rdquo; Frosio</h3>
+        <p class="ruolo">Chitarre e voce</p>
+        <div class="bio">
+          <p>Carisma ed energia. Frontman spiccato, ha trovato nel country il palcoscenico ideale per unire tecnica e grande passione.</p>
+          <p>Commerciale, esuberante, spirito libero, fatto di conoscenza musicale e autenticit&agrave;.</p>
+        </div>
+        <p class="battuta">Ma l&rsquo;hamburger c&rsquo;&egrave; anche vegetale?</p>
+      </article>
+      <article class="v-volto">
+        <figure class="cornice"><img src="images/land/miglio-ritratto-muro.webp" width="520" height="693" alt="Davide &ldquo;Miglio&rdquo; Miglietti con le bacchette in bocca, davanti a un muro arancio" loading="lazy" /></figure>
+        <h3>Davide &ldquo;Miglio&rdquo; Miglietti</h3>
+        <p class="ruolo">Batteria e voci</p>
+        <div class="bio">
+          <p>Precisione, creativit&agrave; ed equilibrio. Gigante buono, ma testardo come un mulo.</p>
+          <p>Aggiusta persone di professione, rompe le scatole per hobby.</p>
+        </div>
+        <p class="battuta">Potevamo fare di meglio.</p>
+      </article>
+      <article class="v-volto">
+        <figure class="cornice"><img src="images/land/larry-ritratto-muro.webp" width="520" height="693" alt="Lorenzo &ldquo;Larry&rdquo; Marini appoggiato alla sua tastiera rossa, davanti a un muro arancio" loading="lazy" /></figure>
+        <h3>Lorenzo &ldquo;Larry&rdquo; Marini</h3>
+        <p class="ruolo">Piano</p>
+        <div class="bio">
+          <p>Colore e positivit&agrave;. Silenzioso, ma non servono parole quando le sue mani creano melodie che sembrano venire dal cuore del Tennessee.</p>
+        </div>
+        <p class="battuta">Raga questo &egrave; troppo country!</p>
+      </article>
+      <article class="v-volto">
+        <figure class="cornice"><img src="images/land/richi-ritratto-muro.webp" width="520" height="693" alt="Riccardo &ldquo;Richi&rdquo; Loda che alza il basso con la lingua di fuori, davanti a un muro arancio" loading="lazy" /></figure>
+        <h3>Riccardo &ldquo;Richi&rdquo; Loda</h3>
+        <p class="ruolo">Basso e contrabbasso</p>
+        <div class="bio">
+          <p>Tecnica, talento e groove. Timing svizzero, orologio un po&rsquo; meno.</p>
+          <p>Arriver&agrave; sempre in ritardo, ma mai senza una birra in mano e il basso pronto a incantare.</p>
+        </div>
+        <p class="battuta">Birretta?</p>
+      </article>
+      <article class="v-volto">
+        <figure class="cornice"><img src="images/land/ste-ritratto-muro.webp" width="520" height="693" alt="Stefano &ldquo;Ste&rdquo; Martinelli con la Telecaster bianca e la salopette, davanti a un muro arancio" loading="lazy" /></figure>
+        <h3>Stefano &ldquo;Ste&rdquo; Martinelli</h3>
+        <p class="ruolo">Chitarre</p>
+        <div class="bio">
+          <p>Le mani pi&ugrave; veloci del west. Il chitarrista di cui ogni country band ha bisogno: tecnica, salopette e ricambi di ogni genere.</p>
+          <p>Finalmente il color country &egrave; nella nostra palette.</p>
+        </div>
+        <p class="battuta">Ti serve &laquo;qualunque cosa&raquo;? Ce l&rsquo;ho.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 8. DOVE CI TROVI: il calendario sopra la foto del palco ====================
+     Ogni data porta con se' i suoi dati negli attributi data-*: sono quelli che il popup legge.
+     Per aggiungere o cambiare una data si tocca SOLO l'HTML qui sotto, il JavaScript non va aperto.
        data-ics-inizio / data-ics-fine : ora locale, formato AAAAMMGGThhmmss
        data-maps                       : indirizzo o link Google Maps
        data-dettagli                   : il testo del popup (vuoto = "in arrivo")
-     ============================================================================ -->
-<section class="section cal-sec on-light sporco strappo" id="date">
-  <div class="wrap rv">
-    <h2 class="sec-title">Dove ci trovi nel 2026.</h2>
+     Le date passate le nasconde lo script in fondo alla pagina; senza date future
+     la scheda sparisce e compare la frase «Stiamo chiudendo le prossime serate…». -->
+<section class="v-sez v-sez--alta cal-sec" id="date">
+  <span class="strappo-su" aria-hidden="true"></span>
+  <img class="cal-bg" src="images/palco-villa-gussago.webp" width="1280" height="720" alt="" loading="lazy" aria-hidden="true" />
+  <span class="cal-velo" aria-hidden="true"></span>
+  <div class="v-in">
+    <h2 class="v-h rv">Dove ci trovi <span class="acc">nel 2026.</span></h2>
 
-    <!-- ⚠️ Qui c'erano il 23/08, il 28/08, il 29/08 e il 05/09: le prime tre sono
-         suonate, la data di Modena era annullata. Questa sezione NON si aggiorna da
-         sola — il 14/09/2026 la scheda in cima annunciava ancora il 23 agosto. -->
-    <div class="next-card">
+    <div class="next-card chiaro rv">
       <div class="when">
         <div class="d">02</div>
         <div class="m">Ott</div>
@@ -2274,7 +435,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <h3>Oktoberfest &mdash; Coco Caf&egrave;</h3>
         <div class="where">San Paolo (BS) &middot; 2026</div>
       </div>
-      <button class="btn-dark dt-open" type="button"
+      <button class="v-pill v-pill--contorno v-pill--mini dt-open" type="button"
         data-titolo="Oktoberfest — Coco Cafè"
         data-quando="Venerdì 2 ottobre 2026, dalle 22:00"
         data-dove="Coco Cafè — San Paolo (BS)"
@@ -2283,10 +444,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         data-ics-inizio="20261002T220000" data-ics-fine="20261002T233000">Dettagli</button>
     </div>
 
-    <div class="cal-rows">
+    <div class="cal-rows rv">
       <div class="cal-row">
         <span class="dd">10 Ott</span><span class="nm">Inaugurazione Beach Fly</span><span class="pv">Botticino (BS)</span>
-        <button class="cal-dett dt-open" type="button"
+        <button class="v-pill v-pill--contorno v-pill--mini dt-open" type="button"
           data-titolo="Inaugurazione Beach Fly"
           data-quando="Sabato 10 ottobre 2026"
           data-dove="Beach Fly — Botticino (BS)"
@@ -2298,122 +459,59 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<!-- ==================== 7. LINEUP (dal sito live) ==================== -->
-<section class="section lu-sec on-light sporco poco specchio" id="lineup">
-  <div class="wrap">
-    <div class="lu-head fade-in">
-      <h2 class="sec-title">La nostra <span class="lu-it">LineUp</span></h2>
+<!-- ==================== 9. SEGUICI: Instagram e il video di YouTube (al clic) ==================== -->
+<section class="v-sez" id="socials">
+  <div class="v-in">
+    <div class="v-testa rv">
+      <h2 class="v-h">Seguici sui <span class="acc">social.</span></h2>
     </div>
-    <div class="lu-grid stagger">
-      <article class="member">
-        <div class="photo"><img src="images/mike-ritratto-muro.webp" alt="Michele &ldquo;Mike&rdquo; Frosio con cappello da cowboy e chitarra acustica, davanti a un muro arancio" loading="lazy" /></div>
-        <h4>Michele &ldquo;Mike&rdquo; Frosio</h4>
-        <div class="role">Guitars &amp; Lead Voice</div>
-        <p class="bio">Carisma ed energia. Frontman spiccato, ha trovato nel country il palcoscenico ideale per unire tecnica e grande passione. Commerciale, esuberante, spirito libero, fatto di conoscenza musicale e autenticità.</p>
-        <p class="quote">“Ma l'hamburger c'è anche vegetale?”</p>
-      </article>
-      <article class="member">
-        <div class="photo"><img src="images/miglio-ritratto-muro.webp" alt="Davide &ldquo;Miglio&rdquo; Miglietti con le bacchette in bocca, davanti a un muro arancio" loading="lazy" /></div>
-        <h4>Davide &ldquo;Miglio&rdquo; Miglietti</h4>
-        <div class="role">Drums &amp; Vocals</div>
-        <p class="bio">Precisione, creatività ed equilibrio. Gigante buono, ma testardo come un mulo. Aggiusta persone di professione, rompe le scatole per hobby.</p>
-        <p class="quote">“Potevamo fare di meglio.”</p>
-      </article>
-      <article class="member">
-        <div class="photo"><img src="images/larry-ritratto-muro.webp" alt="Lorenzo &ldquo;Larry&rdquo; Marini appoggiato alla sua tastiera rossa, davanti a un muro arancio" loading="lazy" /></div>
-        <h4>Lorenzo &ldquo;Larry&rdquo; Marini</h4>
-        <div class="role">Keys</div>
-        <p class="bio">Colore e positività. Silenzioso, ma non servono parole quando le sue mani creano melodie che sembrano venire dal cuore del Tennessee.</p>
-        <p class="quote">“Raga questo è troppo country!”</p>
-      </article>
-      <article class="member">
-        <div class="photo"><img src="images/ste-ritratto-muro.webp" alt="Stefano &ldquo;Ste&rdquo; Martinelli con la Telecaster bianca e la salopette, davanti a un muro arancio" loading="lazy" /></div>
-        <h4>Stefano &ldquo;Ste&rdquo; Martinelli</h4>
-        <div class="role">Guitars &amp; Lap Steel</div>
-        <p class="bio">Le mani più veloci del west. Il chitarrista di cui ogni country band ha bisogno: tecnica, salopette e ricambi di ogni genere, finalmente il color country è nella nostra palette.</p>
-        <p class="quote">“Ti serve «qualunque cosa»? Ce l'ho.”</p>
-      </article>
-      <article class="member">
-        <div class="photo"><img src="images/richi-ritratto-muro.webp" alt="Riccardo &ldquo;Richi&rdquo; Loda che alza il basso con la lingua di fuori, davanti a un muro arancio" loading="lazy" /></div>
-        <h4>Riccardo &ldquo;Richi&rdquo; Loda</h4>
-        <div class="role">Bass &amp; DoubleBass</div>
-        <p class="bio">Tecnica, talento e groove. Timing svizzero, orologio un po' meno: arriverà sempre in ritardo, ma mai senza una birra in mano e il basso pronto a incantare.</p>
-        <p class="quote">“Birretta?”</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ==================== 8. BRANDS (dal sito live) ==================== -->
-<section class="section brands-sec sporco" id="brands">
-  <div class="wrap">
-    <h2 class="sec-title rv">Abbiamo fatto <span class="brands-accent">ballare</span>.</h2>
-    <div class="brand-scorri stagger">
-      <img src="images/loghi/coca-cola.svg" alt="Coca-Cola" loading="lazy" width="615" height="193" />
-      <img src="images/loghi/ca-del-bosco.svg" alt="Ca&rsquo; del Bosco" loading="lazy" width="116" height="53" />
-      <img src="images/loghi/conti-thun.webp" alt="Conti Thun" loading="lazy" width="228" height="132" />
-      <img src="images/loghi/centro-porsche-brescia.webp" alt="Centro Porsche Brescia" loading="lazy" width="183" height="132" />
-      <img src="images/loghi/lombarda-ceramiche.webp" alt="Lombarda Ceramiche" loading="lazy" width="448" height="132" />
-      <img src="images/loghi/pietra-cavalla.webp" alt="Pietracavalla" loading="lazy" width="287" height="132" />
-      <img src="images/loghi/il-cascinetto.webp" alt="Il Cascinetto" loading="lazy" width="245" height="132" />
-      <span class="brand-altri">e tanti altri</span>
-    </div>
-  </div>
-</section>
-
-<!-- ==================== 9. SOCIALS (dal sito live) ==================== -->
-<section class="section socials-sec on-light sporco poco" id="socials">
-  <div class="wrap">
-    <h2 class="sec-title rv">Seguici sui <span class="socials-accent">social.</span></h2>
-    <div class="split">
-      <div class="rv">
-        <div class="ig-card">
-          <div class="ig-card-head">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
-            <div class="ig-handle">@thecoffeekillers</div>
-          </div>
-          <p class="ig-card-sub">I nostri ultimi scatti e aggiornamenti live:</p>
-          <div class="ig-strip">
-            <a href="https://www.instagram.com/thecoffeekillers/" target="_blank" rel="noreferrer"><img src="images/live-notte.webp" alt="The Coffeekillers dopo un live serale in piazza" loading="lazy" /></a>
-            <a href="https://www.instagram.com/thecoffeekillers/" target="_blank" rel="noreferrer"><img src="images/band-giardino-salopette.webp" alt="La band in giardino, prima del live" loading="lazy" /></a>
-            <a href="https://www.instagram.com/thecoffeekillers/" target="_blank" rel="noreferrer"><img src="images/live-allaperto-pomeriggio.webp" alt="Live country all'aperto, di pomeriggio" loading="lazy" /></a>
-            <a href="https://www.instagram.com/thecoffeekillers/" target="_blank" rel="noreferrer"><img src="images/band-fiume-o2.webp" alt="Risate tra i cinque musicisti in riva al fiume" loading="lazy" /></a>
-          </div>
-          <a class="btn-dark" href="https://www.instagram.com/thecoffeekillers/" target="_blank" rel="noreferrer">Vai al profilo</a>
+    <div class="v-due social-due" style="margin-top:clamp(26px,3.6vw,40px)">
+      <div class="ig-card chiaro rv">
+        <div class="ig-card-head">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+          <div class="ig-handle">@thecoffeekillers</div>
         </div>
+        <p class="ig-card-sub">I nostri ultimi scatti e aggiornamenti live.</p>
+        <div class="ig-strip">
+          <a href="https://www.instagram.com/thecoffeekillers/" target="_blank" rel="noreferrer"><img src="images/live-notte.webp" width="1500" height="2000" alt="The Coffeekillers dopo un live serale in piazza" loading="lazy" /></a>
+          <a href="https://www.instagram.com/thecoffeekillers/" target="_blank" rel="noreferrer"><img src="images/band-giardino-salopette.webp" width="1500" height="2000" alt="La band in giardino, prima del live" loading="lazy" /></a>
+          <a href="https://www.instagram.com/thecoffeekillers/" target="_blank" rel="noreferrer"><img src="images/band-fiume-o2.webp" width="2000" height="1500" alt="Risate tra i cinque musicisti in riva al fiume" loading="lazy" /></a>
+          <a href="https://www.instagram.com/thecoffeekillers/" target="_blank" rel="noreferrer"><img src="images/strumenti-fila-alberi.webp" width="1124" height="2000" alt="Gli strumenti in fila sotto gli alberi, prima del concerto" loading="lazy" /></a>
+        </div>
+        <a class="v-pill v-pill--contorno v-pill--mini" href="https://www.instagram.com/thecoffeekillers/" target="_blank" rel="noreferrer">Vai al profilo</a>
       </div>
-      <div class="rv rv--right socials-right">
-        <div class="yt-wrapper">
-          <iframe src="https://www.youtube.com/embed/yKFP1AAzxFM?rel=0&amp;modestbranding=1" title="The Coffeekillers — YouTube" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-          <a class="yt-fallback" href="https://www.youtube.com/@thecoffeekillers" target="_blank" rel="noopener" aria-label="Apri il canale YouTube">
-            <span class="yt-play">▶</span>
-            <span class="yt-label">Guarda su YouTube</span>
-          </a>
+      <div class="v-video-cornice rv">
+        <div class="inner" data-yt="yKFP1AAzxFM" data-titolo="The CoffeeKillers — YouTube">
+          <img src="images/live-allaperto-pomeriggio.webp" width="2000" height="1124" alt="Hot Joe &amp; The CoffeeKillers dal vivo all'aperto, di pomeriggio" loading="lazy" />
+          <button class="vb-play" type="button" aria-label="Riproduci il video dal canale YouTube dei CoffeeKillers">
+            <svg viewBox="0 0 24 24" width="38" height="38" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
+          </button>
+          <span class="vcap"><span class="ico i-stella" aria-hidden="true"></span>Il canale YouTube</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ==================== 10. CTA INSEGNA — RICHIEDI UN PREVENTIVO ==================== -->
-<section class="section cta sporco" id="contact">
-  <div class="wrap">
-    <div class="cta-panel rv">
-      <span class="cta-corner tl ico i-stella" aria-hidden="true"></span>
-      <span class="cta-corner tr ico i-stella" aria-hidden="true"></span>
-      <span class="cta-corner bl ico i-stella" aria-hidden="true"></span>
-      <span class="cta-corner br ico i-stella" aria-hidden="true"></span>
-      <p class="cta-eyebrow">— Richiedi un preventivo —</p>
-      <h2 class="sec-title">Una serata con noi?</h2>
-      <p class="cta-lead">Raccontaci il tuo evento, compila i dettagli e ti facciamo la nostra proposta!</p>
-      <a class="cta-btn" href="preventivo.html">Richiedi un preventivo</a>
+<!-- ==================== 10. L'INVITO: un pieno che porta al modulo, WhatsApp a contorno ==================== -->
+<section class="v-sez v-sez--alta" id="contact">
+  <div class="v-in">
+    <div class="v-testa rv">
+      <h2 class="v-h">Una serata <span class="acc">con noi?</span></h2>
+      <p class="v-lead">Raccontaci il tuo evento: due minuti di modulo, e ti rispondiamo con una proposta in qualche giorno.</p>
+      <div class="v-cta-fila v-cta-fila--centro">
+        <a class="v-pill" href="preventivo.html">Chiedi il preventivo</a>
+        <a class="v-wa" href="https://wa.me/393937011409" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.3-1.39a9.87 9.87 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.44 9.9-9.9 0-2.64-1.03-5.13-2.9-7A9.82 9.82 0 0 0 12.04 2zm0 18.13h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.11.82.83-3.03-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.41a8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.22-8.24 8.22zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.48c-.16 0-.43.06-.65.31-.22.25-.85.83-.85 2.03s.87 2.35.99 2.51c.12.16 1.71 2.61 4.15 3.66.58.25 1.03.4 1.38.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.22-.16-.47-.28z"/></svg>
+          <span>Scrivici su WhatsApp</span>
+        </a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ==================== 12. FOOTER (variante ridotta) ==================== -->
-<footer class="footer footer--ridotta">
-  <div class="payoff-edge tartan"></div>
+<footer class="footer">
+  <div class="filetto"></div>
 
   <!-- la newsletter non e' piu' una fascia sospesa sopra il footer: e' la
        prima riga del footer, dentro la stessa gabbia delle altre colonne
@@ -2475,7 +573,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
   <div class="footer-copy">
-    © 2026 Hot Joe &amp; The CoffeeKillers — All rights reserved. ·
+    © 2026 Hot Joe &amp; The CoffeeKillers — Tutti i diritti riservati. ·
     <a href="privacy.html">Informativa privacy</a> ·
     Sviluppato con <a href="https://emporionelbosco.it" target="_blank" rel="noopener">Emporio nel Bosco</a>
   </div>
@@ -2486,7 +584,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      bottone che l'ha aperto. -->
 <div class="dt-modal" id="dt-modal" hidden>
   <div class="dt-velo" data-chiudi></div>
-  <div class="dt-panel" role="dialog" aria-modal="true" aria-labelledby="dt-titolo">
+  <div class="dt-panel chiaro" role="dialog" aria-modal="true" aria-labelledby="dt-titolo">
     <button class="dt-x" type="button" data-chiudi aria-label="Chiudi">&times;</button>
     <span class="dt-kicker">Dettagli della data</span>
     <h3 id="dt-titolo"></h3>
@@ -2496,8 +594,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </ul>
     <p class="dt-note" id="dt-note"></p>
     <div class="dt-azioni">
-      <a class="btn-poster" id="dt-maps" href="#" target="_blank" rel="noopener">Indicazioni su Google&nbsp;Maps</a>
-      <button class="btn-dark" type="button" id="dt-ricorda">Ricordamela</button>
+      <a class="v-pill v-pill--mini" id="dt-maps" href="#" target="_blank" rel="noopener">Indicazioni su Google&nbsp;Maps</a>
+      <button class="v-pill v-pill--contorno v-pill--mini" type="button" id="dt-ricorda">Ricordamela</button>
     </div>
     <!-- il pannellino del promemoria: compare solo dopo il clic -->
     <div class="dt-ricorda-box" id="dt-ricorda-box" hidden>
@@ -2505,8 +603,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="dt-ricorda-p">Scarica l&rsquo;evento: si aggiunge al calendario del telefono con un
         promemoria gi&agrave; impostato <b>3 giorni prima</b>. Non ci lasci nessun dato.</p>
       <div class="dt-azioni">
-        <a class="btn-dark" id="dt-ics" href="#" download="coffeekillers.ics">Aggiungi al mio calendario</a>
-        <a class="btn-poster" id="dt-gcal" href="#" target="_blank" rel="noopener">Apri in Google&nbsp;Calendar</a>
+        <a class="v-pill v-pill--contorno v-pill--mini" id="dt-ics" href="#" download="coffeekillers.ics">Aggiungi al mio calendario</a>
+        <a class="v-pill v-pill--mini" id="dt-gcal" href="#" target="_blank" rel="noopener">Apri in Google&nbsp;Calendar</a>
       </div>
       <p class="dt-ricorda-nota">Su Google Calendar il promemoria a 3 giorni va confermato a mano:
         il file da scaricare ce l&rsquo;ha gi&agrave; dentro.</p>
@@ -2616,19 +714,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 // YouTube al primo clic, DENTRO la pagina. Prima del clic non parte
 // nessuno script di terze parti.
 (function(){
-  var box = document.getElementById("vb-inner");
-  if(!box) return;
-  var btn = box.querySelector(".vb-play");
-  if(!btn) return;
-  btn.addEventListener("click", function(){
-    var f = document.createElement("iframe");
-    f.src = "https://www.youtube.com/embed/" + box.dataset.yt + "?autoplay=1&rel=0&modestbranding=1";
-    f.title = "Guitar (Zach Top) — Hot Joe & The CoffeeKillers, dal vivo";
-    f.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-    f.referrerPolicy = "strict-origin-when-cross-origin";
-    f.allowFullscreen = true;
-    box.classList.add("vb-on");
-    box.appendChild(f);
+  // dal 18/10 le facciate sono due (il video e il canale): tutte quelle con data-yt
+  document.querySelectorAll(".inner[data-yt]").forEach(function(box){
+    var btn = box.querySelector(".vb-play");
+    if(!btn) return;
+    btn.addEventListener("click", function(){
+      var f = document.createElement("iframe");
+      f.src = "https://www.youtube.com/embed/" + box.dataset.yt + "?autoplay=1&rel=0&modestbranding=1";
+      f.title = box.dataset.titolo || "Hot Joe & The CoffeeKillers — YouTube";
+      f.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+      f.referrerPolicy = "strict-origin-when-cross-origin";
+      f.allowFullscreen = true;
+      box.classList.add("vb-on");
+      box.appendChild(f);
+    });
   });
 })();
 </script>
