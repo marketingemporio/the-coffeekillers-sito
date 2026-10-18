@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Foto e video live — The Coffeekillers Band Country</title>
-<meta name="description" content="Gallery fotografica e video dei live di Hot Joe & The Coffeekillers: scatti dai palchi di Brescia, Cremona, Belluno, Modena e Valle d'Aosta. Guarda come suoniamo." />
+<meta name="description" content="Gallery fotografica e video dei live di Hot Joe & The Coffeekillers: scatti dai palchi di Brescia, Cremona, Belluno e Valle d'Aosta. Guarda come suoniamo." />
 <link rel="canonical" href="https://thecoffeekillers.com/gallery.html" />
 <link rel="alternate" hreflang="it" href="https://thecoffeekillers.com/gallery.html" />
 <link rel="alternate" hreflang="en" href="https://thecoffeekillers.com/en/gallery.html" />
@@ -15,479 +15,40 @@
 <meta property="og:locale:alternate" content="en_US" />
 <meta property="og:url" content="https://thecoffeekillers.com/gallery.html" />
 <meta property="og:title" content="Foto e video live — The Coffeekillers Band Country" />
-<meta property="og:description" content="Gallery fotografica e video dei live di Hot Joe & The Coffeekillers: scatti dai palchi di Brescia, Cremona, Belluno, Modena e Valle d'Aosta. Guarda come suoniamo." />
+<meta property="og:description" content="Gallery fotografica e video dei live di Hot Joe & The Coffeekillers: scatti dai palchi di Brescia, Cremona, Belluno e Valle d'Aosta. Guarda come suoniamo." />
 <!-- ⚠️ jpg e non webp: Facebook e WhatsApp gestiscono male il webp nelle anteprime -->
 <meta property="og:image" content="https://thecoffeekillers.com/images/og-image.jpg" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="icon" type="image/svg+xml" href="images/logo/favicon.svg" />
+<link rel="preload" href="fonts/bonzana.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="fonts/Manrope-Variable.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="hjck.css" />
 <style>
 /* ============================================================================
-   MANROPE, OSPITATO QUI E NON PRESO DA GOOGLE
-   ----------------------------------------------------------------------------
-   Prima arrivava da fonts.googleapis.com: ogni visita mandava l'indirizzo IP
-   del visitatore ai server di Google, senza che nessuno l'avesse chiesto — e
-   in Europa e' proprio il punto su cui i garanti hanno gia' dato torto a dei
-   siti. Ospitandolo qui il problema sparisce del tutto: nessun terzo viene
-   contattato per mostrare una pagina, e l'informativa privacy ha una voce in
-   meno da dichiarare. In piu' si risparmiano due connessioni esterne.
-   E' il file VARIABILE: un file solo copre tutti i pesi da 400 a 800.
-   ⚠️ Rye e' uscito: era solo il fallback dopo Bonzana e veniva anch'esso da
-      Google. Al suo posto il serif di sistema, che non chiama nessuno.
+   GALLERY — solo l'impaginazione dei blocchi suoi: la testa, i tre capitoli di
+   foto in griglia (2 colonne, 3 da 900px), il bottone per Instagram.
+   La lightbox (.v-luce) e il video (.v-video-cornice) sono in hjck.css.
    ============================================================================ */
-@font-face{
-  font-family:"Manrope";
-  src:url("fonts/Manrope-Variable.ttf") format("truetype-variations");
-  font-weight:200 800; font-style:normal; font-display:swap;
+.gal-hero{padding-top:clamp(40px,6vw,80px);padding-bottom:clamp(30px,4vw,56px)}
+.gal-cap{margin-top:clamp(44px,6vw,80px)}
+.gal-cap:first-child{margin-top:0}
+.gal-cap .v-lead{margin-top:10px}
+.gal-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:clamp(18px,2.6vw,28px)}
+@media (min-width:900px){.gal-grid{grid-template-columns:repeat(3,1fr);gap:16px}}
+/* tutte le miniature hanno lo stesso formato 4:5: le orizzontali vengono tagliate qui,
+   ma nella lightbox si aprono intere */
+.gal-item{display:block;border-radius:14px;overflow:hidden;background:var(--carta);aspect-ratio:4/5;box-shadow:0 14px 30px -18px rgba(12,5,1,.55)}
+.gal-item img{width:100%;height:100%;object-fit:cover;filter:saturate(1.04) contrast(1.02);transition:transform .35s ease}
+.gal-item:hover img{transform:scale(1.03)}
+.gal-item:focus-visible{outline:3px solid var(--arancio);outline-offset:2px}
+.gal-more{display:flex;justify-content:center;margin-top:clamp(28px,4vw,44px)}
+@media (min-width:960px){
+  .v-ascolta .v-in{display:grid;grid-template-columns:minmax(0,auto) minmax(0,760px);justify-content:center;gap:clamp(40px,5vw,80px);align-items:center}
+  .v-ascolta .v-h{max-width:9ch;font-size:clamp(38px,4.4vw,58px)}
+  .v-ascolta .v-video{margin:0;width:100%}
+  .v-ascolta .v-cta-fila{grid-column:1/-1}
 }
 </style>
-<style>
-/* ============ FONT ============ */
-@font-face{font-family:"LT Cushion";src:url("fonts/LTCushion-Light.ttf");font-weight:300;font-display:swap}
-@font-face{font-family:"LT Cushion";src:url("fonts/LTCushion-Medium.ttf");font-weight:500;font-display:swap}
-@font-face{font-family:"LT Cushion";src:url("fonts/LTCushion-Bold.ttf");font-weight:700;font-display:swap}
-@font-face{font-family:"LT Cushion";src:url("fonts/LTCushion-Black.ttf");font-weight:900;font-display:swap}
-
-/* ============ TOKENS ============ */
-:root{
-  --espresso:#241005;
-  --espresso-2:#2E1509;
-  --nero:#180A02;
-  --caffe:#49240A;
-  --panna:#FBF5EA;
-  --beige:#EDDABD;
-  --tan:#BD8B65;
-  --arancio:#FA8600;
-  --ruggine:#CD5812;
-  --azz:#8BAEA4;
-  --azz-scuro:#5F837A;
-  --azz-testo:#3F5C55;    /* azzurro leggibile per i TESTI su fondo chiaro */
-  --azz-wash:#D8E5E0;
-  --bronco:"Bronco Valley",serif;
-  --serif:"LT Cushion",serif;
-  --sans:"Manrope",sans-serif;
-  --valley:"Valley",serif;
-  --cushion:"LT Cushion",serif;
-  --wrap:1180px;
-  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>");
-}
-
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:130px}
-body{
-  font-family:var(--sans);
-  background:var(--espresso);
-  color:var(--panna);
-  font-size:16px;
-  line-height:1.6;
-  overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;
-}
-img{max-width:100%;display:block}
-a{color:inherit}
-
-/* il velluto: grana su tutta la pagina */
-body::after{
-  content:"";position:fixed;inset:0;z-index:80;pointer-events:none;
-  background:var(--grain);opacity:.07;
-}
-
-h1,h2,h3{
-  font-family:var(--bronco);
-  font-weight:400;
-  font-synthesis:none;
-  letter-spacing:.03em;
-  line-height:1.04;
-  text-transform:uppercase;
-}
-.wrap{max-width:var(--wrap);margin:0 auto;padding:0 clamp(20px,4vw,48px)}
-
-/* ============ ICONE (mask) ============ */
-.ico{
-  display:inline-block;background:currentColor;flex:none;
-  -webkit-mask:no-repeat center/contain;mask:no-repeat center/contain;
-}
-.i-cactus   {-webkit-mask-image:url("images/icone/cactus.svg");mask-image:url("images/icone/cactus.svg");aspect-ratio:140.28/229.85}
-.i-cappello {-webkit-mask-image:url("images/icone/cappello-cowboy.svg");mask-image:url("images/icone/cappello-cowboy.svg");aspect-ratio:266.88/132.43}
-.i-ferri    {-webkit-mask-image:url("images/icone/ferri-di-cavallo.svg");mask-image:url("images/icone/ferri-di-cavallo.svg");aspect-ratio:267.1/184.4}
-.i-camaleonte{-webkit-mask-image:url("images/icone/camaleonte.svg");mask-image:url("images/icone/camaleonte.svg");aspect-ratio:272.48/160.07}
-.i-stella   {-webkit-mask-image:url("images/icone/stella-sceriffo.svg");mask-image:url("images/icone/stella-sceriffo.svg");aspect-ratio:187.62/203.89}
-.i-chitarra {-webkit-mask-image:url("images/icone/chitarra.svg");mask-image:url("images/icone/chitarra.svg");aspect-ratio:128.45/317.28}
-
-/* ============ TARTAN ============ */
-.tartan{
-  background-color:var(--espresso-2);
-  background-image:
-    repeating-linear-gradient(90deg,
-      transparent 0 16px, rgba(205,88,18,.5) 16px 23px,
-      transparent 23px 40px, rgba(251,245,234,.22) 40px 41.5px,
-      transparent 41.5px 56px),
-    repeating-linear-gradient(0deg,
-      transparent 0 16px, rgba(205,88,18,.5) 16px 23px,
-      transparent 23px 40px, rgba(251,245,234,.22) 40px 41.5px,
-      transparent 41.5px 56px);
-}
-.payoff-edge{height:12px}
-
-/* ============ NAV ============ */
-/* ============ NAV stile sito Kruse Brothers, replica fedele:
-   striscia annuncio in cima, menu maiuscoletto a sinistra, logo grande
-   centrale, icone social a destra; nav trasparente con gradiente sull'hero,
-   scendendo si stacca e diventa barra fissa scura (JS in fondo) ============ */
-.annuncio{
-  background:var(--caffe);color:var(--panna);text-align:center;
-  font-size:11.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
-  padding:9px 16px;position:relative;z-index:61;
-}
-.annuncio a{color:inherit;text-decoration:none}
-.annuncio a:hover{color:var(--arancio)}
-.nav{
-  position:absolute;top:36px;left:0;right:0;z-index:60;
-  background:linear-gradient(180deg,rgba(8,4,1,.94) 0%,rgba(8,4,1,.72) 46%,rgba(8,4,1,.28) 80%,transparent 100%);
-  padding-bottom:26px;
-  transition:background .3s,box-shadow .3s;
-}
-.nav.solid{
-  position:fixed;top:0;
-  background:var(--caffe);            /* stesso marrone della striscia annuncio, come nel riferimento */
-  padding-bottom:0;
-  border-bottom:1px solid rgba(237,218,189,.14);
-  box-shadow:0 10px 30px rgba(0,0,0,.35);
-}
-.nav-in{
-  max-width:1320px;margin:0 auto;padding:10px clamp(20px,4vw,48px) 14px;
-  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px;
-}
-.nav-logo{justify-self:center}
-.nav-logo img{
-  height:118px;width:auto;transition:height .3s;
-}
-.nav.solid .nav-logo img{height:74px}
-.nav-side{display:flex;align-items:center;gap:clamp(12px,1.8vw,26px);list-style:none;margin:0;padding:0}
-.nav-side.dx{justify-content:flex-end}
-.nav-side a{
-  color:#fff;text-decoration:none;font-weight:700;font-size:12.5px;
-  letter-spacing:.16em;text-transform:uppercase;
-}
-.nav-side a:hover{color:var(--arancio)}
-.nav-side a{white-space:nowrap}
-.nav-soc{display:flex;align-items:center;gap:14px}
-.nav-soc a{display:flex}
-.nav-soc svg{width:18px;height:18px;fill:#fff;transition:fill .2s}
-.nav-soc a:hover svg{fill:var(--arancio)}
-
-/* ---- Menu mobile (sotto i 720px): panetto a tendina con tutte le voci ---- */
-.nav-burger{
-  display:none;background:none;border:0;cursor:pointer;padding:8px 6px;
-  flex-direction:column;gap:5px;width:38px;
-}
-.nav-burger span{display:block;height:2px;width:26px;background:var(--beige);transition:transform .25s,opacity .2s}
-.nav-burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-.nav-burger[aria-expanded="true"] span:nth-child(2){opacity:0}
-.nav-burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-.nav-drawer{
-  display:none;background:var(--caffe);border-top:1px solid rgba(237,218,189,.16);
-  padding:10px clamp(20px,5vw,32px) 22px;
-}
-.nav-drawer.open{display:block}
-.nav-drawer ul{list-style:none;margin:0;padding:0}
-.nav-drawer a{
-  display:block;padding:14px 2px;color:var(--beige);text-decoration:none;
-  font-weight:700;font-size:15px;letter-spacing:.16em;text-transform:uppercase;
-  border-bottom:1px solid rgba(237,218,189,.12);
-}
-.nav-drawer a[aria-current="page"]{color:var(--arancio)}
-.nav-drawer .dr-soc{display:flex;gap:20px;padding-top:18px}
-.nav-drawer .dr-soc a{border-bottom:0;padding:0}
-.nav-drawer .dr-soc svg{width:20px;height:20px;fill:var(--beige)}
-
-
-/* Pagine interne: niente foto a tutta pagina dietro la nav → barra marrone
-   piena fin da subito, come la pagina MERCH del riferimento. */
-.nav{
-  position:sticky;top:0;
-  background:var(--caffe);
-  padding-bottom:0;
-  border-bottom:1px solid rgba(237,218,189,.14);
-}
-.nav .nav-logo img{height:74px}
-.nav-cta{
-  font-family:var(--valley)!important;font-size:17px!important;font-weight:400!important;
-  color:var(--azz)!important;border:1.5px solid var(--azz);border-radius:8px;
-  padding:6px 16px;letter-spacing:.05em!important;
-}
-.nav-cta:hover{color:var(--espresso)!important;background:var(--azz)}
-.nav-side a[aria-current="page"]{color:var(--arancio)}
-.nav-burger{display:none}
-
-/* ============ SEZIONI COMUNI ============ */
-.section{position:relative;padding:clamp(72px,9vw,120px) 0}
-.sec-head{
-  display:flex;justify-content:space-between;align-items:baseline;
-  gap:12px;flex-wrap:wrap;margin-bottom:clamp(28px,4vw,44px);
-}
-.eyebrow{
-  display:flex;align-items:center;gap:12px;
-  font-size:13.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--azz);
-}
-.eyebrow .ico{color:var(--azz)}
-.eyebrow-r{font-size:12.5px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--tan)}
-.on-light .eyebrow{color:var(--azz-testo)}          /* testo: tono leggibile */
-.on-light .eyebrow .ico{color:var(--azz-scuro)}      /* icona: tono originale */
-.on-light .eyebrow-r{color:var(--caffe);opacity:.75}
-.sec-title{
-  font-size:clamp(34px,4.6vw,60px);
-  color:var(--panna);
-  margin-bottom:18px;
-}
-.on-light .sec-title{color:var(--espresso)}
-.lead-p{font-size:clamp(16px,1.9vw,19px);color:var(--beige)}
-.on-light .lead-p{color:var(--caffe)}
-
-/* ============ BOTTONI — VESTE POSTER (da A2) ============ */
-.btn-poster,.btn-dark,.cta-btn,.nav-burger{
-  font-family:var(--valley);
-  letter-spacing:.04em;
-}
-.btn-poster,.cta-btn{
-  display:inline-block;text-decoration:none;border-radius:6px;
-  padding:10px 30px 12px;
-  background:var(--beige);color:var(--caffe);
-  border:2px solid var(--beige);
-  box-shadow:inset 0 0 0 2px var(--beige),inset 0 0 0 3px rgba(73,36,10,.55);
-  transition:background .2s,border-color .2s,color .2s;
-}
-.btn-poster::before,.cta-btn::before{content:"★ ";color:var(--ruggine);font-size:.75em}
-.btn-poster::after,.cta-btn::after{content:" ★";color:var(--ruggine);font-size:.75em}
-.btn-poster:hover,.cta-btn:hover{
-  background:var(--arancio);border-color:var(--arancio);color:var(--espresso);
-  box-shadow:inset 0 0 0 2px var(--arancio),inset 0 0 0 3px rgba(24,10,2,.55);
-}
-.btn-poster{font-size:clamp(19px,2.2vw,23px)}
-.cta-btn{font-size:clamp(21px,2.6vw,26px);padding:14px 40px 16px;border-radius:6px}
-.btn-dark{
-  display:inline-block;font-size:20px;font-weight:300;letter-spacing:.08em;
-  background:var(--espresso);color:var(--panna);border-radius:6px;
-  padding:10px 26px 12px;text-decoration:none;
-  border:2px solid var(--espresso);transition:background .2s,color .2s,border-color .2s;
-}
-.btn-dark:hover{background:transparent;color:var(--espresso)}
-/* .btn-dark sulle sezioni scure diventa ghost beige (stile A) */
-.video-b .btn-dark{
-  background:transparent;color:var(--beige);border-color:rgba(237,218,189,.7);
-}
-.video-b .btn-dark:hover{border-color:var(--beige);background:transparent;color:var(--beige)}
-
-/* ============ PAGE HERO (interna, su espresso) ============ */
-.page-hero{
-  background:var(--espresso);text-align:center;
-  padding:clamp(64px,9vw,110px) 0 clamp(44px,6vw,72px);
-}
-.orna{
-  display:flex;align-items:center;justify-content:center;gap:14px;
-  color:var(--azz);font-size:12.5px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;
-}
-.orna .ico{width:17px;height:18px}
-.orna-line{width:clamp(28px,6vw,84px);height:1px;background:var(--azz);opacity:.55}
-.page-hero-eyebrow{
-  font-family:var(--serif);font-style:italic;color:var(--arancio);
-  font-size:clamp(18px,2.4vw,25px);margin:26px 0 10px;letter-spacing:.01em;
-}
-.page-hero h1{
-  color:var(--panna);
-  font-size:clamp(40px,7vw,92px);
-  margin:6px auto 22px;max-width:16ch;
-}
-.title-it{
-  color:var(--arancio);letter-spacing:.01em;
-}
-.page-hero-lead{
-  color:var(--beige);max-width:56ch;margin:0 auto;
-  font-size:clamp(16px,1.9vw,19px);
-}
-@media (min-width:900px){
-  .orna .ico{width:24px;height:25px}
-  .eyebrow .ico{transform:scale(1.35);margin:0 3px}
-}
-
-/* ============ GALLERY (panna) ============ */
-.gal-sec{background:var(--panna);color:var(--espresso)}
-.gal-note{
-  max-width:74ch;
-  font-size:clamp(16px,1.9vw,18.5px);color:var(--caffe);
-  border-left:3px solid var(--azz-scuro);
-  padding:4px 0 4px 22px;
-  margin-bottom:clamp(36px,5vw,54px);
-}
-.gal-note b{color:var(--espresso)}
-.gal-masonry{columns:3 300px;column-gap:20px}
-.gal-item{
-  display:block;break-inside:avoid;margin:0 0 20px;
-  background:var(--beige);padding:10px 10px 12px;border-radius:10px;
-  text-decoration:none;
-  box-shadow:0 26px 50px -16px rgba(73,36,10,.22);
-  transition:transform .18s,box-shadow .18s;
-}
-.gal-item:hover{
-  transform:translateY(-3px);
-  box-shadow:0 26px 50px -16px rgba(73,36,10,.4);
-}
-/* width/height sono nell'HTML: il browser tiene lo spazio della foto prima
-   che carichi, così la griglia non si ricompone mentre si scorre. */
-.gal-item img{width:100%;height:auto;border-radius:6px}
-.gal-cap{
-  display:block;font-family:var(--cushion);font-weight:500;
-  font-size:14.5px;color:var(--caffe);margin-top:10px;
-  letter-spacing:.05em;text-align:center;line-height:1.35;
-}
-.gal-more{display:flex;justify-content:center;margin-top:clamp(32px,5vw,48px)}
-
-/* ============ VIDEO (espresso) ============ */
-.video-b{background:var(--espresso);color:var(--panna)}
-.video-b .lead-p{color:var(--beige)}
-.video-grid{
-  display:grid;grid-template-columns:1fr 1.35fr;gap:clamp(28px,4vw,64px);
-  align-items:center;
-}
-.video-copy{position:relative}
-.video-cam{width:96px;color:var(--azz);opacity:.85;margin-top:26px;transform:scaleX(-1)}
-.v-actions{display:flex;gap:16px;flex-wrap:wrap;margin-top:30px}
-.yt-frame{
-  position:relative;aspect-ratio:16/9;border-radius:16px;overflow:hidden;
-  border:3px solid var(--beige);background:var(--nero);
-  box-shadow:0 26px 50px -16px rgba(0,0,0,.5);
-}
-.yt-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:2}
-.yt-fallback{
-  position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;
-  justify-content:center;gap:14px;background:linear-gradient(135deg,var(--caffe) 0%,var(--espresso) 100%);
-  color:var(--panna);text-align:center;padding:24px;text-decoration:none;
-}
-.yt-play{width:64px;height:64px;border-radius:50%;background:var(--ruggine);color:var(--panna);display:grid;place-items:center;font-size:22px;padding-left:4px}
-.yt-label{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--beige)}
-@media (max-width:960px){
-  .video-grid{grid-template-columns:1fr}
-}
-
-/* ============ CTA INSEGNA (momento CTA su arancio, come la home) ============ */
-.cta{background:var(--arancio);color:var(--espresso);position:relative}
-.cta-panel{
-  max-width:900px;margin:0 auto;text-align:center;
-  border:3px solid var(--espresso);outline:3px solid var(--espresso);outline-offset:7px;
-  padding:clamp(44px,6vw,76px) clamp(22px,5vw,64px);
-  position:relative;
-}
-.cta-corner{position:absolute;width:26px;height:28px;color:var(--espresso)}
-.cta-corner.tl{top:14px;left:14px}
-.cta-corner.tr{top:14px;right:14px}
-.cta-corner.bl{bottom:14px;left:14px}
-.cta-corner.br{bottom:14px;right:14px}
-.cta-eyebrow{
-  font-family:var(--serif);font-style:italic;font-size:clamp(17px,2.2vw,22px);
-  margin-bottom:8px;
-}
-.cta .sec-title{color:var(--espresso);font-size:clamp(40px,6vw,76px);margin-bottom:16px}
-.cta-lead{max-width:46ch;margin:0 auto 30px;font-weight:500;font-size:clamp(16px,1.9vw,18.5px)}
-/* il bottone resta la barra crema con le stelle, identico alla home */
-.cta-meta{
-  display:flex;justify-content:center;gap:clamp(18px,4vw,48px);flex-wrap:wrap;
-  margin-top:34px;font-size:14.5px;font-weight:700;
-}
-.cta-meta a{color:inherit}
-.cta-meta .k{display:block;font-size:11px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;opacity:.7;margin-bottom:2px}
-
-/* ============ FOOTER — variante ridotta ============ */
-.footer{background:var(--nero);position:relative;padding:0 0 26px}
-.footer-cam{
-  display:flex;flex-direction:column;align-items:center;
-  padding:clamp(42px,6vw,72px) 20px 0;text-align:center;
-}
-.footer-cam .ico{
-  width:min(400px,72vw);height:auto;aspect-ratio:272.48/160.07;
-  color:var(--azz);
-}
-.footer-payoff{
-  font-family:var(--bronco);font-weight:400;font-synthesis:none;text-transform:uppercase;
-  color:var(--panna);font-size:clamp(30px,5.4vw,64px);letter-spacing:.06em;
-  margin-top:17px;line-height:1.08;
-}
-.footer-sub{
-  font-family:var(--serif);font-style:italic;color:var(--azz);
-  font-size:clamp(16px,2vw,20px);margin-top:7px;
-}
-.footer-rule{
-  display:flex;align-items:center;gap:18px;
-  max-width:var(--wrap);margin:clamp(29px,4vw,42px) auto 0;padding:0 clamp(20px,4vw,48px);
-  color:var(--azz);
-}
-.footer-rule .line{flex:1;height:1px;background:rgba(139,174,164,.35)}
-.footer-rule .ico{width:20px;height:22px}
-.footer-grid{
-  max-width:var(--wrap);margin:26px auto 0;padding:0 clamp(20px,4vw,48px);
-  display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:clamp(28px,4vw,56px);}
-/* ⚠️ min-width:0 sulle colonne. Senza, un elemento di griglia non scende mai
-   sotto la larghezza del suo contenuto (min-width:auto e' il valore di
-   partenza): da telefono la colonna restava a 403px dentro un footer di 390 e
-   TUTTA la pagina scorreva di lato. Difetto vecchio, trovato il 10/09. */
-.footer-grid > *{min-width:0}
-.footer-grid, .footer-grid *{overflow-wrap:anywhere}
-.footer h5{
-  font-family:var(--sans);font-size:12px;font-weight:800;letter-spacing:.24em;
-  text-transform:uppercase;color:var(--azz);margin-bottom:11px;
-}
-.footer-big{font-family:var(--bronco);font-size:clamp(24px,3vw,32px);color:var(--beige);line-height:1.15;letter-spacing:.04em}
-.footer ul{list-style:none}
-.footer ul li{margin-bottom:6px;font-size:14.5px;color:var(--beige)}
-.footer ul a{color:var(--beige);text-decoration:none}
-.footer ul a:hover{color:var(--azz)}
-.footer-social{display:flex;gap:14px;margin-top:12px}
-.footer-social a{
-  font-size:13px;font-weight:700;letter-spacing:.08em;color:var(--azz);
-  text-decoration:none;border:1px solid rgba(139,174,164,.4);border-radius:99px;
-  padding:7px 16px;
-}
-.footer-social a:hover{background:var(--azz);color:var(--nero)}
-.footer-copy{
-  max-width:var(--wrap);margin:29px auto 0;padding:13px clamp(20px,4vw,48px) 0;
-  border-top:1px solid rgba(139,174,164,.18);
-  font-size:12.5px;color:var(--tan);text-align:center;
-}
-.footer-copy a{color:var(--azz);text-decoration:none}
-
-/* ============ RESPONSIVE ============ */
-@media (max-width:960px){
-  .footer-grid{grid-template-columns:1fr 1fr}
-}
-@media (max-width:1000px){
-  .nav-side.sx{display:none}
-  .nav-soc{display:none}
-  .nav-in{grid-template-columns:auto 1fr auto;gap:10px}
-  .nav-logo{grid-column:2}
-  .nav .nav-logo img{height:52px}
-  .nav-burger{display:flex;grid-column:1;justify-self:start}
-  .footer-grid{grid-template-columns:1fr;gap:22px}
-}
-
-/* ---- REVEAL allo scroll (gating con html.js: senza JS resta tutto visibile) ---- */
-html.js .rv{
-  opacity:0;transform:translateY(26px);
-  transition:opacity .85s cubic-bezier(.22,.61,.36,1),transform .85s cubic-bezier(.22,.61,.36,1);
-  will-change:opacity,transform;
-}
-html.js .rv--right{transform:translateX(30px)}
-html.js .rv.in{opacity:1;transform:none}
-@media (max-width:700px){html.js .rv--right{transform:translateY(26px)}}
-html.js .fade-in{opacity:0;transform:translateY(18px);transition:opacity .9s ease,transform .9s ease}
-html.js .fade-in.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  html.js .rv,html.js .fade-in{
-    opacity:1!important;transform:none!important;transition:none!important;animation:none!important;
-  }
-  .gal-item{transition:none!important}
-}
-</style>
-<link rel="stylesheet" href="stile-hjck.css" />
 <!-- Dati strutturati: recuperati dal sito precedente, il logo aggiornato
      a quello definitivo. Servono a Google per capire chi siamo. -->
 <script type="application/ld+json">
@@ -500,35 +61,6 @@ html.js .fade-in.in{opacity:1;transform:none}
     "about": { "@type": "MusicGroup", "name": "Hot Joe & The Coffeekillers", "url": "https://thecoffeekillers.com" }
   }
 </script>
-<style>
-/* ===== SELETTORE DI LINGUA (aggiunto con la versione inglese) =====
-   Il bottone IT/EN vive nella lista di destra della testata: su mobile quella
-   lista mostra solo l'ultimo elemento (il bottone "preventivo"), quindi la
-   voce della lingua sparisce da sola e resta quella nel menu a tendina. */
-.nav-lang{
-  border:1px solid rgba(237,218,189,.55);border-radius:6px;
-  padding:5px 9px 4px;font-size:11.5px!important;letter-spacing:.16em;
-}
-.nav-lang:hover{background:rgba(237,218,189,.14)}
-/* strisciolina in basso: appare solo a chi ha il browser nell'altra lingua */
-.lang-bar{
-  position:fixed;left:0;right:0;bottom:0;z-index:95;display:none;
-  background:var(--caffe,#49240A);color:var(--panna,#EDDABD);
-  border-top:1px solid rgba(237,218,189,.22);
-  box-shadow:0 -8px 24px rgba(73,36,10,.4);
-  font-family:var(--sans,system-ui,sans-serif);font-size:13.5px;line-height:1.4;
-  padding:11px clamp(14px,4vw,28px);
-}
-.lang-bar.on{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
-.lang-bar a{color:var(--arancio,#CD5812);font-weight:800;text-decoration:underline}
-.lang-bar b{color:var(--panna,#EDDABD)}
-.lang-bar button{
-  background:none;border:1px solid rgba(237,218,189,.45);border-radius:6px;
-  color:inherit;font:inherit;line-height:1;padding:6px 9px;cursor:pointer;
-}
-.lang-bar button:hover{background:rgba(237,218,189,.14)}
-</style>
-
 <!-- ⚠️ L'ORDINE CONTA: consenso.js PRIMA di Tag Manager, e senza defer. Imposta il
      consent mode a NEGATO come stato di partenza, cosi' i tag dentro GTM non scrivono
      niente finche' qualcuno non accetta. Se girasse dopo, il banner sarebbe finto. -->
@@ -549,7 +81,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <script>document.documentElement.classList.add("js");</script>
 
-<!-- ==================== NAV (stile home confermato il 01/09) ==================== -->
 <header class="nav">
   <div class="nav-in">
     <button class="nav-burger" type="button" aria-expanded="false" aria-controls="nav-drawer" aria-label="Apri il menu"><span></span><span></span><span></span></button>
@@ -581,183 +112,214 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </nav>
 </header>
 
-<!-- ==================== 1. PAGE HERO ==================== -->
-<section class="page-hero" id="top">
-  <div class="wrap">
-    <div class="orna" aria-hidden="true">
-      <span class="orna-line"></span>
-      <span class="ico i-stella"></span>
-      <span>34 scatti</span>
-      <span class="ico i-stella"></span>
-      <span class="orna-line"></span>
-    </div>
-    <p class="page-hero-eyebrow">Foto &amp; video</p>
-    <h1>Sul palco e <span class="title-it">dietro le quinte.</span></h1>
-    <p class="page-hero-lead">Scatti dai nostri live, dalle prove, dai backstage. Un album che cresce a ogni serata: clicca una foto per vederla grande.</p>
-  </div>
-</section>
-
-<!-- ==================== 2. GALLERY (nota storica + masonry) ==================== -->
-<section class="section gal-sec on-light" id="gallery">
-  <div class="wrap">
-
-    <div class="gal-masonry">
-      <a class="gal-item" href="images/band-fiume-o3.webp">
-        <img src="images/band-fiume-o3.webp" width="2000" height="1500" alt="Hot Joe &amp; The Coffeekillers, band country di Brescia, tutti e cinque in riva al fiume al tramonto" loading="eager" />
-      </a>
-      <a class="gal-item" href="images/live-voce.webp">
-        <img src="images/live-voce.webp" width="1333" height="2000" alt="Mike canta con la chitarra acustica, cappello country e camicia a fiori, durante un live" loading="lazy" />
-      </a>
-      <a class="gal-item" href="images/band-muro-a.webp">
-        <img src="images/band-muro-a.webp" width="1500" height="2000" alt="Ritratto della band country Hot Joe &amp; The Coffeekillers al completo con gli strumenti, davanti a un muro color terracotta" loading="lazy" />
-      </a>
-      <a class="gal-item" href="images/band-fiume-v2.webp">
-        <img src="images/band-fiume-v2.webp" width="1500" height="2000" alt="I cinque musicisti dei Coffeekillers in riva al fiume prima di un concerto" loading="lazy" />
-      </a>
-      <a class="gal-item" href="images/live-tastiere.webp">
-        <img src="images/live-tastiere.webp" width="1333" height="2000" alt="Larry alla tastiera Nord rossa durante un concerto country al tramonto" loading="lazy" />
-      </a>
-      <a class="gal-item" href="images/band-giardino-a.webp">
-        <img src="images/band-giardino-a.webp" width="1500" height="2000" alt="La band country al completo in giardino, tra sole e alberi" loading="lazy" />
-      </a>
-      <a class="gal-item" href="images/live-basso.webp">
-        <img src="images/live-basso.webp" width="1058" height="1587" alt="Richi al basso con il cappello, sul palco di una sagra di paese" loading="lazy" />
-      </a>
-      <a class="gal-item" href="images/live-batteria.webp">
-        <img src="images/live-batteria.webp" width="1333" height="2000" alt="Miglio dietro la batteria Gretsch durante un live country all'aperto" loading="lazy" />
-      </a>
-      <a class="gal-item" href="images/targa-band.webp">
-        <img src="images/targa-band.webp" width="2000" height="1250" alt="L'insegna in legno dipinta a mano Hot Joe &amp; The Coffeekillers davanti al palco allestito su un prato" loading="lazy" />
-      </a>
-      <a class="gal-item" href="images/vigna-chitarra.webp">
-        <img src="images/vigna-chitarra.webp" width="1333" height="2000" alt="Mike con cappello country e Telecaster tra le vigne al tramonto" loading="lazy" />
-      </a>
-      <a class="gal-item" href="images/studio-contrabbasso.webp">
-        <img src="images/studio-contrabbasso.webp" width="1600" height="2000" alt="Ritratto in studio di Richi con cappello country che abbraccia il contrabbasso" loading="lazy" />
-      </a>
-      <a class="gal-item" href="images/live-blu-batteria.webp">
-        <img src="images/live-blu-batteria.webp" width="2000" height="1333" alt="Miglio di profilo dietro i piatti della batteria, luci blu e viola da concerto" loading="lazy" />
-      </a>
-      <a class="gal-item" href="images/vigna-contrabbasso.webp">
-        <img src="images/vigna-contrabbasso.webp" width="1333" height="2000" alt="Richi sorridente con occhiali da sole e contrabbasso tra le vigne al tramonto" loading="lazy" />
-      </a>
-      <a class="gal-item" href="images/telecaster-dettaglio.webp">
-        <img src="images/telecaster-dettaglio.webp" width="2000" height="1250" alt="Dettaglio ravvicinato di una Telecaster bianca vissuta con cinghia decorata" loading="lazy" />
-      </a>
-      <a class="gal-item" href="images/studio-bacchette.webp">
-        <img src="images/studio-bacchette.webp" width="1600" height="2000" alt="Ritratto in studio di Miglio con camicia a righe e una bacchetta della batteria tra i denti" loading="lazy" />
-      </a>
-      <a class="gal-item" href="images/prato-tastiere.webp">
-        <img src="images/prato-tastiere.webp" width="2000" height="1250" alt="Le mani di Larry sulle tastiere durante un live, luci verdi e viola sullo sfondo" loading="lazy" />
-      </a>
-      <a class="gal-item" href="images/studio-chitarra.webp">
-        <img src="images/studio-chitarra.webp" width="1600" height="2000" alt="Ritratto in studio di Mike sorridente con la Telecaster e la cinghia decorata" loading="lazy" />
-      </a>
-      <a class="gal-item" href="images/prato-voce.webp">
-        <img src="images/prato-voce.webp" width="2000" height="1250" alt="Mike canta al microfono con giacca beige durante un concerto serale" loading="lazy" />
-      </a>
-      <a class="gal-item" href="images/vigna-live-tastiere.webp">
-        <img src="images/vigna-live-tastiere.webp" width="1333" height="2000" alt="Larry alla lap steel appoggiata sopra la tastiera Nord rossa, durante un live serale in vigna" loading="lazy" />
-      </a>
-      <a class="gal-item" href="images/strumenti-prato.webp">
-        <img src="images/strumenti-prato.webp" width="2000" height="1250" alt="Chitarra acustica, tastiera e batteria Gretsch pronte sull'erba prima di un concerto country" loading="lazy" />
-      </a>
-      <a class="gal-item" href="images/vigna-ritratto.webp">
-        <img src="images/vigna-ritratto.webp" width="1333" height="2000" alt="Ritratto di Miglio tra le vigne, cappellino e camicia a righe, braccia incrociate" loading="lazy" />
-      </a>
-      <a class="gal-item" href="images/prato-batteria.webp">
-        <img src="images/prato-batteria.webp" width="2000" height="1250" alt="Miglio in luce viola dietro la batteria, il contrabbasso sfocato in primo piano" loading="lazy" />
-      </a>
-      <a class="gal-item" href="images/studio-tastiere.webp">
-        <img src="images/studio-tastiere.webp" width="1600" height="2000" alt="Ritratto in studio di Larry appoggiato alla sua tastiera Nord rossa" loading="lazy" />
-      </a>
-      <a class="gal-item" href="images/live-sera-tastiere.webp">
-        <img src="images/live-sera-tastiere.webp" width="2000" height="1333" alt="Larry alla tastiera Nord rossa con la band alle spalle durante un live all'imbrunire" loading="lazy" />
-      </a>
-      <a class="gal-item" href="images/prato-batteria-blu.webp">
-        <img src="images/prato-batteria-blu.webp" width="2000" height="1250" alt="Miglio dietro i piatti in luce blu, cappello country sfocato in primo piano" loading="lazy" />
-      </a>
-      <a class="gal-item" href="images/vigna-contrabbasso-live.webp">
-        <img src="images/vigna-contrabbasso-live.webp" width="1333" height="2000" alt="Richi suona il contrabbasso nella vigna al tramonto, il pubblico seduto sull'erba" loading="lazy" />
-      </a>
-      <a class="gal-item" href="images/studio-rullante.webp">
-        <img src="images/studio-rullante.webp" width="1600" height="2000" alt="Ritratto in studio di Miglio seduto con rullante e bacchette" loading="lazy" />
-      </a>
-      <a class="gal-item" href="images/live-blu-tastiere.webp">
-        <img src="images/live-blu-tastiere.webp" width="2000" height="1333" alt="Dettaglio delle mani di Larry sulla tastiera durante un live, luci rosse e viola" loading="lazy" />
-      </a>
-      <a class="gal-item" href="images/vigna-live-batteria.webp">
-        <img src="images/vigna-live-batteria.webp" width="1333" height="2000" alt="Miglio alla batteria durante un concerto serale in vigna, luce rosa di scena" loading="lazy" />
-      </a>
-      <a class="gal-item" href="images/prato-batteria-contrabbasso.webp">
-        <img src="images/prato-batteria-contrabbasso.webp" width="2000" height="1250" alt="Miglio alla batteria in luce colorata con il contrabbasso di Richi in primo piano" loading="lazy" />
-      </a>
-      <a class="gal-item" href="images/live-blu-contrabbasso.webp">
-        <img src="images/live-blu-contrabbasso.webp" width="2000" height="1333" alt="Richi suona il contrabbasso nel buio, illuminato da un faretto e da luci verdi" loading="lazy" />
-      </a>
-      <!-- Scatti precedenti -->
-      <a class="gal-item" href="images/mike-telecaster-live.webp">
-        <img src="images/mike-telecaster-live.webp" width="933" height="1400" alt="Mike, frontman dei Coffeekillers, con cappello country e Telecaster durante un live" loading="lazy" />
-      </a>
-      <a class="gal-item" href="images/mike-miglio-banjo.webp">
-        <img src="images/mike-miglio-banjo.webp" width="1124" height="2000" alt="Mike e Miglio col banjo all'aperto, nella formazione in duo" loading="lazy" />
-      </a>
-    </div>
-
-    <div class="gal-more">
-      <a class="btn-dark" href="https://www.instagram.com/thecoffeekillers/" target="_blank" rel="noopener">Altri scatti su Instagram</a>
+<!-- ==================== 1. LA TESTA ==================== -->
+<section class="v-sez gal-hero" id="top">
+  <div class="v-in v-in--stretto">
+    <div class="v-testa rv">
+      <h1 class="v-h v-h--hero">Sul palco e <span class="acc">dietro le quinte.</span></h1>
+      <p class="v-lead">Scatti dai nostri live, dalle prove, dai backstage. Un album che cresce a ogni serata: tocca una foto per vederla grande.</p>
     </div>
   </div>
 </section>
 
-<!-- ==================== 3. VIDEO YOUTUBE (espresso) ==================== -->
-<section class="section video-b" id="video">
-  <div class="wrap rv">
-    <div class="video-grid">
-      <div class="video-copy">
-        <h2 class="sec-title">Ascoltaci <span class="title-it">dal vivo.</span></h2>
-        <p class="lead-p">Estratti dei nostri show. Per capire davvero come suoniamo, niente è meglio di vederci in azione.</p>
-        <div class="v-actions">
-          <a class="btn-poster" href="https://www.youtube.com/@thecoffeekillers" target="_blank" rel="noopener">Vai al canale</a>
+<!-- ==================== 2. LE FOTO, in tre capitoli (le miniature stanno in images/gal/, la foto intera si apre nella lightbox) ==================== -->
+<section class="v-sez t-panna" id="gallery">
+  <div class="v-in">
+    <div class="gal-cap rv" id="palco">
+      <h2 class="v-h">Sul <span class="acc">palco.</span></h2>
+      <p class="v-lead">Dai prati alle piazze: le serate come le vediamo noi.</p>
+    </div>
+    <div class="gal-grid stagger">
+      <a class="gal-item" href="images/live-voce-senza-numeri.webp" data-dida="Mike canta con la chitarra acustica, cappello country e camicia a fiori, durante un live">
+        <img src="images/gal/live-voce-senza-numeri-600.webp" srcset="images/gal/live-voce-senza-numeri-600.webp 600w, images/gal/live-voce-senza-numeri-1200.webp 1200w" sizes="(min-width:900px) 30vw, 46vw" width="600" height="900" alt="Mike canta con la chitarra acustica, cappello country e camicia a fiori, durante un live" loading="eager" />
+      </a>
+      <a class="gal-item" href="images/live-basso.webp" data-dida="Richi al basso con il cappello, sul palco di una sagra di paese">
+        <img src="images/gal/live-basso-600.webp" srcset="images/gal/live-basso-600.webp 600w, images/gal/live-basso-1200.webp 1200w" sizes="(min-width:900px) 30vw, 46vw" width="600" height="900" alt="Richi al basso con il cappello, sul palco di una sagra di paese" loading="lazy" />
+      </a>
+      <a class="gal-item" href="images/live-batteria.webp" data-dida="Miglio dietro la batteria Gretsch durante un live country all'aperto">
+        <img src="images/gal/live-batteria-600.webp" srcset="images/gal/live-batteria-600.webp 600w, images/gal/live-batteria-1200.webp 1200w" sizes="(min-width:900px) 30vw, 46vw" width="600" height="900" alt="Miglio dietro la batteria Gretsch durante un live country all'aperto" loading="lazy" />
+      </a>
+      <a class="gal-item" href="images/live-tastiere-senza-numeri.webp" data-dida="Larry alla tastiera Nord rossa durante un concerto country al tramonto">
+        <img src="images/gal/live-tastiere-senza-numeri-600.webp" srcset="images/gal/live-tastiere-senza-numeri-600.webp 600w, images/gal/live-tastiere-senza-numeri-1200.webp 1200w" sizes="(min-width:900px) 30vw, 46vw" width="600" height="900" alt="Larry alla tastiera Nord rossa durante un concerto country al tramonto" loading="lazy" />
+      </a>
+      <a class="gal-item" href="images/prato-voce.webp" data-dida="Mike canta al microfono con giacca beige durante un concerto serale">
+        <img src="images/gal/prato-voce-600.webp" srcset="images/gal/prato-voce-600.webp 600w, images/gal/prato-voce-1200.webp 1200w" sizes="(min-width:900px) 30vw, 46vw" width="600" height="375" alt="Mike canta al microfono con giacca beige durante un concerto serale" loading="lazy" />
+      </a>
+      <a class="gal-item" href="images/mike-telecaster-live.webp" data-dida="Mike, frontman dei Coffeekillers, con cappello country e Telecaster durante un live">
+        <img src="images/gal/mike-telecaster-live-600.webp" srcset="images/gal/mike-telecaster-live-600.webp 600w, images/gal/mike-telecaster-live-1200.webp 1200w" sizes="(min-width:900px) 30vw, 46vw" width="600" height="900" alt="Mike, frontman dei Coffeekillers, con cappello country e Telecaster durante un live" loading="lazy" />
+      </a>
+      <a class="gal-item" href="images/vigna-contrabbasso-live.webp" data-dida="Richi suona il contrabbasso nella vigna al tramonto, il pubblico seduto sull'erba">
+        <img src="images/gal/vigna-contrabbasso-live-600.webp" srcset="images/gal/vigna-contrabbasso-live-600.webp 600w, images/gal/vigna-contrabbasso-live-1200.webp 1200w" sizes="(min-width:900px) 30vw, 46vw" width="600" height="900" alt="Richi suona il contrabbasso nella vigna al tramonto, il pubblico seduto sull'erba" loading="lazy" />
+      </a>
+      <a class="gal-item" href="images/live-sera-tastiere.webp" data-dida="Larry alla tastiera Nord rossa con la band alle spalle durante un live all'imbrunire">
+        <img src="images/gal/live-sera-tastiere-600.webp" srcset="images/gal/live-sera-tastiere-600.webp 600w, images/gal/live-sera-tastiere-1200.webp 1200w" sizes="(min-width:900px) 30vw, 46vw" width="600" height="400" alt="Larry alla tastiera Nord rossa con la band alle spalle durante un live all'imbrunire" loading="lazy" />
+      </a>
+      <a class="gal-item" href="images/vigna-live-tastiere.webp" data-dida="Larry alla tastiera Nord rossa durante un live serale in vigna">
+        <img src="images/gal/vigna-live-tastiere-600.webp" srcset="images/gal/vigna-live-tastiere-600.webp 600w, images/gal/vigna-live-tastiere-1200.webp 1200w" sizes="(min-width:900px) 30vw, 46vw" width="600" height="900" alt="Larry alla tastiera Nord rossa durante un live serale in vigna" loading="lazy" />
+      </a>
+      <a class="gal-item" href="images/vigna-live-batteria.webp" data-dida="Miglio alla batteria durante un concerto serale in vigna, luce rosa di scena">
+        <img src="images/gal/vigna-live-batteria-600.webp" srcset="images/gal/vigna-live-batteria-600.webp 600w, images/gal/vigna-live-batteria-1200.webp 1200w" sizes="(min-width:900px) 30vw, 46vw" width="600" height="900" alt="Miglio alla batteria durante un concerto serale in vigna, luce rosa di scena" loading="lazy" />
+      </a>
+      <a class="gal-item" href="images/prato-tastiere.webp" data-dida="Le mani di Larry sulle tastiere durante un live, luci verdi e viola sullo sfondo">
+        <img src="images/gal/prato-tastiere-600.webp" srcset="images/gal/prato-tastiere-600.webp 600w, images/gal/prato-tastiere-1200.webp 1200w" sizes="(min-width:900px) 30vw, 46vw" width="600" height="375" alt="Le mani di Larry sulle tastiere durante un live, luci verdi e viola sullo sfondo" loading="lazy" />
+      </a>
+      <a class="gal-item" href="images/prato-batteria.webp" data-dida="Miglio in luce viola dietro la batteria, il contrabbasso sfocato in primo piano">
+        <img src="images/gal/prato-batteria-600.webp" srcset="images/gal/prato-batteria-600.webp 600w, images/gal/prato-batteria-1200.webp 1200w" sizes="(min-width:900px) 30vw, 46vw" width="600" height="375" alt="Miglio in luce viola dietro la batteria, il contrabbasso sfocato in primo piano" loading="lazy" />
+      </a>
+      <a class="gal-item" href="images/prato-batteria-blu.webp" data-dida="Miglio dietro i piatti in luce blu, cappello country sfocato in primo piano">
+        <img src="images/gal/prato-batteria-blu-600.webp" srcset="images/gal/prato-batteria-blu-600.webp 600w, images/gal/prato-batteria-blu-1200.webp 1200w" sizes="(min-width:900px) 30vw, 46vw" width="600" height="375" alt="Miglio dietro i piatti in luce blu, cappello country sfocato in primo piano" loading="lazy" />
+      </a>
+      <a class="gal-item" href="images/prato-batteria-contrabbasso.webp" data-dida="Miglio alla batteria in luce colorata con il contrabbasso di Richi in primo piano">
+        <img src="images/gal/prato-batteria-contrabbasso-600.webp" srcset="images/gal/prato-batteria-contrabbasso-600.webp 600w, images/gal/prato-batteria-contrabbasso-1200.webp 1200w" sizes="(min-width:900px) 30vw, 46vw" width="600" height="375" alt="Miglio alla batteria in luce colorata con il contrabbasso di Richi in primo piano" loading="lazy" />
+      </a>
+      <a class="gal-item" href="images/live-blu-batteria.webp" data-dida="Miglio di profilo dietro i piatti della batteria, luci blu e viola da concerto">
+        <img src="images/gal/live-blu-batteria-600.webp" srcset="images/gal/live-blu-batteria-600.webp 600w, images/gal/live-blu-batteria-1200.webp 1200w" sizes="(min-width:900px) 30vw, 46vw" width="600" height="400" alt="Miglio di profilo dietro i piatti della batteria, luci blu e viola da concerto" loading="lazy" />
+      </a>
+      <a class="gal-item" href="images/live-blu-tastiere.webp" data-dida="Dettaglio delle mani di Larry sulla tastiera durante un live, luci rosse e viola">
+        <img src="images/gal/live-blu-tastiere-600.webp" srcset="images/gal/live-blu-tastiere-600.webp 600w, images/gal/live-blu-tastiere-1200.webp 1200w" sizes="(min-width:900px) 30vw, 46vw" width="600" height="400" alt="Dettaglio delle mani di Larry sulla tastiera durante un live, luci rosse e viola" loading="lazy" />
+      </a>
+      <a class="gal-item" href="images/live-blu-contrabbasso.webp" data-dida="Richi suona il contrabbasso nel buio, illuminato da un faretto e da luci verdi">
+        <img src="images/gal/live-blu-contrabbasso-600.webp" srcset="images/gal/live-blu-contrabbasso-600.webp 600w, images/gal/live-blu-contrabbasso-1200.webp 1200w" sizes="(min-width:900px) 30vw, 46vw" width="600" height="400" alt="Richi suona il contrabbasso nel buio, illuminato da un faretto e da luci verdi" loading="lazy" />
+      </a>
+    </div>
+    <div class="gal-cap rv" id="band">
+      <h2 class="v-h">La <span class="acc">band.</span></h2>
+      <p class="v-lead">I cinque, in posa e fuori posa.</p>
+    </div>
+    <div class="gal-grid stagger">
+      <a class="gal-item" href="images/band-fiume-o3.webp" data-dida="Hot Joe &amp; The Coffeekillers, band country di Brescia, tutti e cinque in riva al fiume al tramonto">
+        <img src="images/gal/band-fiume-o3-600.webp" srcset="images/gal/band-fiume-o3-600.webp 600w, images/gal/band-fiume-o3-1200.webp 1200w" sizes="(min-width:900px) 30vw, 46vw" width="600" height="450" alt="Hot Joe &amp; The Coffeekillers, band country di Brescia, tutti e cinque in riva al fiume al tramonto" loading="lazy" />
+      </a>
+      <a class="gal-item" href="images/band-muro-a.webp" data-dida="Ritratto della band country Hot Joe &amp; The Coffeekillers al completo con gli strumenti, davanti a un muro color terracotta">
+        <img src="images/gal/band-muro-a-600.webp" srcset="images/gal/band-muro-a-600.webp 600w, images/gal/band-muro-a-1200.webp 1200w" sizes="(min-width:900px) 30vw, 46vw" width="600" height="800" alt="Ritratto della band country Hot Joe &amp; The Coffeekillers al completo con gli strumenti, davanti a un muro color terracotta" loading="lazy" />
+      </a>
+      <a class="gal-item" href="images/band-fiume-v2.webp" data-dida="I cinque musicisti dei Coffeekillers in riva al fiume prima di un concerto">
+        <img src="images/gal/band-fiume-v2-600.webp" srcset="images/gal/band-fiume-v2-600.webp 600w, images/gal/band-fiume-v2-1200.webp 1200w" sizes="(min-width:900px) 30vw, 46vw" width="600" height="800" alt="I cinque musicisti dei Coffeekillers in riva al fiume prima di un concerto" loading="lazy" />
+      </a>
+      <a class="gal-item" href="images/band-giardino-a.webp" data-dida="La band country al completo in giardino, tra sole e alberi">
+        <img src="images/gal/band-giardino-a-600.webp" srcset="images/gal/band-giardino-a-600.webp 600w, images/gal/band-giardino-a-1200.webp 1200w" sizes="(min-width:900px) 30vw, 46vw" width="600" height="800" alt="La band country al completo in giardino, tra sole e alberi" loading="lazy" />
+      </a>
+      <a class="gal-item" href="images/studio-chitarra.webp" data-dida="Ritratto in studio di Mike sorridente con la Telecaster e la cinghia decorata">
+        <img src="images/gal/studio-chitarra-600.webp" srcset="images/gal/studio-chitarra-600.webp 600w, images/gal/studio-chitarra-1200.webp 1200w" sizes="(min-width:900px) 30vw, 46vw" width="600" height="750" alt="Ritratto in studio di Mike sorridente con la Telecaster e la cinghia decorata" loading="lazy" />
+      </a>
+      <a class="gal-item" href="images/studio-bacchette.webp" data-dida="Ritratto in studio di Miglio con camicia a righe e una bacchetta della batteria tra i denti">
+        <img src="images/gal/studio-bacchette-600.webp" srcset="images/gal/studio-bacchette-600.webp 600w, images/gal/studio-bacchette-1200.webp 1200w" sizes="(min-width:900px) 30vw, 46vw" width="600" height="750" alt="Ritratto in studio di Miglio con camicia a righe e una bacchetta della batteria tra i denti" loading="lazy" />
+      </a>
+      <a class="gal-item" href="images/studio-tastiere.webp" data-dida="Ritratto in studio di Larry appoggiato alla sua tastiera Nord rossa">
+        <img src="images/gal/studio-tastiere-600.webp" srcset="images/gal/studio-tastiere-600.webp 600w, images/gal/studio-tastiere-1200.webp 1200w" sizes="(min-width:900px) 30vw, 46vw" width="600" height="750" alt="Ritratto in studio di Larry appoggiato alla sua tastiera Nord rossa" loading="lazy" />
+      </a>
+      <a class="gal-item" href="images/studio-contrabbasso.webp" data-dida="Ritratto in studio di Richi con cappello country che abbraccia il contrabbasso">
+        <img src="images/gal/studio-contrabbasso-600.webp" srcset="images/gal/studio-contrabbasso-600.webp 600w, images/gal/studio-contrabbasso-1200.webp 1200w" sizes="(min-width:900px) 30vw, 46vw" width="600" height="750" alt="Ritratto in studio di Richi con cappello country che abbraccia il contrabbasso" loading="lazy" />
+      </a>
+      <a class="gal-item" href="images/studio-rullante.webp" data-dida="Ritratto in studio di Miglio seduto con rullante e bacchette">
+        <img src="images/gal/studio-rullante-600.webp" srcset="images/gal/studio-rullante-600.webp 600w, images/gal/studio-rullante-1200.webp 1200w" sizes="(min-width:900px) 30vw, 46vw" width="600" height="750" alt="Ritratto in studio di Miglio seduto con rullante e bacchette" loading="lazy" />
+      </a>
+      <a class="gal-item" href="images/vigna-chitarra.webp" data-dida="Mike con cappello country e Telecaster tra le vigne al tramonto">
+        <img src="images/gal/vigna-chitarra-600.webp" srcset="images/gal/vigna-chitarra-600.webp 600w, images/gal/vigna-chitarra-1200.webp 1200w" sizes="(min-width:900px) 30vw, 46vw" width="600" height="900" alt="Mike con cappello country e Telecaster tra le vigne al tramonto" loading="lazy" />
+      </a>
+      <a class="gal-item" href="images/vigna-contrabbasso.webp" data-dida="Richi sorridente con occhiali da sole e contrabbasso tra le vigne al tramonto">
+        <img src="images/gal/vigna-contrabbasso-600.webp" srcset="images/gal/vigna-contrabbasso-600.webp 600w, images/gal/vigna-contrabbasso-1200.webp 1200w" sizes="(min-width:900px) 30vw, 46vw" width="600" height="900" alt="Richi sorridente con occhiali da sole e contrabbasso tra le vigne al tramonto" loading="lazy" />
+      </a>
+      <a class="gal-item" href="images/vigna-ritratto.webp" data-dida="Ritratto di Miglio tra le vigne, cappellino e camicia a righe, braccia incrociate">
+        <img src="images/gal/vigna-ritratto-600.webp" srcset="images/gal/vigna-ritratto-600.webp 600w, images/gal/vigna-ritratto-1200.webp 1200w" sizes="(min-width:900px) 30vw, 46vw" width="600" height="900" alt="Ritratto di Miglio tra le vigne, cappellino e camicia a righe, braccia incrociate" loading="lazy" />
+      </a>
+      <a class="gal-item" href="images/mike-miglio-banjo.webp" data-dida="Mike e Miglio col banjo, all&rsquo;aperto">
+        <img src="images/gal/mike-miglio-banjo-600.webp" srcset="images/gal/mike-miglio-banjo-600.webp 600w, images/gal/mike-miglio-banjo-1200.webp 1200w" sizes="(min-width:900px) 30vw, 46vw" width="600" height="1068" alt="Mike e Miglio col banjo, all&rsquo;aperto" loading="lazy" />
+      </a>
+    </div>
+    <div class="gal-cap rv" id="strumenti">
+      <h2 class="v-h">Strumenti e <span class="acc">dettagli.</span></h2>
+      <p class="v-lead">Quello che portiamo sul palco, prima che arrivi la gente.</p>
+    </div>
+    <div class="gal-grid stagger">
+      <a class="gal-item" href="images/targa-band.webp" data-dida="L'insegna in legno dipinta a mano Hot Joe &amp; The Coffeekillers davanti al palco allestito su un prato">
+        <img src="images/gal/targa-band-600.webp" srcset="images/gal/targa-band-600.webp 600w, images/gal/targa-band-1200.webp 1200w" sizes="(min-width:900px) 30vw, 46vw" width="600" height="375" alt="L'insegna in legno dipinta a mano Hot Joe &amp; The Coffeekillers davanti al palco allestito su un prato" loading="lazy" />
+      </a>
+      <a class="gal-item" href="images/telecaster-dettaglio.webp" data-dida="Dettaglio ravvicinato di una Telecaster bianca vissuta con cinghia decorata">
+        <img src="images/gal/telecaster-dettaglio-600.webp" srcset="images/gal/telecaster-dettaglio-600.webp 600w, images/gal/telecaster-dettaglio-1200.webp 1200w" sizes="(min-width:900px) 30vw, 46vw" width="600" height="375" alt="Dettaglio ravvicinato di una Telecaster bianca vissuta con cinghia decorata" loading="lazy" />
+      </a>
+      <a class="gal-item" href="images/strumenti-prato.webp" data-dida="Chitarra acustica, tastiera e batteria Gretsch pronte sull'erba prima di un concerto country">
+        <img src="images/gal/strumenti-prato-600.webp" srcset="images/gal/strumenti-prato-600.webp 600w, images/gal/strumenti-prato-1200.webp 1200w" sizes="(min-width:900px) 30vw, 46vw" width="600" height="375" alt="Chitarra acustica, tastiera e batteria Gretsch pronte sull'erba prima di un concerto country" loading="lazy" />
+      </a>
+    </div>
+    <div class="gal-more rv">
+      <a class="v-pill v-pill--contorno" href="https://www.instagram.com/thecoffeekillers/" target="_blank" rel="noopener">Altri scatti su Instagram</a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 3. IL VIDEO: titolo e copertina, l'iframe di YouTube nasce al clic ==================== -->
+<section class="v-sez v-ascolta" id="video">
+  <span class="strappo-su" aria-hidden="true"></span>
+  <div class="v-in">
+    <h2 class="v-h v-h--centro rv">Ascoltaci <span class="acc">dal vivo.</span></h2>
+    <div class="v-video rv">
+      <div class="v-video-cornice">
+        <div class="inner" data-yt="yKFP1AAzxFM" data-titolo="The CoffeeKillers — YouTube">
+          <img src="images/live-allaperto-pomeriggio.webp" width="2000" height="1124" alt="Hot Joe &amp; The CoffeeKillers dal vivo all'aperto, di pomeriggio" loading="lazy" />
+          <button class="vb-play" type="button" aria-label="Riproduci un video dal canale YouTube dei CoffeeKillers"><svg viewBox="0 0 24 24" width="38" height="38" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></button>
+          <span class="vcap"><span class="ico i-stella" aria-hidden="true"></span>Il canale YouTube</span>
         </div>
       </div>
-      <div class="rv rv--right">
-        <div class="yt-frame">
-          <iframe src="https://www.youtube.com/embed/yKFP1AAzxFM?rel=0&amp;modestbranding=1" title="The Coffeekillers — Live" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-          <a class="yt-fallback" href="https://www.youtube.com/@thecoffeekillers" target="_blank" rel="noopener" aria-label="Apri il canale YouTube">
-            <span class="yt-play">▶</span>
-            <span class="yt-label">Guarda su YouTube</span>
-          </a>
-        </div>
+    </div>
+    <div class="v-cta-fila v-cta-fila--centro rv">
+      <a class="v-pill v-pill--contorno" href="https://www.youtube.com/@thecoffeekillers" target="_blank" rel="noopener">Vai al canale</a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 4. L'INVITO ==================== -->
+<section class="v-sez v-sez--alta" id="contact">
+  <div class="v-in">
+    <div class="v-testa rv">
+      <h2 class="v-h">Una serata <span class="acc">con noi?</span></h2>
+      <p class="v-lead">Raccontaci il tuo evento: due minuti di modulo, e ti rispondiamo con una proposta in qualche giorno.</p>
+      <div class="v-cta-fila v-cta-fila--centro">
+        <a class="v-pill" href="preventivo.html">Chiedi il preventivo</a>
+        <a class="v-wa" href="https://wa.me/393937011409" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.3-1.39a9.87 9.87 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.44 9.9-9.9 0-2.64-1.03-5.13-2.9-7A9.82 9.82 0 0 0 12.04 2zm0 18.13h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.11.82.83-3.03-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.41a8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.22-8.24 8.22zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.48c-.16 0-.43.06-.65.31-.22.25-.85.83-.85 2.03s.87 2.35.99 2.51c.12.16 1.71 2.61 4.15 3.66.58.25 1.03.4 1.38.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.22-.16-.47-.28z"/></svg><span>Scrivici su WhatsApp</span></a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ==================== 4. CTA INSEGNA (beige) ==================== -->
-<section class="section cta" id="contact">
-  <div class="wrap">
-    <div class="cta-panel rv">
-      <span class="cta-corner tl ico i-stella" aria-hidden="true"></span>
-      <span class="cta-corner tr ico i-stella" aria-hidden="true"></span>
-      <span class="cta-corner bl ico i-stella" aria-hidden="true"></span>
-      <span class="cta-corner br ico i-stella" aria-hidden="true"></span>
-      <p class="cta-eyebrow">— Richiedi un preventivo —</p>
-      <h2 class="sec-title">Una serata con noi?</h2>
-      <p class="cta-lead">Raccontaci il tuo evento. Ti rispondiamo con proposta, scaletta tipo e cachet personalizzato.</p>
-      <a class="cta-btn" href="preventivo.html">Richiedi un preventivo</a>
-      <div class="cta-meta">
-        <span><span class="k">Cachet</span>1.000 € — 2.500 € circa</span>
-        <a href="mailto:music@thecoffeekillers.com"><span class="k">Email</span>music@thecoffeekillers.com</a>
-        <a href="tel:+393937011409"><span class="k">WhatsApp</span>+39 393 7011409</a>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- la lightbox: un dialog nativo, riempito al clic sulla miniatura -->
+<dialog class="v-luce" id="luce">
+  <figure><img id="luce-img" alt="" /><figcaption id="luce-dida"></figcaption></figure>
+  <button class="v-luce-x" type="button" aria-label="Chiudi">&times;</button>
+</dialog>
+<script>
+(function(){
+  var d=document.getElementById("luce"); if(!d||!d.showModal) return;
+  var img=document.getElementById("luce-img"), dida=document.getElementById("luce-dida");
+  document.querySelectorAll(".gal-item").forEach(function(a){
+    a.addEventListener("click",function(e){
+      e.preventDefault();
+      img.src=a.getAttribute("href"); img.alt=a.dataset.dida||""; dida.textContent=a.dataset.dida||"";
+      d.showModal();
+    });
+  });
+  d.querySelector(".v-luce-x").addEventListener("click",function(){ d.close(); });
+  d.addEventListener("click",function(e){ if(e.target===d) d.close(); });
+  d.addEventListener("close",function(){ img.removeAttribute("src"); });
+})();
+// il video: la copertina lascia il posto all'iframe di YouTube al primo clic, dentro la pagina
+(function(){
+  document.querySelectorAll(".inner[data-yt]").forEach(function(box){
+    var btn = box.querySelector(".vb-play"); if(!btn) return;
+    btn.addEventListener("click", function(){
+      var f = document.createElement("iframe");
+      f.src = "https://www.youtube.com/embed/" + box.dataset.yt + "?autoplay=1&rel=0&modestbranding=1";
+      f.title = box.dataset.titolo || "Hot Joe & The CoffeeKillers — YouTube";
+      f.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+      f.referrerPolicy = "strict-origin-when-cross-origin"; f.allowFullscreen = true;
+      box.classList.add("vb-on"); box.appendChild(f);
+    });
+  });
+})();
+</script>
 
-<!-- ==================== 5. FOOTER (variante ridotta) ==================== -->
-<footer class="footer footer--ridotta">
-  <div class="payoff-edge tartan"></div>
+<footer class="footer">
+  <div class="filetto"></div>
 
   <!-- la newsletter e' la prima riga del footer, non una fascia sospesa sopra -->
   <div class="foot-nl" id="newsletter">
@@ -815,7 +377,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
   <div class="footer-copy">
-    © 2026 Hot Joe &amp; The CoffeeKillers — All rights reserved. ·
+    © 2026 Hot Joe &amp; The CoffeeKillers — Tutti i diritti riservati. ·
     <a href="privacy.html">Informativa privacy</a> ·
     Sviluppato con <a href="https://emporionelbosco.it" target="_blank" rel="noopener">Emporio nel Bosco</a>
   </div>
