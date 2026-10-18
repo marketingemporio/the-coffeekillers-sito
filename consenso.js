@@ -18,7 +18,7 @@
    ============================================================================ */
 (function () {
   var CHIAVE = 'ck-consenso-v1';
-  var ESPRESSO = '#49240A', PANNA = '#EDDABD', TAN = '#BD8B65';
+  var ESPRESSO = '#2B1405', PANNA = '#F3E5D0', TAN = '#C39A6A'; /* dal 18/10 la palette della landing vale su tutto il sito */
 
   window.dataLayer = window.dataLayer || [];
   function gtag() { window.dataLayer.push(arguments); }
