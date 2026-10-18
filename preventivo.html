@@ -23,334 +23,34 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ContactPage","name":"Richiedi un preventivo — The Coffeekillers","description":"Richiedi un preventivo per Hot Joe & The Coffeekillers, band country live da Brescia.","mainEntity":{"@type":"MusicGroup","name":"Hot Joe & The CoffeeKillers","email":"music@thecoffeekillers.com","telephone":"+39 393 7011409"}}
 </script>
+<link rel="preload" href="fonts/bonzana.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="fonts/Manrope-Variable.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="hjck.css" />
 <style>
 /* ============================================================================
-   MANROPE, OSPITATO QUI E NON PRESO DA GOOGLE
-   ----------------------------------------------------------------------------
-   Prima arrivava da fonts.googleapis.com: ogni visita mandava l'indirizzo IP
-   del visitatore ai server di Google, senza che nessuno l'avesse chiesto — e
-   in Europa e' proprio il punto su cui i garanti hanno gia' dato torto a dei
-   siti. Ospitandolo qui il problema sparisce del tutto: nessun terzo viene
-   contattato per mostrare una pagina, e l'informativa privacy ha una voce in
-   meno da dichiarare. In piu' si risparmiano due connessioni esterne.
-   E' il file VARIABILE: un file solo copre tutti i pesi da 400 a 800.
-   ⚠️ Rye e' uscito: era solo il fallback dopo Bonzana e veniva anch'esso da
-      Google. Al suo posto il serif di sistema, che non chiama nessuno.
+   PREVENTIVO — la testa e il MODULO. Il blocco del modulo e' la copia di quello
+   della landing (musica-country-dal-vivo.html, sezione 14), con gli stessi nomi
+   di variabile del foglio: sono due copie volute, se cambia una si cambia l'altra.
+   ⚠️ Nomi dei campi, due passi, vincolo servizio→budget e testi delle chip NON si toccano.
    ============================================================================ */
-@font-face{
-  font-family:"Manrope";
-  src:url("fonts/Manrope-Variable.ttf") format("truetype-variations");
-  font-weight:200 800; font-style:normal; font-display:swap;
-}
-</style>
-<style>
-/* ============ FONT ============ */
-@font-face{font-family:"LT Cushion";src:url("fonts/LTCushion-Light.ttf");font-weight:300;font-display:swap}
-@font-face{font-family:"LT Cushion";src:url("fonts/LTCushion-Medium.ttf");font-weight:500;font-display:swap}
-@font-face{font-family:"LT Cushion";src:url("fonts/LTCushion-Bold.ttf");font-weight:700;font-display:swap}
-@font-face{font-family:"LT Cushion";src:url("fonts/LTCushion-Black.ttf");font-weight:900;font-display:swap}
-
-/* ============ TOKENS ============ */
-:root{
-  /* 🅱 la palette della landing (16/09). Michele, 24/09: «rifammi il blocco
-     preventivo uguale alla landing» + tutta la pagina, per non avere due avori
-     diversi nella stessa schermata. Le altre 15 pagine restano sul brand book. */
-  --espresso:#2B1405;
-  --espresso-2:#381A08;      /* i pieni appoggiati sul chiaro: chip scelta, plinto */
-  --nero:#1B0C02;
-  --caffe:#4E2A10;
-  --panna:#FAF3E7;           /* il piu' chiaro: i campi da compilare */
-  --beige:#EFE2CE;           /* le SUPERFICI: card, guscio del modulo, bottoni pieni */
-  --tan:#C39A6A;
-  /* ⚠️ --arancio resta #FA8600: e' l'arancio del LOGO e fa da testo sui fondi scuri
-     (nav, .it nei titoli). Col #C74A07 della landing farebbe 3,66:1, sotto soglia. */
-  --arancio:#FA8600;
-  --ruggine:#C74A07;         /* l'arancio della landing: timbri e pieni */
-  --azz:#8BAEA4;
-  --azz-scuro:#5F837A;
-  --azz-testo:#3F5C55;    /* azzurro leggibile per i TESTI su fondo chiaro */
-  --azz-wash:#D8E5E0;
-  --bronco:"Bronco Valley",serif;
-  --serif:"LT Cushion",serif;
-  --sans:"Manrope",sans-serif;
-  --valley:"Valley",serif;
-  --cushion:"LT Cushion",serif;
-  --wrap:1180px;
-  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>");
-}
-
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:130px}
-body{
-  font-family:var(--sans);
-  background:var(--espresso);
-  color:var(--panna);
-  font-size:16px;
-  line-height:1.6;
-  overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;
-}
-img{max-width:100%;display:block}
-a{color:inherit}
-
-/* il velluto: grana su tutta la pagina */
-body::after{
-  content:"";position:fixed;inset:0;z-index:80;pointer-events:none;
-  background:var(--grain);opacity:.07;
-}
-
-h1,h2,h3{
-  font-family:var(--bronco);
-  font-weight:400;
-  font-synthesis:none;
-  letter-spacing:.03em;
-  line-height:1.04;
-  text-transform:uppercase;
-}
-.wrap{max-width:var(--wrap);margin:0 auto;padding:0 clamp(20px,4vw,48px)}
-
-/* ============ ICONE (mask) ============ */
-.ico{
-  display:inline-block;background:currentColor;flex:none;
-  -webkit-mask:no-repeat center/contain;mask:no-repeat center/contain;
-}
-.i-teschio  {-webkit-mask-image:url("images/icone/teschio-longhorn.svg");mask-image:url("images/icone/teschio-longhorn.svg");aspect-ratio:373.99/176.81}
-.i-cactus   {-webkit-mask-image:url("images/icone/cactus.svg");mask-image:url("images/icone/cactus.svg");aspect-ratio:140.28/229.85}
-.i-cappello {-webkit-mask-image:url("images/icone/cappello-cowboy.svg");mask-image:url("images/icone/cappello-cowboy.svg");aspect-ratio:266.88/132.43}
-.i-ferri    {-webkit-mask-image:url("images/icone/ferri-di-cavallo.svg");mask-image:url("images/icone/ferri-di-cavallo.svg");aspect-ratio:267.1/184.4}
-.i-stivale  {-webkit-mask-image:url("images/icone/stivale.svg");mask-image:url("images/icone/stivale.svg");aspect-ratio:169.63/240.37}
-.i-camaleonte{-webkit-mask-image:url("images/icone/camaleonte.svg");mask-image:url("images/icone/camaleonte.svg");aspect-ratio:272.48/160.07}
-.i-stella   {-webkit-mask-image:url("images/icone/stella-sceriffo.svg");mask-image:url("images/icone/stella-sceriffo.svg");aspect-ratio:187.62/203.89}
-.i-chitarra {-webkit-mask-image:url("images/icone/chitarra.svg");mask-image:url("images/icone/chitarra.svg");aspect-ratio:128.45/317.28}
-
-/* ============ TARTAN ============ */
-.tartan{
-  background-color:var(--espresso-2);
-  background-image:
-    repeating-linear-gradient(90deg,
-      transparent 0 16px, rgba(199,74,7,.5) 16px 23px,
-      transparent 23px 40px, rgba(251,245,234,.22) 40px 41.5px,
-      transparent 41.5px 56px),
-    repeating-linear-gradient(0deg,
-      transparent 0 16px, rgba(199,74,7,.5) 16px 23px,
-      transparent 23px 40px, rgba(251,245,234,.22) 40px 41.5px,
-      transparent 41.5px 56px);
-}
-.payoff-edge{height:12px}
-
-/* ============ NAV ============ */
-/* ============ NAV stile sito Kruse Brothers, replica fedele:
-   striscia annuncio in cima, menu maiuscoletto a sinistra, logo grande
-   centrale, icone social a destra; nav trasparente con gradiente sull'hero,
-   scendendo si stacca e diventa barra fissa scura (JS in fondo) ============ */
-.annuncio{
-  background:var(--caffe);color:var(--panna);text-align:center;
-  font-size:11.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
-  padding:9px 16px;position:relative;z-index:61;
-}
-.annuncio a{color:inherit;text-decoration:none}
-.annuncio a:hover{color:var(--arancio)}
-.nav{
-  position:absolute;top:36px;left:0;right:0;z-index:60;
-  background:linear-gradient(180deg,rgba(8,4,1,.94) 0%,rgba(8,4,1,.72) 46%,rgba(8,4,1,.28) 80%,transparent 100%);
-  padding-bottom:26px;
-  transition:background .3s,box-shadow .3s;
-}
-.nav.solid{
-  position:fixed;top:0;
-  background:var(--caffe);            /* stesso marrone della striscia annuncio, come nel riferimento */
-  padding-bottom:0;
-  border-bottom:1px solid rgba(243,229,208,.14);
-  box-shadow:0 10px 30px rgba(0,0,0,.35);
-}
-.nav-in{
-  max-width:1320px;margin:0 auto;padding:10px clamp(20px,4vw,48px) 14px;
-  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px;
-}
-.nav-logo{justify-self:center}
-.nav-logo img{
-  height:118px;width:auto;transition:height .3s;
-}
-.nav.solid .nav-logo img{height:74px}
-.nav-side{display:flex;align-items:center;gap:clamp(12px,1.8vw,26px);list-style:none;margin:0;padding:0}
-.nav-side.dx{justify-content:flex-end}
-.nav-side a{
-  color:#fff;text-decoration:none;font-weight:700;font-size:12.5px;
-  letter-spacing:.16em;text-transform:uppercase;
-}
-.nav-side a:hover{color:var(--arancio)}
-.nav-side a{white-space:nowrap}
-.nav-soc{display:flex;align-items:center;gap:14px}
-.nav-soc a{display:flex}
-.nav-soc svg{width:18px;height:18px;fill:#fff;transition:fill .2s}
-.nav-soc a:hover svg{fill:var(--arancio)}
-
-/* ---- Menu mobile (sotto i 720px): panetto a tendina con tutte le voci ---- */
-.nav-burger{
-  display:none;background:none;border:0;cursor:pointer;padding:8px 6px;
-  flex-direction:column;gap:5px;width:38px;
-}
-.nav-burger span{display:block;height:2px;width:26px;background:var(--beige);transition:transform .25s,opacity .2s}
-.nav-burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-.nav-burger[aria-expanded="true"] span:nth-child(2){opacity:0}
-.nav-burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-.nav-drawer{
-  display:none;background:var(--caffe);border-top:1px solid rgba(243,229,208,.16);
-  padding:10px clamp(20px,5vw,32px) 22px;
-}
-.nav-drawer.open{display:block}
-.nav-drawer ul{list-style:none;margin:0;padding:0}
-.nav-drawer a{
-  display:block;padding:14px 2px;color:var(--beige);text-decoration:none;
-  font-weight:700;font-size:15px;letter-spacing:.16em;text-transform:uppercase;
-  border-bottom:1px solid rgba(243,229,208,.12);
-}
-.nav-drawer a[aria-current="page"]{color:var(--arancio)}
-.nav-drawer .dr-soc{display:flex;gap:20px;padding-top:18px}
-.nav-drawer .dr-soc a{border-bottom:0;padding:0}
-.nav-drawer .dr-soc svg{width:20px;height:20px;fill:var(--beige)}
-
-/* Pagine interne: niente foto a tutta pagina dietro la nav → barra marrone
-   piena fin da subito, come la pagina MERCH del riferimento. */
-.nav{
-  position:sticky;top:0;
-  background:var(--caffe);
-  padding-bottom:0;
-  border-bottom:1px solid rgba(243,229,208,.14);
-}
-.nav .nav-logo img{height:74px}
-.nav-cta{
-  font-family:var(--valley)!important;font-size:17px!important;font-weight:400!important;
-  color:var(--azz)!important;border:1.5px solid var(--azz);border-radius:8px;
-  padding:6px 16px;letter-spacing:.05em!important;
-}
-.nav-cta:hover{color:var(--espresso)!important;background:var(--azz)}
-.nav-side a[aria-current="page"]{color:var(--arancio)}
-/* pagina corrente: il bottone "Preventivo" si accende in arancio come le altre
-   voci (serve !important perché .nav-cta imposta il colore con !important) */
-.nav-side a.nav-cta[aria-current="page"]{color:var(--arancio)!important;border-color:var(--arancio)}
-.nav-side a.nav-cta[aria-current="page"]:hover{color:var(--espresso)!important;background:var(--arancio)}
-.nav-burger{display:none}
-
-/* ============ SEZIONI COMUNI ============ */
-.section{position:relative;padding:clamp(72px,9vw,120px) 0}
-/* ⚠️ la sezione del modulo NON prende i 72-120px di stacco in cima: sopra di lei
-   c'e' solo il titolo della pagina, e i due padding si sommavano. Sotto resta. */
-.contact{padding-top:0}
-/* e il guscio non ha bisogno del suo margine: e' gia' il primo elemento */
+.ph{text-align:center;padding-top:clamp(40px,6vw,72px);padding-bottom:clamp(10px,2vw,20px)}
+.ph .v-h,.ph .v-lead{margin-inline:auto}
+.contact{padding-top:clamp(18px,3vw,34px)}
 .contact .v-form-guscio{margin-top:0}
-.sec-head{
-  display:flex;justify-content:space-between;align-items:baseline;
-  gap:12px;flex-wrap:wrap;margin-bottom:clamp(28px,4vw,44px);
-}
-.eyebrow{
-  display:flex;align-items:center;gap:12px;
-  font-size:13.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--azz);
-}
-.eyebrow .ico{color:var(--azz)}
-.eyebrow-r{font-size:12.5px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--tan)}
-.on-light .eyebrow{color:var(--azz-testo)}          /* testo: tono leggibile */
-.on-light .eyebrow .ico{color:var(--azz-scuro)}      /* icona: tono originale */
-.on-light .eyebrow-r{color:var(--caffe);opacity:.75}
-.sec-title{
-  font-size:clamp(34px,4.6vw,60px);
-  color:var(--panna);
-  margin-bottom:18px;
-}
-.on-light .sec-title{color:var(--espresso)}
-.lead-p{font-size:clamp(16px,1.9vw,19px);color:var(--beige)}
-.on-light .lead-p{color:var(--caffe)}
-.it{color:var(--arancio)}
 
-/* ============ BOTTONI — VESTE POSTER (da A2) ============ */
-/* ⚠️ era «.btn-poster,.btn-dark»: .btn-poster non esiste piu' in pagina
-   (l'invio ora e' .qf-submit, come sulla landing). .btn-dark serve al
-   pannello «Ricevuto». */
-.btn-dark{
-  display:inline-block;font-family:var(--valley);
-  text-decoration:none;letter-spacing:.04em;cursor:pointer;
-  transition:background .2s,color .2s,border-color .2s;
-}
-
-.btn-poster.is-sending{cursor:wait}
-.btn-dark{
-  font-weight:300;font-size:20px;letter-spacing:.08em;
-  background:var(--espresso);color:var(--panna);border-radius:6px;
-  padding:10px 26px 12px;border:2px solid var(--espresso);
-}
-.btn-dark:hover{background:transparent;color:var(--espresso)}
-/* .btn-dark sulle sezioni scure diventa ghost beige (stile A) */
-.ph .btn-dark{background:transparent;color:var(--beige);border-color:rgba(243,229,208,.7)}
-.ph .btn-dark:hover{border-color:var(--beige);background:transparent;color:var(--beige)}
-
-/* ============ PAGE HERO (Preventivo) ============ */
-/* ⚠️ 24/09: il fondo scende da 64-104px a 14-22px. Fra il sottotitolo e il primo
-   campo c'erano ~350px di marrone vuoto, cioe' mezza schermata di telefono spesa
-   per niente: il contrario di «arrivare piu' in fretta al form». */
-.ph{background:var(--espresso);padding:clamp(40px,6vw,72px) 0 clamp(14px,2vw,22px);text-align:center}
-
-
-/* ⚠️ la scala della landing: li' l'h1 arriva a 52px, non a 96. Un titolo da
-   manifesto sopra un modulo lo allontana e basta. */
-.ph h1{
-  color:var(--panna);
-  font-size:clamp(32px,5vw,52px);letter-spacing:.005em;
-  margin:0 0 16px;
-}
-.ph h1 .it{color:var(--arancio);font-size:.92em}
-.ph-lead{
-  color:var(--beige);max-width:56ch;margin:0 auto;
-  font-size:clamp(16px,1.9vw,19px);
-}
-@media (min-width:900px){.orna .ico{width:24px;height:25px}}
-
-/* — passi "Come funziona" — */
-
-/* ============================================================================
-   CONTACT — IL MODULO, UGUALE A QUELLO DELLA LANDING (24/09/2026)
-   ----------------------------------------------------------------------------
-   Michele: «nella pagina preventivo del sito, puoi rifarmi il blocco preventivo
-   uguale alla landing?». Queste regole sono COPIATE da musica-country-dal-vivo.html
-   e tradotte nei nomi di variabile di questa pagina:
-     --carta -> --beige · --scuro2 -> --espresso-2 · --display -> --valley (Bonzana)
-     --btn -> --cushion · --testo -> --sans
-   ⚠️ --arancio -> --ruggine: qui `--arancio` e' il #FA8600 del LOGO, mentre
-      l'arancio della landing (#C74A07) su questa pagina si chiama `--ruggine`.
-   ⚠️ SE CAMBIA IL MODULO DELLA LANDING, CAMBIA ANCHE QUI. Sono due copie, non un
-      foglio condiviso: la landing ha tutto lo stile inline ed e' la fonte.
-   ============================================================================ */
-.contact{background:var(--espresso);color:var(--panna)}
-/* ============================================================================
-   14 · IL MODULO — la scheda crema appoggiata sul fondo scuro, con la cornice
-   della locandina. Classi .qf-* identiche a preventivo.html: stesse chiavi
-   verso Netlify Forms (prima era Formspree, cambiato il 12/09).
-   ============================================================================ */
+/* ---------- il modulo: la scheda crema appoggiata sul fondo scuro ---------- */
 .v-form-guscio{max-width:880px;margin:clamp(36px,4.6vw,54px) auto 0}
-/* la trappola anti-spam di Netlify: esiste nel markup e non si vede mai */
-.qf-esca{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-/* 🐞 IL TESTO INVISIBILE. `color` qui non c'era: sulla landing non serve perche'
-   ogni pezzo del modulo dichiara il suo colore, ma qui le due tessere «Servizi»
-   (.tlbl/.tsub) prendevano il colore dalla sezione — che ora e' PANNA — e finivano
-   avorio su avorio, 1:1. A schermo erano due riquadri vuoti. E' lo stesso errore
-   gia' annotato per il WhatsApp del pannello «Ricevuto»: un contenitore chiaro
-   dentro una sezione scura deve ridichiarare il colore del testo. */
 .quote-form,.qf-success{
-  background:var(--beige);color:var(--espresso);border-radius:18px;
+  background:var(--carta);color:var(--espresso);border-radius:18px;
   padding:clamp(24px,4vw,44px);
   box-shadow:0 26px 60px -26px rgba(0,0,0,.72),0 0 0 1px rgba(43,20,5,.1);
 }
 .qf-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px clamp(18px,3vw,30px)}
 @media (max-width:640px){.qf-grid{grid-template-columns:1fr}}
+.qf-field{min-width:0}
 .qf-field--full{grid-column:1/-1}
-/* ⚠️ l'etichetta di un campo non e' una "scrittina" decorativa: senza, non si
-   capisce cosa scrivere. Ma non e' piu' sans spaziato a 11px: e' LT Cushion
-   Bold a 15px, cioe' roba della band. */
 .qf-label{
-  /* 🅱 B2: l'etichetta passa al carattere DISPLAY (nel bozzetto: font-western).
-     Sembra un dettaglio e invece e' quello che fa leggere il modulo come parte
-     della pagina e non come un modulo incollato dentro. */
-  display:block;font-family:var(--valley);font-weight:400;font-synthesis:none;
+  display:block;font-family:var(--display);font-weight:400;font-synthesis:none;
   font-size:15.5px;letter-spacing:.085em;text-transform:uppercase;
   color:var(--espresso);margin-bottom:12px;
 }
@@ -359,351 +59,79 @@ h1,h2,h3{
   text-transform:none;letter-spacing:.01em;font-size:14.5px;color:#6B4426;margin-left:7px;
 }
 .qf-input{
-  width:100%;font-family:var(--sans);font-size:16px;color:var(--espresso);
+  width:100%;font-family:var(--testo);font-size:16px;color:var(--espresso);
   background:#FAF3E7;border:1.5px solid rgba(43,20,5,.26);border-radius:12px;
   padding:14px 15px;outline:none;transition:border-color .2s;
 }
 .qf-input::placeholder{color:rgba(43,20,5,.6);opacity:1}
-.qf-input:focus{border-color:var(--ruggine);box-shadow:0 0 0 3px rgba(199,74,7,.18)}
+.qf-input:focus{border-color:var(--arancio);box-shadow:0 0 0 3px rgba(199,74,7,.18)}
 textarea.qf-input{display:block;min-height:100px;line-height:1.5;resize:vertical}
 .qf-chips{display:flex;flex-wrap:wrap;gap:9px}
-/* ⚠️ Da telefono sei pastiglie di larghezza diversa, allineate a sinistra,
-   fanno una scaletta: cinque righe storte, con una riga da due in mezzo per
-   caso. In colonna piena diventano sei voci pari, e il dito le prende tutte.
-   I due gruppi da due voci restano affiancati: ci stanno, e affiancati si
-   leggono come la scelta secca che sono. */
+/* da telefono le voci vanno in colonna piena; il gruppo da due resta affiancato */
 @media (max-width:560px){
   .qf-chips{display:grid;grid-template-columns:1fr;gap:10px}
-  #chips-momento,#chips-ambiente{grid-template-columns:1fr 1fr}
+  #chips-setting{grid-template-columns:1fr 1fr}
 }
-.qf-chips--sotto{margin-top:10px}
-.qf-label--sotto{margin-top:18px}
 .qf-chip--sm{font-size:14px;padding:9px 15px 10px;min-height:40px}
-/* le tre voci del servizio portano la durata scritta sotto: e' li' che il
-   cliente capisce cosa sta comprando, senza doverlo chiedere */
 .qf-chips--grandi{gap:11px}
-.qf-chips--grandi .qf-chip{
-  display:flex;flex-direction:column;align-items:flex-start;gap:5px;
-  text-align:left;padding:14px 20px 15px;line-height:1.2;
-}
-/* ⚠️ 13/09: qui c'era opacity:.72 e faceva ~4:1 su 13,5px — sotto soglia. E' lo
-   stesso identico errore gia' corretto sul .ruolo della line-up il 12/09:
-   l'opacity schiarisce il testo insieme al fondo e nessuno la misura mai.
-   Colore esplicito, uno per ciascuno dei due stati. */
-.qf-chips--grandi .qf-chip em{
-  font-family:var(--sans);font-style:normal;font-weight:600;font-size:13.5px;
-  letter-spacing:0;text-transform:none;color:#6B4426;
-}
+.qf-chips--grandi .qf-chip{display:flex;flex-direction:column;align-items:flex-start;gap:5px;text-align:left;padding:14px 20px 15px;line-height:1.2}
+.qf-chips--grandi .qf-chip em{font-family:var(--testo);font-style:normal;font-weight:600;font-size:13.5px;letter-spacing:0;text-transform:none;color:#6B4426}
 .qf-chips--grandi .qf-chip.on em{color:#DCC6A6}
-/* ⚠️ IL VINCOLO: una voce di budget esclusa dal servizio scelto si SPEGNE ma
-   resta li'. Michele, 10/09: "se mi dici tutto il giorno non puoi selezionare
-   1.000 euro... voglio stanarti". Se sparisse, il messaggio sparirebbe con lei. */
-.qf-chip.off{
-  opacity:.34;cursor:not-allowed;text-decoration:line-through;
-  text-decoration-thickness:1.5px;
-}
+/* il vincolo: una voce di budget esclusa dal servizio scelto si SPEGNE ma resta li' */
+.qf-chip.off{opacity:.34;cursor:not-allowed;text-decoration:line-through;text-decoration-thickness:1.5px}
 .qf-chip.off:hover{border-color:rgba(43,20,5,.28)}
-.qf-spiega{
-  font-family:var(--sans);font-size:14.5px;line-height:1.5;color:#6B4426;
-  margin:-4px 0 12px;max-width:62ch;
-}
+.qf-spiega{font-family:var(--testo);font-size:14.5px;line-height:1.5;color:#6B4426;margin:-4px 0 12px;max-width:62ch}
 .qf-chip{
-  /* 44px di altezza minima: sotto quella soglia, da telefono, si sbaglia a
-     premere (e le chip sono la prima cosa che si tocca del modulo) */
-  /* 🅱 B2: nel bozzetto le voci sono in carattere da TESTO, peso medio, senza
-     spaziatura fra le lettere: si leggono come scelte, non come insegne. Con
-     LT Cushion 700 spaziato ogni riga del modulo gridava quanto un titolo.
-     ⚠️ Il TESTO non cambia di una virgola: il JS confronta le chip per stringa
-     esatta con i valori `chip:` delle VARIANTI. Cambia solo come sono disegnate. */
   display:inline-flex;align-items:center;min-height:48px;
-  font-family:var(--sans);font-size:16px;font-weight:600;letter-spacing:0;cursor:pointer;
-  /* 🅱 B2: la voce non scelta e' TRASPARENTE (bozzetto: bg-transparent), cioe' del
-     colore del guscio, e si regge sul solo bordo. Col fondo #FAF3E7 erano sei
-     pastiglie quasi bianche in fila: pesanti, e rubavano l'occhio alla scelta fatta.
-     Il campo di testo invece resta chiaro e incassato: cosi' si distingue "scrivi
-     qui" da "scegli una". Contrasto del testo sul guscio: 8,48:1. */
+  font-family:var(--testo);font-size:16px;font-weight:600;letter-spacing:0;cursor:pointer;
   color:#5C3315;background:transparent;
-  /* ⚠️ 13/09: il bordo era rgba(...,.3) su un fondo quasi uguale a quello del
-     guscio: la voce scelta si vedeva benissimo (marrone piena) e le ALTRE
-     sembravano disattivate invece che da toccare. Su un modulo e' il difetto
-     peggiore: spegne le alternative. */
-  /* 🅱 B2: 1,5px e non 2. Il bozzetto ha bordi SOTTILI ovunque: e' la differenza
-     fra una scheda e un cartello. ⚠️ Non si torna a .3 — il 13/09 a quell'opacita'
-     le chip non scelte sembravano disattivate. .42 su questa carta si vede. */
   border:1.5px solid rgba(43,20,5,.42);border-radius:99px;padding:11px 20px 12px;
   transition:background .18s,color .18s,border-color .18s;
 }
 .qf-chip:hover{border-color:var(--espresso);background:rgba(43,20,5,.05)}
-.qf-chip.on{background:var(--espresso-2);border-color:var(--espresso-2);color:var(--panna)}
-.qf-stepper{
-  display:flex;align-items:center;gap:14px;
-  background:#FAF3E7;border:1.5px solid rgba(43,20,5,.26);border-radius:99px;
-  padding:6px 8px;width:max-content;max-width:100%;
-}
-.qf-stepper button{
-  font-family:var(--cushion);font-size:22px;font-weight:900;line-height:1;cursor:pointer;
-  width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(43,20,5,.3);
-  background:var(--beige);color:var(--espresso);transition:background .18s,color .18s;
-}
-.qf-stepper button:hover{background:var(--espresso-2);color:var(--panna);border-color:var(--espresso-2)}
-.qf-stepper .val{
-  font-family:var(--valley);font-weight:400;font-synthesis:none;font-size:25px;
-  color:var(--espresso);min-width:96px;text-align:center;font-variant-numeric:tabular-nums;
-}
-.qf-stepper .val small{
-  font-family:var(--cushion);font-size:13px;font-weight:700;letter-spacing:.08em;
-  text-transform:uppercase;color:#6B4426;margin-left:7px;
-}
+.qf-chip.on{background:var(--scuro2);border-color:var(--scuro2);color:var(--panna)}
+.qf-stepper{display:flex;align-items:center;gap:14px;background:#FAF3E7;border:1.5px solid rgba(43,20,5,.26);border-radius:99px;padding:6px 8px;width:max-content;max-width:100%}
+.qf-stepper button{font-family:var(--btn);font-size:22px;font-weight:900;line-height:1;cursor:pointer;width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(43,20,5,.3);background:var(--carta);color:var(--espresso);transition:background .18s,color .18s}
+.qf-stepper button:hover{background:var(--scuro2);color:var(--panna);border-color:var(--scuro2)}
+.qf-stepper .val{font-family:var(--display);font-weight:400;font-synthesis:none;font-size:25px;color:var(--espresso);min-width:96px;text-align:center;font-variant-numeric:tabular-nums}
+.qf-stepper .val small{font-family:var(--btn);font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6B4426;margin-left:7px}
+/* le tessere dei servizi (solo sul sito: la landing non ce le ha). Un contenitore chiaro
+   dentro una sezione scura deve ridichiarare il colore del testo: senza, le due tessere
+   erano riquadri vuoti (24/09). */
 .qf-tiles{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:580px}
 @media (max-width:560px){.qf-tiles{grid-template-columns:1fr}}
-.qf-tile{
-  position:relative;display:flex;flex-direction:column;gap:3px;cursor:pointer;
-  background:#FAF3E7;border:1.5px solid rgba(43,20,5,.26);border-radius:12px;
-  padding:15px 17px;transition:border-color .18s,box-shadow .18s;
-}
+.qf-tile{position:relative;display:flex;flex-direction:column;gap:3px;cursor:pointer;background:#FAF3E7;border:1.5px solid rgba(43,20,5,.26);border-radius:12px;padding:15px 17px;transition:border-color .18s,box-shadow .18s}
 .qf-tile:hover{border-color:var(--espresso)}
 .qf-tile.on{border-color:var(--espresso);box-shadow:inset 0 0 0 2px var(--espresso)}
 .qf-tile input{position:absolute;opacity:0;pointer-events:none}
-/* ⚠️ le etichette delle tessere: la landing non ha questo campo, quindi le sue
-   regole non esistono nel blocco copiato. Vanno ridichiarate qui. */
-.qf-tile .tlbl{font-family:var(--sans);font-weight:700;font-size:16px;color:var(--espresso)}
-.qf-tile .tsub{font-family:var(--sans);font-weight:500;font-size:14px;color:#5C3315}
-.qf-tile.on .tlbl::after{content:" \2713";color:var(--ruggine);font-weight:900}
-
-/* la fascia d'invio: plinto scuro in fondo alla scheda, col consenso dentro.
-   Il bottone crema sul panna spariva. */
-.qf-submit-row{
-  display:flex;justify-content:space-between;align-items:center;gap:18px clamp(18px,3vw,26px);
-  margin-top:clamp(26px,4vw,34px);flex-wrap:wrap;
-  background:var(--espresso-2);border-radius:14px;
-  padding:clamp(20px,3vw,26px) clamp(18px,3vw,26px);
-}
+.qf-tile .tlbl{font-family:var(--testo);font-weight:700;font-size:16px;color:var(--espresso)}
+.qf-tile .tsub{font-family:var(--testo);font-weight:500;font-size:14px;color:#5C3315}
+.qf-tile.on .tlbl::after{content:" \2713";color:var(--arancio);font-weight:900}
+/* la fascia d'invio: plinto scuro in fondo alla scheda, col consenso dentro */
+.qf-submit-row{display:flex;justify-content:space-between;align-items:center;gap:18px clamp(18px,3vw,26px);margin-top:clamp(26px,4vw,34px);flex-wrap:wrap;background:var(--scuro2);border-radius:14px;padding:clamp(20px,3vw,26px) clamp(18px,3vw,26px)}
 .qf-consent{display:flex;align-items:flex-start;gap:12px;flex:1 1 300px}
-.qf-consent input{
-  appearance:none;-webkit-appearance:none;flex:none;width:24px;height:24px;
-  margin-top:1px;cursor:pointer;background-color:var(--beige);
-  border:2px solid rgba(243,229,208,.55);border-radius:5px;
-  transition:background-color .18s,border-color .18s;
-}
-.qf-consent input:checked{
-  background-color:var(--ruggine);border-color:var(--ruggine);
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M5 12.4l4.6 4.6L19 7.2' fill='none' stroke='%232B1405' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
-  background-repeat:no-repeat;background-position:center;background-size:16px 16px;
-}
+.qf-consent input{appearance:none;-webkit-appearance:none;flex:none;width:24px;height:24px;margin-top:1px;cursor:pointer;background-color:var(--carta);border:2px solid rgba(243,229,208,.55);border-radius:5px;transition:background-color .18s,border-color .18s}
+.qf-consent input:checked{background-color:var(--arancio);border-color:var(--arancio);background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M5 12.4l4.6 4.6L19 7.2' fill='none' stroke='%232B1405' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'/></svg>");background-repeat:no-repeat;background-position:center;background-size:16px 16px}
 .qf-consent input:focus-visible{outline:2px solid var(--azz);outline-offset:3px}
 .qf-consent label{font-size:14.5px;line-height:1.5;color:var(--panna);cursor:pointer}
 .qf-consent a{color:var(--azz);text-decoration:underline;text-underline-offset:3px}
-.qf-submit{
-  font-family:var(--cushion);font-weight:900;font-size:17px;letter-spacing:.08em;
-  text-transform:uppercase;cursor:pointer;
-  background:var(--beige);color:var(--espresso);
-  border:2px solid var(--beige);border-radius:14px;padding:16px 28px 17px;
-  transition:background .16s,border-color .16s,color .16s,opacity .2s;
-}
-.qf-submit:hover:not(:disabled){background:var(--ruggine);border-color:var(--ruggine);color:var(--panna)}
+.qf-submit{font-family:var(--btn);font-weight:900;font-size:17px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;background:var(--carta);color:var(--espresso);border:2px solid var(--carta);border-radius:14px;padding:16px 28px 17px;transition:background .16s,border-color .16s,color .16s,opacity .2s}
+.qf-submit:hover:not(:disabled){background:var(--panna);border-color:var(--panna)}
 .qf-submit:disabled{opacity:.55;cursor:not-allowed}
+.qf-submit.is-sending{cursor:wait}
 .qf-success{text-align:center}
-.qf-success h3{
-  font-family:var(--valley);font-weight:400;font-synthesis:none;text-transform:uppercase;
-  font-size:clamp(28px,3.8vw,44px);color:var(--espresso);line-height:1.05;
-}
+.qf-success h3{font-family:var(--display);font-weight:400;font-synthesis:none;text-transform:uppercase;font-size:clamp(28px,3.8vw,44px);color:var(--espresso);line-height:1.05}
 .qf-success h3 .acc{color:var(--panna)}
 .qf-success p{color:#5C3315;max-width:50ch;margin:18px auto 26px;font-size:16.5px;line-height:1.6}
 /* i due passi */
 .v-fase[hidden]{display:none!important}
-.v-avanti{
-  display:block;width:100%;margin-top:28px;cursor:pointer;
-  font-family:var(--cushion);font-weight:900;font-size:17px;letter-spacing:.08em;text-transform:uppercase;
-  background:var(--espresso-2);color:var(--panna);
-  border:2px solid var(--espresso-2);border-radius:14px;padding:17px 20px;
-  transition:background .16s,border-color .16s;
-}
-.v-avanti:hover{background:var(--ruggine);border-color:var(--ruggine)}
-.v-indietro{
-  background:none;border:0;cursor:pointer;margin:18px auto 0;display:block;
-  font-family:var(--sans);font-size:14.5px;color:#6B4426;
-  text-decoration:underline;text-underline-offset:3px;
-}
+.v-avanti{display:block;width:100%;margin-top:28px;cursor:pointer;font-family:var(--btn);font-weight:900;font-size:17px;letter-spacing:.08em;text-transform:uppercase;background:var(--scuro2);color:var(--panna);border:2px solid var(--scuro2);border-radius:14px;padding:17px 20px;transition:background .16s,border-color .16s}
+.v-avanti:hover{background:var(--espresso);border-color:var(--espresso)}
+.v-indietro{background:none;border:0;cursor:pointer;margin:18px auto 0;display:block;font-family:var(--testo);font-size:14.5px;color:#6B4426;text-decoration:underline;text-underline-offset:3px}
 .v-indietro:hover{color:var(--espresso)}
-.v-riep{
-  font-size:15px;line-height:1.55;color:#5C3315;
-  background:#FAF3E7;border-radius:8px;padding:14px 16px;margin-bottom:24px;
-  border-left:4px solid var(--ruggine);
-}
+.v-riep{font-size:15px;line-height:1.55;color:#5C3315;background:#FAF3E7;border-radius:8px;padding:14px 16px;margin-bottom:24px;border-left:4px solid var(--arancio)}
 .v-riep b{color:var(--espresso)}
-
-/* ============ FOOTER (variante ridotta) ============ */
-.footer{background:var(--nero);position:relative;padding:0 0 40px}
-.footer-cam{
-  display:flex;flex-direction:column;align-items:center;
-  padding:clamp(64px,9vw,110px) 20px 0;text-align:center;
-}
-.footer-cam .ico{
-  width:min(400px,72vw);height:auto;aspect-ratio:272.48/160.07;
-  color:var(--azz);
-}
-.footer-payoff{
-  font-family:var(--bronco);font-weight:400;font-synthesis:none;text-transform:uppercase;
-  color:var(--panna);font-size:clamp(30px,5.4vw,64px);letter-spacing:.06em;
-  margin-top:26px;line-height:1.08;
-}
-.footer-sub{
-  font-family:var(--serif);font-style:italic;color:var(--azz);
-  font-size:clamp(16px,2vw,20px);margin-top:10px;
-}
-.footer-rule{
-  display:flex;align-items:center;gap:18px;
-  max-width:var(--wrap);margin:clamp(44px,6vw,64px) auto 0;padding:0 clamp(20px,4vw,48px);
-  color:var(--azz);
-}
-.footer-rule .line{flex:1;height:1px;background:rgba(139,174,164,.35)}
-.footer-rule .ico{width:20px;height:22px}
-.footer-grid{
-  max-width:var(--wrap);margin:40px auto 0;padding:0 clamp(20px,4vw,48px);
-  display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:clamp(28px,4vw,56px);
-}
-/* ⚠️ min-width:0 sulle colonne. Senza, un elemento di griglia non scende mai
-   sotto la larghezza del suo contenuto (min-width:auto e' il valore di
-   partenza): da telefono la colonna restava a 403px dentro un footer di 390 e
-   TUTTA la pagina scorreva di lato di 33px. Difetto vecchio, trovato il 10/09
-   misurando lo scrollWidth. */
-.footer-grid > *{min-width:0}
-.footer-grid, .footer-grid *{overflow-wrap:anywhere}
-.footer h5{
-  font-family:var(--sans);font-size:12px;font-weight:800;letter-spacing:.24em;
-  text-transform:uppercase;color:var(--azz);margin-bottom:16px;
-}
-.footer-big{font-family:var(--bronco);font-size:clamp(24px,3vw,32px);color:var(--beige);line-height:1.15;letter-spacing:.04em}
-.footer ul{list-style:none}
-.footer ul li{margin-bottom:9px;font-size:14.5px;color:var(--beige)}
-.footer ul a{color:var(--beige);text-decoration:none}
-.footer ul a:hover{color:var(--azz)}
-.footer-social{display:flex;gap:14px;margin-top:18px}
-.footer-social a{
-  font-size:13px;font-weight:700;letter-spacing:.08em;color:var(--azz);
-  text-decoration:none;border:1px solid rgba(139,174,164,.4);border-radius:99px;
-  padding:7px 16px;
-}
-.footer-social a:hover{background:var(--azz);color:var(--nero)}
-.footer-copy{
-  max-width:var(--wrap);margin:44px auto 0;padding:20px clamp(20px,4vw,48px) 0;
-  border-top:1px solid rgba(139,174,164,.18);
-  font-size:12.5px;color:var(--tan);text-align:center;
-}
-.footer-copy a{color:var(--azz);text-decoration:none}
-/* variante ridotta (-1/3 sulle spaziature verticali) */
-.footer--ridotta{padding:0 0 26px}
-.footer--ridotta .footer-cam{padding:clamp(42px,6vw,72px) 20px 0}
-.footer--ridotta .footer-payoff{margin-top:17px}
-.footer--ridotta .footer-sub{margin-top:7px}
-.footer--ridotta .footer-rule{margin:clamp(29px,4vw,42px) auto 0}
-.footer--ridotta .footer-grid{margin:26px auto 0}
-.footer--ridotta h5{margin-bottom:11px}
-.footer--ridotta ul li{margin-bottom:6px}
-.footer--ridotta .footer-social{margin-top:12px}
-.footer--ridotta .footer-copy{margin:29px auto 0;padding-top:13px}
-@media (max-width:720px){
-  .footer--ridotta .footer-grid{gap:22px}
-}
-
-/* ============ RESPONSIVE ============ */
-@media (max-width:960px){
-  .footer-grid{grid-template-columns:1fr 1fr}
-}
-@media (max-width:1000px){
-  .nav-side.sx{display:none}
-  .nav-soc{display:none}
-  .nav-in{grid-template-columns:auto 1fr auto;gap:10px}
-  .nav-logo{grid-column:2}
-  .nav .nav-logo img{height:52px}
-  .nav-burger{display:flex;grid-column:1;justify-self:start}
-  .footer-grid{grid-template-columns:1fr;gap:32px}
-}
-
-/* ---- REVEAL allo scroll (dal sito live) --------------------------
-   Gating con html.js: senza JavaScript la classe .js non c'è e tutto
-   resta visibile (fallback obbligatorio). */
-html.js .rv{
-  opacity:0;transform:translateY(26px);
-  transition:opacity .85s cubic-bezier(.22,.61,.36,1),transform .85s cubic-bezier(.22,.61,.36,1);
-  will-change:opacity,transform;
-}
-html.js .rv.in{opacity:1;transform:none}
-html.js .fade-in{opacity:0;transform:translateY(18px);transition:opacity .9s ease,transform .9s ease}
-html.js .fade-in.in{opacity:1;transform:none}
-html.js .stagger>*{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
-html.js .stagger.in>*{opacity:1;transform:none}
-html.js .stagger.in>*:nth-child(1){transition-delay:.04s}
-html.js .stagger.in>*:nth-child(2){transition-delay:.12s}
-html.js .stagger.in>*:nth-child(3){transition-delay:.2s}
-html.js .stagger.in>*:nth-child(4){transition-delay:.28s}
-html.js .stagger.in>*:nth-child(5){transition-delay:.36s}
-html.js .stagger.in>*:nth-child(6){transition-delay:.44s}
-html.js .stagger.in>*:nth-child(7){transition-delay:.52s}
-html.js .stagger.in>*:nth-child(8){transition-delay:.6s}
-@media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  html.js .rv,html.js .fade-in,html.js .stagger>*{
-    opacity:1!important;transform:none!important;transition:none!important;animation:none!important;
-  }
-}
 </style>
-<link rel="stylesheet" href="stile-hjck.css" />
-<style>
-/* ⚠️ QUESTO BLOCCO STA DOPO stile-hjck.css APPOSTA: e' l'unico punto della pagina
-   che puo' batterlo. I due <style> di sopra vengono PRIMA del link e perdono.
-
-   🚫 Via l'ombra arancione piena spostata dal bottone «Preventivo» della testata.
-   E' esattamente cio' che il 10/09 era stato tolto ovunque («sulla .nav-cta
-   un'ombra arancio piena spostata di 3px»), ma nel foglio condiviso era rimasta.
-   ⚠️ Annullata SOLO QUI, perche' stile-hjck.css lo leggono altre 13 pagine e
-   cambiarlo le cambierebbe tutte senza che nessuno le abbia guardate. Segnalato. */
-.nav-cta{box-shadow:none !important}
-.nav-cta:hover{box-shadow:none !important;transform:none}
-/* ===== SELETTORE DI LINGUA (aggiunto con la versione inglese) =====
-   Il bottone IT/EN vive nella lista di destra della testata: su mobile quella
-   lista mostra solo l'ultimo elemento (il bottone "preventivo"), quindi la
-   voce della lingua sparisce da sola e resta quella nel menu a tendina. */
-.nav-lang{
-  border:1px solid rgba(243,229,208,.55);border-radius:6px;
-  padding:5px 9px 4px;font-size:11.5px!important;letter-spacing:.16em;
-}
-.nav-lang:hover{background:rgba(243,229,208,.14)}
-/* strisciolina in basso: appare solo a chi ha il browser nell'altra lingua */
-.lang-bar{
-  position:fixed;left:0;right:0;bottom:0;z-index:95;display:none;
-  background:var(--caffe,#2B1405);color:var(--panna,#EFE2CE);
-  border-top:1px solid rgba(243,229,208,.22);
-  box-shadow:0 -8px 24px rgba(43,20,5,.4);
-  font-family:var(--sans,system-ui,sans-serif);font-size:13.5px;line-height:1.4;
-  padding:11px clamp(14px,4vw,28px);
-}
-.lang-bar.on{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
-.lang-bar a{color:var(--arancio,#C74A07);font-weight:800;text-decoration:underline}
-.lang-bar b{color:var(--panna,#EFE2CE)}
-.lang-bar button{
-  background:none;border:1px solid rgba(243,229,208,.45);border-radius:6px;
-  color:inherit;font:inherit;line-height:1;padding:6px 9px;cursor:pointer;
-}
-.lang-bar button:hover{background:rgba(243,229,208,.14)}
-
-/* ---------- IL MODULO, REVISIONE DEL 10/09 --------------------------------
-   Le tre voci del servizio portano la durata scritta sotto, e il budget si
-   restringe in base a quello che hai scelto. Michele: "se mi dici tutto il
-   giorno non puoi selezionare 1.000 euro... voglio stanarti". */
-.qf-chips--grandi{gap:11px}
-.qf-chips--grandi .qf-chip{
-  display:flex;flex-direction:column;align-items:flex-start;gap:5px;
-  text-align:left;padding:13px 20px 14px;line-height:1.15;
-}
-.qf-chips--grandi .qf-chip em{
-  font-family:var(--sans,inherit);font-style:normal;font-weight:600;font-size:13.5px;
-  letter-spacing:0;text-transform:none;opacity:.72;
-}
-.qf-chip.off{opacity:.34;cursor:not-allowed;text-decoration:line-through;text-decoration-thickness:1.5px}
-.qf-spiega{font-size:14.5px;line-height:1.5;color:#6B4426;margin:-2px 0 12px;max-width:62ch}
-</style>
-
 <!-- ⚠️ L'ORDINE CONTA: consenso.js PRIMA di Tag Manager, e senza defer. Imposta il
      consent mode a NEGATO come stato di partenza, cosi' i tag dentro GTM non scrivono
      niente finche' qualcuno non accetta. Se girasse dopo, il banner sarebbe finto. -->
@@ -724,7 +152,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <script>document.documentElement.classList.add("js");</script>
 
-<!-- ==================== NAV (stile home confermato il 01/09) ==================== -->
 <header class="nav">
   <div class="nav-in">
     <button class="nav-burger" type="button" aria-expanded="false" aria-controls="nav-drawer" aria-label="Apri il menu"><span></span><span></span><span></span></button>
@@ -756,35 +183,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </nav>
 </header>
 
-<!-- ==================== PAGE HERO — Come funziona ==================== -->
-<!-- ⚠️ INTRO CONTRATTA AL MINIMO (24/09/2026). Michele: «accorcia la pagina, falla
-     piu' breve, bisogna arrivare piu' in fretta al form» e «meno distrazioni di copy».
-     Prima qui c'erano: la riga «Risposta rapida», l'occhiello «Preventivo», il titolo,
-     una presentazione, TRE step numerati (01/02/03), tre rassicurazioni, e poi un
-     SECONDO titolo con una seconda presentazione quasi identica alla prima. La stessa
-     promessa era scritta tre volte prima che si vedesse un campo.
-     🚫 Via anche la fascia «Cachet 1.000 € — 2.500 € circa»: Michele, 24/09, «non dare
-        anticipazioni di prezzo, sono vecchie». Le tre voci di budget DENTRO il modulo
-        restano: quelle chiedono, non annunciano. -->
-<section class="ph" id="top">
-  <div class="wrap">
-    <h1>Una serata <span class="it">con noi?</span></h1>
+<section class="v-sez v-sez--bassa ph" id="top">
+  <div class="v-in v-in--stretto">
+    <h1 class="v-h v-h--hero">Una serata <span class="acc">con noi?</span></h1>
     <!-- la stessa riga della landing, parola per parola -->
-    <p class="ph-lead">Due minuti. <b>Lo legge Mike</b>, non un robot, e ti rispondiamo
+    <p class="v-lead v-lead--centro">Due minuti. <b>Lo legge Mike</b>, non un robot, e ti rispondiamo
       con una proposta in qualche giorno.</p>
   </div>
 </section>
 
 <!-- ==================== CONTACT — il modulo ==================== -->
-<section class="section contact on-light" id="contact">
-  <div class="wrap">
+<section class="v-sez contact" id="contact">
+  <div class="v-in v-in--stretto">
     <div class="v-form-guscio rv">
 
     <!-- pannello di conferma (nascosto finché l'invio non riesce) -->
-    <div class="qf-success" id="qf-success" hidden>
-      <h3>Richiesta <span class="it">ricevuta.</span></h3>
+    <div class="qf-success chiaro" id="qf-success" hidden>
+      <h3>Richiesta <span class="acc">ricevuta.</span></h3>
       <p id="qf-success-msg">Grazie — ti ricontattiamo con proposta dettagliata, scaletta tipo e cachet personalizzato per la data che ci hai indicato.</p>
-      <button type="button" class="btn-dark" id="qf-reset">↺ Nuova richiesta</button>
+      <button type="button" class="v-pill v-pill--contorno v-pill--mini" id="qf-reset">↺ Nuova richiesta</button>
     </div>
 
     <!-- ⚠️ NETLIFY FORMS dal 12/09 (prima Formspree). Netlify riconosce i moduli leggendo
@@ -944,8 +361,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <!-- ==================== FOOTER (variante ridotta) ==================== -->
-<footer class="footer footer--ridotta">
-  <div class="payoff-edge tartan"></div>
+
+<footer class="footer">
+  <div class="filetto"></div>
 
   <!-- la newsletter e' la prima riga del footer, non una fascia sospesa sopra -->
   <div class="foot-nl" id="newsletter">
@@ -1002,7 +420,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
   <div class="footer-copy">
-    © 2026 Hot Joe &amp; The CoffeeKillers — All rights reserved. ·
+    © 2026 Hot Joe &amp; The CoffeeKillers — Tutti i diritti riservati. ·
     <a href="privacy.html">Informativa privacy</a> ·
     Sviluppato con <a href="https://emporionelbosco.it" target="_blank" rel="noopener">Emporio nel Bosco</a>
   </div>
