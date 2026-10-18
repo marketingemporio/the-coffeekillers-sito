@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Dates and upcoming 2026 shows — The Coffeekillers</title>
-<meta name="description" content="The full 2026 calendar of Hot Joe & The Coffeekillers shows: pubs, village feasts and fairs, festivals and events across northern Italy and beyond." />
+<title>Dates and upcoming shows — The Coffeekillers</title>
+<meta name="description" content="The calendar of Hot Joe & The Coffeekillers shows: pubs, village feasts and fairs, festivals and events across northern Italy and beyond." />
 <link rel="canonical" href="https://thecoffeekillers.com/en/dates.html" />
 <link rel="alternate" hreflang="it" href="https://thecoffeekillers.com/date.html" />
 <link rel="alternate" hreflang="en" href="https://thecoffeekillers.com/en/dates.html" />
@@ -14,569 +14,81 @@
 <meta property="og:locale" content="en_US" />
 <meta property="og:locale:alternate" content="it_IT" />
 <meta property="og:url" content="https://thecoffeekillers.com/en/dates.html" />
-<meta property="og:title" content="Dates and upcoming 2026 shows — The Coffeekillers" />
-<meta property="og:description" content="The full 2026 calendar of Hot Joe & The Coffeekillers shows: pubs, village feasts and fairs, festivals and events across northern Italy and beyond." />
+<meta property="og:title" content="Dates and upcoming shows — The Coffeekillers" />
+<meta property="og:description" content="The calendar of Hot Joe & The Coffeekillers shows: pubs, village feasts and fairs, festivals and events across northern Italy and beyond." />
 <!-- ⚠️ jpg e non webp: Facebook e WhatsApp gestiscono male il webp nelle anteprime -->
 <meta property="og:image" content="https://thecoffeekillers.com/images/og-image.jpg" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="icon" type="image/svg+xml" href="../images/logo/favicon.svg" />
+<link rel="preload" href="../fonts/bonzana.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="../fonts/Manrope-Variable.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="../hjck.css" />
 <style>
 /* ============================================================================
-   MANROPE, OSPITATO QUI E NON PRESO DA GOOGLE
-   ----------------------------------------------------------------------------
-   Prima arrivava da fonts.googleapis.com: ogni visita mandava l'indirizzo IP
-   del visitatore ai server di Google, senza che nessuno l'avesse chiesto — e
-   in Europa e' proprio il punto su cui i garanti hanno gia' dato torto a dei
-   siti. Ospitandolo qui il problema sparisce del tutto: nessun terzo viene
-   contattato per mostrare una pagina, e l'informativa privacy ha una voce in
-   meno da dichiarare. In piu' si risparmiano due connessioni esterne.
-   E' il file VARIABILE: un file solo copre tutti i pesi da 400 a 800.
-   ⚠️ Rye e' uscito: era solo il fallback dopo Bonzana e veniva anch'esso da
-      Google. Al suo posto il serif di sistema, che non chiama nessuno.
+   DATE — solo l'impaginazione dei blocchi suoi: la scheda della prossima data
+   col conto alla rovescia, i biglietti per mese, la fascia dal vivo, l'archivio.
+   ⚠️ Le classi e gli id sono quelli che il JavaScript in fondo usa: non si rinominano.
    ============================================================================ */
-@font-face{
-  font-family:"Manrope";
-  src:url("../fonts/Manrope-Variable.ttf") format("truetype-variations");
-  font-weight:200 800; font-style:normal; font-display:swap;
-}
-</style>
-<style>
-/* ============ FONT (come proposta A2) ============ */
-@font-face{font-family:"LT Cushion";src:url("../fonts/LTCushion-Light.ttf");font-weight:300;font-display:swap}
-@font-face{font-family:"LT Cushion";src:url("../fonts/LTCushion-Medium.ttf");font-weight:500;font-display:swap}
-@font-face{font-family:"LT Cushion";src:url("../fonts/LTCushion-Bold.ttf");font-weight:700;font-display:swap}
-@font-face{font-family:"LT Cushion";src:url("../fonts/LTCushion-Black.ttf");font-weight:900;font-display:swap}
+.dt-hero{padding-top:clamp(40px,6vw,80px);padding-bottom:clamp(26px,3.6vw,48px)}
+/* contenitori: il blocco del calendario e la colonna dei testi del biglietto */
+.cal-sec{position:relative}
+.tk-info{min-width:0}
 
-/* ============ TOKENS ============ */
-:root{
-  --espresso:#241005;
-  --espresso-2:#2E1509;
-  --nero:#180A02;
-  --caffe:#49240A;
-  --panna:#FBF5EA;
-  --beige:#EDDABD;
-  --tan:#BD8B65;
-  --arancio:#FA8600;
-  --ruggine:#CD5812;
-  --azz:#8BAEA4;
-  --azz-scuro:#5F837A;
-  --azz-testo:#3F5C55;    /* azzurro leggibile per i TESTI su fondo chiaro */
-  --azz-wash:#D8E5E0;
-  --bronco:"Bronco Valley",serif;
-  --serif:"LT Cushion",serif;
-  --sans:"Manrope",sans-serif;
-  --valley:"Valley",serif;
-  --cushion:"LT Cushion",serif;
-  --wrap:1180px;
-  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>");
-}
-
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:130px}
-body{
-  font-family:var(--sans);
-  background:var(--espresso);
-  color:var(--panna);
-  font-size:16px;
-  line-height:1.6;
-  overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;
-}
-img{max-width:100%;display:block}
-a{color:inherit}
-
-/* il velluto: grana su tutta la pagina */
-body::after{
-  content:"";position:fixed;inset:0;z-index:80;pointer-events:none;
-  background:var(--grain);opacity:.07;
-}
-
-h1,h2,h3{
-  font-family:var(--bronco);
-  font-weight:400;
-  font-synthesis:none;
-  letter-spacing:.03em;
-  line-height:1.04;
-  text-transform:uppercase;
-}
-.wrap{max-width:var(--wrap);margin:0 auto;padding:0 clamp(20px,4vw,48px)}
-
-/* ============ ICONE (mask) ============ */
-.ico{
-  display:inline-block;background:currentColor;flex:none;
-  -webkit-mask:no-repeat center/contain;mask:no-repeat center/contain;
-}
-.i-teschio  {-webkit-mask-image:url("../images/icone/teschio-longhorn.svg");mask-image:url("../images/icone/teschio-longhorn.svg");aspect-ratio:373.99/176.81}
-.i-cactus   {-webkit-mask-image:url("../images/icone/cactus.svg");mask-image:url("../images/icone/cactus.svg");aspect-ratio:140.28/229.85}
-.i-cappello {-webkit-mask-image:url("../images/icone/cappello-cowboy.svg");mask-image:url("../images/icone/cappello-cowboy.svg");aspect-ratio:266.88/132.43}
-.i-ferri    {-webkit-mask-image:url("../images/icone/ferri-di-cavallo.svg");mask-image:url("../images/icone/ferri-di-cavallo.svg");aspect-ratio:267.1/184.4}
-.i-stivale  {-webkit-mask-image:url("../images/icone/stivale.svg");mask-image:url("../images/icone/stivale.svg");aspect-ratio:169.63/240.37}
-.i-camaleonte{-webkit-mask-image:url("../images/icone/camaleonte.svg");mask-image:url("../images/icone/camaleonte.svg");aspect-ratio:272.48/160.07}
-.i-stella   {-webkit-mask-image:url("../images/icone/stella-sceriffo.svg");mask-image:url("../images/icone/stella-sceriffo.svg");aspect-ratio:187.62/203.89}
-.i-chitarra {-webkit-mask-image:url("../images/icone/chitarra.svg");mask-image:url("../images/icone/chitarra.svg");aspect-ratio:128.45/317.28}
-
-/* ============ TARTAN ============ */
-.tartan{
-  background-color:var(--espresso-2);
-  background-image:
-    repeating-linear-gradient(90deg,
-      transparent 0 16px, rgba(205,88,18,.5) 16px 23px,
-      transparent 23px 40px, rgba(251,245,234,.22) 40px 41.5px,
-      transparent 41.5px 56px),
-    repeating-linear-gradient(0deg,
-      transparent 0 16px, rgba(205,88,18,.5) 16px 23px,
-      transparent 23px 40px, rgba(251,245,234,.22) 40px 41.5px,
-      transparent 41.5px 56px);
-}
-.payoff-edge{height:12px}
-
-/* ============ NAV ============ */
-/* ============ NAV stile sito Kruse Brothers, replica fedele:
-   striscia annuncio in cima, menu maiuscoletto a sinistra, logo grande
-   centrale, icone social a destra; nav trasparente con gradiente sull'hero,
-   scendendo si stacca e diventa barra fissa scura (JS in fondo) ============ */
-.annuncio{
-  background:var(--caffe);color:var(--panna);text-align:center;
-  font-size:11.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
-  padding:9px 16px;position:relative;z-index:61;
-}
-.annuncio a{color:inherit;text-decoration:none}
-.annuncio a:hover{color:var(--arancio)}
-.nav{
-  position:absolute;top:36px;left:0;right:0;z-index:60;
-  background:linear-gradient(180deg,rgba(8,4,1,.94) 0%,rgba(8,4,1,.72) 46%,rgba(8,4,1,.28) 80%,transparent 100%);
-  padding-bottom:26px;
-  transition:background .3s,box-shadow .3s;
-}
-.nav.solid{
-  position:fixed;top:0;
-  background:var(--caffe);            /* stesso marrone della striscia annuncio, come nel riferimento */
-  padding-bottom:0;
-  border-bottom:1px solid rgba(237,218,189,.14);
-  box-shadow:0 10px 30px rgba(0,0,0,.35);
-}
-.nav-in{
-  max-width:1320px;margin:0 auto;padding:10px clamp(20px,4vw,48px) 14px;
-  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px;
-}
-.nav-logo{justify-self:center}
-.nav-logo img{
-  height:118px;width:auto;transition:height .3s;
-}
-.nav.solid .nav-logo img{height:74px}
-.nav-side{display:flex;align-items:center;gap:clamp(12px,1.8vw,26px);list-style:none;margin:0;padding:0}
-.nav-side.dx{justify-content:flex-end}
-.nav-side a{
-  color:#fff;text-decoration:none;font-weight:700;font-size:12.5px;
-  letter-spacing:.16em;text-transform:uppercase;
-}
-.nav-side a:hover{color:var(--arancio)}
-.nav-side a{white-space:nowrap}
-.nav-soc{display:flex;align-items:center;gap:14px}
-.nav-soc a{display:flex}
-.nav-soc svg{width:18px;height:18px;fill:#fff;transition:fill .2s}
-.nav-soc a:hover svg{fill:var(--arancio)}
-
-/* ---- Menu mobile (sotto i 720px): panetto a tendina con tutte le voci ---- */
-.nav-burger{
-  display:none;background:none;border:0;cursor:pointer;padding:8px 6px;
-  flex-direction:column;gap:5px;width:38px;
-}
-.nav-burger span{display:block;height:2px;width:26px;background:var(--beige);transition:transform .25s,opacity .2s}
-.nav-burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-.nav-burger[aria-expanded="true"] span:nth-child(2){opacity:0}
-.nav-burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-.nav-drawer{
-  display:none;background:var(--caffe);border-top:1px solid rgba(237,218,189,.16);
-  padding:10px clamp(20px,5vw,32px) 22px;
-}
-.nav-drawer.open{display:block}
-.nav-drawer ul{list-style:none;margin:0;padding:0}
-.nav-drawer a{
-  display:block;padding:14px 2px;color:var(--beige);text-decoration:none;
-  font-weight:700;font-size:15px;letter-spacing:.16em;text-transform:uppercase;
-  border-bottom:1px solid rgba(237,218,189,.12);
-}
-.nav-drawer a[aria-current="page"]{color:var(--arancio)}
-.nav-drawer .dr-soc{display:flex;gap:20px;padding-top:18px}
-.nav-drawer .dr-soc a{border-bottom:0;padding:0}
-.nav-drawer .dr-soc svg{width:20px;height:20px;fill:var(--beige)}
-
-
-/* Pagine interne: niente foto a tutta pagina dietro la nav → barra marrone
-   piena fin da subito, come la pagina MERCH del riferimento. */
-.nav{
-  position:sticky;top:0;
-  background:var(--caffe);
-  padding-bottom:0;
-  border-bottom:1px solid rgba(237,218,189,.14);
-}
-.nav .nav-logo img{height:74px}
-.nav-cta{
-  font-family:var(--valley)!important;font-size:17px!important;font-weight:400!important;
-  color:var(--azz)!important;border:1.5px solid var(--azz);border-radius:8px;
-  padding:6px 16px;letter-spacing:.05em!important;
-}
-.nav-cta:hover{color:var(--espresso)!important;background:var(--azz)}
-.nav-side a[aria-current="page"]{color:var(--arancio)}
-.nav-burger{display:none}
-
-/* ============ SEZIONI COMUNI ============ */
-.section{position:relative;padding:clamp(72px,9vw,120px) 0}
-.sec-head{
-  display:flex;justify-content:space-between;align-items:baseline;
-  gap:12px;flex-wrap:wrap;margin-bottom:clamp(28px,4vw,44px);
-}
-.eyebrow{
-  display:flex;align-items:center;gap:12px;
-  font-size:13.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--azz);
-}
-.eyebrow .ico{color:var(--azz)}
-.eyebrow-r{font-size:12.5px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--tan)}
-.on-light .eyebrow{color:var(--azz-testo)}          /* testo: tono leggibile */
-.on-light .eyebrow .ico{color:var(--azz-scuro)}      /* icona: tono originale */
-.on-light .eyebrow-r{color:var(--caffe);opacity:.75}
-.sec-title{
-  font-size:clamp(34px,4.6vw,60px);
-  color:var(--panna);
-  margin-bottom:18px;
-}
-.on-light .sec-title{color:var(--espresso)}
-.lead-p{font-size:clamp(16px,1.9vw,19px);color:var(--beige)}
-.on-light .lead-p{color:var(--caffe)}
-
-/* ============ BOTTONI — veste poster (da A2) ============ */
-.btn-poster,.btn-dark,.cta-btn,.nav-burger{
-  font-family:var(--valley);
-  letter-spacing:.04em;
-}
-.btn-poster,.cta-btn{
-  display:inline-block;text-decoration:none;
-  background:var(--beige);color:var(--caffe);
-  border:2px solid var(--beige);border-radius:6px;
-  padding:10px 30px 12px;
-  box-shadow:inset 0 0 0 2px var(--beige),inset 0 0 0 3px rgba(73,36,10,.55);
-  transition:background .2s,border-color .2s,color .2s;
-}
-.btn-poster::before,.cta-btn::before{content:"★ ";color:var(--ruggine);font-size:.75em}
-.btn-poster::after,.cta-btn::after{content:" ★";color:var(--ruggine);font-size:.75em}
-.btn-poster:hover,.cta-btn:hover{
-  background:var(--arancio);border-color:var(--arancio);color:var(--espresso);
-  box-shadow:inset 0 0 0 2px var(--arancio),inset 0 0 0 3px rgba(24,10,2,.55);
-}
-.btn-poster{font-size:clamp(19px,2.2vw,23px)}
-.cta-btn{font-size:clamp(21px,2.6vw,26px);padding:14px 40px 16px;border-radius:6px}
-.btn-dark{
-  display:inline-block;font-weight:300;font-size:20px;letter-spacing:.08em;
-  background:var(--espresso);color:var(--panna);border-radius:6px;
-  padding:10px 26px 12px;text-decoration:none;
-  border:2px solid var(--espresso);transition:background .2s,color .2s,border-color .2s;
-}
-.btn-dark:hover{background:transparent;color:var(--espresso)}
-/* .btn-dark sulle sezioni scure diventa ghost beige (stile A) */
-.on-dark .btn-dark{
-  background:transparent;color:var(--beige);border-color:rgba(237,218,189,.7);
-}
-.on-dark .btn-dark:hover{border-color:var(--beige);background:transparent;color:var(--beige)}
-
-/* ============ PAGE HERO (apertura testuale) ============ */
-.page-hero{background:var(--espresso);padding:clamp(56px,8vw,100px) 0 clamp(40px,5vw,64px)}
-.page-hero .sec-head{margin-bottom:clamp(20px,3vw,30px)}
-.page-hero h1{
-  color:var(--panna);
-  font-size:clamp(42px,6.6vw,92px);
-  margin:0 0 20px;
-  max-width:16ch;
-}
-.ph-it{color:var(--arancio)}
-.page-hero .lead-p{max-width:58ch}
-.rise{animation:ck-rise .9s cubic-bezier(.22,.61,.36,1) both}
-@keyframes ck-rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
-
-/* ============ PROSSIMA DATA — card con countdown (ticket beige, da A2) ============ */
-.cal-sec{background:var(--espresso);color:var(--panna);padding-top:clamp(30px,4vw,48px)}
+/* la scheda della prossima data: carta sul fondo scuro */
 .next-card{
-  background:var(--beige);border:none;border-radius:12px;
-  box-shadow:0 18px 40px -18px rgba(0,0,0,.55);color:var(--espresso);
-  padding:clamp(22px,3vw,34px);display:grid;grid-template-columns:auto 1fr auto;
-  gap:clamp(18px,3vw,36px);align-items:center;margin:20px 0 0;
+  display:grid;grid-template-columns:auto 1fr;gap:clamp(16px,2.6vw,28px);align-items:center;
+  background:var(--carta);color:var(--espresso);border-radius:16px;
+  padding:clamp(18px,2.6vw,26px) clamp(18px,2.8vw,30px);box-shadow:0 24px 50px -22px rgba(12,5,1,.7);
 }
-.next-card .when{text-align:center;border-right:2px solid var(--espresso);padding-right:clamp(18px,3vw,36px)}
-.next-card .when .d{font-family:var(--valley);font-size:clamp(52px,6vw,76px);line-height:.9;color:var(--ruggine)}
-.next-card .when .m{font-family:var(--valley);font-size:24px;color:var(--espresso)}
-.cal-badge{
-  display:inline-block;background:var(--espresso);color:var(--panna);
-  font-family:var(--valley);font-size:15px;letter-spacing:.09em;
-  padding:6px 16px 7px;border-radius:999px;margin-bottom:10px;
-}
-.next-card h2{font-size:clamp(24px,3vw,38px);color:var(--espresso)}
-.next-card .where{font-family:var(--cushion);font-weight:500;font-size:17px;color:var(--caffe);margin-top:6px;letter-spacing:.04em}
-/* conto alla rovescia */
-.cd{display:flex;gap:clamp(10px,1.6vw,16px)}
-.cd-cell{
-  min-width:86px;text-align:center;
-  border:2px solid var(--espresso);border-radius:10px;
-  padding:12px 10px 10px;background:var(--panna);
-}
-.cd-cell .n{font-family:var(--valley);font-size:clamp(28px,3.4vw,40px);line-height:1;color:var(--ruggine)}
-.cd-cell .l{font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--caffe);margin-top:6px}
-@media (max-width:860px){
-  .next-card{grid-template-columns:1fr}
-  .next-card .when{border-right:none;border-bottom:2px solid var(--espresso);padding:0 0 14px;display:flex;align-items:baseline;gap:12px;text-align:left}
-  .cd-cell{flex:1;min-width:0}
-}
-
-/* ============ MESI + TICKET (stile ticket beige da A2) ============ */
-.month-head{
-  display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;
-  margin:clamp(38px,5vw,54px) 0 16px;
-}
-.month-head h3{font-size:clamp(24px,3vw,34px);color:var(--beige)}
-.month-head .cnt{font-size:12.5px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--tan)}
-.tickets{display:grid;gap:16px;margin-top:8px}
-/* i biglietti NON sono cliccabili: nessun hover che finga un link */
-.ticket{
-  position:relative;display:grid;grid-template-columns:132px 1fr auto;align-items:center;
-  background:var(--beige);color:var(--espresso);border-radius:12px;
-  overflow:hidden;
-  box-shadow:0 12px 26px -20px rgba(0,0,0,.5);
-}
-.tk-date{
-  text-align:center;padding:20px 10px;
-  border-right:2px dashed rgba(73,36,10,.35);
-  position:relative;
-}
-.tk-date::before,.tk-date::after{
-  content:"";position:absolute;right:-9px;width:16px;height:16px;border-radius:50%;
-  background:var(--espresso);z-index:1;
-}
-.tk-date::before{top:-9px}
-.tk-date::after{bottom:-9px}
-.tk-day{font-family:var(--valley);font-size:40px;line-height:1;color:var(--ruggine)}
-.tk-mon{font-size:12px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:var(--caffe);margin-top:4px;white-space:nowrap}
-/* riga da locandina: nome — puntinato — provincia, cosi il biglietto largo non resta vuoto */
-.tk-info{padding:16px 22px;display:flex;align-items:baseline;gap:16px}
-.tk-name{font-weight:800;font-size:17px;letter-spacing:.01em}
-.tk-lead{flex:1 1 24px;min-width:20px;height:0;align-self:center;border-bottom:2px dotted rgba(73,36,10,.32)}
-.tk-prov{font-size:13.5px;font-weight:700;color:var(--azz-testo);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
-.tk-side{
-  padding:0 24px;display:flex;align-items:center;gap:10px;
-  font-family:var(--valley);font-size:16px;color:var(--caffe);letter-spacing:.08em;
-}
-.tk-side .ico{width:18px;height:20px;color:var(--azz-scuro)}
-
-/* ============ FASCIA DAL VIVO — spezza il blocco scuro con una foto ============ */
-.live-strip{position:relative;margin:0;background:var(--espresso-2);overflow:hidden}
-.live-strip img{
-  width:100%;height:clamp(300px,34vw,460px);object-fit:cover;object-position:center 38%;
-}
-.live-cap{
-  position:absolute;left:0;right:0;bottom:0;
-  padding:clamp(80px,10vw,120px) 0 clamp(18px,2.4vw,26px);
-  background:linear-gradient(to top,
-    rgba(24,10,2,.92) 0%, rgba(24,10,2,.86) 42%, rgba(24,10,2,0) 100%);
-}
-.live-cap .wrap{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
-.live-cap .k{
-  font-size:12px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--azz);
-}
-.live-cap .t{
-  font-family:var(--cushion);font-weight:500;color:var(--panna);
-  font-size:clamp(15px,2vw,19px);letter-spacing:.03em;
-}
-
-/* ============ GIA SUONATE — righe sobrie su carta ============ */
-.past-sec{background:var(--panna);color:var(--espresso)}
-.past-rows{margin-top:6px}
-.past-row{
-  display:grid;grid-template-columns:110px 1fr auto;gap:18px;align-items:baseline;
-  padding:17px 6px;border-top:1px solid rgba(73,36,10,.16);
-  opacity:.78;
-}
-.past-row:first-child{border-top:none}
-.past-row .dd{font-family:var(--valley);font-size:22px;white-space:nowrap;color:var(--caffe)}
-.past-row .nm{font-weight:800;font-size:16.5px;color:var(--espresso)}
-.past-row .pv{font-weight:700;color:var(--azz-testo);font-size:13px;letter-spacing:.06em;text-transform:uppercase}
-@media (max-width:640px){
-  .past-row{grid-template-columns:96px 1fr;row-gap:2px}
+.next-card .when{text-align:center;font-family:var(--display);line-height:1;min-width:64px}
+.next-card .when .d{font-size:clamp(40px,4.6vw,56px)}
+.next-card .when .m{font-size:16px;letter-spacing:.08em;text-transform:uppercase;margin-top:4px}
+.cal-badge{display:inline-block;font-family:var(--btn);font-weight:700;font-size:13.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--panna);background:var(--scuro2);border-radius:999px;padding:6px 12px 7px;margin-bottom:8px}
+.next-card h2{font-size:clamp(20px,2.2vw,26px);letter-spacing:.01em;color:var(--espresso)}
+.next-card .where{font-size:15.5px;color:#5C3315;margin-top:4px}
+.cd{grid-column:1/-1;display:flex;gap:10px;padding-top:14px;border-top:1px solid rgba(43,20,5,.16)}
+.cd-cell{flex:1;text-align:center;background:#FAF3E7;border:1px solid rgba(43,20,5,.14);border-radius:12px;padding:10px 6px}
+.cd-cell .n{font-family:var(--display);font-size:clamp(24px,2.6vw,32px);line-height:1}
+.cd-cell .l{font-family:var(--btn);font-weight:700;font-size:13.5px;letter-spacing:.06em;text-transform:uppercase;color:#6B4426;margin-top:4px}
+@media (min-width:760px){.next-card{grid-template-columns:auto 1fr auto}.cd{grid-column:auto;border-top:0;padding-top:0;min-width:280px}}
+/* lo stato vuoto: lo scrive il JavaScript quando non ci sono date future */
+.next-card--vuota{display:block;text-align:center;padding:clamp(24px,3.4vw,40px)}
+.nd-vuoto h2{margin:6px 0 8px}
+.nd-vuoto .where{font-size:16.5px;max-width:46ch;margin-inline:auto}
+.nd-vuoto a{color:var(--espresso);font-weight:800;text-decoration:underline;text-decoration-color:var(--arancio);text-decoration-thickness:2px;text-underline-offset:3px}
+/* il mese e i suoi biglietti */
+.month-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-top:clamp(30px,4vw,44px);padding-bottom:10px;border-bottom:1px solid var(--pg-fil)}
+.month-head h3{font-size:clamp(20px,2.2vw,26px);letter-spacing:.01em}
+.month-head .cnt{font-family:var(--btn);font-weight:700;font-size:13.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--pg-mut)}
+.tickets{display:grid;gap:10px;margin-top:14px}
+.ticket{display:grid;grid-template-columns:auto 1fr auto;gap:6px 16px;align-items:center;background:rgba(56,26,8,.78);border:1px solid var(--pg-fil);border-radius:14px;padding:14px 18px}
+.tk-date{text-align:center;min-width:56px}
+.tk-day{font-family:var(--display);font-size:clamp(24px,2.4vw,30px);line-height:1}
+.tk-mon{font-family:var(--btn);font-weight:700;font-size:13.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--pg-mut);margin-top:3px}
+.tk-name{font-weight:700;font-size:16.5px}
+.tk-prov{font-size:14.5px;color:var(--pg-mut)}
+.tk-side{display:inline-flex;align-items:center;gap:8px;font-family:var(--btn);font-weight:700;font-size:13.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--pg-mut)}
+.tk-side .ico{color:var(--tan)}
+@media (max-width:480px){.ticket{grid-template-columns:auto 1fr}.tk-side{display:none}}
+/* la fascia dal vivo: la foto a tutta larghezza, la riga sotto */
+.live-strip{margin:0;background:var(--espresso)}
+.live-strip img{width:100%;height:clamp(240px,42vw,480px);object-fit:cover;object-position:center 45%;display:block}
+.live-cap{max-width:var(--wrap);margin:0 auto;padding:14px var(--lato) 22px;font-family:var(--btn);font-style:italic;font-weight:500;font-size:16px;line-height:1.5;color:var(--pg-mut)}
+/* l'archivio, su carta: da telefono le prime otto righe, poi «Mostra tutte» */
+.past-rows{margin-top:clamp(18px,2.6vw,28px);border-top:1px solid rgba(43,20,5,.18)}
+.past-row{display:grid;grid-template-columns:84px 1fr auto;gap:4px 14px;align-items:baseline;padding:12px 0;border-bottom:1px solid rgba(43,20,5,.18);font-size:16px}
+.past-row .dd{font-family:var(--display);font-size:17px;letter-spacing:.02em;text-transform:uppercase}
+.past-row .nm{font-weight:700}
+.past-row .pv{font-size:14.5px;color:var(--pg-mut)}
+.past-tutte{margin-top:18px}
+@media (max-width:560px){
+  .past-row{grid-template-columns:72px 1fr}
   .past-row .pv{grid-column:2}
+  .past-rows:not(.aperto) .past-row:nth-child(n+9){display:none}
 }
-
-/* ============ CTA INSEGNA (identica alla home A2: fondo arancio) ============ */
-.cta{background:var(--arancio);color:var(--espresso);position:relative}
-.cta-panel{
-  max-width:900px;margin:0 auto;text-align:center;
-  border:3px solid var(--espresso);outline:3px solid var(--espresso);outline-offset:7px;
-  padding:clamp(44px,6vw,76px) clamp(22px,5vw,64px);
-  position:relative;
-}
-.cta-corner{position:absolute;width:26px;height:28px;color:var(--espresso)}
-.cta-corner.tl{top:14px;left:14px}
-.cta-corner.tr{top:14px;right:14px}
-.cta-corner.bl{bottom:14px;left:14px}
-.cta-corner.br{bottom:14px;right:14px}
-.cta-eyebrow{
-  font-family:var(--serif);font-style:italic;font-size:clamp(17px,2.2vw,22px);
-  margin-bottom:8px;
-}
-.cta .sec-title{color:var(--espresso);font-size:clamp(40px,6vw,76px);margin-bottom:16px}
-.cta-lead{max-width:46ch;margin:0 auto 30px;font-weight:500;font-size:clamp(16px,1.9vw,18.5px)}
-.cta-meta{
-  display:flex;justify-content:center;gap:clamp(18px,4vw,48px);flex-wrap:wrap;
-  margin-top:34px;font-size:14.5px;font-weight:700;
-}
-.cta-meta a{color:inherit;text-decoration:none}
-.cta-meta .k{display:block;font-size:11px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;opacity:.7;margin-bottom:2px}
-
-/* ============ FOOTER (variante ridotta, da A2) ============ */
-.footer{background:var(--nero);position:relative;padding:0 0 40px}
-.footer-cam{
-  display:flex;flex-direction:column;align-items:center;
-  padding:clamp(64px,9vw,110px) 20px 0;text-align:center;
-}
-.footer-cam .ico{
-  width:min(400px,72vw);height:auto;aspect-ratio:272.48/160.07;
-  color:var(--azz);
-}
-.footer-payoff{
-  font-family:var(--bronco);font-weight:400;font-synthesis:none;text-transform:uppercase;
-  color:var(--panna);font-size:clamp(30px,5.4vw,64px);letter-spacing:.06em;
-  margin-top:26px;line-height:1.08;
-}
-.footer-sub{
-  font-family:var(--serif);font-style:italic;color:var(--azz);
-  font-size:clamp(16px,2vw,20px);margin-top:10px;
-}
-.footer-rule{
-  display:flex;align-items:center;gap:18px;
-  max-width:var(--wrap);margin:clamp(44px,6vw,64px) auto 0;padding:0 clamp(20px,4vw,48px);
-  color:var(--azz);
-}
-.footer-rule .line{flex:1;height:1px;background:rgba(139,174,164,.35)}
-.footer-rule .ico{width:20px;height:22px}
-.footer-grid{
-  max-width:var(--wrap);margin:40px auto 0;padding:0 clamp(20px,4vw,48px);
-  display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:clamp(28px,4vw,56px);
-}
-/* ⚠️ min-width:0 sulle colonne. Senza, un elemento di griglia non scende mai
-   sotto la larghezza del suo contenuto (min-width:auto e' il valore di
-   partenza): da telefono la colonna restava a 403px dentro un footer di 390 e
-   TUTTA la pagina scorreva di lato di 33px. Difetto vecchio, trovato il 10/09
-   misurando lo scrollWidth. */
-.footer-grid > *{min-width:0}
-.footer-grid, .footer-grid *{overflow-wrap:anywhere}
-.footer h5{
-  font-family:var(--sans);font-size:12px;font-weight:800;letter-spacing:.24em;
-  text-transform:uppercase;color:var(--azz);margin-bottom:16px;
-}
-.footer-big{font-family:var(--bronco);font-size:clamp(24px,3vw,32px);color:var(--beige);line-height:1.15;letter-spacing:.04em}
-.footer ul{list-style:none}
-.footer ul li{margin-bottom:9px;font-size:14.5px;color:var(--beige)}
-.footer ul a{color:var(--beige);text-decoration:none}
-.footer ul a:hover{color:var(--azz)}
-.footer-social{display:flex;gap:14px;margin-top:18px}
-.footer-social a{
-  font-size:13px;font-weight:700;letter-spacing:.08em;color:var(--azz);
-  text-decoration:none;border:1px solid rgba(139,174,164,.4);border-radius:99px;
-  padding:7px 16px;
-}
-.footer-social a:hover{background:var(--azz);color:var(--nero)}
-.footer-copy{
-  max-width:var(--wrap);margin:44px auto 0;padding:20px clamp(20px,4vw,48px) 0;
-  border-top:1px solid rgba(139,174,164,.18);
-  font-size:12.5px;color:var(--tan);text-align:center;
-}
-.footer-copy a{color:var(--azz);text-decoration:none}
-/* variante ridotta (-1/3 sulle spaziature verticali) */
-.footer--ridotta{padding:0 0 26px}
-.footer--ridotta .footer-cam{padding:clamp(42px,6vw,72px) 20px 0}
-.footer--ridotta .footer-payoff{margin-top:17px}
-.footer--ridotta .footer-sub{margin-top:7px}
-.footer--ridotta .footer-rule{margin:clamp(29px,4vw,42px) auto 0}
-.footer--ridotta .footer-grid{margin:26px auto 0}
-.footer--ridotta h5{margin-bottom:11px}
-.footer--ridotta ul li{margin-bottom:6px}
-.footer--ridotta .footer-social{margin-top:12px}
-.footer--ridotta .footer-copy{margin:29px auto 0;padding-top:13px}
-@media (max-width:720px){
-  .footer--ridotta .footer-grid{gap:22px}
-}
-
-/* ============ ICONE PIU GRANDI DA DESKTOP (come A2) ============ */
-@media (min-width:900px){
-  .eyebrow .ico{transform:scale(1.35);margin:0 3px}
-  .tk-side .ico{width:24px;height:27px}
-}
-
-/* ============ RESPONSIVE ============ */
-@media (max-width:960px){
-  .footer-grid{grid-template-columns:1fr 1fr}
-}
-@media (max-width:1000px){
-  .nav-side.sx{display:none}
-  .nav-soc{display:none}
-  .nav-in{grid-template-columns:auto 1fr auto;gap:10px}
-  .nav-logo{grid-column:2}
-  .nav .nav-logo img{height:52px}
-  .nav-burger{display:flex;grid-column:1;justify-self:start}
-  .ticket{grid-template-columns:118px 1fr}
-  .tk-side{display:none}
-  .tk-day{font-size:34px}
-  .tk-mon{font-size:11px;letter-spacing:.18em}
-  .tk-info{display:block}
-  .tk-lead{display:none}
-  .tk-prov{margin-top:3px}
-  .footer-grid{grid-template-columns:1fr;gap:32px}
-}
-
-/* ============ REVEAL allo scroll (gating con html.js, fallback senza JS) ============ */
-html.js .rv{
-  opacity:0;transform:translateY(26px);
-  transition:opacity .85s cubic-bezier(.22,.61,.36,1),transform .85s cubic-bezier(.22,.61,.36,1);
-  will-change:opacity,transform;
-}
-html.js .rv--left{transform:translateX(-30px)}
-html.js .rv--right{transform:translateX(30px)}
-html.js .rv.in{opacity:1;transform:none}
-@media (max-width:700px){html.js .rv--left,html.js .rv--right{transform:translateY(26px)}}
-html.js .fade-in{opacity:0;transform:translateY(18px);transition:opacity .9s ease,transform .9s ease}
-html.js .fade-in.in{opacity:1;transform:none}
-html.js .stagger>*{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
-html.js .stagger.in>*{opacity:1;transform:none}
-html.js .stagger.in>*:nth-child(1){transition-delay:.04s}
-html.js .stagger.in>*:nth-child(2){transition-delay:.12s}
-html.js .stagger.in>*:nth-child(3){transition-delay:.2s}
-html.js .stagger.in>*:nth-child(4){transition-delay:.28s}
-html.js .stagger.in>*:nth-child(5){transition-delay:.36s}
-html.js .stagger.in>*:nth-child(6){transition-delay:.44s}
-html.js .stagger.in>*:nth-child(7){transition-delay:.52s}
-html.js .stagger.in>*:nth-child(8){transition-delay:.6s}
-@media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  html.js .rv,html.js .fade-in,html.js .stagger>*,.rise{
-    opacity:1!important;transform:none!important;transition:none!important;animation:none!important;
-  }
-}
-.next-card--vuota{grid-template-columns:1fr;text-align:center}
-.nd-vuoto .cal-badge{margin-bottom:12px}
-.nd-vuoto h2{margin-bottom:8px}
-.nd-vuoto a{color:var(--ruggine);font-weight:800}
-
-/* ⚠️ L'attributo `hidden` da solo non basta: il browser gli da' `display:none`
-   con la specificita' piu' bassa, e qualunque regola che imposti un display
-   (`.ticket{display:grid}`, `.cal-row{display:grid}`, `.tickets{display:grid}`)
-   lo sovrascrive. Le date passate restavano a schermo pur avendo l'attributo.
-   Con `!important` il nascondi vale davvero. */
-[hidden]{display:none !important}
-
+@media (min-width:561px){.past-tutte{display:none}}
 </style>
-<link rel="stylesheet" href="../stile-hjck.css" />
-<!-- Dati strutturati: recuperati dal sito precedente, il logo aggiornato
-     a quello definitivo. Servono a Google per capire chi siamo. -->
-<!-- ⚠️ Questo elenco per Google NON si aggiorna da solo: le date passate
-     spariscono dalla pagina (lo fa lo script in fondo) ma restano qui.
-     Quando si cambiano le date sopra, va aggiornato anche questo blocco. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -653,35 +165,6 @@ html.js .stagger.in>*:nth-child(8){transition-delay:.6s}
   ]
 }
 </script>
-<style>
-/* ===== SELETTORE DI LINGUA (aggiunto con la versione inglese) =====
-   Il bottone IT/EN vive nella lista di destra della testata: su mobile quella
-   lista mostra solo l'ultimo elemento (il bottone "preventivo"), quindi la
-   voce della lingua sparisce da sola e resta quella nel menu a tendina. */
-.nav-lang{
-  border:1px solid rgba(237,218,189,.55);border-radius:6px;
-  padding:5px 9px 4px;font-size:11.5px!important;letter-spacing:.16em;
-}
-.nav-lang:hover{background:rgba(237,218,189,.14)}
-/* strisciolina in basso: appare solo a chi ha il browser nell'altra lingua */
-.lang-bar{
-  position:fixed;left:0;right:0;bottom:0;z-index:95;display:none;
-  background:var(--caffe,#49240A);color:var(--panna,#EDDABD);
-  border-top:1px solid rgba(237,218,189,.22);
-  box-shadow:0 -8px 24px rgba(73,36,10,.4);
-  font-family:var(--sans,system-ui,sans-serif);font-size:13.5px;line-height:1.4;
-  padding:11px clamp(14px,4vw,28px);
-}
-.lang-bar.on{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
-.lang-bar a{color:var(--arancio,#CD5812);font-weight:800;text-decoration:underline}
-.lang-bar b{color:var(--panna,#EDDABD)}
-.lang-bar button{
-  background:none;border:1px solid rgba(237,218,189,.45);border-radius:6px;
-  color:inherit;font:inherit;line-height:1;padding:6px 9px;cursor:pointer;
-}
-.lang-bar button:hover{background:rgba(237,218,189,.14)}
-</style>
-
 <!-- ⚠️ L'ORDINE CONTA: consenso.js PRIMA di Tag Manager, e senza defer. Imposta il
      consent mode a NEGATO come stato di partenza, cosi' i tag dentro GTM non scrivono
      niente finche' qualcuno non accetta. Se girasse dopo, il banner sarebbe finto. -->
@@ -702,7 +185,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <script>document.documentElement.classList.add("js");</script>
 
-<!-- ==================== NAV (stile home confermato il 01/09) ==================== -->
 <header class="nav">
   <div class="nav-in">
     <button class="nav-burger" type="button" aria-expanded="false" aria-controls="nav-drawer" aria-label="Open the menu"><span></span><span></span><span></span></button>
@@ -734,28 +216,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </nav>
 </header>
 
-<!-- ==================== 1. PAGE HERO ==================== -->
-<section class="page-hero" id="top">
-  <div class="wrap">
-    <h1 class="rise" style="animation-delay:.16s">All the 2026 <span class="ph-it">dates.</span></h1>
-    <p class="lead-p rise" style="animation-delay:.28s">The next confirmed nights &mdash; pubs, feasts and fairs, festivals and private events &mdash; and the archive of the shows already played. See you in front of the stage.</p>
+<!-- ==================== 1. LA TESTA ==================== -->
+<section class="v-sez dt-hero" id="top">
+  <div class="v-in v-in--stretto">
+    <div class="v-testa rv">
+      <h1 class="v-h v-h--hero">Our <span class="acc">dates.</span></h1>
+      <p class="v-lead">The next confirmed nights &mdash; pubs, feasts and fairs, festivals and private events &mdash; and the archive of the shows already played. See you in front of the stage.</p>
+    </div>
   </div>
 </section>
 
-<!-- ==================== 2. PROSSIMA DATA + CALENDARIO ==================== -->
-<section class="section cal-sec on-dark" id="calendario">
-  <div class="wrap">
-
-    <!-- card prossima data con countdown -->
-    <div class="next-card rv" id="next-card" data-iso="2026-10-02">
+<!-- ==================== 2. NEXT DATE + CALENDAR ====================
+     To add a date, copy a .ticket block and set its data-iso. Past dates are hidden
+     by the script at the bottom; with no future dates the card becomes the invitation.
+     Keep it in step with date.html. -->
+<section class="v-sez v-sez--bassa cal-sec" id="calendario">
+  <div class="v-in v-in--stretto">
+    <div class="next-card chiaro rv" id="next-card" data-iso="2026-10-02">
       <div class="when">
         <div class="d">02</div>
         <div class="m">Oct</div>
       </div>
       <div>
-        <span class="cal-badge">★ Next date</span>
-        <h2>Oktoberfest — Coco Cafè</h2>
-        <div class="where">2 October 2026 · San Paolo (BS)</div>
+        <span class="cal-badge">Next date</span>
+        <h2>Oktoberfest &mdash; Coco Caf&egrave;</h2>
+        <div class="where">2 October 2026 &middot; San Paolo (BS)</div>
       </div>
       <div class="cd" id="countdown" role="timer" aria-label="Countdown to the next date">
         <div class="cd-cell"><div class="n" id="cd-d">7</div><div class="l" id="cd-dl">days</div></div>
@@ -764,14 +249,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
 
-    <!-- ⚠️ August and September are gone from here: 23/08, 29/08 and 05/09 have been
-         played and moved to the archive below; 28/08 in Modena was **cancelled** and does
-         NOT go to the archive, which means «we played these».
-         🚨 This page does NOT update itself — no script hides expired tickets — so a past
-         date stays listed as «next» until someone moves it by hand. Keep it in step with
-         date.html. -->
-
-    <!-- Ottobre -->
+    <!-- October -->
     <div class="month-head rv" data-mese="2026-10">
       <h3>October 2026</h3>
       <span class="cnt">2 dates</span>
@@ -779,45 +257,37 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="tickets stagger" data-gruppo>
       <div class="ticket" data-iso="2026-10-02">
         <div class="tk-date"><div class="tk-day">02</div><div class="tk-mon">Oct 2026</div></div>
-        <div class="tk-info"><div class="tk-name">Oktoberfest — Coco Cafè</div><span class="tk-lead" aria-hidden="true"></span><div class="tk-prov">San Paolo (BS)</div></div>
+        <div class="tk-info"><div class="tk-name">Oktoberfest &mdash; Coco Caf&egrave;</div><div class="tk-prov">San Paolo (BS)</div></div>
         <div class="tk-side"><span class="ico i-cappello" style="width:28px;height:14px" aria-hidden="true"></span> Live</div>
       </div>
       <div class="ticket" data-iso="2026-10-10">
         <div class="tk-date"><div class="tk-day">10</div><div class="tk-mon">Oct 2026</div></div>
-        <div class="tk-info"><div class="tk-name">Beach Fly opening night</div><span class="tk-lead" aria-hidden="true"></span><div class="tk-prov">Botticino (BS)</div></div>
+        <div class="tk-info"><div class="tk-name">Beach Fly opening night</div><div class="tk-prov">Botticino (BS)</div></div>
         <div class="tk-side"><span class="ico i-chitarra" style="width:12px;height:27px" aria-hidden="true"></span> Live</div>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- ==================== 2b. FASCIA DAL VIVO ==================== -->
-<div class="payoff-edge tartan" aria-hidden="true"></div>
+<!-- ==================== 3. THE LIVE STRIP ==================== -->
+<div class="filetto"></div>
 <figure class="live-strip">
-  <img src="../images/live-allaperto-pomeriggio.webp"
-       alt="Hot Joe &amp; The CoffeeKillers live on an open-air stage at sunset: bass, electric guitar, drums and keys"
-       loading="lazy" width="2000" height="1124" />
-  <figcaption class="live-cap">
-    <div class="wrap">
-      <span class="k">Live</span>
-      <span class="t">Pubs, village feasts, weddings and festivals: the stage changes, the energy does not.</span>
-    </div>
-  </figcaption>
+  <img src="../images/live-allaperto-pomeriggio.webp" alt="Hot Joe &amp; The CoffeeKillers live on an open-air stage at sunset: bass, electric guitar, drums and keys" loading="lazy" width="2000" height="1124" />
+  <figcaption class="live-cap">Pubs, village feasts, weddings and festivals: the stage changes, the energy does not.</figcaption>
 </figure>
-<div class="payoff-edge tartan" aria-hidden="true"></div>
 
-<!-- ==================== 3. GIA SUONATE ==================== -->
-<section class="section past-sec on-light" id="archivio">
-  <div class="wrap rv">
-    <h2 class="sec-title">The 2026 archive.</h2>
-    <div class="past-rows">
+<!-- ==================== 4. THE ARCHIVE ==================== -->
+<section class="v-sez t-panna" id="archivio">
+  <span class="strappo-su" aria-hidden="true"></span>
+  <div class="v-in v-in--stretto">
+    <h2 class="v-h rv">The 2026 <span class="acc">archive.</span></h2>
+    <div class="past-rows rv" id="past-rows">
       <div class="past-row"><span class="dd">05 Sep</span><span class="nm">Wedding</span><span class="pv">Siena (SI)</span></div>
       <div class="past-row"><span class="dd">29 Aug</span><span class="nm">A night in the mountains</span><span class="pv">Aosta (AO)</span></div>
-      <div class="past-row"><span class="dd">23 Aug</span><span class="nm">Country night — B Wild Ranch</span><span class="pv">Belluno (BL)</span></div>
+      <div class="past-row"><span class="dd">23 Aug</span><span class="nm">Country night &mdash; B Wild Ranch</span><span class="pv">Belluno (BL)</span></div>
       <div class="past-row"><span class="dd">09 Aug</span><span class="nm">Night at the inn</span><span class="pv">Vicenza (VI)</span></div>
       <div class="past-row"><span class="dd">08 Aug</span><span class="nm">Party at the Southern Pub</span><span class="pv">Belluno (BL)</span></div>
-      <div class="past-row"><span class="dd">07 Aug</span><span class="nm">Night at Villaggio Costa Verde Natura</span><span class="pv">Clusane d'Iseo (BS)</span></div>
+      <div class="past-row"><span class="dd">07 Aug</span><span class="nm">Night at Villaggio Costa Verde Natura</span><span class="pv">Clusane d&rsquo;Iseo (BS)</span></div>
       <div class="past-row"><span class="dd">01 Aug</span><span class="nm">Night in the apple orchard</span><span class="pv">Cremona (CR)</span></div>
       <div class="past-row"><span class="dd">25 Jul</span><span class="nm">Night at the riding stables</span><span class="pv">Brescia (BS)</span></div>
       <div class="past-row"><span class="dd">24 Jul</span><span class="nm">Night at the osteria</span><span class="pv">Brescia (BS)</span></div>
@@ -829,33 +299,38 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="past-row"><span class="dd">30 May</span><span class="nm">Community festival</span><span class="pv">Brescia (BS)</span></div>
       <div class="past-row"><span class="dd">23 May</span><span class="nm">Club night (duo)</span><span class="pv">Cremona (CR)</span></div>
     </div>
+    <button class="v-pill v-pill--contorno past-tutte" type="button" id="past-tutte">Show all the dates</button>
   </div>
 </section>
 
-<!-- ==================== 4. CTA INSEGNA ==================== -->
-<section class="section cta" id="contact">
-  <div class="wrap">
-    <div class="cta-panel rv">
-      <span class="cta-corner tl ico i-stella" aria-hidden="true"></span>
-      <span class="cta-corner tr ico i-stella" aria-hidden="true"></span>
-      <span class="cta-corner bl ico i-stella" aria-hidden="true"></span>
-      <span class="cta-corner br ico i-stella" aria-hidden="true"></span>
-      <p class="cta-eyebrow">— Ask for a quote —</p>
-      <h2 class="sec-title">A night with us?</h2>
-      <p class="cta-lead">Tell us about your event. We reply with an offer, a sample set list and a price for your night.</p>
-      <a class="cta-btn" href="quote.html">Request a quote</a>
-      <div class="cta-meta">
-        <span><span class="k">Fee</span>around € 1,000 — € 2,500</span>
-        <a href="mailto:music@thecoffeekillers.com"><span class="k">Email</span>music@thecoffeekillers.com</a>
-        <a href="tel:+393937011409"><span class="k">WhatsApp</span>+39 393 7011409</a>
+<!-- ==================== 5. THE CALL ==================== -->
+<section class="v-sez v-sez--alta" id="contact">
+  <span class="strappo-su" aria-hidden="true"></span>
+  <div class="v-in">
+    <div class="v-testa rv">
+      <h2 class="v-h">A night <span class="acc">with us?</span></h2>
+      <p class="v-lead">Tell us about your event: two minutes of form, and we&rsquo;ll get back to you with a proposal within a few days.</p>
+      <div class="v-cta-fila v-cta-fila--centro">
+        <a class="v-pill" href="quote.html">Get a quote</a>
+        <a class="v-wa" href="https://wa.me/393937011409" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.3-1.39a9.87 9.87 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.44 9.9-9.9 0-2.64-1.03-5.13-2.9-7A9.82 9.82 0 0 0 12.04 2zm0 18.13h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.11.82.83-3.03-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.41a8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.22-8.24 8.22zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.48c-.16 0-.43.06-.65.31-.22.25-.85.83-.85 2.03s.87 2.35.99 2.51c.12.16 1.71 2.61 4.15 3.66.58.25 1.03.4 1.38.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.22-.16-.47-.28z"/></svg>
+          <span>Message us on WhatsApp</span>
+        </a>
       </div>
     </div>
   </div>
 </section>
+<script>
+// the archive on phones: the first eight rows, the rest on tap
+(function(){
+  var b=document.getElementById("past-tutte"), r=document.getElementById("past-rows");
+  if(!b||!r) return;
+  b.addEventListener("click",function(){ r.classList.add("aperto"); b.hidden=true; });
+})();
+</script>
 
-<!-- ==================== 5. FOOTER (variante ridotta) ==================== -->
-<footer class="footer footer--ridotta">
-  <div class="payoff-edge tartan"></div>
+<footer class="footer">
+  <div class="filetto"></div>
 
   <!-- la newsletter e' la prima riga del footer, non una fascia sospesa sopra -->
   <div class="foot-nl" id="newsletter">
@@ -1087,7 +562,7 @@ document.querySelectorAll("form.newsletter").forEach(function(form){
     }
   }else if(!future.length && (!propria || propria < oggi)){
     // nessuna data in calendario: meglio un invito che una card scaduta
-    card.innerHTML='<div class="nd-vuoto"><span class="cal-badge">★ No dates in the calendar</span>'+
+    card.innerHTML='<div class="nd-vuoto"><span class="cal-badge">No dates in the calendar</span>'+
       '<h2>The next stage could be yours.</h2>'+
       '<p class="where">We are still confirming the next shows. If you would like us at your event, '+
       '<a href="quote.html">tell us about it here</a>.</p></div>';
