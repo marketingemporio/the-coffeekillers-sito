@@ -391,7 +391,8 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:400;font-synthesis:none;
   align-items:center;align-content:start;
   background:var(--carta);color:var(--pg-fg);border:1px solid #DFCDAE;border-radius:16px;
   box-shadow:0 10px 26px -14px rgba(0,0,0,.55);
-  padding:clamp(21px,2.6vw,27px) clamp(21px,2.8vw,29px) clamp(23px,2.8vw,29px);
+  --ct:clamp(21px,2.6vw,27px);--cx:clamp(21px,2.8vw,29px);--cb:clamp(23px,2.8vw,29px);
+  padding:var(--ct) var(--cx) var(--cb);
 }
 .v-info-card > div{display:contents}
 .v-info-card .ico{grid-column:1;grid-row:1;width:36px;height:30px;aspect-ratio:auto;justify-self:center;color:var(--arancio)}
@@ -399,6 +400,20 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:400;font-synthesis:none;
 .v-info-card p{grid-column:1/-1;grid-row:2;margin-top:11px;font-family:var(--testo);font-size:16.5px;line-height:1.68;color:#5A3A1C}
 .v-info-card p b{color:var(--pg-fg);font-weight:700}
 .v-info-card .emo{font-size:1em;line-height:1;vertical-align:-.05em}
+/* la card CON LA FOTO (18/10 sera, Michele: «questo muro di testo… una vista migliore, senza nasconderlo»):
+   la fotografia in testa, a filo dei bordi della card; sotto, icona + titolo e il testo di sempre.
+   Da telefono il taglio e' 2:1 (la card non si allunga troppo), da 700px in su 16:10 su due colonne. */
+.v-info-card--foto{overflow:hidden}
+.v-info-card--foto .ic-foto{grid-column:1/-1;grid-row:1;margin:calc(-1*var(--ct)) calc(-1*var(--cx)) var(--ct);line-height:0;background:var(--scuro2)}
+.v-info-card--foto .ic-foto img{width:100%;height:auto;aspect-ratio:2/1;object-fit:cover;display:block}
+.v-info-card--foto .ic-foto img.foco-alto{object-position:50% 30%}
+.v-info-card--foto .ic-foto img.foco-medio{object-position:50% 40%}
+.v-info-card--foto .ico,.v-info-card--foto h3{grid-row:2}
+.v-info-card--foto p{grid-row:3}
+@media (min-width:700px){
+  .v-info--foto{grid-template-columns:1fr 1fr;max-width:none;gap:clamp(14px,1.6vw,18px)}
+  .v-info-card--foto .ic-foto img{aspect-ratio:16/10}
+}
 @media (min-width:900px){
   .v-info{grid-template-columns:1fr 1fr;max-width:none;gap:clamp(14px,1.6vw,18px)}
   /* con un numero dispari la prima card (il testo piu' lungo) prende tutta la riga */
