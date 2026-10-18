@@ -57,6 +57,10 @@
 > home da 7,7 a 2,8 MB. E un **bug di produzione nel preventivo** corretto a parte (chi lasciava
 > vuoti data o luogo non riusciva a inviare). Vedi **«IL SITO COME LA LANDING (18/10)»** qui sotto:
 > è la sezione più recente e **viene prima di tutte le altre** per capire com'è fatto il sito oggi.
+> **18/10 sera:** le sei card «Dove diamo il meglio?» hanno **una foto in testa** (Michele: «questo muro di
+> testo… una vista migliore, senza nasconderlo») e c'è una **variante B con più arancio** su un secondo ramo
+> (`ux-ui-arancio`): **si aspetta la scelta di Michele, A o B, e il suo ok**. Vedi «LA SERA DEL 18/10» nella
+> sezione del 18/10. Pagina per scegliere: https://claude.ai/artifact/MBYr8yatJ5RAHDxvBWYT6H
 > Compilato il 2026-06-25 da `README.md` + memoria + stato git reale.
 
 ---
@@ -69,6 +73,36 @@ sponsorizzate, migliora UX e UI rendendo tutto più armonico, fotografie e testo
 niente muri di testo e lettura più scorrevole»*. Prima di toccare un file: **audit con 68 schermate**
 (17 pagine × 390/1440), tre esplorazioni del codice e delle regole di casa, un piano approvato da
 Michele in modalità piano. Tutto su un branch, **niente pubblicato senza il suo ok**.
+
+## La sera del 18/10: le card con le foto e la variante arancio (SCELTA APERTA)
+
+Michele, visto il report: *«c'è modo di sistemare questo muro di testo? è la parte più importante e va
+letta, quindi non nascondiamola, però una vista migliore»* (le sei card «Dove diamo il meglio?» a 390 px) e
+*«per quanto bello, mi manca un po' di quell'arancio scuro: una versione intermedia che comunque promuova
+lettura e contrasto»*. Fatte entrambe, su due rami così il confronto è reale:
+
+- **Ramo A, `ux-ui-come-la-landing`** (`bc7ad2a`): palette della landing come la mattina, **più** le card con
+  una **fotografia vera in testa** (miniature della gallery, 600/1200 con `srcset`; taglio 2:1 da telefono,
+  16:10 su due colonne da 700 px, tre da 1000; testi identici; classi `.v-info--foto`, `.v-info-card--foto`,
+  `.ic-foto`, `.foco-alto/.foco-medio`) e la foto del basso alla sagra senza telefono e mail dello sponsor
+  (`live-basso-senza-numeri`, come le due sorelle). La home a 390 passa da 7.374 a 8.418 px: una schermata in
+  più, in cambio di sei foto.
+- **Ramo B, `ux-ui-arancio`** (`df9604a`, = A + un commit): nel foglio il tono **`.t-arancio`** e il
+  **pannello `.v-pannello`** (scheda di carta con titolo, riga e bottoni). In home «Ascoltaci live» sta su
+  arancio; in **tutte** le pagine l'invito finale diventa il pannello sull'arancio (nel country i due bottoni
+  escono dal capitolo 05 ed entrano nel pannello; le FAQ lo prendono fuori dal `<main>`). Le card restano su
+  carta. **Regola che vale solo se si sceglie B** (da scrivere in `CLAUDE.md` dopo la scelta): sull'arancio
+  stanno solo titoli grandi, pastiglie scure e pannelli di carta; un testo corrente nudo farebbe 3,84:1.
+  Misure: 0 testi <13 px e **0 contrasti sotto soglia** su 6 pagine × 2 larghezze, scheletri IT = EN, 0 link rotti.
+- Pagina per scegliere (card prima/ora, A e B affiancate a 390 e 1440, invito, FAQ e country):
+  https://claude.ai/artifact/MBYr8yatJ5RAHDxvBWYT6H
+
+**Dopo la scelta:** merge su `main` del fix `fix-preventivo-required`, poi del ramo scelto (B contiene A),
+push, controllo online con `?c=`, data qui sopra. **Trappola:** `_strumenti/corpi/` non è in git e **non segue
+il ramo**: ci sono `_strumenti/corpi-panna/` (= A) e `_strumenti/corpi-arancio/` (= B); `corpi/` è il set
+attivo (stasera = arancio). Copiare il set giusto in `corpi/` prima di rigenerare una pagina. `migra.py` ora si
+può rilanciare anche su una pagina già migrata (niente link doppi; regge le FAQ senza `<style>` e i due
+JSON-LD del country: tre bug trovati stasera provando a rigenerare tutte le 16 pagine, che ora tornano identiche).
 
 ## Le quattro decisioni di Michele (18/10, in chat)
 
