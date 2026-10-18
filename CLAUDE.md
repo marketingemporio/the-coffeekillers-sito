@@ -95,44 +95,32 @@ Quindi `consenso.js` fa bene a concedere anche `ad_storage` e `ad_personalizatio
 riquadro e l'informativa a dover cambiare**, perché oggi chiedono solo «cookie di statistica» e
 promettono *«non usiamo cookie per mostrarti pubblicità»*.
 
-## 🎨 TRE PAGINE HANNO UNA PALETTE LORO, E NON SI "CORREGGONO"
+## 🎨 DAL 18/10/2026 TUTTO IL SITO HA LA PALETTE E IL LINGUAGGIO DELLA LANDING
 
-Dal **24/09** sono **tre**: `musica-country-dal-vivo.html` (la landing, 16/09) e le due
-pagine del preventivo, `preventivo.html` ed `en/quote.html`. Michele, 24/09: *«nella pagina
-preventivo del sito, puoi rifarmi il blocco preventivo uguale alla landing?»* — e la palette
-va su **tutta** la pagina, se no nella stessa schermata ci sono due avori diversi.
-Le altre **14 pagine restano sul brand book**.
+Michele, 18/10: *«prendi come standard di riferimento la landing delle sponsorizzate, migliora UX e UI
+rendendo tutto più armonico»*, e alla domanda esplicita: **sì, la palette della landing ovunque**.
+Quindi **non ci sono più due (anzi tre) palette**: le 14 pagine del sito e le due del preventivo
+usano i colori e i componenti della landing, dichiarati **una volta sola** in `hjck.css`.
 
-La landing è nata così per decisione di Michele (16/09): *«i nuovi colori vanno bene, su questa landing teniamo questi»*, e poi
-*«vai online, anche solo i colori hanno più contrasto, e serviva»*. Nasce da una proposta
-grafica che ha fatto fare fuori. È una pagina `noindex` che vive solo dentro le inserzioni.
+| ruolo | valore (ovunque) |
+|---|---|
+| fondo scuro `--espresso` | `#2B1405` |
+| testo su scuro `--panna` | `#F3E5D0` |
+| superfici chiare `--carta` | `#EFE2CE` |
+| pieni sul chiaro `--scuro2` | `#381A08` |
+| arancio `--arancio` | `#C74A07` — **solo come pieno** (fasce, timbro `.acc`, bordi): mai testo piccolo |
+| tan `--tan` | `#C39A6A` |
+| turchese `--azz` | `#8BAEA4` — solo accento sui fondi scuri |
 
-| | le altre 14 pagine | landing e preventivi |
-|---|---|---|
-| fondo scuro | `#49240A` | **`#2B1405`** |
-| panna | `#EDDABD` | **`#F3E5D0`** testo · **`#EFE2CE`** superfici |
-| arancio | `#CD5812` | **`#C74A07`** |
-| tan | `#BD8B65` | **`#C39A6A`** |
-| pieni sul chiaro | — | **`#381A08`** |
-
-🚫 **L'arancio resta sotto soglia anche qui** (3,84:1 contro 4,5): pastiglia marrone o corpo
-≥19px/700, come sempre. Il resto guadagna parecchio: il corpo sul fondo scuro fa **14,05:1**.
-
-Insieme al colore sono cambiati, **solo lì**: tinte piatte (via grana e sporcature, restano
-gli strappi), titoli più piccoli e meno spaziati (h1 64→52, h2 54→40) con il corpo più grande,
-il video a tutta larghezza, bordi sottili, e il modulo con le voci in Manrope e le non
-selezionate trasparenti. **Il contenuto non è cambiato**: testi, foto, blocchi e bottoni sono
-identici, verificati byte per byte prima di pubblicare. Dettagli in `_STATO.md`, sezione
-«LA REVISIONE DI STILE DEL 16/09».
-
-⚠️ **Resta aperto**: il mockup fa i bottoni nel carattere dei titoli, la regola di casa dice
-«LT Cushion, mai Bonzana». Non deciso — segnalato a Michele, non cambiato.
-
-🔑 **E la lezione che è costata un giro intero**: *un bozzetto si apre in un browser prima di
-copiarlo.* Il primo tentativo l'aveva letto come codice e ne aveva preso solo colori e raggi;
-Michele: *«sembra che tu abbia cambiato solo i colori, ma c'era anche un bel lavoro di design
-affinato, e qui non lo vedo»*. Il carattere di un impaginato si vede, non si legge. È la
-gemella della regola «sulle cose visive si crede allo screenshot, non al DOM».
+🚫 **L'arancio non è mai testo** (3,84:1 sul fondo scuro): la parola chiave dei titoli è **timbrata**
+(`<span class="acc">`, blocco arancio con testo panna), i numeri d'indice sono in `--tan`, i link
+sono panna sottolineati d'arancio. Il `#FA8600` del logo vive solo nel logo.
+⚠️ **La palette del brand book (#49240A / #EDDABD / #CD5812) non è più in nessuna pagina**: resta
+scritta in un commento in testa a `hjck.css` per tornare indietro in sei righe, se mai servisse.
+⚠️ **La landing resta intatta** (`git diff main -- musica-country-dal-vivo.html` è vuoto): è il
+riferimento, non si "allinea". L'unica incoerenza nota: lì Ste è ancora «Chitarre e lap steel».
+Dettagli, tabella di traduzione delle vecchie classi e numeri prima/dopo in `_STATO.md`,
+sezione «IL SITO COME LA LANDING (18/10)».
 
 ## ⚠️ I fatti verificati che hanno già fatto sbagliare
 
@@ -472,6 +460,12 @@ Se la scelta di prima diventa illegale, si sposta da sola sulla piu' bassa ammes
 
 ## 🔧 Come si verifica il lavoro
 
+- **Gli strumenti stanno in `_strumenti/`** (dal 18/10): `server.mjs` (server locale che non
+  resetta le connessioni: `node _strumenti/server.mjs 8912`), `shots.mjs` (schermate a
+  390/768/1024/1440 + misure: `scrollWidth`, testi <13px, immagini rotte, errori, peso; `VPS=m,t,l,d`),
+  `contrasti.mjs` (contrasto sul fondo reale di ogni testo), `orfani.mjs` (classi nel markup senza
+  regola), `scheletro.py` (IT ↔ EN), `link.py` (link e risorse locali), `form-test.mjs` (il modulo
+  con data e luogo vuoti deve passare), `ottimizza-immagini.py` (copie web, miniature, sfocature).
 - **Playwright non è installato**: si usa **Chrome headless + CDP**, a **1440×900** e **390×844**.
 - 🚨 **Sulle cose visive si crede allo screenshot, non al DOM.** Tutti i difetti veri di
   queste pagine sono usciti guardando le schermate (sette in una sola sessione), nessuno dal
@@ -493,17 +487,28 @@ Se la scelta di prima diventa illegale, si sposta da sola sulla piu' bassa ammes
   footer senza `min-width:0`).
 - **La landing è a pagamento**: ogni KB si paga a ogni clic. È passata da 5,46 a 3,40 MB.
 
-## 📐 Com'è fatto, in due righe
+## 📐 Com'è fatto, in due righe (dal 18/10/2026)
 
-`index.html` ha **tutto lo stile inline** ed è la fonte di verità visiva; `_stile-hjck.css`
-serve alle pagine interne — se cambia la home, il foglio condiviso va riallineato a mano.
-Le pagine in **`en/` sono copie tradotte a mano**: ogni testo cambiato in italiano va
-cambiato anche là, e **le date stanno in quattro punti** (`date.html`, `en/dates.html` e i
-calendari in home di entrambe le lingue).
+**`hjck.css` è il foglio di linguaggio di tutto il sito** (token, tipografia, bottoni, card, strappi,
+line-up, loghi, video, FAQ, testata, piede, newsletter, striscia lingua, lightbox): ogni pagina lo
+linka **prima** del proprio `<style>`, che contiene **solo l'impaginazione di quella pagina**
+(prefissi `.hero6 .ph- .cal- .dt- .gal- .pv- .chap- .toc .qf-`). Niente token, niente `.v-*`,
+niente `.nav-*`/`.footer*` negli `<style>` di pagina: se una cosa serve a due pagine, va nel foglio.
+La landing `musica-country-dal-vivo.html` **non** usa il foglio: ha tutto inline ed è la sorgente da
+cui il foglio è stato ricavato (stessi nomi di variabile e di classe, così i blocchi si copiano).
+Il **CSS del modulo** esiste in due copie volute (landing e `preventivo.html`/`en/quote.html`).
+Le pagine in **`en/` sono copie tradotte a mano**, con lo **stesso scheletro di tag** dell'italiana
+(`_strumenti/scheletro.py` lo verifica: deve dare 0 righe diverse, a parte la nota di traduzione
+in `en/privacy.html`): ogni testo cambiato in italiano va cambiato anche là, e **le date stanno in
+quattro punti** (`date.html`, `en/dates.html` e i calendari in home di entrambe le lingue).
 ⚠️ Il **JSON-LD di `date.html` non si aggiorna da solo**: lo script in fondo alla pagina
 nasconde le date passate a chi guarda, ma i dati strutturati per Google restano scritti a
-mano. Vanno ripuliti quando le date cambiano — il 07/09 dichiaravano ancora *in programma*
-una serata che il brain dà come **saltata**.
+mano. Vanno ripuliti quando le date cambiano.
+**`_strumenti/`** (ignorata da git, solo sul Mac di Michele) tiene gli script di verifica e i
+«corpi» (`_strumenti/corpi/`) da cui le pagine sono state rigenerate con `migra.py`: per rifare
+una pagina si modifica il suo corpo e si rilancia, non si edita l'HTML a mano in due lingue.
+Gli originali delle foto stanno fuori dal repo; `images/` ha solo copie web, `images/gal/` le
+miniature della gallery; quello che non serve più è in `_parcheggio/` (mai cancellato).
 
 ## Regole d'igiene
 - Repo **fuori** da iCloud/Drive. Pull prima di iniziare, push appena finito.

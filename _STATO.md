@@ -1,7 +1,7 @@
 # The Coffeekillers — STATO (leggimi per primo)
 
 > Handoff per riprendere il lavoro in una nuova chat / per un collega.
-> **Ultimo aggiornamento:** 2026-09-25
+> **Ultimo aggiornamento:** 2026-10-18
 > **Stato in una riga:** il **sito nuovo è ONLINE** dal 02/09/2026 — la maquette è diventata
 > il sito, il React di prima è in `_parcheggio/`. Vedi **«IL SITO NUOVO È ONLINE»** qui sotto.
 > Dal **04/09/2026 è online anche la versione inglese** in `en/`, per chi si connette
@@ -50,7 +50,180 @@
 > (Michele: *«così sappiamo di cosa si parla»*, perché accanto c'è `the-coffeekillers-brain`).
 > Vedi **«IL RINOMINO DEL 25/09»** qui sotto: c'è la trappola della memoria di Claude e
 > il controllo su Netlify.
+> Il **18/10/2026 TUTTO IL SITO È PASSATO AL LINGUAGGIO DELLA LANDING**: un foglio solo,
+> `hjck.css`, con la sua palette (decisione di Michele), tinte piatte, bottoni senza ombre né
+> stelline, card con l'icona in riga, line-up in cornice, FAQ col «+», testata e piede nuovi;
+> 16 pagine rigenerate (IT ed EN), testi del country dimezzati, gallery in capitoli con lightbox,
+> home da 7,7 a 2,8 MB. E un **bug di produzione nel preventivo** corretto a parte (chi lasciava
+> vuoti data o luogo non riusciva a inviare). Vedi **«IL SITO COME LA LANDING (18/10)»** qui sotto:
+> è la sezione più recente e **viene prima di tutte le altre** per capire com'è fatto il sito oggi.
 > Compilato il 2026-06-25 da `README.md` + memoria + stato git reale.
+
+---
+
+# 🎨 IL SITO COME LA LANDING — LA REVISIONE UX/UI DEL 18/10/2026
+
+Michele, 18/10 alle 13:31 (lavoro programmato via cron per le 14:17): *«fai un lavoro profondo di
+miglioramento di UX e UI del sito. Prendi come standard di riferimento la landing page delle
+sponsorizzate, migliora UX e UI rendendo tutto più armonico, fotografie e testo meglio integrati,
+niente muri di testo e lettura più scorrevole»*. Prima di toccare un file: **audit con 68 schermate**
+(17 pagine × 390/1440), tre esplorazioni del codice e delle regole di casa, un piano approvato da
+Michele in modalità piano. Tutto su un branch, **niente pubblicato senza il suo ok**.
+
+## Le quattro decisioni di Michele (18/10, in chat)
+
+1. **La palette della landing su tutto il sito.** Supera la regola «tre pagine hanno una palette loro
+   e non si correggono» (16/09 e 24/09): oggi non ci sono più due palette, e nemmeno tre — perché
+   le 6 pagine interne e le loro gemelle inglesi NON erano sul brand book come diceva `CLAUDE.md`,
+   ma su una palette della vecchia proposta A4 (`#241005 / #FBF5EA / #FA8600`). Era già incoerente.
+2. **Le bio dei musicisti restano anche in home**, ma impaginate meglio (foto accanto, sinistra, due paragrafi).
+3. **La fascia «Cachet 1.000 € — 2.500 €» si toglie ovunque**: FAQ 01 (testo, title, description e
+   JSON-LD), date, gallery, in italiano e inglese. Chiude il punto aperto dal 24/09.
+4. **I testi si possono spezzare E accorciare** (fino a ~1/3): fatto soprattutto su «Il country».
+
+## 🚨 Il bug trovato per strada: il preventivo del sito non si inviava
+
+`preventivo.html` ed `en/quote.html` avevano ancora `required` su data e luogo (riga 821 e 825) e la
+riga 1037 riattivava la validazione HTML5. Lasciandoli vuoti il passo 2 si apriva, si compilavano i
+contatti, e al clic su «Invia» **il browser bloccava il modulo sui due campi nascosti, senza nessun
+messaggio**. La landing era stata corretta il 21/09 (commit `1d5ed93`); le due pagine del sito no.
+Vicolo cieco silenzioso dal 24/09. **Verificato in browser headless**, prima e dopo. Il fix (branch
+`fix-preventivo-required`, commit `635978c`) toglie `required` ai due campi e mette le etichette
+della landing («se la sai già», «anche solo la zona»); nomi dei campi e JavaScript invariati.
+È un commit separato dal restyling, così si può pubblicare da solo.
+
+## Com'è fatto adesso: un foglio solo
+
+- **`hjck.css`** (≈800 righe) è il foglio di linguaggio del sito, **ricavato dalla landing** con gli
+  stessi nomi di variabile (`--espresso --panna --carta --scuro2 --arancio --tan --azz --pg-*`) e di
+  classe (`.v-sez .v-in .v-h .v-lead .acc .v-pill .v-wa .v-info-card .v-scorri .v-loghi .v-fatti
+  .v-volto .cornice .v-video-cornice .v-q .rv`), più i componenti che la landing non ha: **testata**
+  sticky piena (`.nav*`), **piede** con newsletter (`.footer*`, `.foot-nl*`), **striscia lingua**
+  (`#lang-bar`), **lightbox** nativa (`dialog.v-luce`), helper `.v-due` (foto e testo affiancati),
+  `.v-prosa` (colonna di testo ≤62ch), `.v-figura`, `.v-pill--contorno`, `.v-pill--mini`, `.chiaro`.
+  Font: le 5 `@font-face` **woff2** della landing (prima home e interne caricavano i `.ttf`: ≈420 KB a pagina).
+- **Ogni pagina linka il foglio PRIMA del proprio `<style>`**, che contiene solo l'impaginazione di
+  quella pagina (40-130 righe). `index.html` è passata da 2.809 a 907 righe, le interne da ≈1.000 a
+  ≈450-620, `preventivo.html` da 1.284 a 701. Lo stile inline a strati di index (143 classi orfane su
+  278) **non è stato potato: è stato riscritto da zero**.
+- **`stile-hjck.css` non esiste più** (è in `_parcheggio/stile-hjck-fino-al-2026-10-18.css`):
+  nessuna pagina lo linka.
+- **La landing è intatta**: `git diff main -- musica-country-dal-vivo.html` è vuoto. Il CSS del modulo
+  resta in due copie volute (landing e preventivo), ora con gli stessi nomi di variabile.
+- **`_strumenti/`** (ignorata da git): `migra.py` rigenera una pagina da un «corpo» in
+  `_strumenti/corpi/` tenendo testa, JSON-LD, consenso+GTM, testata, piede e script originali;
+  `genera-gallery.py` fa i due corpi della gallery dalla lista delle foto; `shots.mjs` (schermate +
+  misure a 390/768/1024/1440), `contrasti.mjs`, `orfani.mjs`, `scheletro.py` (IT ↔ EN), `link.py`,
+  `form-test.mjs`, `ottimizza-immagini.py`, `server.mjs` (il `python3 -m http.server` resettava le
+  connessioni sotto carico e negli screenshot mancavano font e icone a caso).
+
+### La tabella di traduzione (vecchio → nuovo), per chi incontra ancora un nome vecchio
+
+| vecchio | nuovo |
+|---|---|
+| `.section` · `.wrap` · `.sec-title` · `.lead-p` · `.on-light` | `.v-sez` · `.v-in` · `.v-h` · `.v-lead` · `.t-panna` |
+| `.btn-poster` · `.cta-btn` | `.v-pill` (pieno) |
+| `.btn-dark` | `.v-pill v-pill--contorno` (dentro un contenitore chiaro: aggiungere `chiaro`) |
+| `.nav-cta` con ombra arancio | `.nav-cta` = pill piccola carta/espresso, senza ombra |
+| `.polaroid` · `.photo-r` · `.stamp` (ruotati) | `.cornice` dritta · `.v-figura` |
+| `.member` tondo | `.v-volto` in cornice 3:4 (`images/land/*-ritratto-muro.webp`) |
+| `.ctx-card` · `.qa` | `.v-info-card` · `.v-q` |
+| `.payoff-edge.tartan` | `.filetto` |
+| `.it` / `.ph-it` / `.title-it` / `.lu-it` (testo arancio) | `.acc` (timbro: blocco arancio, testo panna) |
+| occhielli (`.eyebrow*`, `.orna*`, `.cta-eyebrow`, `.page-hero-eyebrow`) · `.cta-meta .k` 11px · `.sporco/.strappo/.specchio/.poco` | **spariti** |
+| `--arancio` #FA8600 come testo · `--caffe` · `--nero` · `--espresso-2` · `--ruggine` · `--bronco/--valley` · `--sans` · `--cushion` | `.acc`/`--tan` · `--espresso` · `--espresso` · `--scuro2` · `--arancio` · `--display` · `--testo` · `--btn` |
+
+## Cosa è cambiato, pagina per pagina (IT e EN insieme)
+
+- **Home** — un **bottone pieno nell'hero** (non c'era); «Ascoltaci live» senza paragrafo; «Cosa
+  facciamo?» coi due paragrafi approvati della landing (perimetro «dagli anni Novanta in poi») e la
+  foto accanto; sei card con l'icona in riga (via «al bancone si continua a ordinare» e «stage plan e
+  input list», che vendevano fatturato e logistica); **fascia dei numeri**; «Abbiamo suonato per.»;
+  **line-up in cornice a scorrimento con le bio dentro** (1 schermata invece di 5), ordine e ruoli come
+  la landing; calendario sopra la foto del palco (via l'mp4 da 2,2 MB); YouTube come card con copertina
+  (l'iframe nasceva senza clic, contro l'informativa); invito finale con un **bottone visibile** (era
+  beige su beige, 1:1); pill social su una riga («Instagr am» era spezzato). Da 10.316 a 7.374 px.
+- **Chi siamo** — foto in cornice accanto al testo; contatori nella fascia arancione (etichette ≥14px);
+  musicisti a **righe alternate** con bio in due paragrafi; invito al preventivo in fondo; via la
+  polaroid storta, la ★ in didascalia, lo script «cambia foto» di una foto che non esisteva.
+- **Il country** — **da 1.122 a 813 parole**, paragrafi ≤4 righe a sinistra, frase guida per capitolo,
+  foto accanto al testo a lati alterni, il capitolo 03 prende una foto, strumenti in griglia a 2
+  colonne, pastiglie senza ★, pieno finale → preventivo. **Via la foto di Nashville da Wikimedia**
+  (licenza CC BY-SA da attribuire, desaturata): nell'hero una foto vera della band. Didascalia
+  «chitarre, lap steel, armonica» → «chitarre, piano e contrabbasso». Via il titolo «non è più roba
+  d'oltreoceano» e la riga «il genere più ascoltato negli Stati Uniti» (mai verificata).
+- **Date** — scheda della prossima data come carta col countdown dentro; biglietti; foto dal vivo con
+  la riga sotto; archivio su carta con «Mostra tutte» da telefono; invito senza cornice, ★, «scaletta
+  tipo» e prezzo; WhatsApp che apriva `tel:` ora apre WhatsApp; **title e description senza l'anno**
+  (regola SEO: si riusano). Il JavaScript delle date è lo stesso, con gli stessi id e classi.
+- **Gallery** — 33 foto (la pagina diceva 34) in **tre capitoli** con titolo e una riga, **2 colonne**
+  da telefono e 3 da 900px, tutte 4:5; **lightbox vera** (prima «clicca per vederla grande» apriva il
+  file nudo); miniature da 600/1200px in `images/gal/` con `srcset`. Da oltre 16.000 px e 9,5 MB a
+  6.900 px e 2,0 MB. **Le due foto col furgone dell'impresa edile hanno una copia web con i numeri di
+  telefono e il sito sfocati** (`*-senza-numeri.webp`; Michele 15/09: «se puoi cancellare i numeri di
+  telefono meglio»): gli originali non sono stati toccati. Alt corretti («lap steel», «in duo»).
+- **FAQ** — stile landing («+» in cerchio arancio, 21/17px), senza i numeri 01-08, un pieno finale.
+  **La 01 non dice più la fascia di prezzo**: «ogni serata è diversa, compila il preventivo e ti
+  rispondiamo in qualche giorno».
+- **Privacy** — dieci card su carta; testi tenuti, con tre correzioni di fatto: Netlify era elencata
+  due volte e Formspree «riceveva i moduli» (riceve solo la newsletter dal 12/09); l'elenco dei cookie
+  ora ha anche la **pubblicità** (il riquadro la chiede dal 15/09). Data portata al 18 ottobre 2026.
+  «YouTube non viene contattato» ora è vero su tutte le pagine.
+- **Preventivo** — testata e piede dal foglio; **il `<form>` è byte-identico** (diff), 18 campi,
+  passo 2 e invio verificati con `form-test.mjs`.
+- **Trasversale** — via grana e sporcature (tinte piatte, restano gli strappi), via tutte le micro-scritte
+  (nav-lang 11,5px, `h5` 12px, ruoli 11px, consenso newsletter 12px, `.cta-meta .k` 11px: ora minimo
+  13,5px), via `All rights reserved` sulle pagine italiane, `consenso.js` prende i tre colori nuovi
+  (era rimasto l'unico pezzo col marrone del brand book).
+
+## Le immagini
+
+- **51 file non usati da nessuna pagina** (13 MB, pubblicati lo stesso da Netlify) sono in
+  `_parcheggio/immagini-non-usate-2026-10/`: i vecchi loghi segnaposto in Arial, le foto degli artisti,
+  prove di ritratti, le due col furgone (sostituite dalle copie sfocate), la Nashville di Wikimedia,
+  l'mp4 del palco, le grane, e **`vigna-live-chitarra.webp` con un ex membro, che era scaricabile dal
+  dominio**. Restano `icone/beige/`, `logo/` (le varianti col contorno servono sulle foto chiare) e `land/`.
+- **Otto foto in uso hanno una copia web più leggera con lo stesso nome** (le pesanti in
+  `_parcheggio/immagini-pesanti-2026-10/`): hero home 615→363 KB, band-fiume-o2 875→191,
+  band-giardino-salopette 863→325, strumenti-fila-alberi 546→307, band-fiume-v1 774→263,
+  live-notte 257→89, live-allaperto-pomeriggio 374→179, strumenti-palco-verde 742→368.
+  La striscia Instagram della home usa miniature da 400px. `images/` da 33 a 21 MB.
+
+## I numeri, prima e dopo (a 390px, tutte le immagini caricate)
+
+| pagina | altezza prima → dopo | peso prima → dopo | testi <13px prima → dopo |
+|---|---|---|---|
+| home | 10.316 → 7.374 px | 7,7 → 2,8 MB | 15 → 0 |
+| chi siamo | 4.952 → 5.752 px (le bio con la foto accanto) | 2,3 → 1,0 MB | 17 → 0 |
+| il country | 9.792 → 8.482 px | 3,0 → 2,0 MB | 14 → 0 |
+| date | 4.662 → 3.375 px | 1,0 → 0,7 MB | 12 → 0 |
+| gallery | >16.000 → 6.864 px | 9,5 → 2,0 MB | 13 → 0 |
+| faq | 2.553 → 2.608 px | 0,7 → 0,5 MB | 8 → 0 |
+| privacy | 7.109 → 7.448 px | 0,6 → 0,5 MB | 8 → 0 |
+| preventivo | 3.353 → 3.353 px | 0,75 → 0,5 MB | 8 → 0 |
+
+## ✅ Come è stato verificato (17 pagine × 390 · 768 · 1024 · 1440)
+
+`scrollWidth == innerWidth` ovunque · **zero testi sotto i 13px** · zero immagini rotte o a larghezza
+0 · zero errori in console (il CORS di cloudflareinsights in locale non conta) · **contrasti calcolati
+sul fondo reale** per ogni testo visibile (`contrasti.mjs`, 32 schermate): 0 sotto soglia — i testi
+appoggiati sulle foto (hero) sono stati guardati, non misurati · nessuna classe nel markup senza regola
+(`orfani.mjs`) · **scheletro di tag IT ↔ EN identico** sulle 8 coppie (`scheletro.py`; privacy e
+preventivo hanno le 2 differenze note e volute) · 0 link rotti (`link.py`) · JSON-LD validi · landing
+byte-identica a `main` · `name=` dei moduli identici · `form-test.mjs`: passo 2 e invio con data/luogo
+vuoti passano · schermate di ogni pagina **guardate** a 390 e 1440 prima del commit.
+
+## 🔜 Aperto, e va deciso da Michele
+
+- **Pubblicare**: prima il fix del preventivo (branch `fix-preventivo-required`), poi il restyling
+  (branch `ux-ui-come-la-landing`). Dopo l'ok si fa merge su `main` e si controlla online.
+- La landing dice ancora «Chitarre e lap steel» per Ste (fuori dal live dal 06/10) e usa i suoi testi:
+  non si tocca, ma non è più vera.
+- Le date del 2 e 10 ottobre non sono nell'archivio di `date.html`, il JSON-LD le dà «in programma» e
+  c'è un countdown doppio con la data cablata (`2026-10-02`): contenuto delle date, fuori perimetro.
+- Le testimonianze vere (nome, locale, città) restano il buco numero uno.
+- `sitemap.xml` ha i `lastmod` fermi al 03/09 (non toccata).
+- Le foto nuove che arriveranno vanno sempre guardate prima di metterle in pagina (ex membri).
 
 ---
 
