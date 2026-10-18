@@ -87,7 +87,7 @@ lettura e contrasto»*. Fatte entrambe, su due rami così il confronto è reale:
   `.ic-foto`, `.foco-alto/.foco-medio`) e la foto del basso alla sagra senza telefono e mail dello sponsor
   (`live-basso-senza-numeri`, come le due sorelle). La home a 390 passa da 7.374 a 8.418 px: una schermata in
   più, in cambio di sei foto.
-- **Ramo B, `ux-ui-arancio`** (`df9604a`, = A + un commit): nel foglio il tono **`.t-arancio`** e il
+- **Ramo B, `ux-ui-arancio`** (= A + un commit, viene ribasato su A a ogni aggiornamento): nel foglio il tono **`.t-arancio`** e il
   **pannello `.v-pannello`** (scheda di carta con titolo, riga e bottoni). In home «Ascoltaci live» sta su
   arancio; in **tutte** le pagine l'invito finale diventa il pannello sull'arancio (nel country i due bottoni
   escono dal capitolo 05 ed entrano nel pannello; le FAQ lo prendono fuori dal `<main>`). Le card restano su
