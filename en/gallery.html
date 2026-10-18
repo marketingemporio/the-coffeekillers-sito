@@ -387,7 +387,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 // Reveal allo scroll (traduzione vanilla dell'hook useReveal del sito live).
 (function(){
-  var els=document.querySelectorAll(".fade-in, .rv");
+  var els=document.querySelectorAll(".fade-in, .rv, .stagger");
   if(!("IntersectionObserver" in window)){
     els.forEach(function(el){el.classList.add("in");});
     return;

@@ -534,8 +534,14 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:400;font-synthesis:none;
 body:has(dialog.v-luce[open]){overflow:hidden}
 
 /* ---------- 17 · COMPARSA ALLO SCORRIMENTO (solo con JS attivo) -------------- */
-.js .rv,.js .fade-in,.js .rise{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
-.js .rv.in,.js .fade-in.in,.js .rise.in{opacity:1;transform:none}
+.js .rv,.js .fade-in{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.js .rv.in,.js .fade-in.in{opacity:1;transform:none}
+/* .rise e' per le hero: compare DA SOLA, a tempo, senza aspettare uno script (18/10 sera: sul country
+   lo script osservava solo .fade-in/.rv/.stagger e titolo, riga e indice restavano invisibili) */
+.js .rise{opacity:0;transform:translateY(20px);animation:v-rise .7s ease .12s both}
+.js .rise + .rise{animation-delay:.3s}
+.js .rise + .rise + .rise{animation-delay:.46s}
+@keyframes v-rise{to{opacity:1;transform:none}}
 .js .stagger > *{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
 .js .stagger.in > *{opacity:1;transform:none}
 .js .stagger.in > *:nth-child(2){transition-delay:.08s}
