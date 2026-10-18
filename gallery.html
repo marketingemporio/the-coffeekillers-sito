@@ -399,7 +399,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         io.unobserve(e.target);
       }
     });
-  },{threshold:0.12});
+  },{threshold:0.01});  // griglie altissime: il 12% non entrava mai nella prima schermata (18/10)
   els.forEach(function(el){io.observe(el);});
 })();
 </script>
