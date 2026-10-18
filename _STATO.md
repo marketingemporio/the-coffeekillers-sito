@@ -57,10 +57,12 @@
 > home da 7,7 a 2,8 MB. E un **bug di produzione nel preventivo** corretto a parte (chi lasciava
 > vuoti data o luogo non riusciva a inviare). Vedi **«IL SITO COME LA LANDING (18/10)»** qui sotto:
 > è la sezione più recente e **viene prima di tutte le altre** per capire com'è fatto il sito oggi.
-> **18/10 sera:** le sei card «Dove diamo il meglio?» hanno **una foto in testa** (Michele: «questo muro di
-> testo… una vista migliore, senza nasconderlo») e c'è una **variante B con più arancio** su un secondo ramo
-> (`ux-ui-arancio`): **si aspetta la scelta di Michele, A o B, e il suo ok**. Vedi «LA SERA DEL 18/10» nella
-> sezione del 18/10. Pagina per scegliere: https://claude.ai/artifact/MBYr8yatJ5RAHDxvBWYT6H
+> **18/10 sera, ONLINE:** Michele ha scelto la **B** («vai con la b»). Pubblicati su `main` in sequenza il **fix
+> del preventivo** (`635978c`, online ~20:40 e provato in produzione: data e luogo vuoti non bloccano più l'invio)
+> e poi il **restyling** (ramo `ux-ui-arancio`, `main` = `01d60ba`, online ~20:52): palette della landing ovunque,
+> le sei card «Dove diamo il meglio?» con **una foto in testa**, «Ascoltaci live» e l'invito finale di ogni pagina
+> su **fogli arancio**. Verifica in produzione: 17 pagine e tutte le risorse nuove a 200, il vecchio
+> `stile-hjck.css` a 404, 0 testi <13 px, 0 immagini rotte, 0 errori in console. Vedi «LA SERA DEL 18/10».
 > Compilato il 2026-06-25 da `README.md` + memoria + stato git reale.
 
 ---
@@ -72,9 +74,9 @@ miglioramento di UX e UI del sito. Prendi come standard di riferimento la landin
 sponsorizzate, migliora UX e UI rendendo tutto più armonico, fotografie e testo meglio integrati,
 niente muri di testo e lettura più scorrevole»*. Prima di toccare un file: **audit con 68 schermate**
 (17 pagine × 390/1440), tre esplorazioni del codice e delle regole di casa, un piano approvato da
-Michele in modalità piano. Tutto su un branch, **niente pubblicato senza il suo ok**.
+Michele in modalità piano. Tutto su un branch fino al suo ok: **online dalla sera del 18/10** (scelta B).
 
-## La sera del 18/10: le card con le foto e la variante arancio (SCELTA APERTA)
+## La sera del 18/10: le card con le foto e la variante arancio (SCELTA: B, ONLINE)
 
 Michele, visto il report: *«c'è modo di sistemare questo muro di testo? è la parte più importante e va
 letta, quindi non nascondiamola, però una vista migliore»* (le sei card «Dove diamo il meglio?» a 390 px) e
@@ -97,8 +99,13 @@ lettura e contrasto»*. Fatte entrambe, su due rami così il confronto è reale:
 - Pagina per scegliere (card prima/ora, A e B affiancate a 390 e 1440, invito, FAQ e country):
   https://claude.ai/artifact/MBYr8yatJ5RAHDxvBWYT6H
 
-**Dopo la scelta:** merge su `main` del fix `fix-preventivo-required`, poi del ramo scelto (B contiene A),
-push, controllo online con `?c=`, data qui sopra. **Trappola:** `_strumenti/corpi/` non è in git e **non segue
+**Fatto (18/10 sera, «vai con la b»):** `main` portata prima sul fix (`635978c`, fast-forward, online in 40 s,
+modulo provato in produzione nelle due lingue senza inviare: passo 2 aperto, `checkValidity` vero con data e
+luogo vuoti), poi sul ramo B (`01d60ba`, fast-forward, online in 30 s). Controlli sul sito vero: 17 pagine a 200,
+foglio, font, le 6 miniature delle card e `live-basso-senza-numeri` a 200, `stile-hjck.css` 404, home 390 px =
+8.470 px / 2,3 MB, 0 testi <13 px, 0 immagini rotte, 0 errori in console (anche su FAQ). Per tornare indietro:
+su Netlify «Deploys → il deploy precedente → Publish deploy», oppure `git revert` dei commit (mai reset su main).
+I tre rami restano su GitHub finché Michele non decide di cancellarli. **Trappola:** `_strumenti/corpi/` non è in git e **non segue
 il ramo**: ci sono `_strumenti/corpi-panna/` (= A) e `_strumenti/corpi-arancio/` (= B); `corpi/` è il set
 attivo (stasera = arancio). Copiare il set giusto in `corpi/` prima di rigenerare una pagina. `migra.py` ora si
 può rilanciare anche su una pagina già migrata (niente link doppi; regge le FAQ senza `<style>` e i due

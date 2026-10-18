@@ -108,13 +108,19 @@ usano i colori e i componenti della landing, dichiarati **una volta sola** in `h
 | testo su scuro `--panna` | `#F3E5D0` |
 | superfici chiare `--carta` | `#EFE2CE` |
 | pieni sul chiaro `--scuro2` | `#381A08` |
-| arancio `--arancio` | `#C74A07` — **solo come pieno** (fasce, timbro `.acc`, bordi): mai testo piccolo |
+| arancio `--arancio` | `#C74A07` — **solo come pieno** (fasce, timbro `.acc`, bordi, e dalla sera del 18/10 i fogli `.t-arancio`: il video in home e l'invito finale di ogni pagina): mai testo piccolo |
 | tan `--tan` | `#C39A6A` |
 | turchese `--azz` | `#8BAEA4` — solo accento sui fondi scuri |
 
 🚫 **L'arancio non è mai testo** (3,84:1 sul fondo scuro): la parola chiave dei titoli è **timbrata**
 (`<span class="acc">`, blocco arancio con testo panna), i numeri d'indice sono in `--tan`, i link
 sono panna sottolineati d'arancio. Il `#FA8600` del logo vive solo nel logo.
+🟧 **Sui fogli arancio (`.t-arancio`, scelta B di Michele del 18/10 sera: «mi manca un po' di quell'arancio
+scuro… una versione intermedia che promuova lettura e contrasto») stanno solo tre cose:** titoli grandi
+(≥19 px/700, il timbro `.acc` lì diventa scuro), pastiglie scure, e il **pannello di carta `.v-pannello`**
+(scheda `--carta` con titolo, riga e bottoni). Il testo corrente va **dentro il pannello**, mai nudo
+sull'arancio (farebbe 3,84:1). Le card con testo lungo restano su carta: per questo «Dove diamo il meglio?»
+è su `.t-panna` anche nella B.
 ⚠️ **La palette del brand book (#49240A / #EDDABD / #CD5812) non è più in nessuna pagina**: resta
 scritta in un commento in testa a `hjck.css` per tornare indietro in sei righe, se mai servisse.
 ⚠️ **La landing resta intatta** (`git diff main -- musica-country-dal-vivo.html` è vuoto): è il
