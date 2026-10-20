@@ -1,7 +1,7 @@
 # The Coffeekillers — STATO (leggimi per primo)
 
 > Handoff per riprendere il lavoro in una nuova chat / per un collega.
-> **Ultimo aggiornamento:** 2026-10-18
+> **Ultimo aggiornamento:** 2026-10-20
 > **Stato in una riga:** il **sito nuovo è ONLINE** dal 02/09/2026 — la maquette è diventata
 > il sito, il React di prima è in `_parcheggio/`. Vedi **«IL SITO NUOVO È ONLINE»** qui sotto.
 > Dal **04/09/2026 è online anche la versione inglese** in `en/`, per chi si connette
@@ -57,6 +57,11 @@
 > home da 7,7 a 2,8 MB. E un **bug di produzione nel preventivo** corretto a parte (chi lasciava
 > vuoti data o luogo non riusciva a inviare). Vedi **«IL SITO COME LA LANDING (18/10)»** qui sotto:
 > è la sezione più recente e **viene prima di tutte le altre** per capire com'è fatto il sito oggi.
+> **20/10, ONLINE:** il **footer di 16 pagine (IT+EN)** dice che la band opera in regola tramite **Esibirsi Società
+> Cooperativa** (P.I. 01463820934, Pordenone, link a esibirsi.it), con agibilità INPS (ex ENPALS) e fatturazione.
+> Richiesta di Michele: *«ora siamo sotto la cooperativa Esibirsi, scrivilo in calce… solo nel footer»*. Dati presi dal
+> sito pubblico della cooperativa. **La landing delle inserzioni non è stata toccata** (ha un footer suo, `v-foot`):
+> se serve anche lì lo decide Michele. ⚠️ Il cruscotto dice che i **matrimoni non passano da Esibirsi** (07/10).
 > **18/10 sera, ONLINE:** Michele ha scelto la **B** («vai con la b»). Pubblicati su `main` in sequenza il **fix
 > del preventivo** (`635978c`, online ~20:40 e provato in produzione: data e luogo vuoti non bloccano più l'invio)
 > e poi il **restyling** (ramo `ux-ui-arancio`, `main` = `01d60ba`, online ~20:52): palette della landing ovunque,

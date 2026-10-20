@@ -204,6 +204,10 @@ JSON non valido, ed e' già successo.
 **La band non ha forma giuridica.** Mai scrivere «fatturiamo»: nel 2026 solo 3 date su 17
 hanno toccato una fattura. Nell'informativa privacy il titolare è **Michele Frosio persona
 fisica** (GDPR art. 4.7).
+🗓️ **Dal 20/10/2026 la band opera sotto Esibirsi Società Cooperativa** e il footer di tutte le pagine lo scrive
+(P.I. 01463820934, link a esibirsi.it; modificabile in un punto solo per pagina: `<p class="footer-coop">`). La fattura è
+della cooperativa, non della band: **«fatturiamo» resta una parola da non scrivere** finché Michele non decide altrimenti,
+e i **matrimoni** risultano fuori dalla cooperativa (cruscotto, 07/10): la frase del footer non dice «tutte le serate».
 
 **Cosa vende questa band: intrattenimento.** Non il ritorno economico del locale, non
 l'attrezzatura, non la scheda tecnica — e **mai** i difetti della concorrenza. Michele,
