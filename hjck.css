@@ -693,6 +693,9 @@ body:has(dialog.v-luce[open]){overflow:hidden}
   border-top:1px solid rgba(139,174,164,.18);
   font-size:13.5px;line-height:1.6;color:var(--pg-mut);text-align:center;
 }
+/* la riga della cooperativa (20/10/2026): sopra il copyright, stesso corpo, un po' piu' leggibile */
+.footer-copy .footer-coop{max-width:68ch;margin:0 auto 10px;color:var(--panna);text-wrap:balance}
+.footer-coop a{white-space:nowrap}
 .footer-copy a{color:var(--azz);text-decoration:none}
 .footer-copy a:hover{text-decoration:underline}
 @media (max-width:960px){.footer-grid{grid-template-columns:1fr 1fr}}
