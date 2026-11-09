@@ -102,7 +102,7 @@ lettura e contrasto»*. Fatte entrambe, su due rami così il confronto è reale:
   stanno solo titoli grandi, pastiglie scure e pannelli di carta; un testo corrente nudo farebbe 3,84:1.
   Misure: 0 testi <13 px e **0 contrasti sotto soglia** su 6 pagine × 2 larghezze, scheletri IT = EN, 0 link rotti.
 - Pagina per scegliere (card prima/ora, A e B affiancate a 390 e 1440, invito, FAQ e country):
-  https://claude.ai/artifact/MBYr8yatJ5RAHDxvBWYT6H
+  https://claude.ai/artifact/EmenFzUK9qZtuVvtvGhe9E (raccolta «The CoffeeKillers · sito e palco», pagina «Variante arancio», dal 9/11/2026)
 
 **Fatto (18/10 sera, «vai con la b»):** `main` portata prima sul fix (`635978c`, fast-forward, online in 40 s,
 modulo provato in produzione nelle due lingue senza inviare: passo 2 aperto, `checkValidity` vero con data e
