@@ -74,8 +74,8 @@ della landing: *«dagli anni Novanta in poi, con qualche eccezione»*, con *Coun
 Wallen è uscito** da `country.html`: era l'unico artista citato fuori elenco.
 
 **Larry suona solo il piano.** Niente più armonica, né nelle schede né nei dati strutturati né
-nel cruscotto. **Ste non è ancora socio**: il cruscotto dice il contrario (`socio=1`) e **è il
-cruscotto a sbagliare** — va corretto lì, perché è la tabella su cui si divide il cachet.
+nel cruscotto. **Ste è socio da inizio 2026** (Michele, 18/09/2026). Nel cruscotto `socio=1` è
+giusto: non va cambiato.
 
 **Sette regioni, ovunque.** Era 7 sulla landing, «8 province» su «Chi siamo», quattro nella meta
 delle date. È una **mossa di marketing dichiarata**, come «oltre 200 live»: non si corregge, si
@@ -172,7 +172,7 @@ correggere. Non lo è: è una **scelta**, perché è il numero su cui la band ri
 Il 331 870 6356 sta nel brain ma **non va sul sito**, e questo file diceva il contrario fino al
 07/09. Email pubblica `music@thecoffeekillers.com`.
 **Lecconeria** non è un cliente (solo un preventivo, mai suonato) e **Beach Fly** è una data
-futura e gratis. **Coca-Cola, Ca' del Bosco, Porsche, Thun, Lombarda Ceramiche** sì, confermati
+gratis: l'inaugurazione del 10/10/2026. **Coca-Cola, Ca' del Bosco, Porsche, Thun, Lombarda Ceramiche** sì, confermati
 da Michele — ma anno e occasione non sono ancora nel brain.
 
 **Lo show dura «circa due ore» — un'ora e 45 di musica.** Deciso da Michele il 07/09 e vero:
@@ -391,9 +391,8 @@ niente.
 Michele: *«non dare anticipazioni di prezzo da 1.000 a 2.500 che sono vecchie»*. Via la riga
 «Cachet 1.000 € — 2.500 € circa» e via «scaletta tipo e cachet personalizzato» dai testi.
 ⚠️ **Le tre voci di budget dentro il modulo restano**: quelle *chiedono*, non *annunciano*.
-⚠️ **La stessa fascia è ancora pubblicata su altre 6 pagine** (`faq`, `gallery`, `date` e le
-tre gemelle inglesi, meta description e JSON-LD compresi): segnalato a Michele il 24/09,
-**non ancora deciso** cosa farne.
+**Dal 18/10/2026 la fascia «Cachet 1.000 € — 2.500 €» non è più in nessuna pagina** (decisione
+di Michele): via anche da `faq`, `gallery`, `date` e dalle tre gemelle inglesi.
 
 **Ordine di spesa → tre voci, e la prima parte da mille.**
 **Intorno ai 1.000 €** (predefinita) · **Arrivo a 1.500 €** · **Oltre 2.000 €**.
@@ -401,8 +400,7 @@ tre gemelle inglesi, meta description e JSON-LD compresi): segnalato a Michele i
 sempre, ed è l'unico valore con cui il vincolo «da 1.500 in su» ha senso.
 La prima voce esiste *per far capire che sotto non si va*: la vecchia scaletta apriva con
 «Fino a 1.000» e lasciava credere il contrario. ⚠️ **Il «Non lo so ancora» non si rimette**:
-chi lo spuntava non dava nessuna informazione, ed era la scelta comoda. Coerente con la
-fascia già pubblicata nelle FAQ (1.000 € — 2.500 €).
+chi lo spuntava non dava nessuna informazione, ed era la scelta comoda.
 
 ## 📣 UN SOLO BOTTONE PIENO PER PAGINA, E PORTA AL MODULO
 

@@ -19,8 +19,9 @@
 > Vedi **«IL CONTENUTO DELLA LANDING SULLE LEVE D'ACQUISTO»**, che è la sezione più recente e
 > **viene prima di tutte le altre** se devi scrivere un testo per questa band.
 > **Tutto in regola sui font**: il 02/09 Michele ha comprato anche la licenza **Webfont** di
-> Bonzana. L'**informativa privacy** è scritta. Le **date in calendario sono ancora quelle di
-> prova**, per scelta: non ne abbiamo altre.
+> Bonzana. L'**informativa privacy** è scritta. Le **date in `date.html` sono vere**. Dopo
+> il 10/10/2026 in pagina non ci sono date future: si vede l'invito a scriverci. Il 2 e il 10
+> ottobre vanno spostati nell'archivio.
 > (Cronologia: 20/08 cartella cliente col logo definitivo · 12/08 brand rev.2, video della prima
 > canzone intera, sezione «Il palco», link agli artisti, fix overflow mobile.)
 > L'**11/09 la landing e' stata rimessa in sesto sul piano grafico** (UX e UI): la revisione
@@ -280,8 +281,8 @@ vuoti passano · schermate di ogni pagina **guardate** a 390 e 1440 prima del co
 
 ## 🔜 Aperto, e va deciso da Michele
 
-- **Pubblicare**: prima il fix del preventivo (branch `fix-preventivo-required`), poi il restyling
-  (branch `ux-ui-come-la-landing`). Dopo l'ok si fa merge su `main` e si controlla online.
+- **Pubblicati il 18/10/2026**: il fix del preventivo e la scelta B (`ux-ui-arancio`). I rami
+  restano su GitHub finché Michele non decide.
 - La landing dice ancora «Chitarre e lap steel» per Ste (fuori dal live dal 06/10) e usa i suoi testi:
   non si tocca, ma non è più vera.
 - Le date del 2 e 10 ottobre non sono nell'archivio di `date.html`, il JSON-LD le dà «in programma» e
@@ -381,8 +382,8 @@ quattro punti, messaggio di conferma compreso).
 *annunciano* un prezzo. È la differenza per cui esistono (decisione del 07/09, corretta il 15/09).
 🚨 **La stessa fascia è ancora pubblicata su altre sei pagine** — `faq.html`, `gallery.html`,
 `date.html` e le tre gemelle inglesi — e in `faq` sta anche nella **meta description** e nel
-**JSON-LD**. Segnalato a Michele il 24/09: **non ancora deciso**. Finché non si decide, il sito
-si contraddice.
+**JSON-LD**. Segnalato a Michele il 24/09. **Chiuso il 18/10/2026**: la fascia è stata tolta
+ovunque (decisione n. 3 di Michele, sezione del 18/10).
 
 ## Come è fatto, e cosa NON è cambiato
 
